@@ -1,8 +1,6 @@
 {% extends 'registration/base.html' %}
 
-{% block title %}
-لیست کلاس‌ها
-{% endblock %}
+{% block title %}داشبورد اصلی{% endblock %}
 
 
 {% block main %}
@@ -15,35 +13,24 @@
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th>نام کلاس</th>
-                      <th>تعداد دانش‌آموزان</th>
-                      <th>نام اتاق</th>
-                      <th>موضوع کلاس</th>
-                      <th>تاریخ ایجاد کلاس</th>
-                      <th>تاریخ پایان کلاس</th>
-                      <th>ایجاد کننده کلاس</th>
-                      <th>وضعیت کلاس</th>
+                      <th>نام شرکت</th>
+                      <th>تعداد کارمندان</th>
+                      <th>تاریخ ایجاد شرکت</th>
+                      <th>ایجاد کننده شرکت</th>
+                      <th>عملیات</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {% for ClassesList in object_list %}
+                    {% for CompaniesList in object_list %}
                       <tr>
-                        <td><a href="{% url 'account:comment' ClassesList.slug %} ">{{ClassesList.Name}}</a></td>
-                        <td>{{ClassesList.students.count}}</td>
-                        <td>{{ClassesList.room}}</td>
-                        <td>{{ClassesList.subject}}</td>
-                        <td>{{ClassesList.jcreated_time}}</td>
-                        <td>{{ClassesList.finished_time}}</td>
-                        <td>{{ClassesList.creator.get_full_name}}</td>
+                        <td><a href="#">{{CompaniesList.name}}</a></td>
+                        <td>{{CompaniesList.staff.count}}</td>
+                        <td>{{CompaniesList.jcreated_time}}</td>
+                        <td>{{CompaniesList.creator.get_full_name}}</td>
                         <td>
-                          {% if ClassesList.status == 'private' %}
-                            <span class="badge badge-success">خصوصی</span>
-                            {% else %}
-                            <span class="badge badge-danger">عمومی</span>
-                            {% endif %}
                             {% if user.is_superuser %}
-                            <a class="badge" href="{% url 'account:class-update' ClassesList.slug %}">ویرایش کلاس</a>
-                            <a class="badge" href="{% url 'account:class-delete' ClassesList.slug %}">حذف</a>
+                            <a class="badge" href="{% url 'common:company-update' CompaniesList.slug %}">ویرایش</a>
+                            <a class="badge" href="{% url 'common:company-delete' CompaniesList.slug %}">حذف</a>
                             {% endif %}
                         </td>
                       </tr>

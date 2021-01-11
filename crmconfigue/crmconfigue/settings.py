@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'common',
+    'common.apps.CommonConfig',
 
     # third party apps 
     'django_extensions',
@@ -73,6 +73,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+            ],
+        'builtins': [
+            'common.templatetags.auth_extras',                
             ],
         },
     },

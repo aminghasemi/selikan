@@ -4,6 +4,7 @@ from django.utils import timezone
 from extensions.utils import jalali_converter
 from django.urls import reverse
 from cuser.middleware import CuserMiddleware
+from .managers import  EnrolledManager
 
 
 
@@ -15,19 +16,6 @@ def img_url(self, filename):
     hash_ = int(time.time())
     return "%s/%s/%s" % ("profile_pics", hash_, filename)
 
-class Company(models.Model):
-    name = models.CharField(max_length=100, blank=True, null=True,verbose_name="نام شرکت")
-    address = models.CharField(max_length=2000, blank=True, null=True,verbose_name="آدرس")
-    sub_domain = models.CharField(max_length=30,verbose_name="آدرس دامنه")
-    user_limit = models.IntegerField(default=5,verbose_name="محدودیت کاربر")
-    country = models.CharField(max_length=3, choices=COUNTRIES, blank=True, null=True,verbose_name="کشور")
-
-    class Meta:
-        verbose_name = "شرکت"
-        verbose_name_plural = "شرکت‌ها"
-
-    def __str__(self):
-        return self.name
 
 class User(AbstractBaseUser, PermissionsMixin):
     file_prepend = "users/profile_pics"
@@ -45,13 +33,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     has_sales_access = models.BooleanField(default=False,verbose_name="دسترسی به فروش")
     has_marketing_access = models.BooleanField(default=False,verbose_name="دسترسی به بازاریابی")
-    company = models.ForeignKey(
-        Company, on_delete=models.CASCADE, null=True, blank=True ,verbose_name="نام شرکت"
-    )
+
 
     class Meta:
         verbose_name = "کاربر"
         verbose_name_plural = "کاربران"
+
+
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = [
@@ -96,6 +84,33 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     class Meta:
         ordering = ["-is_active"]
+
+
+
+
+
+
+
+class Company(models.Model):
+    name = models.CharField(max_length=100, blank=True, null=True,verbose_name="نام شرکت")
+    address = models.CharField(max_length=2000, blank=True, null=True,verbose_name="آدرس")
+    slug=models.SlugField(max_length=100,unique=True, verbose_name ="لینک شرکت")
+    sub_domain = models.CharField(max_length=30,verbose_name="آدرس دامنه")
+    user_limit = models.IntegerField(default=5,verbose_name="محدودیت کاربر")
+    country = models.CharField(max_length=3, choices=COUNTRIES, blank=True, null=True,verbose_name="کشور")
+    creator = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='crm_creator', verbose_name="ایجادکننده شرکت")
+    created_time=models.DateTimeField(auto_now_add=True, verbose_name ="تاریخ ایجاد")
+    staff=models.ManyToManyField(User, through='Enrolled', related_name='companystaff')
+
+    class Meta:
+        verbose_name = "شرکت"
+        verbose_name_plural = "شرکت‌ها"
+
+    def jcreated_time(self):
+        return jalali_converter(self.created_time)  
+
+    def __str__(self):
+        return self.name
 
 
 class Address(models.Model):
@@ -144,3 +159,25 @@ class Address(models.Model):
             else:
                 address += self.get_country_display()
         return address
+
+
+class Enrolled(models.Model):
+    staff = models.ForeignKey(User, related_name='staff',on_delete=models.CASCADE,  null=True, blank=True,verbose_name="کارمند")
+    company = models.ForeignKey(Company, on_delete=models.CASCADE , related_name='staff_enroll', null=True, blank=True, verbose_name="نام شرکت")
+    date =models.DateTimeField(auto_now_add=True, verbose_name="تاریخ عضویت")
+    previous_attempts = models.IntegerField(default=0)
+    objects = EnrolledManager()
+
+    class Meta:
+        verbose_name = "کارمند"
+        verbose_name_plural = "کارمندان"
+
+
+    def __unicode__(self):
+        return u'{0}'.format(self.staff)
+
+    @staticmethod
+    def autocomplete_search_fields():
+        return (
+            "staff__user__last_name__icontains",
+            "staff__user__first_name__icontains",)
