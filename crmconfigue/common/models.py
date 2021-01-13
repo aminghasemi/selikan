@@ -176,6 +176,9 @@ class Enrolled(models.Model):
     def __unicode__(self):
         return u'{0}'.format(self.staff)
 
+    def jdate(self):
+        return jalali_converter(self.date)    
+
     @staticmethod
     def autocomplete_search_fields():
         return (

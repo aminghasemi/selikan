@@ -10,6 +10,7 @@ from itertools import chain
 from .models import Company
 from .mixins import CreatorAccessMixin, SuperUserAccessMixin
 from .decorators import allowed_users, company_enrolled
+from .forms import EnrollForm
 
 # Create your views here.
 
@@ -46,17 +47,18 @@ class CompanyDelete(LoginRequiredMixin,CreatorAccessMixin, DeleteView):
     success_url= reverse_lazy('common:home')
 
 
-@login_required(login_url='account:login')
+@login_required(login_url='common:login')
 @company_enrolled
-def class_student(request, slug):
-    template_name = 'registration/Company-create-update.html'
+def company_staff(request, slug):
+    template_name = 'registration/company_add_staff.html'
+    #company=Company.objects.get(slug=slug)
     company = get_object_or_404(Company, slug=slug)
-    staff = company.staff_enroll.all()
+    companystaff = company.staff_enroll.all()
     new_staff = None
     if request.method == 'POST':
         def form_valid(self, form):
             form.instance.company = company
-            return super(staff, self).form_valid(form)
+            return super(company_staff, self).form_valid(form)
         enroll_form = EnrollForm(data=request.POST)
         if enroll_form.is_valid():
 
@@ -68,7 +70,7 @@ def class_student(request, slug):
             new_staff.save()
     else:
         enroll_form = EnrollForm()
-    return render(request, template_name, {'staff': staff,
+    return render(request, template_name, {'companystaff': companystaff,
                                            'company': company,
                                            'new_staff': new_staff,
                                            'enroll_form': enroll_form,})

@@ -1,0 +1,67 @@
+
+import arrow
+from django.db import models
+
+from common.models import Address, User, Company
+from phonenumber_field.modelfields import PhoneNumberField
+from teams.models import Teams
+
+
+class Contact(models.Model):
+    first_name = models.CharField(verbose_name="نام", max_length=255)
+    last_name = models.CharField(verbose_name="نام خانوادگی", max_length=255)
+    email = models.EmailField(verbose_name="ایمیل",unique=True)
+    phone = PhoneNumberField(null=True, unique=True, verbose_name="موبایل")
+    office_phone = PhoneNumberField(null=True, unique=True, verbose_name="تلفن ثابت")
+
+    address = models.ForeignKey(
+        Address,
+        related_name="adress_contacts",
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        verbose_name="آدرس",
+    )
+    description = models.TextField(blank=True, null=True, verbose_name="توضیحات")
+    assigned_to = models.ManyToManyField(User, related_name="contact_assigned_users", verbose_name="محول شده به")
+    created_by = models.ForeignKey(
+        User, related_name="contact_created_by", on_delete=models.SET_NULL, null=True, verbose_name="ساخته شده توسط"
+    )
+    created_on = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
+    is_active = models.BooleanField(default=False,verbose_name="فعال")
+
+    company = models.ForeignKey(
+        Company, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="شرکت"
+    )
+
+    def __str__(self):
+        return self.first_name
+
+    @property
+    def created_on_arrow(self):
+        return arrow.get(self.created_on).humanize()
+
+    class Meta:
+        ordering = ["-created_on"]
+
+    @property
+    def get_team_users(self):
+        team_user_ids = list(self.teams.values_list("users__id", flat=True))
+        return User.objects.filter(id__in=team_user_ids)
+
+    @property
+    def get_team_and_assigned_users(self):
+        team_user_ids = list(self.teams.values_list("users__id", flat=True))
+        assigned_user_ids = list(self.assigned_to.values_list("id", flat=True))
+        user_ids = team_user_ids + assigned_user_ids
+        return User.objects.filter(id__in=user_ids)
+
+    @property
+    def get_assigned_users_not_in_teams(self):
+        team_user_ids = list(self.teams.values_list("users__id", flat=True))
+        assigned_user_ids = list(self.assigned_to.values_list("id", flat=True))
+        user_ids = set(assigned_user_ids) - set(team_user_ids)
+        return User.objects.filter(id__in=list(user_ids))
+    class Meta:
+        verbose_name = "مشتری"
+        verbose_name_plural = "مشتریان"

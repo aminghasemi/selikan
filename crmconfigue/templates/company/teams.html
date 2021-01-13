@@ -13,25 +13,27 @@
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th>نام شرکت</th>
-                      <th>تعداد کارمندان</th>
-                      <th>تاریخ ایجاد شرکت</th>
-                      <th>ایجاد کننده شرکت</th>
+                      <th>نام تیم</th>
+                      <th>تعداد اعضا</th>
+                      <th>تاریخ ایجاد </th>
+                      <th>ایجاد کننده </th>
+                      <th>توضیحات</th>
                       <th>عملیات</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {% for CompaniesList in object_list %}
+                    {% for TeamsList in object_list %}
                       <tr>
-                        <td><a href="#">{{CompaniesList.name}}</a></td>
-                        <td>{{CompaniesList.staff.count}}</td>
-                        <td>{{CompaniesList.jcreated_time}}</td>
-                        <td>{{CompaniesList.creator.get_full_name}}</td>
+                        <td>{{TeamsList.name}}</a></td>
+                        <td>{{TeamsList.users.count}}</td>
+                        <td>{{TeamsList.jcreated_on}}</td>
+                        <td>{{TeamsList.created_by.get_full_name}}</td>
+                        <td>{{TeamsList.description}}</td>
                         <td>
                             {% if user.is_superuser %}
-                            <a class="badge" href="{% url 'common:company-update' CompaniesList.slug %}">ویرایش</a>
-                            <a class="badge" href="{% url 'common:company-delete' CompaniesList.slug %}">حذف</a>
-                            <a class="badge" href="{% url 'common:company_add_staff' CompaniesList.slug %}">افزودن کاربر</a>
+                            <a class="badge" href="{% url 'teams:team-update' TeamsList %}">ویرایش</a>
+                            <a class="badge" href="{% url 'teams:team-delete' TeamsList %}">حذف</a>
+
                             {% endif %}
                         </td>
                       </tr>

@@ -1,0 +1,68 @@
+{% extends 'registration/base.html' %}
+{% load crispy_forms_tags %}
+{% block main %}
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-primary card-outline">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i class="fas fa-edit"></i>
+              {% block title %}{{company.name}}{% endblock %}
+            </h3>
+          </div>
+          </div>
+          <!-- /.card -->
+  <div class="card">
+    <div class="card-header">
+
+        <h3 class="card-title">لیست کاربران عضو شده</h3>
+          </div>
+    <div class="card-body p-0">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>نام کاربر</th>
+            <th>نام کاربری</th>
+            <th>تاریخ عضویت</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for person in companystaff %}
+          <tr>
+            <td>{{ person.staff.get_full_name }}</td>
+            <td>{{ person.staff }}</td>
+            <td>{{ person.jdate }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% if request.user.is_superuser %}
+    <div class="col-md-12">
+      <div class="card-body">
+        {% if new_staff %}
+        <div class="alert alert-success" role="alert">
+          کاربر انتخاب شده به عنوان کارمند جدید به شرکت اضافه شد.
+        </div>
+        {% else %}
+        <p>نام کاربری کارمند را وارد کنید:</p>
+
+          <form method="post" style="margin-top: 1.3em;">
+          {{ enroll_form | crispy }}
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary  btn-sm">ارسال</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+    {% endif%}
+
+
+  </div>
+  </div>
+  </div>
+
+  </section>
+{% endblock %}

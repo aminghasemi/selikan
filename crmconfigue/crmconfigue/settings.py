@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'common.apps.CommonConfig',
+    'contacts.apps.ContactsConfig',
+    'teams.apps.TeamsConfig',
+
 
     # third party apps 
     'django_extensions',
@@ -47,6 +50,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_filters',
     'cuser',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [

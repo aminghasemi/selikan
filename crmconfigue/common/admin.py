@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Company, User, Address
+from .models import Company, User, Address, Enrolled
 # Register your models here.
 
 
@@ -21,3 +21,12 @@ class UserAdmin(admin.ModelAdmin):
 class AddressAdmin(admin.ModelAdmin):
     list_display = ('city', 'state')
     search_fields = ('username', 'email')
+
+@admin.register(Enrolled)
+class EnrolledAdmin(admin.ModelAdmin):
+    list_display= ('staff','company','date')
+    list_filter = ('company', )
+    search_fields = ( 'company', )
+    autocomplete_lookup_fields = {
+        'fk': ['company', ],
+    }
