@@ -16,18 +16,18 @@ class TeamsList(LoginRequiredMixin,ListView):
 class TeamCreate(LoginRequiredMixin, CreateView):
     model=Teams
     fields=["name", "description", "users","company"]
-    template_name="registration/Company-create-update.html"
+    template_name="company/team-create-update.html"
     success_url= reverse_lazy('common:home')
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
 
-class TeamUpdate(LoginRequiredMixin,CreatorAccessMixin, UpdateView):
+class TeamUpdate(LoginRequiredMixin, UpdateView):
     model=Teams
-    fields=["name", "description", "users","created_by","company"]
-    template_name = "registration/team-create-update.html"
+    fields=["name", "description", "users","company"]
+    template_name = "company/team-create-update.html"
     success_url= reverse_lazy('teams:teams')
-class TeamDelete(LoginRequiredMixin,CreatorAccessMixin, DeleteView):
+class TeamDelete(LoginRequiredMixin, DeleteView):
     model=Teams
-    template_name = "registration/team_confirm_delete.html"
+    template_name = "company/team_confirm_delete.html"
     success_url= reverse_lazy('teams:teams')

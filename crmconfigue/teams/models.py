@@ -1,4 +1,5 @@
 import arrow
+from extensions.utils import jalali_converter
 
 from django.db import models
 from common.models import User, Company
@@ -41,3 +42,5 @@ class Teams(models.Model):
     class Meta:
         verbose_name = "تیم"
         verbose_name_plural = "تیم‌ها"
+    def jcreated_on(self):
+        return jalali_converter(self.created_on) 
