@@ -38,6 +38,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = "کاربر"
         verbose_name_plural = "کاربران"
+        ordering = ["-is_active"]
 
 
 
@@ -82,8 +83,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
-    class Meta:
-        ordering = ["-is_active"]
 
 
 

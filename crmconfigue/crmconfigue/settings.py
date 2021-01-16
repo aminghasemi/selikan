@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'common.apps.CommonConfig',
     'contacts.apps.ContactsConfig',
     'teams.apps.TeamsConfig',
+    'opportunity.apps.OpportunityConfig',
+    'accounts.apps.AccountsConfig',
+    'lead.apps.LeadConfig',
+    'tasks.apps.TasksConfig',
 
 
     # third party apps 

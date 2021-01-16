@@ -74,43 +74,43 @@ TYPECHOICES = (
 )
 
 ROLES = (
-    ("ADMIN", "ADMIN"),
-    ("USER", "USER"),
+    ("ADMIN", "ادمین"),
+    ("USER", "کاربر"),
 )
 
 LEAD_STATUS = (
-    ("assigned", "Assigned"),
-    ("in process", "In Process"),
-    ("converted", "Converted"),
-    ("recycled", "Recycled"),
-    ("closed", "Closed"),
+    ("assigned", "محول‌شده"),
+    ("in process", "در‌حال ‌انجام"),
+    ("converted", "تبدیل‌شده"),
+    ("recycled", "بازیافت‌شده"),
+    ("closed", "بسته‌شده"),
 )
 
 
 LEAD_SOURCE = (
-    ("call", "Call"),
-    ("email", "Email"),
-    ("existing customer", "Existing Customer"),
-    ("partner", "Partner"),
-    ("public relations", "Public Relations"),
-    ("compaign", "Campaign"),
-    ("other", "Other"),
+    ("call", "تماس"),
+    ("email", "ایمیل"),
+    ("existing customer", "مشتریان"),
+    ("partner", "شرکا"),
+    ("public relations", "روابط عمومی"),
+    ("compaign", "کمپین"),
+    ("other", "سایر"),
 )
 
 STATUS_CHOICE = (
-    ("New", "New"),
-    ("Assigned", "Assigned"),
-    ("Pending", "Pending"),
-    ("Closed", "Closed"),
-    ("Rejected", "Rejected"),
-    ("Duplicate", "Duplicate"),
+    ("New", "جدید"),
+    ("Assigned", "محول‌شده"),
+    ("Pending", "در حال انتظار"),
+    ("Closed", "بسته شده"),
+    ("Rejected", "رد شده"),
+    ("Duplicate", "کپی شده"),
 )
 
 PRIORITY_CHOICE = (
-    ("Low", "Low"),
-    ("Normal", "Normal"),
-    ("High", "High"),
-    ("Urgent", "Urgent"),
+    ("Low", "ضعیت"),
+    ("Normal", "معمولی"),
+    ("High", "بالا"),
+    ("Urgent", "ضروری"),
 )
 
 CASE_TYPE = (("Question", "Question"), ("Incident", "Incident"), ("Problem", "Problem"))
