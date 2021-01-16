@@ -17,7 +17,7 @@ class TeamCreate(LoginRequiredMixin, CreateView):
     model=Teams
     fields=["name", "description", "users","company"]
     template_name="company/team-create-update.html"
-    success_url= reverse_lazy('common:home')
+    success_url= reverse_lazy('teams:teams')
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super().form_valid(form)

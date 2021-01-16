@@ -11,7 +11,7 @@ from teams.models import Teams
 
 
 class Opportunity(models.Model):
-    name = models.CharField( max_length=64, verbose_name="uk,hk")
+    name = models.CharField( max_length=64, verbose_name="عنوان")
     account = models.ForeignKey(
         Account,
         related_name="opportunities",
@@ -47,7 +47,7 @@ class Opportunity(models.Model):
     )
     created_on = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
     is_active = models.BooleanField(default=False, verbose_name="فعال")
-    tags = models.ManyToManyField(Tags, blank=True, verbose_name="تگ هه")
+    tags = models.ManyToManyField(Tags, blank=True, verbose_name="تگ‌ها")
     teams = models.ManyToManyField(Teams, related_name="oppurtunity_teams", verbose_name="تیم")
     company = models.ForeignKey(
         Company, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="شرکت"

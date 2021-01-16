@@ -1,0 +1,48 @@
+{% extends 'company/base.html' %}
+
+{% block title %}داشبورد اصلی{% endblock %}
+
+
+{% block main %}
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>عنوان سرنخ</th>
+                      <th>وضعیت</th>
+                      <th>منبع</th>
+                      <th>محول شده به</th>
+                      <th>مقدار فرصت</th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for leads in object_list %}
+                      <tr>
+                        <td><a href="{% url 'leads:lead-update' leads.pk %}">{{leads.title}}</a></td>
+                        <td>{{leads.status}}</td>
+                        <td>{{leads.source}}</td>
+                        <td>{{leads.assigned_to.get_full_name}}</td>
+                        <td>{{leads.opportunity_amount}}</td>
+                        <td>
+                            {% if user.is_superuser %}
+                            <a class="badge" href="{% url 'leads:lead-update' leads.pk %}">ویرایش</a>
+                            <a class="badge" href="{% url 'leads:lead-delete' leads.pk %}">حذف</a>
+                            {% endif %}
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+{% endblock %}

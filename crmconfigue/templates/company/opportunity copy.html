@@ -1,0 +1,46 @@
+{% extends 'company/base.html' %}
+
+{% block title %}داشبورد اصلی{% endblock %}
+
+
+{% block main %}
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>عنوان فرصت</th>
+                      <th>شخص - شرکت</th>
+                      <th>مقدار</th>
+                      <th>احتمال موفقیت</th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for opportunity in object_list %}
+                      <tr>
+                        <td><a href="#">{{opportunity.name}}</a></td>
+                        <td>{{opportunity.account}}  {{opportunity.contacts}}</td>
+                        <td>{{opportunity.amount}}</td>
+                        <td>{{opportunity.probability}}</td>
+                        <td>
+                            {% if user.is_superuser %}
+                            <a class="badge" href="{% url 'opportunity:opportunity-update' opportunity.pk %}">ویرایش</a>
+                            <a class="badge" href="{% url 'opportunity:opportunity-delete' opportunity.pk %}">حذف</a>
+                            {% endif %}
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+{% endblock %}

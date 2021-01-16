@@ -51,7 +51,7 @@
           <a href="#" class="nav-link active">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
-              مشتریان
+              اشخاص و شرکت‌ها
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
@@ -59,18 +59,101 @@
             <li class="nav-item">
               <a href="{% url 'contacts:contacts'%}" class="nav-link active">
                 <i class="fas fa-list nav-icon"></i>
-                <p>لیست مشتریان</p>
+                <p>لیست اشخاص</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="{% url 'contacts:contact-create'%}" class="nav-link active">
                 <i class="far fa-edit nav-icon"></i>
-                <p>ایجاد مشتری جدید</p>
+                <p>ایجاد شخص جدید</p>
               </a>
             </li>            
-
+            <li class="nav-item">
+              <a href="{% url 'accounts:accounts'%}" class="nav-link active">
+                <i class="far fa-edit nav-icon"></i>
+                <p>لیست شرکت‌ها</p>
+              </a>
+            </li>  
+            <li class="nav-item">
+              <a href="{% url 'accounts:account-create'%}" class="nav-link active">
+                <i class="far fa-edit nav-icon"></i>
+                <p>ایجاد شرکت جدید</p>
+              </a>
+            </li>  
           </ul>
         </li>
+        <li class="nav-item has-treeview menu-open">
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              سرنخ‌ها
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{% url 'leads:leads'%}" class="nav-link active">
+                <i class="fas fa-list nav-icon"></i>
+                <p>لیست سرنخ‌ها</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'leads:lead-create'%}" class="nav-link active">
+                <i class="far fa-edit nav-icon"></i>
+                <p>ایجاد سرنخ جدید</p>
+              </a>
+            </li>
+          </ul>  
+        </li> 
+        
+        <li class="nav-item has-treeview menu-open">
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              فرصت‌ها
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{% url 'opportunity:opportunity'%}" class="nav-link active">
+                <i class="fas fa-list nav-icon"></i>
+                <p>لیست فرصت‌ها</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'opportunity:opportunity-create'%}" class="nav-link active">
+                <i class="far fa-edit nav-icon"></i>
+                <p>ایجاد فرصت جدید</p>
+              </a>
+            </li>
+          </ul>  
+        </li>    
+
+        <li class="nav-item has-treeview menu-open">
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              وظایف و کارها
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{% url 'task:task'%}" class="nav-link active">
+                <i class="fas fa-list nav-icon"></i>
+                <p>لیست وظایف و کارها</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'task:task-create'%}" class="nav-link active">
+                <i class="far fa-edit nav-icon"></i>
+                <p>ایجاد وظیفه و کار جدید</p>
+              </a>
+            </li>
+          </ul>  
+        </li>    
+        
         <li class="nav-item">
           <a href="pages/widgets.html" class="nav-link">
             <i class="nav-icon fas fa-th"></i>

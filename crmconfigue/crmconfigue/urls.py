@@ -23,7 +23,10 @@ urlpatterns = [
     path('company/', include('common.urls')),
     path('company/teams', include('teams.urls')),
     path('company/contacts', include('contacts.urls')),
-
+    path('company/leads', include('lead.urls')),
+    path('company/accounts', include('accounts.urls')),
+    path('company/opportunity', include('opportunity.urls')),
+    path('company/task', include('tasks.urls')),
 ]
 
 from django.conf import settings
