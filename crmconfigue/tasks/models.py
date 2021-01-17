@@ -43,7 +43,7 @@ class Task(models.Model):
     )
     teams = models.ManyToManyField(Teams, related_name="tasks_teams", verbose_name="تیم")
     company = models.ForeignKey(
-        Company, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="کاربر سایت"
+        Company, on_delete=models.SET_NULL, related_name='companytask', null=True, blank=True, verbose_name="کاربر سایت"
     )
 
     def __str__(self):

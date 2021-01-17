@@ -7,7 +7,7 @@ from .views import TaskList, TaskCreate, TaskUpdate, TaskDelete
 app_name="task"
 
 urlpatterns = [
-    path('', TaskList.as_view(),name="task"),
+    path('/<slug:slug>', TaskList,name="task"),
     path('create/', TaskCreate.as_view(),name="task-create"),
     path('update/<int:pk>', TaskUpdate.as_view(),name="task-update"),
     path('delete/<int:pk>', TaskDelete.as_view(),name="task-delete"),
