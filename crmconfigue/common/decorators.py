@@ -27,7 +27,7 @@ def company_enrolled(view_func):
     def wrapper_func(request, slug, *args, **kwargs):
         #classroom=class_room.objects.get(slug=slug)
         company= get_object_or_404(Company, slug=slug)
-        if  request.user in company.staff.all() or  company.creator == request.user or request.user.is_superuser:
+        if  request.user in company.staff.all() or  company.creator == request.user:
         #if classroom.objects.get(students=request.user.profile) or classroom.objects.get(teachers=request.user.profile):
             return view_func(request, slug, *args, **kwargs)
         else:

@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
+from django.contrib.auth import views
 
 
 urlpatterns = [
@@ -27,6 +28,7 @@ urlpatterns = [
     path('company/accounts', include('accounts.urls')),
     path('company/opportunity', include('opportunity.urls')),
     path('company/task', include('tasks.urls')),
+    path('login/', views.LoginView.as_view(redirect_authenticated_user=True), name='login'),
 ]
 
 from django.conf import settings

@@ -2,16 +2,18 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 
 
 from common.models import Company
 from .models import Task
 from common.mixins import EnrollMixin, SuperUserAccessMixin, CreatorAccessMixin
+from common.decorators import company_enrolled
 # Create your views here.
 
-
+@login_required(login_url='login')
+@company_enrolled
 def TaskList(request, slug):
-    #creates view for comments inside the classroom.
     template_name = 'company/task.html'
     company = get_object_or_404(Company, slug=slug)
     tasks = company.companytask.all()
