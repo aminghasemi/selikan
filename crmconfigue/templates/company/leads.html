@@ -22,7 +22,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {% for leads in object_list %}
+                    {% for leads in leads %}
                       <tr>
                         <td><a href="{% url 'leads:lead-update' leads.pk %}">{{leads.title}}</a></td>
                         <td>{{leads.status}}</td>

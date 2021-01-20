@@ -27,7 +27,7 @@ urlpatterns = [
     path('company/leads', include('lead.urls')),
     path('company/accounts', include('accounts.urls')),
     path('company/opportunity', include('opportunity.urls')),
-    path('company/task', include('tasks.urls')),
+    path('', include('tasks.urls')),
     path('login/', views.LoginView.as_view(redirect_authenticated_user=True), name='login'),
 ]
 

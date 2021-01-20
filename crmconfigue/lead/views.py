@@ -1,18 +1,28 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 
-
+from django.contrib.auth.decorators import login_required
+from common.decorators import company_enrolled
 from .models import Lead
 from common.mixins import EnrollMixin, SuperUserAccessMixin, CreatorAccessMixin
 # Create your views here.
 
+@login_required(login_url='login')
+@company_enrolled
+def LeadsList(request, slug):
+    template_name = 'company/leads.html'
+    company = get_object_or_404(Company, slug=slug)
+    leads = company.companyleads.all()
+    return render(request, template_name, {'company': company,
+                                           'leads': leads,})
 
-class LeadsList(LoginRequiredMixin,ListView):
-        queryset= Lead.objects.all()
-        template_name="company/leads.html"
+
+#class LeadsList(LoginRequiredMixin,ListView):
+#        queryset= Lead.objects.all()
+#        template_name="company/leads.html"
 class LeadCreate(LoginRequiredMixin, CreateView):
     model=Lead
     fields=["title","first_name", "last_name", "email","phone","status", "source", "address_line",

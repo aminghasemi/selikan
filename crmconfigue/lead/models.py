@@ -52,7 +52,7 @@ class Lead(models.Model):
     created_from_site = models.BooleanField(default=False, verbose_name="ایجاد شده توسط سایت")
     teams = models.ManyToManyField(Teams, related_name="lead_teams", verbose_name="تیم سرنخ")
     company = models.ForeignKey(
-        Company, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="شرکت"
+        Company, on_delete=models.SET_NULL, related_name="companyleads", null=True, blank=True, verbose_name="شرکت"
     )
 
 

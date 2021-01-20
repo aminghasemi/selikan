@@ -1,18 +1,27 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
-
-
+from django.contrib.auth.decorators import login_required
+from common.decorators import company_enrolled
 from .models import Teams
 from common.mixins import EnrollMixin, SuperUserAccessMixin, CreatorAccessMixin
 # Create your views here.
 
+@login_required(login_url='login')
+@company_enrolled
+def TeamsList(request, slug):
+    template_name = 'company/teams.html'
+    company = get_object_or_404(Company, slug=slug)
+    teams = company.companyteams.all()
+    return render(request, template_name, {'company': company,
+                                           'teams': teams,})
 
-class TeamsList(LoginRequiredMixin,ListView):
-        queryset= Teams.objects.all()
-        template_name="company/teams.html"
+
+#class TeamsList(LoginRequiredMixin,ListView):
+#        queryset= Teams.objects.all()
+#        template_name="company/teams.html"
 class TeamCreate(LoginRequiredMixin, CreateView):
     model=Teams
     fields=["name", "description", "users","company"]

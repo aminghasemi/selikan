@@ -31,7 +31,7 @@ class Contact(models.Model):
     is_active = models.BooleanField(default=False,verbose_name="فعال")
 
     company = models.ForeignKey(
-        Company, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="شرکت"
+        Company, related_name="companycontacts", on_delete=models.SET_NULL, null=True, blank=True, verbose_name="شرکت"
     )
 
     def __str__(self):

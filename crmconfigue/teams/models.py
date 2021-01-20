@@ -21,7 +21,7 @@ class Teams(models.Model):
     )
 
     company = models.ForeignKey(
-        Company, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="نام شرکت"
+        Company, related_name="companyteams", on_delete=models.SET_NULL, null=True, blank=True, verbose_name="نام شرکت"
     )
 
     def __str__(self):

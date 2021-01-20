@@ -74,7 +74,7 @@ class Account(models.Model):
     teams = models.ManyToManyField(Teams, related_name="account_teams", verbose_name="تیم")
 
     company = models.ForeignKey(
-        Company, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="کاربر سایت"
+        Company, related_name= "companyaccounts", on_delete=models.SET_NULL, null=True, blank=True, verbose_name="کاربر سایت"
     )
 
     def __str__(self):
