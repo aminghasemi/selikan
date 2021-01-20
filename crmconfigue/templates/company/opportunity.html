@@ -21,7 +21,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {% for opportunity in opportunity %}
+                    {% for opportunity in object_list %}
                       <tr>
                         <td><a href="#">{{opportunity.name}}</a></td>
                         <td>{{opportunity.account}}  {{opportunity.contacts}}</td>
@@ -29,8 +29,8 @@
                         <td>{{opportunity.probability}}</td>
                         <td>
                             {% if user.is_superuser %}
-                            <a class="badge" href="{% url 'opportunity:opportunity-update' opportunity.pk %}">ویرایش</a>
-                            <a class="badge" href="{% url 'opportunity:opportunity-delete' opportunity.pk %}">حذف</a>
+                            <a class="badge" href="{% url 'opportunity:opportunity-update' company.slug opportunity.pk %}">ویرایش</a>
+                            <a class="badge" href="{% url 'opportunity:opportunity-delete' company.slug opportunity.pk %}">حذف</a>
                             {% endif %}
                         </td>
                       </tr>

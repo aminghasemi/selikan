@@ -7,7 +7,7 @@ from .views import OpportunityList, OpportunityCreate, OpportunityUpdate, Opport
 app_name="opportunity"
 
 urlpatterns = [
-    path('', OpportunityList,name="opportunity"),
+    path('', OpportunityList.as_view(),name="opportunity"),
     path('create/', OpportunityCreate.as_view(),name="opportunity-create"),
     path('update/<int:pk>', OpportunityUpdate.as_view(),name="opportunity-update"),
     path('delete/<int:pk>', OpportunityDelete.as_view(),name="opportunity-delete"),

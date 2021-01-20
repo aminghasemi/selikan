@@ -21,7 +21,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {% for task in tasks %}
+                    {% for task in object_list %}
                       <tr>
                         <td><a href="#">{{task.title}}</a></td>
                         <td>{{task.account}}  {{task.contacts}}</td>
@@ -29,8 +29,8 @@
                         <td>{{task.priority}}</td>
                         <td>
                             {% if user.is_superuser %}
-                            <a class="badge" href="{% url 'task:task-update' task.pk %}">ویرایش</a>
-                            <a class="badge" href="{% url 'task:task-delete' task.pk %}">حذف</a>
+                            <a class="badge" href="{% url 'task:task-update' company.slug task.pk %}">ویرایش</a>
+                            <a class="badge" href="{% url 'task:task-delete' company.slug task.pk %}">حذف</a>
                             {% endif %}
                         </td>
                       </tr>

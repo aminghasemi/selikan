@@ -1,4 +1,4 @@
-{% extends 'registration/base.html' %}
+{% extends 'company/base.html' %}
 
 {% block title %}
 لیست مشتریان
@@ -7,7 +7,7 @@
 
 {% block main %}
 <form method="post">{% csrf_token %}
-    <p>آیا از حذف تیم "{{object}}" اطمینان دارید؟</p>
+    <p>آیا از حذف کار  "{{object}}" اطمینان دارید؟</p>
     <button type="submit" class="btn btn-primary  btn-sm">حذف</button>
 </form>
 

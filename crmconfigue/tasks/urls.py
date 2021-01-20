@@ -7,10 +7,10 @@ from .views import TaskList, TaskCreate, TaskUpdate, TaskDelete
 app_name="task"
 
 urlpatterns = [
-    path('<slug:slug>/tasks', TaskList,name="task"),
-    path('<slug:slug>/tasks/create/', TaskCreate,name="task-create"),
-    path('tasks/update/<int:pk>', TaskUpdate.as_view(),name="task-update"),
-    path('tasks/delete/<int:pk>', TaskDelete.as_view(),name="task-delete"),
+    path('', TaskList.as_view(),name="task"),
+    path('create/', TaskCreate.as_view(),name="task-create"),
+    path('update/<int:pk>', TaskUpdate.as_view(),name="task-update"),
+    path('delete/<int:pk>', TaskDelete.as_view(),name="task-delete"),
 
 
 

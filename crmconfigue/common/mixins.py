@@ -4,11 +4,12 @@ from .models import Company
 
 
 class EnrollMixin():
-    def dispatch(self,request, *args, **kwargs):
-        if request.user.staff__user.exists() or request.user.staff__user.exists() or self.request.user.is_superuser:
-            new_classworks = None
-
-        return super().dispatch(request, *args, **kwargs)
+    def dispatch(self, request, slug, *args, **kwargs):
+        company= get_object_or_404(Company, slug=slug)
+        if  request.user in company.staff.all() or  company.creator == request.user:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            raise Http404("شما به این صفحه دسترسی ندارید.")
 class SuperUserAccessMixin():
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_superuser:

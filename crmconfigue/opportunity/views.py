@@ -3,42 +3,75 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
-
+from common.models import Company
 from django.contrib.auth.decorators import login_required
 from common.decorators import company_enrolled
 from .models import Opportunity
 from common.mixins import EnrollMixin, SuperUserAccessMixin, CreatorAccessMixin
 # Create your views here.
 
-@login_required(login_url='login')
-@company_enrolled
-def OpportunityList(request, slug):
+class OpportunityList(EnrollMixin, LoginRequiredMixin,ListView):
     template_name = 'company/opportunity.html'
-    company = get_object_or_404(Company, slug=slug)
-    opportunity = company.companyopportunity.all()
-    return render(request, template_name, {'company': company,
-                                           'opportunity': opportunity,})
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companyopportunity.all()
+    def get_context_data(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
 
-#class OpportunityList(LoginRequiredMixin,ListView):
-#        queryset= Opportunity.objects.all()
-#        template_name="company/opportunity.html"
-class OpportunityCreate(LoginRequiredMixin, CreateView):
+class OpportunityCreate(EnrollMixin, LoginRequiredMixin, CreateView):
     model=Opportunity
     fields=["name", "account", "stage","currency", "amount", "lead_source", "probability", "contacts",
     "closed_by", "closed_on","description", "assigned_to", "is_active","tags", "teams"]
-    template_name="company/account-create-update.html"
+    template_name="company/opportunity-create-update.html"
     success_url= reverse_lazy('opportunity:opportunity')
-    def form_valid(self, form):
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companyopportunity.all()
+    def get_context_data(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+    def form_valid(self, company, form):
         form.instance.created_by = self.request.user
+        form.instance.company= company
         return super().form_valid(form)
 
-class OpportunityUpdate(LoginRequiredMixin, UpdateView):
+class OpportunityUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
     model=Opportunity
     fields=["name", "account", "stage","currency", "amount", "lead_source", "probability", "contacts",
     "closed_by", "closed_on","description", "assigned_to", "is_active","tags", "teams"]
-    template_name = "company/account-create-update.html"
+    template_name = "company/opportunity-create-update.html"
     success_url= reverse_lazy('opportunity:opportunity')
-class OpportunityDelete(LoginRequiredMixin, DeleteView):
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companyopportunity.all()
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+
+class OpportunityDelete(EnrollMixin, LoginRequiredMixin, DeleteView):
     model=Opportunity
-    template_name = "company/account_confirm_delete.html"
+    template_name = "company/opportunity_confirm_delete.html"
     success_url= reverse_lazy('opportunity:opportunity')
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companyopportunity.all()
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context

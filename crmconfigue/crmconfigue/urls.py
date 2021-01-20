@@ -22,12 +22,12 @@ from django.contrib.auth import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('company/', include('common.urls')),
-    path('company/teams', include('teams.urls')),
-    path('company/contacts', include('contacts.urls')),
-    path('company/leads', include('lead.urls')),
-    path('company/accounts', include('accounts.urls')),
-    path('company/opportunity', include('opportunity.urls')),
-    path('', include('tasks.urls')),
+    path('company/teams/', include('teams.urls')),
+    path('company/contacts/', include('contacts.urls')),
+    path('company/leads/', include('lead.urls')),
+    path('company/accounts/', include('accounts.urls')),
+    path('<slug:slug>/opportunity/', include('opportunity.urls')),
+    path('<slug:slug>/tasks/', include('tasks.urls')),
     path('login/', views.LoginView.as_view(redirect_authenticated_user=True), name='login'),
 ]
 
