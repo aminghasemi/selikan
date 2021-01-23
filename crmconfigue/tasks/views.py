@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
 
 
@@ -31,7 +31,6 @@ class TaskCreate(EnrollMixin, LoginRequiredMixin, CreateView):
     model=Task
     fields=["title", "status", "priority","due_date", "account", "contacts", "assigned_to"]
     template_name="company/task-create-update.html"
-    success_url= reverse_lazy('task:task')
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -43,16 +42,22 @@ class TaskCreate(EnrollMixin, LoginRequiredMixin, CreateView):
         context= super().get_context_data(**kwargs)
         context['company'] = company
         return context
-    def form_valid(self, company, form):
+    def form_valid(self, form, **kwargs):       
         form.instance.created_by = self.request.user
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
         form.instance.company= company
-        return super().form_valid(form)
-
+        return super().form_valid(form, **kwargs)
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('task:task', kwargs={'slug': slug}, current_app='task')
 class TaskUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
     model=Task
     fields=["title", "status", "priority","due_date", "account", "contacts", "assigned_to"]
     template_name = "company/task-create-update.html"
-    success_url= reverse_lazy('task:task')
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('task:task', kwargs={'slug': slug}, current_app='task')
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -68,7 +73,7 @@ class TaskUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
 class TaskDelete(EnrollMixin, LoginRequiredMixin, DeleteView):
     model=Task
     template_name = "company/task_confirm_delete.html"
-    success_url= reverse_lazy('task:task')
+
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -78,7 +83,9 @@ class TaskDelete(EnrollMixin, LoginRequiredMixin, DeleteView):
         context= super().get_context_data(**kwargs)
         context['company'] = company
         return context
-
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('task:task', kwargs={'slug': slug}, current_app='task')
 
 
 

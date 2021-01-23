@@ -5,7 +5,7 @@ from accounts.models import Account
 from contacts.models import Contact
 from django.utils.translation import ugettext_lazy as _
 from teams.models import Teams
-
+from django.urls import reverse
 
 class Task(models.Model):
 
@@ -48,6 +48,7 @@ class Task(models.Model):
 
     def __str__(self):
         return self.title
+
 
     @property
     def created_on_arrow(self):

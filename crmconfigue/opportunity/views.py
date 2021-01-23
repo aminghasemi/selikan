@@ -29,7 +29,9 @@ class OpportunityCreate(EnrollMixin, LoginRequiredMixin, CreateView):
     fields=["name", "account", "stage","currency", "amount", "lead_source", "probability", "contacts",
     "closed_by", "closed_on","description", "assigned_to", "is_active","tags", "teams"]
     template_name="company/opportunity-create-update.html"
-    success_url= reverse_lazy('opportunity:opportunity')
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('opportunity:opportunity', kwargs={'slug': slug}, current_app='opportunity')
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -41,17 +43,21 @@ class OpportunityCreate(EnrollMixin, LoginRequiredMixin, CreateView):
         context= super().get_context_data(**kwargs)
         context['company'] = company
         return context
-    def form_valid(self, company, form):
+    def form_valid(self, form, **kwargs):       
         form.instance.created_by = self.request.user
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
         form.instance.company= company
-        return super().form_valid(form)
+        return super().form_valid(form, **kwargs)
 
 class OpportunityUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
     model=Opportunity
     fields=["name", "account", "stage","currency", "amount", "lead_source", "probability", "contacts",
     "closed_by", "closed_on","description", "assigned_to", "is_active","tags", "teams"]
     template_name = "company/opportunity-create-update.html"
-    success_url= reverse_lazy('opportunity:opportunity')
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('opportunity:opportunity', kwargs={'slug': slug}, current_app='opportunity')
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -65,7 +71,9 @@ class OpportunityUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
 class OpportunityDelete(EnrollMixin, LoginRequiredMixin, DeleteView):
     model=Opportunity
     template_name = "company/opportunity_confirm_delete.html"
-    success_url= reverse_lazy('opportunity:opportunity')
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('opportunity:opportunity', kwargs={'slug': slug}, current_app='opportunity')
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')

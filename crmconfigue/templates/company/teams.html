@@ -22,7 +22,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {% for TeamsList in teams %}
+                    {% for TeamsList in object_list %}
                       <tr>
                         <td>{{TeamsList.name}}</a></td>
                         <td>{{TeamsList.users.count}}</td>
@@ -31,8 +31,8 @@
                         <td>{{TeamsList.description}}</td>
                         <td>
                             {% if user.is_superuser %}
-                            <a class="badge" href="{% url 'teams:team-update' TeamsList.pk %}">ویرایش</a>
-                            <a class="badge" href="{% url 'teams:team-delete' TeamsList.pk %}">حذف</a>
+                            <a class="badge" href="{% url 'teams:team-update' company.slug TeamsList.pk %}">ویرایش</a>
+                            <a class="badge" href="{% url 'teams:team-delete' company.slug TeamsList.pk %}">حذف</a>
 
                             {% endif %}
                         </td>

@@ -21,7 +21,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {% for accounts in accounts %}
+                    {% for accounts in object_list %}
                       <tr>
                         <td><a href="#">{{accounts.first_name}} {{accounts.last_name}}</a></td>
                         <td>{{accounts.phone}}</td>
@@ -29,8 +29,8 @@
                         <td>{{accounts.assigned_to.get_full_name}}</td>
                         <td>
                             {% if user.is_superuser %}
-                            <a class="badge" href="{% url 'accounts:accounts-update' accounts.pk %}">ویرایش</a>
-                            <a class="badge" href="{% url 'accounts:accounts-delete' accounts.pk %}">حذف</a>
+                            <a class="badge" href="{% url 'accounts:accounts-update' company.slug accounts.pk %}">ویرایش</a>
+                            <a class="badge" href="{% url 'accounts:accounts-delete' company.slug accounts.pk %}">حذف</a>
                             {% endif %}
                         </td>
                       </tr>

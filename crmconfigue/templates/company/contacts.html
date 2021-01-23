@@ -21,7 +21,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {% for Contacts in contacts %}
+                    {% for Contacts in object_list %}
                       <tr>
                         <td><a href="#">{{Contacts.first_name}} {{Contacts.last_name}}</a></td>
                         <td>{{Contacts.phone}}</td>
@@ -29,8 +29,8 @@
                         <td>{{Contacts.assigned_to.get_full_name}}</td>
                         <td>
                             {% if user.is_superuser %}
-                            <a class="badge" href="{% url 'contacts:contact-update' Contacts.pk %}">ویرایش</a>
-                            <a class="badge" href="{% url 'contacts:contact-delete' Contacts.pk %}">حذف</a>
+                            <a class="badge" href="{% url 'contacts:contact-update' company.slug Contacts.pk %}">ویرایش</a>
+                            <a class="badge" href="{% url 'contacts:contact-delete' company.slug Contacts.pk %}">حذف</a>
                             {% endif %}
                         </td>
                       </tr>
