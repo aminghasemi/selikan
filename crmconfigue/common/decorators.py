@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, get_object_or_404
 from .models import Company, Enrolled
+from django.db.models import Count
 
 def unauthenticated_user(view_func):
     def wrapper_func(request, *args, **kwargs):
@@ -32,4 +33,15 @@ def company_enrolled(view_func):
             return view_func(request, slug, *args, **kwargs)
         else:
             return HttpResponse('شما در این شرکت عضو نیستید')
+    return wrapper_func
+def user_limit(view_func):
+    def wrapper_func(request, slug, *args, **kwargs):
+        #classroom=class_room.objects.get(slug=slug)
+        company= get_object_or_404(Company, slug=slug)
+        staff_count=company.staff_enroll.count()
+        if  company.user_limit>staff_count:
+        #if classroom.objects.get(students=request.user.profile) or classroom.objects.get(teachers=request.user.profile):
+            return view_func(request, slug, *args, **kwargs)
+        else:
+            return HttpResponse('محدودیت تعداد کاربران شرکت')
     return wrapper_func

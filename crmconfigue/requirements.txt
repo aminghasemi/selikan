@@ -10,6 +10,7 @@ django-widget-tweaks==1.4.8
 phonenumbers==8.12.16
 Pillow==7.1.2
 python-dateutil==2.8.1
+python-decouple==3.4
 pytz==2020.1
 six==1.15.0
 sqlparse==0.3.1

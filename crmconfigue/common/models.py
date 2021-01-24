@@ -100,7 +100,7 @@ class Company(models.Model):
     creator = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='crm_creator', verbose_name="ایجادکننده شرکت")
     created_time=models.DateTimeField(auto_now_add=True, verbose_name ="تاریخ ایجاد")
     staff=models.ManyToManyField(User, through='Enrolled', related_name='companystaff')
-
+    access_date=models.DateTimeField(default=timezone.now, verbose_name='تاریخ اعتبار حساب')
     class Meta:
         verbose_name = "شرکت"
         verbose_name_plural = "شرکت‌ها"
@@ -110,7 +110,13 @@ class Company(models.Model):
 
     def __str__(self):
         return self.name
-
+    def is_special_company(self):
+        if self.access_date > timezone.now():
+            return True
+        else:
+            return False
+    is_special_company.boolean = True
+    is_special_company.short_description = "وضعیت اعتبارحساب"
 
 class Address(models.Model):
     address_line = models.CharField( max_length=255, blank=True, null=True,verbose_name="آدرس")

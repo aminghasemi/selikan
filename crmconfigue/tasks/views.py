@@ -7,13 +7,13 @@ from django.contrib.auth.decorators import login_required
 
 from common.models import Company
 from .models import Task
-from common.mixins import EnrollMixin, SuperUserAccessMixin, CreatorAccessMixin
+from common.mixins import EnrollMixin, SuperUserAccessMixin, CreatorAccessMixin, SpecialCompanyMixin
 from common.decorators import company_enrolled
 from .forms import TaskForm
 # Create your views here.
 
 
-class TaskList(EnrollMixin, LoginRequiredMixin,ListView):
+class TaskList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
     template_name = 'company/task.html'
     def get_queryset(self):
         global company

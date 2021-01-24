@@ -1,6 +1,7 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from .models import Company
+from django.utils import timezone
 
 
 class EnrollMixin():
@@ -23,3 +24,11 @@ class CreatorAccessMixin():
             return super().dispatch(request, *args, **kwargs)
         else:
             raise Http404("شما به این صفحه دسترسی ندارید.")
+class SpecialCompanyMixin():
+    def dispatch(self, request, *args, **kwargs):
+        slug= self.kwargs.get('slug')
+        company= get_object_or_404(Company, slug=slug)
+        if company.access_date>timezone.now():
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            raise Http404("مدت زمان اعتبار این شرکت به پایان رسیده است.")
