@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'lead.apps.LeadConfig',
     'tasks.apps.TasksConfig',
-
+    'payment.apps.PaymentConfig',
 
     # third party apps 
     'django_extensions',
