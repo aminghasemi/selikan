@@ -25,11 +25,17 @@
                       <tr>
                         <td><a href="#">{{billings.invoice_number}}</a></td>
                         <td>{{billings.staff.jinvoice_date}}</td>
-                        <td>{{billings.status}}</td>
-                        <td>{{billings.creator.amount}}</td>
+                        <td>{% if billings.status == 'PAID'%}
+                          <span class="badge badge-success">پرداخت شده</span>
+                        {% elif billings.status == 'NOT_PAID' %}
+                          <span class="badge badge-danger">پرداخت نشده</span>
+                        {% else %}
+                          <span class="badge badge-warning">در حال پرداخت</span>
+                        {% endif %} </td>
+                        <td>{{billings.amount}}</td>
                         <td>
                             {% if user.is_superuser %}
-                            <a class="badge" href="{% url 'payment:billing_detail' billings.slug %}">مشاهده</a>
+                            <a class="badge" href="{% url 'payment:billing-detail' company.slug billings.pk %}">مشاهده</a>
 
                             {% endif %}
                         </td>

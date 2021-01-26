@@ -107,7 +107,8 @@ class Company(models.Model):
 
     def jcreated_time(self):
         return jalali_converter(self.created_time)  
-
+    def jaccess_date(self):
+        return jalali_converter(self.access_date) 
     def __str__(self):
         return self.name
     def is_special_company(self):

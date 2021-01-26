@@ -28,7 +28,7 @@ class BillingCreate(EnrollMixin, LoginRequiredMixin, CreateView):
         global company
         slug= self.kwargs.get('slug')
         company = get_object_or_404(Company , slug=slug)
-        return company.companytask.all()
+        return company.companybilling.all()
     def get_context_data(self, **kwargs):
         slug= self.kwargs.get('slug')
         company = get_object_or_404(Company , slug=slug)
@@ -37,40 +37,76 @@ class BillingCreate(EnrollMixin, LoginRequiredMixin, CreateView):
         return context
     def form_valid(self, form, **kwargs):       
         form.instance.user = self.request.user
+        form.instance.staff_unit = 100000
+        form.instance.month_unit = 100000
+        form.instance.status= "PENDING"
         slug= self.kwargs.get('slug')
         company = get_object_or_404(Company , slug=slug)
         form.instance.company= company
         return super().form_valid(form, **kwargs)
-
-
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('payment:billing-preview', kwargs={'slug': slug, 'pk': self.object.pk}, current_app='payment')
+class BillingPreview(EnrollMixin,LoginRequiredMixin,DetailView):
+    template_name="registration/billing_preview.html"
+    def get_object(self):
+        pk=self.kwargs.get('pk')
+        return get_object_or_404(Billing, pk=pk)
+    def get_context_data(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('request', kwargs={'slug': slug, 'pk': self.object.pk}, current_app='payment')
+class BillingDetail(EnrollMixin,LoginRequiredMixin,DetailView):
+    template_name="registration/billing_detail.html"
+    def get_object(self):
+        pk=self.kwargs.get('pk')
+        return get_object_or_404(Billing, pk=pk)
+    def get_context_data(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('request', kwargs={'slug': slug, 'pk': self.object.pk}, current_app='payment')
 
 # -*- coding: utf-8 -*-
 # Github.com/Rasooll
 from django.http import HttpResponse
 from zeep import Client
-
+from .forms import ZarinpalForm
 MERCHANT = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
 client = Client('https://www.zarinpal.com/pg/services/WebGate/wsdl')
 
-email = 'email@example.com'  # Optional
-mobile = '09123456789'  # Optional
+
 CallbackURL = 'http://localhost:8000/verify/' # Important: need to edit for realy server.
 
-def send_request(request):
-    amount = 1000  # Toman / Required
 
-    description = "توضیحات مربوط به تراکنش را در این قسمت وارد کنید"  # Required
-    result = client.service.PaymentRequest(MERCHANT, amount, description, email, mobile, CallbackURL)
+def send_request(request, pk):
+    billing=get_object_or_404(Billing, pk=pk)
+    amount= billing.amount
+    email= request.user.email
+    description = "خرید اشتراک سلیکان"
+    result = client.service.PaymentRequest(MERCHANT, amount, description, email, CallbackURL=CallbackURL)
     if result.Status == 100:
         return redirect('https://www.zarinpal.com/pg/StartPay/' + str(result.Authority))
     else:
         return HttpResponse('Error code: ' + str(result.Status))
 
-def verify(request, slug):
+def verify(request, self, slug):
     if request.GET.get('Status') == 'OK':
         result = client.service.PaymentVerification(MERCHANT, request.GET['Authority'], amount)
         if result.Status == 100:
             company = get_object_or_404(Company, slug=slug)
+            pk=self.kwargs.get('pk')
+            billing=get_object_or_404(Billing, pk=pk)
+            billing.object.status="PAID"
             company.access_date = datetime.now() + timedelta(days=30)
             return HttpResponse('Transaction success.\nRefID: ' + str(result.RefID))
         elif result.Status == 101:

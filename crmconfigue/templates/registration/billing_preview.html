@@ -1,0 +1,125 @@
+{% extends 'registration/base.html' %}
+
+{% block title %}داشبورد اصلی{% endblock %}
+
+
+{% block main %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" style="margin-right:0px">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <h4>تایید پرداخت فاکتور</h4>
+          </div>
+          <div class="col-sm-12">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">خانه</a></li>
+              <li class="breadcrumb-item active">تمدید اشتراک</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+
+
+            <!-- Main content -->
+            <div class="invoice p-3 mb-3">
+              <!-- title row -->
+              <div class="row">
+                <div class="col-12">
+                  <h5>
+                    <i class="fas fa-globe"></i> نرم افزار ارتباط با مشتریان سلیکان<br>
+                    <small class="float-right">تاریخ: {{object.jinvoice_date}}</small>
+                  </h5>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- info row -->
+              <div class="row invoice-info">
+                <div class="col-sm-4 invoice-col">
+                  فروشنده
+                  <address>
+                    <strong>نرم افزار ارتباط با مشتریان سلیکان</strong><br>
+                     خیام جنوبی کوی ۲۲<br>
+                    ارومیه، آذربایجان غربی<br>
+                    تلفن: (۰۴۴) ۹۶۳۷-۳۲۲۵<br>
+                    ایمیل: info@selikan.com
+                  </address>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4 invoice-col">
+                  خریدار
+                  <address>
+                    <strong>{{object.company}}</strong><br>
+                    {{object.company.address}}<br>
+                    {{object.company.city}}<br>
+                    تلفن: {{object.phone_number}}<br>
+                    ایمیل: {{object.company.email}}
+                  </address>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4 invoice-col">
+                  <b>شماره فاکتور #{{object.invoice_number}}</b><br>
+                  <br>
+
+                  <b>نام کاربر:</b> {{request.user.get_full_name}}
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+
+              <!-- Table row -->
+              <div class="row">
+                <div class="col-12 table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                    <tr>
+                      <th>ردیف</th>
+                      <th>وضعیت پرداخت</th>
+                      <th>تعداد ماه اشتراک</th>
+                      <th>تعداد کارمند اشتراک</th>
+                      <th>هزینه</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>۱</td>
+                      <td>{{object.status}}</td>
+                      <td>{{object.month_number}}</td>
+                      <td>{{object.staff_number}}</td>
+                      <td>{{object.amount}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+
+
+
+              <!-- this row will not appear when printing -->
+              <div class="row no-print">
+                <div class="col-12">
+                  <a class="badge" href="{% url 'request' object.pk %}">ویرایش</a>
+
+                </div>
+              </div>
+            </div>
+            <!-- /.invoice -->
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  {% endblock %}

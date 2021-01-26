@@ -8,7 +8,7 @@ class PackagesAdmin(admin.ModelAdmin):
 
 @admin.register(Billing)
 class BillingAdmin(admin.ModelAdmin):
-    list_display = ('invoice_number','invoice_date', 'status', 'company','user', 'gateway')
+    list_display = ('amount','invoice_number','invoice_date', 'status', 'company','user', 'gateway')
 
 @admin.register(Seller)
 class SellerAdmin(admin.ModelAdmin):

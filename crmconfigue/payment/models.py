@@ -6,7 +6,7 @@ from django.db.models import F
 
 BILLING_STATUS = (
     ("PAID", "پرداخت شده"),
-    ("NOT_PAID", "پرداخت شده"),
+    ("NOT_PAID", "پرداخت نشده"),
     ("PENDING", "در حال پرداخت"),
     ("EXPIRED", "منقضی شده"),
 )
@@ -22,8 +22,8 @@ class Packages(models.Model):
     description = models.TextField(blank=True, null=True, verbose_name="توضیحات")
     created_on = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
     is_active = models.BooleanField(default=False, verbose_name="فعال")
-    staff_amount=models.DecimalField( decimal_places=2, max_digits=12, blank=True, null=True, verbose_name="قیمت هر کاربر")
-    monthly_amount = models.DecimalField( decimal_places=2, max_digits=12, blank=True, null=True, verbose_name="حق اشتراک ماهیانه")
+    staff_amount=models.IntegerField(  blank=True, null=True, verbose_name="قیمت هر کاربر")
+    monthly_amount = models.IntegerField(  blank=True, null=True, verbose_name="حق اشتراک ماهیانه")
     start_date=models.DateField(blank=True, null=True, verbose_name="تاریخ شروع")
     end_date=models.DateField(blank=True, null=True, verbose_name="تاریخ پایان")
 
@@ -44,8 +44,8 @@ class Packages(models.Model):
 def increment_invoice_number():
     last_invoice = Billing.objects.all().order_by('id').last()
     if not last_invoice:
-        return '0000001'
-    invoice_no = last_invoice.invoice_no
+        return '1'
+    invoice_no = last_invoice.invoice_number
     invoice_int = int(invoice_no)
     width = 7
     new_invoice_int = invoice_int + 1
@@ -55,13 +55,18 @@ def increment_invoice_number():
 class Billing(models.Model):
     staff_number=models.IntegerField( verbose_name="تعداد کارمند")
     month_number=models.IntegerField( verbose_name="تعداد ماه")
+    staff_unit=models.IntegerField(verbose_name="حق اشتراک به ازای هر کاربر")
+    month_unit=models.IntegerField(verbose_name="حق اشتراک به ازای هر ماه")
     invoice_number=models.CharField(max_length=64, default = increment_invoice_number, verbose_name="شماره فاکتور")
     invoice_date=models.DateTimeField(auto_now_add=True, verbose_name="تاریخ فاکتور")
     status=models.CharField(max_length=20, choices=BILLING_STATUS, verbose_name="وضعیت")
     gateway=models.CharField(max_length=20, choices=PAYMENT_GATEWAYS, verbose_name="درگاه پرداخت")
     company=models.ForeignKey(Company,related_name="companybilling", on_delete=models.SET_NULL, null=True, blank=True, verbose_name="نام شرکت کاربر")
-    amount=models.DecimalField( decimal_places=2, max_digits=20, blank=True, verbose_name="مبلغ فاکتور")
+    amount=models.IntegerField( blank=True, verbose_name="مبلغ فاکتور")
     user=models.ForeignKey(User, related_name="userbilling", on_delete=models.SET_NULL, null=True, blank=True, verbose_name="نام کاربر")
+    def save(self):
+        self.amount= (self.staff_number*self.staff_unit*self.month_number)
+        return super(Billing, self).save()
     def jinvoice_date(self):
         return jalali_converter(self.invoice_date)      
     class Meta:

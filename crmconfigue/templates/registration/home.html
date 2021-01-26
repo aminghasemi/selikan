@@ -15,7 +15,7 @@
                     <tr>
                       <th>نام شرکت</th>
                       <th>تعداد کارمندان</th>
-                      <th>تاریخ ایجاد شرکت</th>
+                      <th>تاریخ اعتبار شرکت</th>
                       <th>ایجاد کننده شرکت</th>
                       <th>عملیات</th>
                     </tr>
@@ -25,10 +25,12 @@
                       <tr>
                         <td><a href="#">{{CompaniesList.name}}</a></td>
                         <td>{{CompaniesList.staff.count}}</td>
-                        <td>{{CompaniesList.jcreated_time}}</td>
+                        <td>{{CompaniesList.jaccess_date}}</td>
                         <td>{{CompaniesList.creator.get_full_name}}</td>
                         <td>
                             {% if user.is_superuser %}
+                            <a class="badge" href="{% url 'payment:billing-list' CompaniesList.slug %}">سوابق مالی</a>
+                            <a class="badge" href="{% url 'payment:billing-create' CompaniesList.slug %}">افزایش اعتبار</a>
                             <a class="badge" href="{% url 'common:company-update' CompaniesList.slug %}">ویرایش</a>
                             <a class="badge" href="{% url 'common:company-delete' CompaniesList.slug %}">حذف</a>
                             <a class="badge" href="{% url 'common:company_add_staff' CompaniesList.slug %}">افزودن کاربر</a>

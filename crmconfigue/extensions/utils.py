@@ -44,10 +44,10 @@ def jalali_converter(time):
         if time_to_list[1] == index + 1:
             time_to_list[1] = month
             break
-    output = "{} {} {}, ساعت {}:{}".format(
-        time_to_tuple[2],
-        time_to_tuple[1],
+    output = "{}/{}/{}, ساعت {}:{}".format(
         time_to_tuple[0],
+        time_to_tuple[1],
+        time_to_tuple[2],
         time.hour,
         time.minute,
     )
