@@ -24,6 +24,52 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
+             <li class="nav-item has-treeview menu-open">
+              <a href="#" class="nav-link active">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  معاملات
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{% url 'deals:deals' company.slug %}" class="nav-link active">
+                    <i class="fas fa-list nav-icon"></i>
+                    <p>لیست معاملات</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'deals:deal-create' company.slug %}" class="nav-link active">
+                    <i class="far fa-edit nav-icon"></i>
+                    <p>ایجاد معامله جدید</p>
+                  </a>
+                </li>
+              </ul>  
+            </li> 
+             <li class="nav-item has-treeview menu-open">
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              تیم‌ها
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{% url 'teams:teams' company.slug %}" class="nav-link active">
+                <i class="fas fa-list nav-icon"></i>
+                <p>لیست تیم‌ها</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'teams:team-create' company.slug %}" class="nav-link active">
+                <i class="far fa-edit nav-icon"></i>
+                <p>ایجاد تیم جدید</p>
+              </a>
+            </li>
+          </ul>  
+        </li>  
         <li class="nav-item has-treeview menu-open">
           <a href="#" class="nav-link active">
             <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -153,7 +199,29 @@
             </li>
           </ul>  
         </li>    
-        
+        <li class="nav-item has-treeview menu-open">
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              تنظیمات CRM
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{% url 'deals:pipelines' company.slug %}" class="nav-link active">
+                <i class="fas fa-list nav-icon"></i>
+                <p>مراحل فروش</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'deals:pipeline-create' company.slug %}" class="nav-link active">
+                <i class="far fa-edit nav-icon"></i>
+                <p>ایجاد مرحله فروش جدید</p>
+              </a>
+            </li>
+          </ul>  
+        </li>   
         <li class="nav-item">
           <a href="pages/widgets.html" class="nav-link">
             <i class="nav-icon fas fa-th"></i>

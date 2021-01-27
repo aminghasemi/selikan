@@ -1,0 +1,46 @@
+{% extends 'company/base.html' %}
+
+{% block title %}داشبورد اصلی{% endblock %}
+
+
+{% block main %}
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>عنوان معامله</th>
+                      <th>مرحله فروش</th>
+                      <th>مبلغ</th>
+                      <th>محول شده به</th>
+                      <th>نام مشتری</th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for deals in object_list %}
+                      <tr>
+                        <td><a href="{% url 'deals:deals-update' deals.pk %}">{{deals.title}}</a></td>
+                        <td>{{deals.pipeline_status}}</td>
+                        <td>{{deals.amount}}</td>
+                        <td>{{deals.assigned_to.get_full_name}}</td>
+                        <td>{{deals.accoun_name}}</td>
+                        <td>
+                            <a class="badge" href="{% url 'deals:deals-update' company.slug deals.pk %}">ویرایش</a>
+                            <a class="badge" href="{% url 'deals:deals-delete' company.slug deals.pk %}">حذف</a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+{% endblock %}

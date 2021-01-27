@@ -81,7 +81,7 @@ class BillingDetail(EnrollMixin,LoginRequiredMixin,DetailView):
 from django.http import HttpResponse
 from zeep import Client
 from .forms import ZarinpalForm
-MERCHANT = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
+MERCHANT = 'fa7c7e73-04fe-48ea-adb0-6c3550bd4978'
 client = Client('https://www.zarinpal.com/pg/services/WebGate/wsdl')
 
 

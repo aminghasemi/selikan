@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'lead.apps.LeadConfig',
     'tasks.apps.TasksConfig',
     'payment.apps.PaymentConfig',
+    'deals.apps.DealsConfig',
 
     # third party apps 
     'django_extensions',

@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('common.urls')),
     path('<slug:slug>/teams/', include('teams.urls')),
     path('<slug:slug>/contacts/', include('contacts.urls')),
+    path('<slug:slug>/deals/', include('deals.urls')),
     path('<slug:slug>/leads/', include('lead.urls')),
     path('<slug:slug>/accounts/', include('accounts.urls')),
     path('<slug:slug>/opportunity/', include('opportunity.urls')),
