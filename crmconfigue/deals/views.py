@@ -96,9 +96,14 @@ class DealsList(EnrollMixin, LoginRequiredMixin,ListView):
         slug= self.kwargs.get('slug')
         company = get_object_or_404(Company , slug=slug)
         context= super().get_context_data(**kwargs)
-        context['company'] = company.companydeals.all()
+        context['company'] = company
         return context
-
+    def get_context_data2(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        context['deals'] = company.companydeals.all()
+        return context
 class DealCreate(LoginRequiredMixin, CreateView):
     model=Deal
     fields=["title","pipeline_status", "description", "assigned_to","account_name","deal_amount", "is_active", "contacts","teams"]
