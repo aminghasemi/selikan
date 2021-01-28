@@ -4,7 +4,7 @@ from .models import Deal, Pipeline
 
 @admin.register(Pipeline)
 class LeadAdmin(admin.ModelAdmin):
-    list_display = ('pipeline_number','title', 'company')
+    list_display = ('pipeline_number','pipeline_title', 'company')
  
 @admin.register(Deal)
 class DealAdmin(admin.ModelAdmin):

@@ -27,7 +27,7 @@ class PipelinesList(EnrollMixin, LoginRequiredMixin,ListView):
 
 class PipelineCreate(LoginRequiredMixin, CreateView):
     model=Pipeline
-    fields=["pipeline_number","title"]
+    fields=["pipeline_number","pipeline_title"]
     template_name="company/pipeline-create-update.html"
     def get_queryset(self):
         global company
@@ -52,7 +52,7 @@ class PipelineCreate(LoginRequiredMixin, CreateView):
 
 class PipelineUpdate(LoginRequiredMixin, UpdateView):
     model=Pipeline
-    fields=["pipeline_number","title"]
+    fields=["pipeline_number","pipeline_title"]
     template_name = "company/pipeline-create-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')
@@ -91,12 +91,12 @@ class DealsList(EnrollMixin, LoginRequiredMixin,ListView):
         global company
         slug= self.kwargs.get('slug')
         company = get_object_or_404(Company , slug=slug)
-        return company.companyleads.all()
+        return company.companypipelines.all()
     def get_context_data(self, **kwargs):
         slug= self.kwargs.get('slug')
         company = get_object_or_404(Company , slug=slug)
         context= super().get_context_data(**kwargs)
-        context['company'] = company
+        context['company'] = company.companydeals.all()
         return context
 
 class DealCreate(LoginRequiredMixin, CreateView):

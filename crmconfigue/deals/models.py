@@ -13,7 +13,7 @@ from teams.models import Teams
 
 class Pipeline(models.Model):
     pipeline_number=models.IntegerField(verbose_name="شماره مرحله")
-    title = models.CharField(max_length=64, verbose_name="عنوان")
+    pipeline_title = models.CharField(max_length=64, verbose_name="عنوان")
     created_by = models.ForeignKey(User, related_name="pipline_created_by", on_delete=models.SET_NULL, null=True, verbose_name="ساخته شده توسط")
     created_on = models.DateTimeField( auto_now_add=True, verbose_name="تاریخ ایجاد")
     company = models.ForeignKey(Company, on_delete=models.SET_NULL, related_name="companypipelines", null=True, blank=True, verbose_name="شرکت")
@@ -22,7 +22,7 @@ class Pipeline(models.Model):
         verbose_name = "مرحله فروش"
         verbose_name_plural = "مراحل فروش"
     def __str__(self):
-        return self.title
+        return self.pipeline_title
 
 class Deal(models.Model):
     title = models.CharField(max_length=64, verbose_name="عنوان")

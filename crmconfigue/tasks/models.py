@@ -22,29 +22,12 @@ class Task(models.Model):
     priority = models.CharField( max_length=50, choices=PRIORITY_CHOICES, verbose_name="تقدم")
     due_date = models.DateField(blank=True, null=True, verbose_name="مهلت انجام")
     created_on = models.DateTimeField( auto_now_add=True, verbose_name="تاریخ ایجاد")
-    account = models.ForeignKey(
-        Account,
-        related_name="accounts_tasks",
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL, verbose_name="نام شرکت"
-    )
-
+    account = models.ForeignKey(Account,related_name="accounts_tasks",null=True,blank=True,on_delete=models.SET_NULL, verbose_name="نام شرکت")
     contacts = models.ManyToManyField(Contact, related_name="contacts_tasks", verbose_name="نام مشتری")
-
     assigned_to = models.ManyToManyField(User, related_name="users_tasks", verbose_name="محول شده به")
-
-    created_by = models.ForeignKey(
-        User,
-        related_name="task_created",
-        blank=True,
-        null=True,
-        on_delete=models.SET_NULL, verbose_name="ایجاد شده توسط"
-    )
+    created_by = models.ForeignKey(User,related_name="task_created",blank=True,null=True,on_delete=models.SET_NULL, verbose_name="ایجاد شده توسط")
     teams = models.ManyToManyField(Teams, related_name="tasks_teams", verbose_name="تیم")
-    company = models.ForeignKey(
-        Company, on_delete=models.SET_NULL, related_name='companytask', null=True, blank=True, verbose_name="کاربر سایت"
-    )
+    company = models.ForeignKey(Company, on_delete=models.SET_NULL, related_name='companytask', null=True, blank=True, verbose_name="کاربر سایت")
 
     def __str__(self):
         return self.title

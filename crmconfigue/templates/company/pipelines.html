@@ -21,7 +21,7 @@
                   <tbody>
                     {% for pipelines in object_list %}
                       <tr>
-                        <td><a href="{% url 'deals:pipeline-update' company.slug pipelines.pk %}">{{pipelines.title}}</a></td>
+                        <td><a href="{% url 'deals:pipeline-update' company.slug pipelines.pk %}">{{pipelines.pipeline.title}}</a></td>
                         <td>{{pipelines.pipeline_number}}</td>
                         <td>
                             <a class="badge" href="{% url 'deals:pipeline-update' company.slug pipelines.pk %}">ویرایش</a>
