@@ -91,18 +91,13 @@ class DealsList(EnrollMixin, LoginRequiredMixin,ListView):
         global company
         slug= self.kwargs.get('slug')
         company = get_object_or_404(Company , slug=slug)
-        return company.companypipelines.all()
+        return company.companydeals.all()
     def get_context_data(self, **kwargs):
         slug= self.kwargs.get('slug')
         company = get_object_or_404(Company , slug=slug)
         context= super().get_context_data(**kwargs)
         context['company'] = company
-        return context
-    def get_context_data2(self, **kwargs):
-        slug= self.kwargs.get('slug')
-        company = get_object_or_404(Company , slug=slug)
-        context= super().get_context_data(**kwargs)
-        context['deals'] = company.companydeals.all()
+      #  context['deals']= company.companydeals.all()
         return context
 class DealCreate(LoginRequiredMixin, CreateView):
     model=Deal

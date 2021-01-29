@@ -24,7 +24,7 @@
                   <tbody>
                     {% for leads in object_list %}
                       <tr>
-                        <td><a href="{% url 'leads:lead-update' leads.pk %}">{{leads.title}}</a></td>
+                        <td><a href="{% url 'leads:lead-update' company.slug leads.pk %}">{{leads.title}}</a></td>
                         <td>{{leads.status}}</td>
                         <td>{{leads.source}}</td>
                         <td>{{leads.assigned_to.get_full_name}}</td>
