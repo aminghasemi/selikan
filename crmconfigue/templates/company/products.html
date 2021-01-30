@@ -1,0 +1,46 @@
+{% extends 'company/base.html' %}
+
+{% block title %}داشبورد اصلی{% endblock %}
+
+
+{% block main %}
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>نام محصول</th>
+                      <th>کد محصول</th>
+                      <th>واحد اندازه‌گیری</th>
+                      <th>قیمت واحد</th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for product in object_list %}
+                      <tr>
+                        <td><a href="{% url 'common:product-update' company.slug product.pk %}">{{product.name}}</a></td>
+                        <td>{{product.code}}</td>
+                        <td>{{product.unit}}</td>
+                        <td>{{product.price}}</td>
+                        <td>
+                            
+                            <a class="badge" href="{% url 'common:product-update' company.slug product.pk %}">ویرایش</a>
+                            <a class="badge" href="{% url 'common:product-delete' company.slug product.pk %}">حذف</a>
+                          
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+{% endblock %}

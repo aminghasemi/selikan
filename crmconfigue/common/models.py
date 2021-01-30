@@ -190,3 +190,40 @@ class Enrolled(models.Model):
         return (
             "staff__user__last_name__icontains",
             "staff__user__first_name__icontains",)
+
+
+class Product(models.Model):
+    name=models.CharField( max_length=255, blank=True, null=True,verbose_name="نام محصول")
+    code=models.CharField( max_length=255, blank=True, null=True,verbose_name="کد محصول")
+    unit=models.CharField( max_length=255, blank=True, null=True,verbose_name="واحد اندازه‌گیری")
+    price=models.FloatField(blank=True, null=True, verbose_name="قیمت واحد محصول")
+    description=models.CharField( max_length=255, blank=True, null=True,verbose_name="توضیحات")
+    created_by=models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='product_creator', verbose_name="ایجادکننده محصول")
+    created_on=models.DateTimeField(auto_now_add=True, verbose_name ="تاریخ ایجاد")
+    company=models.ForeignKey(Company, on_delete=models.SET_NULL, related_name="companyproducts", null=True, blank=True, verbose_name="محصولات شرکت")
+    
+    class Meta:
+        verbose_name = "محصول"
+        verbose_name_plural = "محصولات"
+
+    def jdate(self):
+        return jalali_converter(self.created_on)
+
+    def __str__(self):
+        return self.name
+
+class Country(models.Model):
+    name=models.CharField( max_length=255, blank=True, null=True,verbose_name="نام کشور")
+    short_name=models.CharField(max_length=3, choices=COUNTRIES, blank=True, null=True,verbose_name="نام کوتاه کشور")
+    created_by=models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='country_creator', verbose_name="ایجادکننده کشور")
+    created_on=models.DateTimeField(auto_now_add=True, verbose_name ="تاریخ ایجاد")
+    company=models.ForeignKey(Company, on_delete=models.SET_NULL, related_name="companycountries", null=True, blank=True, verbose_name="کشورهای مرتبط شرکت")
+
+    class Meta:
+        verbose_name = "کشور"
+        verbose_name_plural = "کشورها"
+    def jdate(self):
+        return jalali_converter(self.created_on)
+
+    def __str__(self):
+        return self.name

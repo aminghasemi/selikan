@@ -7,8 +7,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from cuser.middleware import CuserMiddleware
 from itertools import chain
-from .models import Company, User
-from .mixins import CreatorAccessMixin, SuperUserAccessMixin, SpecialCompanyMixin
+from .models import Company, User, Product, Country
+from .mixins import CreatorAccessMixin, SuperUserAccessMixin, SpecialCompanyMixin, EnrollMixin
 from .decorators import allowed_users, company_enrolled, user_limit
 from .forms import EnrollForm, ProfileForm
 from django.contrib.auth.views import LoginView, PasswordChangeView
@@ -150,3 +150,150 @@ def activate(request, uidb64, token):
 		return HttpResponse('اکانت شما با موفقیت فعال شد. برای ورود <a href="/login">کلیک</a> کنید.')
 	else:
 		return HttpResponse('لینک فعال سازی منقضی شده است. <a href="/registration">دوباره امتحان کنید.</a>')
+
+
+
+
+class ProductsList(EnrollMixin, LoginRequiredMixin,ListView):
+    template_name = 'company/products.html'
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companyproducts.all()
+    def get_context_data(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+
+class ProductCreate(LoginRequiredMixin, CreateView):
+    model=Product
+    fields=["name", "code", "unit", "price", "description"]
+    template_name="company/product-create-update.html"
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companyproducts.all()
+    def get_context_data(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+    def form_valid(self, form, **kwargs):       
+        form.instance.created_by = self.request.user
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        form.instance.company= company
+        return super().form_valid(form, **kwargs)
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('common:products', kwargs={'slug': slug}, current_app='common')
+
+class ProductUpdate(LoginRequiredMixin, UpdateView):
+    model=Product
+    fields=["name", "code", "unit", "price", "description"]
+    template_name = "company/product-create-update.html"
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('common:products', kwargs={'slug': slug}, current_app='common')
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companyproducts.all()
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+class ProductDelete(LoginRequiredMixin, DeleteView):
+    model=Product
+    template_name = "company/product_confirm_delete.html"
+    success_url= reverse_lazy('common:products')
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companyproducts.all()
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('common:products', kwargs={'slug': slug}, current_app='common')
+
+class CountriesList(EnrollMixin, LoginRequiredMixin,ListView):
+    template_name = 'company/countries.html'
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companyproducts.all()
+    def get_context_data(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+
+class CountryCreate(LoginRequiredMixin, CreateView):
+    model=Country
+    fields=["name", "short_name"]
+    template_name="company/country-create-update.html"
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companycountries.all()
+    def get_context_data(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+    def form_valid(self, form, **kwargs):       
+        form.instance.created_by = self.request.user
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        form.instance.company= company
+        return super().form_valid(form, **kwargs)
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('common:countries', kwargs={'slug': slug}, current_app='common')
+
+class CountryUpdate(LoginRequiredMixin, UpdateView):
+    model=Country
+    fields=["name", "short_name"]
+    template_name = "company/country-create-update.html"
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('common:countries', kwargs={'slug': slug}, current_app='common')
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companycountries.all()
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+class CountryDelete(LoginRequiredMixin, DeleteView):
+    model=Country
+    template_name = "company/country_confirm_delete.html"
+    success_url= reverse_lazy('common:countries')
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companycountries.all()
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('common:countries', kwargs={'slug': slug}, current_app='common')
