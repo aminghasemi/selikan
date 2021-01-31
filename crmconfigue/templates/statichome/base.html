@@ -1,0 +1,206 @@
+﻿{% load static %}
+
+<!doctype html>
+<html lang="fa">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="keywords" content="سلیکان, ارتباط با مشتریان, مدیریت فروش, اتوماسیون فروش, اتوماسیون بازاریابی , نرم افزار مدیریت ارتباط با مشتریان" >
+        <meta name="description" content="سلیکان - نرم افزار مدیریت فروش و ارتباط با مشتریان">
+        
+
+        <!-- Bootstrap CSS --> 
+        <link rel="stylesheet" href="{% static 'statichome/assets/css/bootstrap.min.css' %}">
+        <!-- Animate CSS --> 
+        <link rel="stylesheet" href="{% static 'statichome/assets/css/animate.css' %}">
+        <!-- Boxicons CSS --> 
+		<link rel="stylesheet" href="{% static 'statichome/assets/css/boxicons.min.css' %}">
+        <!-- Owl Carousel CSS --> 
+        <link rel="stylesheet" href="{% static 'statichome/assets/css/owl.carousel.min.css' %}">
+        <!-- Owl Default CSS --> 
+        <link rel="stylesheet" href="{% static 'statichome/assets/css/owl.theme.default.min.css' %}">
+        <!-- Magnific Popup CSS --> 
+        <link rel="stylesheet" href="{% static 'statichome/assets/css/magnific-popup.min.css' %}">
+        <!-- Odometer CSS --> 
+        <link rel="stylesheet" href="{% static 'statichome/assets/css/odometer.css' %}">
+        <!-- Nice Select CSS --> 
+        <link rel="stylesheet" href="{% static 'statichome/assets/css/nice-select.css' %}">
+        <!-- Meanmenu CSS -->
+        <link rel="stylesheet" href="{% static 'statichome/assets/css/meanmenu.css' %}">
+        <!-- Style CSS -->
+        <link rel="stylesheet" href="{% static 'statichome/assets/css/style.css' %}">
+        <!-- Responsive CSS -->
+		<link rel="stylesheet" href="{% static 'statichome/assets/css/responsive.css' %}">
+        <!-- RTL CSS -->
+		<link rel="stylesheet" href="{% static 'statichome/assets/css/rtl.css' %}">
+		
+		<title>سلیکان - نرم افزار مدیریت فروش و ارتباط با مشتریان</title>
+
+        <link rel="icon" type="image/png" href="{% static 'statichome/assets/img/favicon.png' %}">
+    </head>
+
+    <body>
+
+        <!-- Start Preloader Area -->
+        <div class="preloader">
+            <div class="spinner"></div>
+        </div>
+        <!-- End Preloader Area -->
+
+        <!-- Start Navbar Area -->
+        {% include 'statichome/navbar.html'%}
+        <!-- End Navbar Area -->
+        <!-- Start Home Area -->
+        <!-- Start Main Slider Area -->
+        {% block main %}
+        
+        {% endblock %}
+        <!-- End Overview Area -->
+        <!-- End Home Area -->
+        <!-- Start Footer Area -->
+        <section class="footer-area pb-70">
+            <div class="subscribe-area">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="subscribe-content">
+                                <h3>مقالات جذاب ما  را از دست ندهید</h3>
+                            </div>
+                        </div>
+    
+                        <div class="col-lg-6 col-md-6">
+                            <form class="newsletter-form">
+                                <input type="email" class="input-newsletter" placeholder="ایمیل شما" name="EMAIL" required autocomplete="off">
+                                <button type="submit">
+                                     اشتراک در خبرنامه
+                                </button>
+                                
+                                <div id="validator-newsletter" class="form-result"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single-footer-widget">
+                            <h3>درباره ما</h3>
+    
+                            <ul class="quick-links">
+                                <li>
+                                    <a href="#">- مدیریت مشتری چیست</a>
+                                </li>
+
+                            </ul>
+                        </div>    
+                    </div>
+
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single-footer-widget">
+                            <h3>آموزش</h3>
+    
+                            <ul class="quick-links">
+                                <li>
+                                    <a href="#">- مدیریت شرکت</a>
+                                </li>
+
+                        </div>    
+                    </div>
+
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single-footer-widget">
+                            <h3>مدیریت مشتری</h3>
+    
+                            <ul class="quick-links">
+                                <li>
+                                    <a href="#">- خرده فروشی</a>
+                                </li>
+
+                            </ul>
+                        </div>    
+                    </div>
+
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single-footer-widget">
+                            <h3>لینکهای سریع</h3>
+    
+                            <ul class="quick-links">
+                                <li>
+                                    <a href="#">- قیمت گذاری</a>
+                                </li>
+
+                            </ul>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Footer Area -->
+
+        <!-- Start Copy Right Area -->
+        <div class="copyright-area">
+            <div class="container">
+                <div class="copyright-area-content">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-md-6">
+                            <p>
+                                 کلیه حقوق محفوظ و متعلق به نرم‌افزار مدیریت ارتباط با مشتریان سلیکان است.
+                            </p>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6">
+                            <ul>
+                                <li>
+                                    <a href="terms-condition.html">قوانین و ضوابط</a>
+                                </li>
+                                <li>
+                                    <a href="privacy-policy.html">حریم خصوصی</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Copy Right Area -->
+
+        <!-- Start Go Top Section -->
+        <div class="go-top">
+            <i class="bx bx-chevron-up"></i>
+            <i class="bx bx-chevron-up"></i>
+        </div>
+        <!-- End Go Top Section -->
+
+        <!-- Jquery Slim JS -->
+        <script src="{% static 'statichome/assets/js/jquery.min.js' %}"></script>
+        <!-- Popper JS -->
+        <script src="{% static 'statichome/assets/js/popper.min.js' %}"></script>
+        <!-- Bootstrap JS -->
+        <script src="{% static 'statichome/assets/js/bootstrap.min.js' %}"></script>
+        <!-- Meanmenu JS -->
+        <script src="{% static 'statichome/assets/js/jquery.meanmenu.js' %}"></script>
+        <!-- Owl Carousel JS -->
+        <script src="{% static 'statichome/assets/js/owl.carousel.min.js' %}"></script>
+        <!-- Magnific Popup JS -->
+        <script src="{% static 'statichome/assets/js/jquery.magnific-popup.min.js' %}"></script>
+        <!-- Appear JS -->
+        <script src="{% static 'statichome/assets/js/jquery.appear.js' %}"></script>
+        <!-- Odometer JS -->
+        <script src="{% static 'statichome/assets/js/odometer.min.js' %}"></script>
+        <!-- Form Ajaxchimp JS -->
+		<script src="{% static 'statichome/assets/js/jquery.ajaxchimp.min.js' %}"></script>
+		<!-- Form Validator JS -->
+		<script src="{% static 'statichome/assets/js/form-validator.min.js' %}"></script>
+		<!-- Contact JS -->
+        <script src="{% static 'statichome/assets/js/contact-form-script.js' %}"></script>
+        <!-- Nice Select JS -->
+        <script src="{% static 'statichome/assets/js/jquery.nice-select.min.js' %}"></script>
+        <!-- Wow Popup JS -->
+		<script src="{% static 'statichome/assets/js/wow.min.js' %}"></script>
+        <!-- Custom JS -->
+        <script src="{% static 'statichome/assets/js/main.js' %}"></script>
+    </body>
+</html>

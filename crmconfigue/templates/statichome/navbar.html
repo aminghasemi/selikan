@@ -1,0 +1,163 @@
+{% load static %}
+
+        <!-- Start Top Header Area -->
+        <div class="top-header-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <ul class="social">
+                            <li class="facebook">
+                                <a href="#" target="_blank">
+                                    <i class='bx bxl-facebook'></i>
+                                </a>
+                            </li>
+                            <li class="twitter">
+                                <a href="#" target="_blank">
+                                    <i class='bx bxl-twitter'></i>
+                                </a>
+                            </li>
+                            <li class="instagram">
+                                <a href="#" target="_blank">
+                                    <i class='bx bxl-instagram'></i>
+                                </a>
+                            </li>
+                            <li class="pinterest">
+                                <a href="#" target="_blank">
+                                    <i class='bx bxl-pinterest-alt'></i>
+                                </a>
+                            </li>
+                            <li class="youtube">
+                                <a href="#" target="_blank">
+                                    <i class='bx bxl-youtube'></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="top-header-text">
+                            <p>
+                                پیشنهاد ویژه خرید اشتراک نرم‌افزار برای مشتریان جدید
+                                <a href="contact.html">بیشتر بدانید</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="map-dropdown">
+                            <div class="d-flex align-items-center">
+
+                                    
+                                <div class="option-item">
+                                    <ul class="list">
+                                        <li>
+                                            <a href="{% url 'login' %}">
+                                                ورود 
+                                            </a>
+                                        </li>
+                                        <li>
+                                            یا
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'register' %}">عضویت</a>
+                                            
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Top Header Area -->
+
+        <div class="navbar-area">
+            <div class="main-responsive-nav">
+                <div class="container">
+                    <div class="main-responsive-menu">
+                        <div class="logo">
+                            <a href="index.html">
+                                <img src="{% static 'statichome/assets/img/logo.png' %}" alt="logo">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-navbar">
+                <div class="container-fluid p-0">
+                    <nav class="navbar navbar-expand-md navbar-light">
+                        <a class="navbar-brand" href="index.html">
+                            <img src="{% static 'statichome/assets/img/logo.png' %}" alt="logo">
+                        </a>
+
+                        <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a href="{% url 'common:statichome' %}" class="nav-link active">
+                                        خانه 
+                                        
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        درباره ما 
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        آموزش </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        وبلاگ 
+                                        <i class='bx bx-chevron-down'></i>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="blog-1.html" class="nav-link">
+                                                  اخبار شرکت
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="blog-2.html" class="nav-link">
+                                                 بروزرسانی‌ها
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="blog-details.html" class="nav-link">
+                                                 مقالات
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        تماس با ما
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div class="others-options">
+                                <div class="d-flex align-items-center">
+                                    <div class="option-item">
+                                        <a href="tel:021123456" class="call-button">
+                                            <i class='bx bxs-phone-call'></i>
+                                            ۰۴۴-۳۲۲۵۹۶۳۷
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
