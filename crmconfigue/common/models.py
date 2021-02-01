@@ -227,3 +227,14 @@ class Country(models.Model):
 
     def __str__(self):
         return self.name
+
+class Province(models.Model):
+    name=models.CharField( max_length=255, blank=True, null=True,verbose_name="نام کشور")
+    short_name=models.CharField(max_length=3, choices=COUNTRIES, blank=True, null=True,verbose_name="نام کوتاه کشور")
+
+    class Meta:
+        verbose_name = "استان"
+        verbose_name_plural = "استان‌ها"
+
+    def __str__(self):
+        return self.name

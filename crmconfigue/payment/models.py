@@ -73,14 +73,14 @@ class Billing(models.Model):
         verbose_name= "پرداخت"
         verbose_name_plural= "پرداخت‌ها"
 class Seller(models.Model):
-    name = models.CharField( max_length=64, verbose_name="نام")
-    company_name = models.CharField( max_length=64, verbose_name="نام شرکت")
-    phone_number= models.CharField(max_length = 15, verbose_name= "شماره تماس")
-    Address=models.CharField(max_length=250, verbose_name="آدرس")
+    name = models.CharField(default="سلیکان", max_length=64, verbose_name="نام")
+    company_name = models.CharField(default="سلیکان", max_length=64, verbose_name="نام شرکت")
+    phone_number= models.CharField(default="+4432259637", max_length = 15, verbose_name= "شماره تماس")
+    Address=models.CharField(default="ارومیه، خیام جنوبی، کوی ۲۲",max_length=250, verbose_name="آدرس")
     zipcode=models.CharField(max_length=10, verbose_name="کدپستی")
     national_number= models.CharField(max_length=15, verbose_name="شناسه ملی")
     economic_number= models.CharField(max_length=15, verbose_name="کد اقتصادی")
-    email=models.CharField(max_length=25, verbose_name="ایمیل")
+    email=models.CharField(default="info@selikan.ir", max_length=25, verbose_name="ایمیل")
 
     def __str__(self):
         return self.name

@@ -2,7 +2,7 @@
 import arrow
 from django.db import models
 
-from common.models import Address, User, Company
+from common.models import Address, User, Company, Country, Province
 from phonenumber_field.modelfields import PhoneNumberField
 from teams.models import Teams
 
@@ -10,32 +10,27 @@ from teams.models import Teams
 class Contact(models.Model):
     first_name = models.CharField(verbose_name="نام", max_length=255)
     last_name = models.CharField(verbose_name="نام خانوادگی", max_length=255)
-    email = models.EmailField(verbose_name="ایمیل",unique=True)
-    phone = PhoneNumberField(null=True, unique=True, verbose_name="موبایل")
-    office_phone = PhoneNumberField(null=True, unique=True, verbose_name="تلفن ثابت")
-
-    address = models.ForeignKey(
-        Address,
-        related_name="adress_contacts",
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True,
-        verbose_name="آدرس",
-    )
-    description = models.TextField(blank=True, null=True, verbose_name="توضیحات")
-    assigned_to = models.ManyToManyField(User, related_name="contact_assigned_users", verbose_name="محول شده به")
-    created_by = models.ForeignKey(
-        User, related_name="contact_created_by", on_delete=models.SET_NULL, null=True, verbose_name="ساخته شده توسط"
-    )
+    email = models.EmailField(blank=True,verbose_name="ایمیل")
+    phone = models.CharField(max_length=20,blank=True, verbose_name="موبایل")
+    office_phone = models.CharField(max_length=20,blank=True, verbose_name="تلفن ثابت")
+    fax = models.CharField(max_length=20,blank=True, verbose_name="شماره فکس ")
+    address = models.CharField(verbose_name="آدرس",blank=True, max_length=350)
+    description = models.TextField(blank=True,verbose_name="توضیحات")
+    created_by = models.ForeignKey(User, related_name="contact_created_by", on_delete=models.CASCADE, verbose_name="ساخته شده توسط")
     created_on = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
-    is_active = models.BooleanField(default=False,verbose_name="فعال")
-
-    company = models.ForeignKey(
-        Company, related_name="companycontacts", on_delete=models.SET_NULL, null=True, blank=True, verbose_name="شرکت"
-    )
+    is_active = models.BooleanField(default=True,verbose_name="فعال")
+    billing_address_line = models.CharField(max_length=255, blank=True, verbose_name="آدرس")
+    billing_street = models.CharField(max_length=55, blank=True, verbose_name="خیابان")
+    billing_city = models.CharField( max_length=255, blank=True, verbose_name="شهر")
+    billing_state = models.ForeignKey(Province, on_delete=models.CASCADE, max_length=255, blank=True, verbose_name="استان")
+    billing_postcode = models.CharField(max_length=10, blank=True, verbose_name="کد پستی")
+    billing_country = models.ForeignKey(Country, on_delete=models.CASCADE, blank=True, verbose_name="کشور")
+    company = models.ForeignKey(Company, related_name="companycontacts", on_delete=models.CASCADE, blank=True, verbose_name="شرکت")
 
     def __str__(self):
         return self.first_name
+    def jcreated_on(self):
+        return jalali_converter(self.created_on)
 
     @property
     def created_on_arrow(self):

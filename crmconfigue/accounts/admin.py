@@ -4,8 +4,8 @@ from .models import Account, Tags, Email, EmailLog
 
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ('name','email', 'phone','status','company')
-    search_fields = ('name','email', 'phone','status','company')
+    list_display = ('name','email', 'phone','company')
+    search_fields = ('name','email', 'phone','company')
 
 @admin.register(Tags)
 class TagsAdmin(admin.ModelAdmin):

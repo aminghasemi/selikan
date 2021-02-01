@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import pgettext_lazy
 from django.utils.translation import ugettext_lazy as _
 
-from common.models import User, Company
+from common.models import User, Company, Country, Province
 from common.utils import INDCHOICES, COUNTRIES
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.text import slugify
@@ -25,60 +25,33 @@ class Tags(models.Model):
         verbose_name_plural="تگ‌ها"
 
 class Account(models.Model):
-
-    ACCOUNT_STATUS_CHOICE = (("open", "Open"), ("close", "Close"))
-
-    name = models.CharField( max_length=64, verbose_name="نام شرکت")
-    email = models.EmailField( verbose_name="ایمیل")
-    phone = PhoneNumberField(null=True, verbose_name="شماره تماس")
-    industry = models.CharField(
-         max_length=255, choices=INDCHOICES, blank=True, null=True, verbose_name="صنعت"
-    )
-    # billing_address = models.ForeignKey(
-    #     Address, related_name='account_billing_address', on_delete=models.CASCADE, blank=True, null=True)
-    # shipping_address = models.ForeignKey(
-    #     Address, related_name='account_shipping_address', on_delete=models.CASCADE, blank=True, null=True)
-    billing_address_line = models.CharField(
-         max_length=255, blank=True, null=True, verbose_name="آدرس"
-    )
-    billing_street = models.CharField(max_length=55, blank=True, null=True, verbose_name="خیابان")
-    billing_city = models.CharField( max_length=255, blank=True, null=True, verbose_name="شهر")
-    billing_state = models.CharField( max_length=255, blank=True, null=True, verbose_name="استان")
-    billing_postcode = models.CharField(
-         max_length=10, blank=True, null=True, verbose_name="کد پستی"
-    )
-    billing_country = models.CharField(
-        max_length=3, choices=COUNTRIES, blank=True, null=True, verbose_name="کشور"
-    )
-    website = models.URLField( blank=True, null=True, verbose_name="وب‌سایت")
-    description = models.TextField(blank=True, null=True, verbose_name="توضیحات")
-    created_by = models.ForeignKey(
-        User, related_name="account_created_by", on_delete=models.SET_NULL, null=True, verbose_name="ایجاد شده توسط"
-    )
-    created_on = models.DateTimeField( auto_now_add=True, verbose_name="تاریخ ایجاد")
-    is_active = models.BooleanField(default=False, verbose_name="فعال")
-    tags = models.ManyToManyField(Tags, blank=True, verbose_name="تگ‌ها")
-    status = models.CharField(
-        choices=ACCOUNT_STATUS_CHOICE, max_length=64, default="open", verbose_name="وضعیت"
-    )
-    lead = models.ForeignKey(
-        "lead.Lead", related_name="account_leads", on_delete=models.SET_NULL, null=True, verbose_name="سرنخ"
-    )
-    contact_name = models.CharField(
-         max_length=120, verbose_name="نام رابط"
-    )
-    contacts = models.ManyToManyField(
-        "contacts.Contact", related_name="account_contacts", verbose_name="نام شخص"
-    )
-    assigned_to = models.ManyToManyField(User, related_name="account_assigned_users", verbose_name="محول شده به")
-    teams = models.ManyToManyField(Teams, related_name="account_teams", verbose_name="تیم")
-
-    company = models.ForeignKey(
-        Company, related_name= "companyaccounts", on_delete=models.SET_NULL, null=True, blank=True, verbose_name="کاربر سایت"
-    )
+    name = models.CharField(max_length=64, verbose_name="نام مشتری")
+    national_id = models.CharField(max_length=64,blank=True, verbose_name="کد‌/شناسه ملی")
+    economic_id=models.CharField(max_length=64,blank=True, verbose_name="کد اقتصادی")
+    email = models.EmailField(blank=True, verbose_name="ایمیل")
+    phone = models.CharField(max_length=20, verbose_name="شماره تماس موبایل")
+    office_phone = models.CharField(max_length=20,blank=True, verbose_name="شماره تماس ثابت")
+    fax = models.CharField(max_length=20,blank=True, verbose_name="شماره فکس ")
+    industry = models.CharField(max_length=255, choices=INDCHOICES, blank=True, verbose_name="صنعت")
+    billing_address_line = models.CharField(max_length=255, blank=True, verbose_name="آدرس")
+    billing_street = models.CharField(max_length=55, blank=True, verbose_name="خیابان")
+    billing_city = models.CharField( max_length=255, blank=True, verbose_name="شهر")
+    billing_state = models.ForeignKey(Province, on_delete=models.CASCADE, max_length=255, blank=True, verbose_name="استان")
+    billing_postcode = models.CharField(max_length=10, blank=True, verbose_name="کد پستی")
+    billing_country = models.ForeignKey(Country, on_delete=models.CASCADE, blank=True, verbose_name="کشور")
+    website = models.URLField(blank=True, verbose_name="وب‌سایت")
+    description = models.TextField(blank=True, verbose_name="توضیحات")
+    created_by = models.ForeignKey(User, related_name="account_created_by", on_delete=models.CASCADE, verbose_name="ایجاد شده توسط")
+    created_on = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
+    is_active = models.BooleanField(default=True, verbose_name="فعال")
+    tags = models.ForeignKey(Tags, blank=True,on_delete=models.CASCADE, verbose_name="تگ‌ها")
+    contacts = models.ForeignKey("contacts.Contact",on_delete=models.CASCADE, related_name="account_contacts", verbose_name="شخص مرتبط")
+    company = models.ForeignKey(Company, related_name= "companyaccounts", on_delete=models.CASCADE,  blank=True, verbose_name="کاربر سایت")
 
     def __str__(self):
         return self.name
+    def jcreated_on(self):
+        return jalali_converter(self.created_on)
 
     class Meta:
         verbose_name= "مشتری حقوقی"

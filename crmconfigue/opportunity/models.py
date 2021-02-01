@@ -2,56 +2,56 @@ import arrow
 from django.db import models
 from django.utils.translation import pgettext_lazy
 from django.utils.translation import ugettext_lazy as _
-
+from extensions.utils import jalali_converter
 from accounts.models import Account, Tags
 from contacts.models import Contact
 from common.models import User, Company
 from common.utils import STAGES, SOURCES, CURRENCY_CODES
 from teams.models import Teams
 
+class OpportunityStatus(models.Model):
+    OpportunityStatus_number=models.IntegerField(verbose_name="شماره مرحله")
+    OpportunityStatus_title = models.CharField(max_length=64, verbose_name="عنوان")
+    created_by = models.ForeignKey(User, related_name="opportunity_status_created_by", on_delete=models.CASCADE,  verbose_name="ساخته شده توسط")
+    created_on = models.DateTimeField( auto_now_add=True, verbose_name="تاریخ ایجاد")
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="companyopportunitystatus", verbose_name="کاربر سایت")
+
+    class Meta:
+        verbose_name = "مرحله فرصت"
+        verbose_name_plural = "مراحل فرصت"
+    def __str__(self):
+        return self.OpportunityStatus_title
+
+class OpportunitySource(models.Model):
+    OpportunitySource_title = models.CharField(max_length=64, verbose_name="عنوان")
+    created_by = models.ForeignKey(User, related_name="opportunity_source_created_by", on_delete=models.CASCADE,  verbose_name="ساخته شده توسط")
+    created_on = models.DateTimeField( auto_now_add=True, verbose_name="تاریخ ایجاد")
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="companyopportunitysource", verbose_name="کاربر سایت")
+
+    class Meta:
+        verbose_name = "منبع فرصت"
+        verbose_name_plural = "منابع فرصت"
+    def __str__(self):
+        return self.OpportunitySource_title
 
 class Opportunity(models.Model):
     name = models.CharField( max_length=64, verbose_name="عنوان")
-    account = models.ForeignKey(
-        Account,
-        related_name="opportunities",
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True,
-        verbose_name="حساب"
-    )
-    stage = models.CharField(
-         max_length=64, choices=STAGES, verbose_name="مرحله"
-    )
-    currency = models.CharField(
-        max_length=3, choices=CURRENCY_CODES, blank=True, null=True, verbose_name="واحد پولی"
-    )
-    amount = models.DecimalField(
-        decimal_places=2, max_digits=12, blank=True, null=True, verbose_name="مقدار"
-    )
-    lead_source = models.CharField(
-        max_length=255, choices=SOURCES, blank=True, null=True, verbose_name="منبع فرصت"
-    )
-    probability = models.IntegerField(default=0, blank=True, null=True, verbose_name="احتمال")
-    contacts = models.ManyToManyField(Contact, verbose_name="مشتری")
-    closed_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name="منعقد شده توسط")
-    # closed_on = models.DateTimeField(blank=True, null=True)
-    closed_on = models.DateField(blank=True, null=True, verbose_name="تاریخ انعقاد")
-    description = models.TextField(blank=True, null=True, verbose_name="توضیحات")
-    assigned_to = models.ManyToManyField(User, related_name="opportunity_assigned_to", verbose_name="محول شده به")
-    created_by = models.ForeignKey(
-        User,
-        related_name="opportunity_created_by",
-        on_delete=models.SET_NULL,
-        null=True, verbose_name="ایجاد شده توسط"
-    )
+    account = models.ForeignKey(Account,related_name="opportunities",on_delete=models.CASCADE,blank=True,verbose_name="مشتری")
+    status = models.ForeignKey(OpportunityStatus, related_name="Opportunity_status",on_delete=models.CASCADE,verbose_name="مرحله")
+    source = models.ForeignKey(OpportunitySource,related_name="Opportunity_source",on_delete=models.CASCADE, blank=True, verbose_name="منبع")
+    amount = models.FloatField(blank=True, verbose_name="مبلغ")
+    probability = models.IntegerField(default=0, blank=True, verbose_name="احتمال")
+    contacts = models.ForeignKey(Contact,on_delete=models.CASCADE, verbose_name="مشتری")
+    converted_by = models.ForeignKey(User,related_name="Opportunity_converted_by", on_delete=models.CASCADE, blank=True, verbose_name="تکمیل‌شده توسط")
+    closed_on = models.DateField(blank=True, verbose_name="تاریخ تکمیل")
+    description = models.TextField(blank=True, verbose_name="توضیحات")
+    assigned_to = models.ForeignKey(User, on_delete=models.CASCADE, related_name="opportunity_assigned_to", verbose_name="محول شده به")
+    created_by = models.ForeignKey(User,related_name="opportunity_created_by", on_delete=models.CASCADE, verbose_name="ایجاد شده توسط")
     created_on = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
-    is_active = models.BooleanField(default=False, verbose_name="فعال")
-    tags = models.ManyToManyField(Tags, blank=True, verbose_name="تگ‌ها")
-    teams = models.ManyToManyField(Teams, related_name="oppurtunity_teams", verbose_name="تیم")
-    company = models.ForeignKey(
-        Company, related_name= "companyopportunity", on_delete=models.SET_NULL, null=True, blank=True, verbose_name="شرکت"
-    )
+    is_active = models.BooleanField(default=True, verbose_name="فعال")
+    tags = models.ForeignKey(Tags,on_delete=models.CASCADE, blank=True, verbose_name="تگ‌ها")
+    teams = models.ForeignKey(Teams,on_delete=models.CASCADE, related_name="oppurtunity_teams", verbose_name="تیم")
+    company = models.ForeignKey(Company, related_name= "companyopportunity", on_delete=models.CASCADE,  blank=True, verbose_name="کاربر سایت")
 
     class Meta:
         ordering = ["-created_on"]
@@ -60,6 +60,10 @@ class Opportunity(models.Model):
 
     def __str__(self):
         return self.name
+    def jclosed_on(self):
+        return jalali_converter(self.closed_on)
+    def jcreated_on(self):
+        return jalali_converter(self.created_on)
 
     @property
     def created_on_arrow(self):

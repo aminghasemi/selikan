@@ -3,7 +3,7 @@ from .models import Deal, Pipeline
 # Register your models here.
 
 @admin.register(Pipeline)
-class LeadAdmin(admin.ModelAdmin):
+class PipelineAdmin(admin.ModelAdmin):
     list_display = ('pipeline_number','pipeline_title', 'company')
  
 @admin.register(Deal)
