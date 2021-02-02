@@ -21,23 +21,24 @@ class Task(models.Model):
     title = models.CharField( max_length=200, verbose_name="عنوان")
     status = models.CharField( max_length=50, choices=STATUS_CHOICES, verbose_name="وضعیت")
     priority = models.CharField( max_length=50, choices=PRIORITY_CHOICES, verbose_name="تقدم")
-    due_date = models.DateField(blank=True, verbose_name="مهلت انجام")
+    due_date = models.DateField(null=True,blank=True, verbose_name="مهلت انجام")
     created_on = models.DateTimeField( auto_now_add=True, verbose_name="تاریخ ایجاد")
-    account = models.ForeignKey(Account,related_name="accounts_tasks",blank=True,on_delete=models.CASCADE, verbose_name="نام شرکت")
-    contacts = models.ForeignKey(Contact, related_name="contacts_tasks",on_delete=models.CASCADE, verbose_name="نام مشتری")
-    assigned_to = models.ForeignKey(User, related_name="users_tasks",on_delete=models.CASCADE, verbose_name="محول شده به")
-    created_by = models.ForeignKey(User,related_name="task_created",blank=True,on_delete=models.CASCADE, verbose_name="ایجاد شده توسط")
-    teams = models.ForeignKey(Teams, related_name="tasks_teams",on_delete=models.CASCADE, verbose_name="تیم")
-    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='companytask', blank=True, verbose_name="کاربر سایت")
-    done_by = models.ForeignKey(User,related_name="task_done_by", on_delete=models.CASCADE, blank=True, verbose_name="تکمیل‌شده توسط")
-
+    account = models.ForeignKey(Account,null=True, related_name="accounts_tasks",blank=True,on_delete=models.SET_NULL, verbose_name="نام مشتری")
+    contacts = models.ForeignKey(Contact,blank=True,null=True, related_name="contacts_tasks",on_delete=models.SET_NULL, verbose_name="نام شخص")
+    assigned_to = models.ForeignKey(User,blank=True,null=True, related_name="users_tasks",on_delete=models.SET_NULL, verbose_name="محول شده به")
+    created_by = models.ForeignKey(User,related_name="task_created",null=True,blank=True,on_delete=models.SET_NULL, verbose_name="ایجاد شده توسط")
+    teams = models.ForeignKey(Teams,null=True, related_name="tasks_teams",on_delete=models.SET_NULL, verbose_name="تیم")
+    company = models.ForeignKey(Company, on_delete=models.SET_NULL,null=True, related_name='companytask', blank=True, verbose_name="کاربر سایت")
+    done_by = models.ForeignKey(User, null=True,related_name="task_done_by", on_delete=models.SET_NULL, blank=True, verbose_name="تکمیل‌شده توسط")
+    description = models.TextField(blank=True, verbose_name="توضیحات")
+    done_on=models.DateField(null=True, blank=True, verbose_name="تاریخ تکمیل")
     def __str__(self):
         return self.title
 
     def jcreated_on(self):
         return jalali_converter(self.created_on)
-    def jclosed_on(self):
-        return jalali_converter(self.closed_on)
+    def jdone_on(self):
+        return jalali_converter(self.done_on)
 
     @property
     def created_on_arrow(self):

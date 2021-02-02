@@ -2,6 +2,7 @@ import arrow
 from django.db import models
 from django.utils.translation import pgettext_lazy
 from django.utils.translation import ugettext_lazy as _
+from extensions.utils import jalali_converter
 
 from common.models import User, Company, Country, Province
 from common.utils import INDCHOICES, COUNTRIES

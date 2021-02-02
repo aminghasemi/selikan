@@ -23,8 +23,12 @@
                   <tbody>
                     {% for task in object_list %}
                       <tr>
-                        <td><a href="#">{{task.title}}</a></td>
-                        <td>{{task.account}}  {{task.contacts}}</td>
+                        <td><a href="{% url 'task:task-update' company.slug task.pk %}">{{task.title}}</a></td>
+                        {% if task.account is null %}
+                        <td style="color:red">مشتری تعریف‌نشده</td>
+                        {% else %}
+                        <td>{{task.account}}</td>
+                        {% endif %}
                         <td>{{task.status}}</td>
                         <td>{{task.priority}}</td>
                         <td>

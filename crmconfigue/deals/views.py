@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-
+from .forms import DealForm
 from common.models import Company
 from django.contrib.auth.decorators import login_required
 from common.decorators import company_enrolled
@@ -101,7 +101,7 @@ class DealsList(EnrollMixin, LoginRequiredMixin,ListView):
         return context
 class DealCreate(LoginRequiredMixin, CreateView):
     model=Deal
-    fields=["title","pipeline_status", "description", "assigned_to","account_name","deal_amount", "is_active", "contacts","teams"]
+    form_class = DealForm
     template_name="company/deal-create-update.html"
     def get_queryset(self):
         global company
@@ -126,7 +126,7 @@ class DealCreate(LoginRequiredMixin, CreateView):
 
 class DealUpdate(LoginRequiredMixin, UpdateView):
     model=Deal
-    fields=["title","pipeline_status", "description", "assigned_to","account_name","deal_amount", "is_active", "contacts","teams"]
+    form_class = DealForm
     template_name = "company/deal-create-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')

@@ -74,11 +74,23 @@
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
-              اشخاص و شرکت‌ها
+              مشتریان
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{% url 'accounts:accounts' company.slug %}" class="nav-link">
+                <i class="far fa-edit nav-icon"></i>
+                <p>لیست مشتریان</p>
+              </a>
+            </li>  
+            <li class="nav-item">
+              <a href="{% url 'accounts:account-create' company.slug %}" class="nav-link">
+                <i class="far fa-edit nav-icon"></i>
+                <p>ایجاد مشتری جدید</p>
+              </a>
+            </li> 
             <li class="nav-item">
               <a href="{% url 'contacts:contacts' company.slug %}" class="nav-link">
                 <i class="fas fa-list nav-icon"></i>
@@ -90,19 +102,7 @@
                 <i class="far fa-edit nav-icon"></i>
                 <p>ایجاد شخص جدید</p>
               </a>
-            </li>            
-            <li class="nav-item">
-              <a href="{% url 'accounts:accounts' company.slug %}" class="nav-link">
-                <i class="far fa-edit nav-icon"></i>
-                <p>لیست شرکت‌ها</p>
-              </a>
-            </li>  
-            <li class="nav-item">
-              <a href="{% url 'accounts:account-create' company.slug %}" class="nav-link">
-                <i class="far fa-edit nav-icon"></i>
-                <p>ایجاد شرکت جدید</p>
-              </a>
-            </li>  
+            </li>             
           </ul>
         </li>
         <li class="nav-item has-treeview menu-open">
@@ -176,6 +176,29 @@
             </li>
           </ul>  
         </li>    
+        <li class="nav-item has-treeview menu-open">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              فاکتورها
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{% url 'invoice:invoices' company.slug %}" class="nav-link">
+                <i class="fas fa-list nav-icon"></i>
+                <p>لیست فاکتورها</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'invoice:invoice-create' company.slug %}" class="nav-link">
+                <i class="far fa-edit nav-icon"></i>
+                <p>ایجاد فاکتور جدید</p>
+              </a>
+            </li>
+          </ul>  
+        </li>  
         <li class="nav-item has-treeview menu-open">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>

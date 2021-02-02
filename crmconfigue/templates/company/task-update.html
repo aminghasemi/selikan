@@ -30,15 +30,32 @@
               {{ form.account|as_crispy_field }}
             </div>
             <div class="col-3">
-              {{ form.contacts|as_crispy_field }}
+              {{ form.assigned_to|as_crispy_field}}
             </div>
             <div class="col-3">
-              {{ form.assigned_to|as_crispy_field}}
+              <span id="persiandate">{{form.done_on|as_crispy_field}}</span>
+              
+            </div>
+            <div class="col-3">
+              {{ form.done_by|as_crispy_field}}
+            </div>
+            <div class="col-12">
+              {{ form.description|as_crispy_field }}
             </div>
           </div>
               <button class="btn btn-success">ذخیره</button>
             </form>
+            <div class="input-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="far fa-calendar-alt"></i>
+                  </span>
+                </div>
+                <input type="text" class=".pdatepicker">
+              </div>
       </div>
+      <input type="text" class="persiandate" placeholder="تاریخ" id=".pdatepicker">
     </div>
   </div>
 </div>

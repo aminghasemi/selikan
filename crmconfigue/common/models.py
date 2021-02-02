@@ -5,7 +5,7 @@ from extensions.utils import jalali_converter
 from django.urls import reverse
 from cuser.middleware import CuserMiddleware
 from .managers import  EnrolledManager
-
+from datetime import timedelta
 
 
 from common.utils import COUNTRIES, ROLES
@@ -83,9 +83,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
-
-
-
+    def __str__(self):
+        full_name = self.first_name + " " + self.last_name
+        return full_name
 
 
 
@@ -100,7 +100,7 @@ class Company(models.Model):
     creator = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='crm_creator', verbose_name="ایجادکننده شرکت")
     created_time=models.DateTimeField(auto_now_add=True, verbose_name ="تاریخ ایجاد")
     staff=models.ManyToManyField(User, through='Enrolled', related_name='companystaff')
-    access_date=models.DateTimeField(default=timezone.now, verbose_name='تاریخ اعتبار حساب')
+    access_date=models.DateTimeField(default=timezone.now()+timedelta(days=15), verbose_name='تاریخ اعتبار حساب')
     class Meta:
         verbose_name = "شرکت"
         verbose_name_plural = "شرکت‌ها"

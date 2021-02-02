@@ -9,10 +9,9 @@
       <form method="post" enctype="multipart/form-data"> {% csrf_token %}
         <div class="row">
           <div class="col-12">
-            {{form|crispy}}
+            {% crispy form%}
           </div>
         </div>
 
-            <button class="btn btn-success">ذخیره</button>
           </form>
 {% endblock %}

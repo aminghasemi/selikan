@@ -1,6 +1,7 @@
 
 import arrow
 from django.db import models
+from extensions.utils import jalali_converter
 
 from common.models import Address, User, Company, Country, Province
 from phonenumber_field.modelfields import PhoneNumberField
@@ -26,12 +27,13 @@ class Contact(models.Model):
     billing_postcode = models.CharField(max_length=10, blank=True, verbose_name="کد پستی")
     billing_country = models.ForeignKey(Country, on_delete=models.CASCADE, blank=True, verbose_name="کشور")
     company = models.ForeignKey(Company, related_name="companycontacts", on_delete=models.CASCADE, blank=True, verbose_name="شرکت")
-
+    birthday=models.DateField(null=True, blank=True, verbose_name="تاریخ تولد")
     def __str__(self):
         return self.first_name
     def jcreated_on(self):
         return jalali_converter(self.created_on)
-
+    def jbirthday(self):
+        return jalali_converter(self.birthday)
     @property
     def created_on_arrow(self):
         return arrow.get(self.created_on).humanize()

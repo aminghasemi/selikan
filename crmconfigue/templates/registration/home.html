@@ -23,7 +23,7 @@
                   <tbody>
                     {% for CompaniesList in object_list %}
                       <tr>
-                        <td><a href="#">{{CompaniesList.name}}</a></td>
+                        <td><a href="{% url 'deals:deals' CompaniesList.slug %}">{{CompaniesList.name}}</a></td>
                         <td>{{CompaniesList.staff.count}}</td>
                         <td>{{CompaniesList.jaccess_date}}</td>
                         <td>{{CompaniesList.creator.get_full_name}}</td>

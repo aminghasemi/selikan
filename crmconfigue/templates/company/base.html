@@ -32,6 +32,13 @@
   <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">
   <!-- Custom style for RTL -->
   <link rel="stylesheet" href="{% static 'registration/adminlte/dist/css/custom.css' %}">
+
+
+
+  <link rel="stylesheet" href="{% static 'pdatepicker/dist/css/persian-datepicker.css' %}"/>
+  <script src="{% static 'jquery/dist/jquery.js' %}"></script>
+  <script src="{% static 'persian-date/dist/persian-date.js' %}"></script>
+  <script src="{% static 'pdatepicker/dist/js/persian-datepicker.js' %}"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -138,5 +145,13 @@
 <script src="{% static 'registration/adminlte/dist/js/pages/dashboard.js' %}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{% static 'registration/adminlte/dist/js/demo.js' %}"></script>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".pdatepicker").pDatepicker();
+  });
+</script>
+
 </body>
 </html>
