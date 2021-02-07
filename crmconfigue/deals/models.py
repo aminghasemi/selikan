@@ -6,18 +6,20 @@ from django.utils.translation import ugettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 from extensions.utils import jalali_converter
 
-from accounts.models import Tags
+from accounts.models import Tags, Account
 from common.models import User, Company, Product
 from contacts.models import Contact
 from teams.models import Teams
 
 
 class Pipeline(models.Model):
-    pipeline_number=models.IntegerField(verbose_name="شماره مرحله")
+    pipeline_number=models.IntegerField(verbose_name="شماره مرحله", unique=True)
     pipeline_title = models.CharField(max_length=64, verbose_name="عنوان")
     created_by = models.ForeignKey(User, related_name="pipline_created_by", on_delete=models.CASCADE,  verbose_name="ساخته شده توسط")
     created_on = models.DateTimeField( auto_now_add=True, verbose_name="تاریخ ایجاد")
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="companypipelines", verbose_name="شرکت")
+    won = models.BooleanField(default=False, verbose_name="در صورتی که این مرحله بیانگر مرحله پایانی و فروش موفق است این تیک را بزنید.")
+    lost = models.BooleanField(default=False, verbose_name="در صورتی که این مرحله بیانگر مرحله پایانی و شکست در معامله است این تیک را بزنید.")
 
     class Meta:
         verbose_name = "مرحله فروش"
@@ -29,18 +31,18 @@ class Deal(models.Model):
     title = models.CharField(max_length=64, verbose_name="عنوان")
     pipeline_status = models.ForeignKey(Pipeline, related_name="dealpipeline",on_delete=models.CASCADE, verbose_name="مرحله فروش")
     description = models.TextField(blank=True,  verbose_name="توضیحات")
-    assigned_to = models.ForeignKey(User,on_delete=models.CASCADE, related_name="deal_assigned_users", blank=True, verbose_name="محول شده به")
+    assigned_to = models.ForeignKey(User,on_delete=models.SET_NULL,null=True, related_name="deal_assigned_users", blank=True, verbose_name="محول شده به")
     account_name = models.CharField(max_length=255,  blank=True, verbose_name="نام حساب")
     deal_amount = models.FloatField(blank=True, verbose_name="مبلغ معامله")
     created_by = models.ForeignKey(User, related_name="deal_created_by", on_delete=models.CASCADE, verbose_name="ساخته شده توسط")
     created_on = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
     is_active = models.BooleanField(default=True, verbose_name="فعال")
-    account = models.ForeignKey(Contact,on_delete=models.CASCADE,blank=True, related_name="deal_acounts", verbose_name="مشتری")
-    teams = models.ForeignKey(Teams,on_delete=models.CASCADE, related_name="deal_teams", verbose_name="تیم معالمه")
-    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="companydeals",  blank=True, verbose_name="شرکت")
-    product= models.ForeignKey(Product, on_delete=models.CASCADE, related_name="dealproducts",  blank=True, verbose_name="محصول")
-    converted_by = models.ForeignKey(User, on_delete=models.CASCADE,related_name="deal_converted_by", blank=True, verbose_name="تکمیل‌شده توسط")
-    closed_on = models.DateField(blank=True, verbose_name="تاریخ تکمیل")
+    account = models.ForeignKey(Account,on_delete=models.SET_NULL,blank=True,null=True, related_name="deal_acounts", verbose_name="مشتری")
+    teams = models.ForeignKey(Teams,blank=True, on_delete=models.SET_NULL,null=True, related_name="deal_teams", verbose_name="تیم معالمه")
+    company = models.ForeignKey(Company, on_delete=models.SET_NULL,null=True, related_name="companydeals",  blank=True, verbose_name="شرکت")
+    product= models.ForeignKey(Product, on_delete=models.SET_NULL,null=True, related_name="dealproducts",  blank=True, verbose_name="محصول")
+    converted_by = models.ForeignKey(User, on_delete=models.SET_NULL,null=True,related_name="deal_converted_by", blank=True, verbose_name="تکمیل‌شده توسط")
+    closed_on = models.DateField(blank=True,null=True, verbose_name="تاریخ تکمیل")
 
 
     class Meta:

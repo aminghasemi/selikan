@@ -1,0 +1,72 @@
+{% extends 'company/base.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_field %}
+{% load widget_tweaks %}
+{% load jalali_tags %}
+{% block title %}
+ایجاد مشتری جدید
+{% endblock %}
+
+
+{% block main %}
+<div class="col-md-12">
+  <div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title mb-0 float-left">اضافه کردن سرنخ جدید</h3>
+    </div>
+      <div class="card-body">
+        <form method="post" enctype="multipart/form-data"> {% csrf_token %}
+          <div class="row">
+            <div class="col-3">
+              {{ form.title|as_crispy_field }}
+            </div>
+            <div class="col-3">
+              {{ form.first_name|as_crispy_field }}
+            </div>
+            <div class="col-3">
+              {{ form.last_name|as_crispy_field }}
+            </div>
+            <div class="col-3">
+               {{form.email|as_crispy_field}}
+            </div>
+            <div class="col-3">
+              {{ form.phone|as_crispy_field }}
+            </div>
+            <div class="col-3">
+              {{ form.status|as_crispy_field}}
+            </div>
+            <div class="col-3">
+              {{ form.source|as_crispy_field}}
+            </div>
+            <div class="col-3">
+              {{ form.assigned_to|as_crispy_field}}
+            </div>
+            <div class="col-3">
+              {{ form.tags|as_crispy_field}}
+            </div>
+            <div class="col-3">
+              {{ form.contacts|as_crispy_field}}
+            </div>
+            <div class="col-3">
+              {{ form.teams|as_crispy_field}}
+            </div>
+            <div class="col-3">
+              {{ form.converted_by|as_crispy_field}}
+            </div>
+            <div class="col-3">
+              {{ form.closed_on|as_crispy_field}}
+            </div>
+            <div class="col-12">
+              {{ form.description|as_crispy_field }}
+            </div>
+            <div class="col-3">
+              {{ form.is_active|as_crispy_field}}
+            </div>
+          </div>
+              <button class="btn btn-success">ذخیره</button>
+            </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

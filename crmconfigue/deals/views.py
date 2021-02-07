@@ -12,7 +12,7 @@ from common.mixins import EnrollMixin, SuperUserAccessMixin, CreatorAccessMixin
 
 
 class PipelinesList(EnrollMixin, LoginRequiredMixin,ListView):
-    template_name = 'company/pipelines.html'
+    template_name = 'company/deal/pipelines.html'
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -27,8 +27,8 @@ class PipelinesList(EnrollMixin, LoginRequiredMixin,ListView):
 
 class PipelineCreate(LoginRequiredMixin, CreateView):
     model=Pipeline
-    fields=["pipeline_number","pipeline_title"]
-    template_name="company/pipeline-create-update.html"
+    fields=["pipeline_number","pipeline_title","won", "lost"]
+    template_name="company/deal/pipeline-create-update.html"
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -52,8 +52,8 @@ class PipelineCreate(LoginRequiredMixin, CreateView):
 
 class PipelineUpdate(LoginRequiredMixin, UpdateView):
     model=Pipeline
-    fields=["pipeline_number","pipeline_title"]
-    template_name = "company/pipeline-create-update.html"
+    fields=["pipeline_number","pipeline_title","won", "lost"]
+    template_name = "company/deal/pipeline-create-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('deals:pipelines', kwargs={'slug': slug}, current_app='deals')
@@ -68,7 +68,7 @@ class PipelineUpdate(LoginRequiredMixin, UpdateView):
         return context
 class PipelineDelete(LoginRequiredMixin, DeleteView):
     model=Pipeline
-    template_name = "company/pipeline_confirm_delete.html"
+    template_name = "company/deal/pipeline_confirm_delete.html"
     success_url= reverse_lazy('deals:pipelines')
     def get_queryset(self):
         global company
@@ -86,7 +86,7 @@ class PipelineDelete(LoginRequiredMixin, DeleteView):
 
 
 class DealsList(EnrollMixin, LoginRequiredMixin,ListView):
-    template_name = 'company/deals.html'
+    template_name = 'company/deal/deals.html'
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -102,7 +102,7 @@ class DealsList(EnrollMixin, LoginRequiredMixin,ListView):
 class DealCreate(LoginRequiredMixin, CreateView):
     model=Deal
     form_class = DealForm
-    template_name="company/deal-create-update.html"
+    template_name="company/deal/deal-create-update.html"
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -127,7 +127,7 @@ class DealCreate(LoginRequiredMixin, CreateView):
 class DealUpdate(LoginRequiredMixin, UpdateView):
     model=Deal
     form_class = DealForm
-    template_name = "company/deal-create-update.html"
+    template_name = "company/deal/deal-create-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('deals:deals', kwargs={'slug': slug}, current_app='deals')
@@ -142,7 +142,7 @@ class DealUpdate(LoginRequiredMixin, UpdateView):
         return context
 class DealDelete(LoginRequiredMixin, DeleteView):
     model=Deal
-    template_name = "company/deal_confirm_delete.html"
+    template_name = "company/deal/deal_confirm_delete.html"
     success_url= reverse_lazy('deals:deals')
     def get_queryset(self):
         global company

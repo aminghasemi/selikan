@@ -1,18 +1,72 @@
 {% extends 'company/base.html' %}
 {% load crispy_forms_tags %}
+{% load crispy_forms_field %}
+{% load widget_tweaks %}
+{% load jalali_tags %}
 {% block title %}
 ایجاد مشتری جدید
 {% endblock %}
 
 
 {% block main %}
-      <form method="post" enctype="multipart/form-data"> {% csrf_token %}
-        <div class="row">
-          <div class="col-12">
-            {{form|crispy}}
+<div class="col-md-12">
+  <div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title mb-0 float-left">افزودن و ویرایش اشخاص</h3>
+    </div>
+      <div class="card-body">
+        <form method="post" enctype="multipart/form-data"> {% csrf_token %}
+          <div class="row">
+            <div class="col-3">
+              {{ form.first_name|as_crispy_field }}
+            </div>
+            <div class="col-3">
+              {{ form.last_name|as_crispy_field }}
+            </div>
+            <div class="col-3">
+              {{ form.birthday|as_crispy_field }}
+            </div>
+            <div class="col-3">
+               {{form.email|as_crispy_field}}
+            </div>
+            <div class="col-3">
+              {{ form.phone|as_crispy_field }}
+            </div>
+            <div class="col-3">
+              {{ form.office_phone|as_crispy_field}}
+            </div>
+            <div class="col-3">
+              {{ form.fax|as_crispy_field}}
+            </div>
+            <div class="col-6">
+              {{ form.billing_address_line|as_crispy_field}}
+            </div>
+            <div class="col-6">
+              {{ form.billing_street|as_crispy_field}}
+            </div>
+            <div class="col-3">
+              {{ form.billing_city|as_crispy_field}}
+            </div>
+            <div class="col-3">
+              {{ form.billing_state|as_crispy_field}}
+            </div>
+            <div class="col-3">
+              {{ form.billing_postcode|as_crispy_field}}
+            </div>
+            <div class="col-3">
+              {{ form.billing_country|as_crispy_field}}
+            </div>
+            <div class="col-12">
+              {{ form.description|as_crispy_field }}
+            </div>
+            <div class="col-3">
+              {{ form.is_active|as_crispy_field}}
+            </div>
           </div>
-        </div>
-
-            <button class="btn btn-success">ذخیره</button>
-          </form>
+              <button class="btn btn-success">ذخیره</button>
+            </form>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

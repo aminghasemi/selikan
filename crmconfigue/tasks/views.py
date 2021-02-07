@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
-
+from jalali_date import datetime2jalali, date2jalali
 
 from common.models import Company
 from .models import Task
@@ -46,6 +46,7 @@ class TaskCreate(EnrollMixin, LoginRequiredMixin, CreateView):
         form.instance.created_by = self.request.user
         slug= self.kwargs.get('slug')
         company = get_object_or_404(Company , slug=slug)
+        jalali_join = datetime2jalali(due_date).strftime('%y/%m/%d _ %H:%M:%S')
         form.instance.company= company
         return super().form_valid(form, **kwargs)
     def get_success_url(self):

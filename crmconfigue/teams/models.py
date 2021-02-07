@@ -11,6 +11,7 @@ class Teams(models.Model):
     description = models.TextField(verbose_name="توضیحات")
     users = models.ManyToManyField(User, related_name="user_teams", verbose_name="کاربران تیم")
     created_on = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
+    is_active = models.BooleanField(default=True,verbose_name="فعال")
     created_by = models.ForeignKey(
         User,
         related_name="teams_created",

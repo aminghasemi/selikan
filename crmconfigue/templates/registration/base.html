@@ -1,146 +1,150 @@
 {% load static %}
- {% load auth_extras %}
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>نرم افزار مدیریت ارتباط با مشتریان سلیکان</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/fontawesome-free/css/all.min.css' %}">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Tempusdominus Bbootstrap 4 -->
-  <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/jqvmap/jqvmap.min.css' %}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{% static 'registration/adminlte/dist/css/adminlte.min.css' %}">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/daterangepicker/daterangepicker.css' %}">
-  <!-- summernote -->
-  <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/summernote/summernote-bs4.css' %}">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <!-- Bootstrap 4 RTL -->
-  <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">
-  <!-- Custom style for RTL -->
-  <link rel="stylesheet" href="{% static 'registration/adminlte/dist/css/custom.css' %}">
-</head>
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
+<html class="loading" lang="fa" data-textdirection="rtl" dir="rtl">
+  <!-- BEGIN: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>نرم افزار مدیریت ارتباط با مشتریان سلیکان</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'frest/assets/images/ico/favicon.ico' %}">
+	<meta name="theme-color" content="#5A8DEE">
+    
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/vendors.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/charts/apexcharts.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/extensions/swiper.min.css' %}">
+    <!-- END: Vendor CSS-->
 
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="{% url 'common:home' %}" class="nav-link">صفحه اصلی</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" target="_blank" class="nav-link">پشتیبانی</a>
-      </li>
-    </ul>
-    <!-- Right navbar links -->
-    <ul class="navbar-nav mr-auto-navbav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="{% url 'logout' %}">
-          <i class="fas fa-sign-out-alt"></i>
-          خروج
-        </a>
-      </li>
-    </ul>
-  </nav>
-  <!-- /.navbar -->
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/bootstrap-extended.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/colors.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/components.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/themes/dark-layout.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/themes/semi-dark-layout.css' %}">
+    <!-- END: Theme CSS-->
 
-  <!-- Main Sidebar Container -->
-{% include 'registration/sidebar.html'%}
-  <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/core/menu/menu-types/vertical-menu.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/pages/dashboard-ecommerce.css' %}">
+    {% block css %}
+    <link rel="stylesheet" type="text/css" href="../../assets/css/pages/app-invoice.css">
+    {% endblock %}
+
+    <!-- END: Page CSS-->
+
+  </head>
+  <!-- END: Head-->
+
+  <!-- BEGIN: Body-->
+  <body class="vertical-layout vertical-menu-modern semi-dark-layout 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="semi-dark-layout">
+
+    <!-- BEGIN: Header-->
+    <div class="header-navbar-shadow"></div>
+    <nav class="header-navbar main-header-navbar navbar-expand-lg navbar navbar-with-menu fixed-top ">
+      <div class="navbar-wrapper">
+        <div class="navbar-container content">
+          <div class="navbar-collapse" id="navbar-mobile">
+            <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
+              <ul class="nav navbar-nav">
+                <li class="nav-item mobile-menu d-xl-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ficon bx bx-menu"></i></a></li>
+              </ul>
+              <ul class="nav navbar-nav bookmark-icons">
+                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-email.html" data-toggle="tooltip" data-placement="bottom" title="ایمیل"><i class="ficon bx bx-envelope"></i></a></li>
+                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-chat.html" data-toggle="tooltip" data-placement="bottom" title="گفتگو"><i class="ficon bx bx-chat"></i></a></li>
+                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-todo.html" data-toggle="tooltip" data-placement="bottom" title="وظایف"><i class="ficon bx bx-check-circle"></i></a></li>
+                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-calendar.html" data-toggle="tooltip" data-placement="bottom" title="تقویم"><i class="ficon bx bx-calendar-alt"></i></a></li>
+              </ul>
+              <ul class="nav navbar-nav">
+                <li class="nav-item d-none d-lg-block"><a class="nav-link bookmark-star"><i class="ficon bx bx-star warning"></i></a>
+                  <div class="bookmark-input search-input">
+                    <div class="bookmark-input-icon"><i class="bx bx-search primary"></i></div>
+                    <input class="form-control input" type="text" placeholder="جستجو ..." tabindex="0" data-search="template-search">
+                    <ul class="search-list"></ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <ul class="nav navbar-nav float-right">
+              <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i class="ficon bx bx-fullscreen"></i></a></li>
+              <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon bx bx-search"></i></a>
+                <div class="search-input">
+                  <div class="search-input-icon"><i class="bx bx-search primary"></i></div>
+                  <input class="input" type="text" placeholder="جستجو ..." tabindex="-1" data-search="template-search">
+                  <div class="search-input-close"><i class="bx bx-x"></i></div>
+                  <ul class="search-list"></ul>
+                </div>
+              </li>
+              <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                  <div class="user-nav d-sm-flex d-none"><span class="user-name">{{user.get_full_name}}</span><span class="user-status text-muted">کاربر</span></div><span><img class="round" src="{% static 'frest/assets/images/portrait/small/avatar-s-11.jpg' %}" alt="avatar" height="40" width="40"></span></a>
+                <div class="dropdown-menu pb-0"><a class="dropdown-item" href="{% url 'common:profile' %}"><i class="bx bx-user mr-50"></i> ویرایش پروفایل</a>
+                  <div class="dropdown-divider mb-0"></div><a class="dropdown-item" href="{% url 'logout' %}"><i class="bx bx-power-off mr-50"></i> خروج</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- END: Header-->
 
 
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+    {% include 'registration/sidebar.html'%}
+
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+      <div class="content-overlay"></div>
+      <div class="content-wrapper">
+        <div class="content-header row">
+        </div>
+        {% block main %}
+
+        {% endblock %}
+      </div>
     </div>
-    <!-- /.content-header -->
+    <!-- END: Content-->
 
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-      {% block main %}
 
-      {% endblock %}
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
-</div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <strong>نرم افزار مدیریت ارتباط با مشتریان سلیکان</a>.</strong>
-    کلیه حقوق محفوظ است.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>نسخه</b> 0.0.0.01
-    </div>
-  </footer>
+    <!-- BEGIN: Footer-->
+    <footer class="footer footer-static footer-light">
+      <p class="clearfix mb-0"><span class="float-left d-inline-block">کلیه حقوق برای  سلیکان محفوظ  می‌باشد <a href="https://www.selikan.ir" target="_blank">  سلیکان نرم افزار ارتباط با مشتریان</a></span><span class="float-right d-sm-inline-block d-none">ساخته شده با <i class="bx bxs-heart pink ml-50 font-small-3"></i></span>
+        <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>
+      </p>
+    </footer>
+    <!-- END: Footer-->
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
 
-<!-- jQuery -->
-<script src="{% static 'registration/adminlte/plugins/jquery/jquery.min.js' %}"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="{% static 'registration/adminlte/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 rtl -->
-<script src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="{% static 'registration/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-<!-- ChartJS -->
-<script src="{% static 'registration/adminlte/plugins/chart.js/Chart.min.js' %}"></script>
-<!-- Sparkline -->
-<script src="{% static 'registration/adminlte/plugins/sparklines/sparkline.js' %}"></script>
-<!-- JQVMap -->
-<script src="{% static 'registration/adminlte/plugins/jqvmap/jquery.vmap.min.js' %}"></script>
-<script src="{% static 'registration/adminlte/plugins/jqvmap/maps/jquery.vmap.world.js' %}"></script>
-<!-- jQuery Knob Chart -->
-<script src="{% static 'registration/adminlte/plugins/jquery-knob/jquery.knob.min.js' %}"></script>
-<!-- daterangepicker -->
-<script src="{% static 'registration/adminlte/plugins/moment/moment.min.js' %}"></script>
-<script src="{% static 'registration/adminlte/plugins/daterangepicker/daterangepicker.js' %}"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="{% static 'registration/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
-<!-- Summernote -->
-<script src="{% static 'registration/adminlte/plugins/summernote/summernote-bs4.min.js' %}"></script>
-<!-- overlayScrollbars -->
-<script src="{% static 'registration/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
-<!-- AdminLTE App -->
-<script src="{% static 'registration/adminlte/dist/js/adminlte.js' %}"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{% static 'registration/adminlte/dist/js/pages/dashboard.js' %}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{% static 'registration/adminlte/dist/js/demo.js' %}"></script>
-</body>
+    <!-- BEGIN: Vendor JS-->
+    <script src="{% static 'frest/assets/vendors/js/vendors.min.js' %}"></script>
+    <script src="{% static 'frest/assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.min.js' %}"></script>
+    <script src="{% static 'frest/assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js' %}"></script>
+    <script src="{% static 'frest/assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js' %}"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{% static 'frest/assets/vendors/js/charts/apexcharts.min.js' %}"></script>
+    <script src="{% static 'frest/assets/vendors/js/extensions/swiper.min.js' %}"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="{% static 'frest/assets/js/scripts/configs/vertical-menu-dark.js' %}"></script>
+    <script src="{% static 'frest/assets/js/core/app-menu.js' %}"></script>
+    <script src="{% static 'frest/assets/js/core/app.js' %}"></script>
+    <script src="{% static 'frest/assets/js/scripts/components.js' %}"></script>
+    <script src="{% static 'frest/assets/js/scripts/footer.js' %}"></script>
+    <script src="{% static 'frest/assets/js/scripts/customizer.js' %}"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="{% static 'frest/assets/js/scripts/pages/dashboard-ecommerce.js' %}"></script>
+
+    {% block js %}
+
+    {% endblock %}
+    <!-- END: Page JS-->
+
+  </body>
+  <!-- END: Body-->
 </html>

@@ -1,0 +1,40 @@
+{% extends 'company/company-settings-base.html' %}
+
+{% block title %}داشبورد اصلی{% endblock %}
+
+
+{% block main %}
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>عنوان</th>
+                      <th>ترتیب در فرایند</th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for leadstatus in object_list %}
+                      <tr>
+                        <td><a href="{% url 'leads:leadstatus-update' company.slug leadstatus.pk %}">{{leadstatus.LeadStatus.title}}</a></td>
+                        <td>{{leadstatus.LeadStatus_number}}</td>
+                        <td>
+                            <a class="badge-warning" href="{% url 'leads:leadstatus-update' company.slug leadstatus.pk %}">ویرایش</a>
+                            <a class="badge-danger" href="{% url 'leads:leadstatus-delete' company.slug leadstatus.pk %}">حذف</a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+{% endblock %}

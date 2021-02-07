@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 from decouple import config
+from django.conf import settings
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -60,6 +61,7 @@ INSTALLED_APPS = [
     'django_filters',
     'cuser',
     'phonenumber_field',
+    'jalali_date',
 ]
 
 MIDDLEWARE = [
@@ -163,3 +165,38 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+
+
+JALALI_DATE_DEFAULTS = {
+   'Strftime': {
+        'date': '%y/%m/%d',
+        'datetime': '%H:%M:%S _ %y/%m/%d',
+    },
+    'Static': {
+        'js': [
+            # loading datepicker
+            'admin/js/django_jalali.min.js',
+            # OR
+            # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.core.js',
+            # 'admin/jquery.ui.datepicker.jalali/scripts/calendar.js',
+            # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.datepicker-cc.js',
+            # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.datepicker-cc-fa.js',
+            # 'admin/js/main.js',
+        ],
+        'css': {
+            'all': [
+                'admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css',
+            ]
+        }
+    },
+}
+if hasattr(settings, 'JALALI_DATE_DEFAULTS'):
+    jalali_date_defaults = settings.JALALI_DATE_DEFAULTS
+    for item in jalali_date_defaults.keys():
+        if isinstance(jalali_date_defaults[item], dict):
+            JALALI_DATE_DEFAULTS[item].update(jalali_date_defaults[item])
+        else:
+            JALALI_DATE_DEFAULTS[item] = jalali_date_defaults[item]
+
+setattr(settings, 'JALALI_DATE_DEFAULTS', JALALI_DATE_DEFAULTS)

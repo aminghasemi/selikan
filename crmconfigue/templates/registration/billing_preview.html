@@ -1,125 +1,175 @@
 {% extends 'registration/base.html' %}
-
-{% block title %}داشبورد اصلی{% endblock %}
-
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="../../assets/css/pages/app-invoice.css">
+{% endblock %}
 
 {% block main %}
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="margin-right:0px">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-12">
-            <h4>تایید پرداخت فاکتور</h4>
-          </div>
-          <div class="col-sm-12">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">خانه</a></li>
-              <li class="breadcrumb-item active">تمدید اشتراک</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
-
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
 
 
-            <!-- Main content -->
-            <div class="invoice p-3 mb-3">
-              <!-- title row -->
-              <div class="row">
-                <div class="col-12">
-                  <h5>
-                    <i class="fas fa-globe"></i> نرم افزار ارتباط با مشتریان سلیکان<br>
-                    <small class="float-right">تاریخ: {{object.jinvoice_date}}</small>
-                  </h5>
-                </div>
-                <!-- /.col -->
+<div class="content-body"><!-- app invoice View Page -->
+<section class="invoice-view-wrapper">
+  <div class="row">
+    <!-- invoice view page -->
+    <div class="col-xl-9 col-md-8 col-12">
+      <div class="card invoice-print-area">
+        <div class="card-content">
+          <div class="card-body pb-0 mx-25">
+            <!-- header section -->
+            <div class="row line-height-2 mt-n50">
+              <div class="col-xl-4 col-md-12 mb-50 mb-xl-0">
+                <span class="invoice-number mr-50">شماره فاکتور</span>
+                <span>{{object.invoice_number}}</span>
               </div>
-              <!-- info row -->
-              <div class="row invoice-info">
-                <div class="col-sm-4 invoice-col">
-                  فروشنده
-                  <address>
-                    <strong>نرم افزار ارتباط با مشتریان سلیکان</strong><br>
-                     خیام جنوبی کوی ۲۲<br>
-                    ارومیه، آذربایجان غربی<br>
-                    تلفن: (۰۴۴) ۹۶۳۷-۳۲۲۵<br>
-                    ایمیل: info@selikan.com
-                  </address>
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4 invoice-col">
-                  خریدار
-                  <address>
-                    <strong>{{object.company}}</strong><br>
-                    {{object.company.address}}<br>
-                    {{object.company.city}}<br>
-                    تلفن: {{object.phone_number}}<br>
-                    ایمیل: {{object.company.email}}
-                  </address>
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4 invoice-col">
-                  <b>شماره فاکتور #{{object.invoice_number}}</b><br>
-                  <br>
-
-                  <b>نام کاربر:</b> {{request.user.get_full_name}}
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-
-              <!-- Table row -->
-              <div class="row">
-                <div class="col-12 table-responsive">
-                  <table class="table table-striped">
-                    <thead>
-                    <tr>
-                      <th>ردیف</th>
-                      <th>وضعیت پرداخت</th>
-                      <th>تعداد ماه اشتراک</th>
-                      <th>تعداد کارمند اشتراک</th>
-                      <th>هزینه</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td>۱</td>
-                      <td>{{object.status}}</td>
-                      <td>{{object.month_number}}</td>
-                      <td>{{object.staff_number}}</td>
-                      <td>{{object.amount}}</td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-
-
-
-              <!-- this row will not appear when printing -->
-              <div class="row no-print">
-                <div class="col-12">
-                  <a class="badge" href="{% url 'request' object.pk %}">ویرایش</a>
-
+              <div class="col-xl-8 col-md-12">
+                <div class="d-flex align-items-center justify-content-xl-end flex-wrap">
+                  <div class="mr-3">
+                    <small class="text-muted">تاریخ تنظیم:</small>
+                    <span>{{object.jinvoice_date}}</span>
+                  </div>
+                  <div>
+                    <small class="text-muted">تاریخ اعتبار:</small>
+                    <span>{{object.jinvoice_date}}</span>
+                  </div>
                 </div>
               </div>
             </div>
-            <!-- /.invoice -->
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+            <!-- logo and title -->
+            <div class="row my-3">
+              <div class="col-sm-6">
+                <h4 class="text-primary">فاکتور</h4>
+                <span>تمدید اعتبار حساب</span>
+              </div>
+              <div class="mt-1 mt-sm-0 col-sm-6 d-flex justify-content-end">
+                <img src="../../assets/images/pages/pixinvent-logo.png" alt="logo" height="46" width="164">
+              </div>
+            </div>
+            <hr>
+            <!-- invoice address and contact -->
+            <div class="row invoice-info">
+              <div class="col-6 mt-1">
+                <h6 class="invoice-from">فروشنده</h6>
+                <div class="mb-75">
+                  <span><strong>نرم افزار ارتباط با مشتریان سلیکان</strong></span>
 
+                </div>
+                <div class="mb-75">
+                  <span>خیام جنوبی کوی ۲۲<br>
+                   ارومیه، آذربایجان غربی<br></span>
+                </div>
+                <div class="mb-75">
+                  <span>ایمیل: info@selikan.com</span>
+                </div>
+                <div class="mb-75">
+                  <span class="ltr-text">تلفن: (۰۴۴) ۹۶۳۷-۳۲۲۵</span>
+                </div>
+              </div>
+              <div class="col-6 mt-1">
+                <h6 class="invoice-to">خریدار</h6>
+                <div class="mb-75">
+                  <span>{{object.company}}</span><br>
+                  <b>نام کاربر:</b> {{request.user.get_full_name}}
+                </div>
+                <div class="mb-75">
+                  <span>{{object.company.address}}{{object.company.city}}</span>
+                </div>
+                <div class="mb-75">
+                  <span>{{object.company.email}}</span>
+                </div>
+                <div class="mb-75">
+                  <span class="ltr-text">{{object.company.phone_number}}</span>
+                </div>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <!-- product details table-->
+          <div class="invoice-product-details table-responsive mx-md-25">
+            <table class="table table-borderless mb-0">
+              <thead>
+                <tr class="border-0">
+                  <th scope="col">ردیف</th>
+                  <th scope="col">وضعیت پرداخت</th>
+                  <th scope="col">تعداد ماه اشتراک</th>
+                  <th scope="col">تعداد کارمند</th>
+                  <th scope="col" class="text-right">جمع کل (تومان)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>۱</td>
+                  <td>{{object.status}}</td>
+                  <td>{{object.month_number}}</td>
+                  <td>{{object.staff_number}}</td>
+                  <td class="text-primary text-right font-weight-bold">{{object.amount}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- invoice subtotal -->
+          <div class="card-body pt-0 mx-25">
+            <hr>
+            <div class="row">
+              <div class="col-4 col-sm-6 mt-75">
+                <p>با تشکر از خرید شما</p>
+              </div>
+              <div class="col-8 col-sm-6 d-flex justify-content-end mt-75">
+                <div class="invoice-subtotal">
+                  <div class="invoice-calc d-flex justify-content-between">
+                    <span class="invoice-title">جمع جزء</span>
+                    <span class="invoice-value">{{object.amount}}</span>
+                  </div>
+                  <div class="invoice-calc d-flex justify-content-between">
+                    <span class="invoice-title">تخفیف</span>
+                    <span class="invoice-value">-</span>
+                  </div>
+                  <div class="invoice-calc d-flex justify-content-between">
+                    <span class="invoice-title"> مالیات بر ارزش افزوده</span>
+                    <span class="invoice-value">-</span>
+                  </div>
+                  <hr>
+                  <div class="invoice-calc d-flex justify-content-between">
+                    <span class="invoice-title">جمع صورتحساب</span>
+                    <span class="invoice-value">{{object.amount}} </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- invoice action  -->
+  <div class="col-xl-3 col-md-4 col-12">
+    <div class="card invoice-action-wrapper shadow-none border">
+      <div class="card-body">
+        <div class="invoice-action-btn">
+            <a href="{% url 'request' object.pk %}" class="btn btn-success btn-block invoice-send-btn">
+              <i class="bx bx-send"></i>
+              <span>پرداخت صورتحساب</span>
+            </a>
+          </div>
+          <div class="invoice-action-btn">
+            <button class="btn btn-light-primary btn-block invoice-print">
+              <span>چاپ</span>
+            </button>
+          </div>
+          <div class="invoice-action-btn">
+            <a href="#" class="btn btn-light-primary btn-block">
+              <span>ویرایش صورتحساب</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+    <!-- END: Content-->
+  {% endblock %}
+
+  
+  {% block js %}
+  <script src="{% static 'frest/assets/js/scripts/pages/dashboard-ecommerce.js' %}"></script>
   {% endblock %}

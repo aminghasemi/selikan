@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from teams.models import Teams
 from django.urls import reverse
 from extensions.utils import jalali_converter
-
+from jalali_date import datetime2jalali, date2jalali
 class Task(models.Model):
 
     STATUS_CHOICES = (
@@ -39,7 +39,8 @@ class Task(models.Model):
         return jalali_converter(self.created_on)
     def jdone_on(self):
         return jalali_converter(self.done_on)
-
+    def jdue_date(self):
+        return jalali_converter(self.due_date)
     @property
     def created_on_arrow(self):
         return arrow.get(self.created_on).humanize()

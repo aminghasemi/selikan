@@ -1,0 +1,2659 @@
+<!DOCTYPE html>
+<html class="loading" lang="fa" data-textdirection="rtl" dir="rtl">
+  <!-- BEGIN: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>جدول های اطلاعاتی</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/ico/favicon.ico">
+	<meta name="theme-color" content="#5A8DEE">
+    
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="../../assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/vendors/css/tables/datatable/datatables.min.css">
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="../../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/colors.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/components.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/themes/dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/themes/semi-dark-layout.css">
+    <!-- END: Theme CSS-->
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="../../assets/css/core/menu/menu-types/vertical-menu.css">
+    <!-- END: Page CSS-->
+
+  </head>
+  <!-- END: Head-->
+
+  <!-- BEGIN: Body-->
+  <body class="vertical-layout vertical-menu-modern semi-dark-layout 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="semi-dark-layout">
+
+    <!-- BEGIN: Header-->
+    <div class="header-navbar-shadow"></div>
+    <nav class="header-navbar main-header-navbar navbar-expand-lg navbar navbar-with-menu fixed-top ">
+      <div class="navbar-wrapper">
+        <div class="navbar-container content">
+          <div class="navbar-collapse" id="navbar-mobile">
+            <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
+              <ul class="nav navbar-nav">
+                <li class="nav-item mobile-menu d-xl-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ficon bx bx-menu"></i></a></li>
+              </ul>
+              <ul class="nav navbar-nav bookmark-icons">
+                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-email.html" data-toggle="tooltip" data-placement="bottom" title="ایمیل"><i class="ficon bx bx-envelope"></i></a></li>
+                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-chat.html" data-toggle="tooltip" data-placement="bottom" title="گفتگو"><i class="ficon bx bx-chat"></i></a></li>
+                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-todo.html" data-toggle="tooltip" data-placement="bottom" title="وظایف"><i class="ficon bx bx-check-circle"></i></a></li>
+                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-calendar.html" data-toggle="tooltip" data-placement="bottom" title="تقویم"><i class="ficon bx bx-calendar-alt"></i></a></li>
+              </ul>
+              <ul class="nav navbar-nav">
+                <li class="nav-item d-none d-lg-block"><a class="nav-link bookmark-star"><i class="ficon bx bx-star warning"></i></a>
+                  <div class="bookmark-input search-input">
+                    <div class="bookmark-input-icon"><i class="bx bx-search primary"></i></div>
+                    <input class="form-control input" type="text" placeholder="جستجو ..." tabindex="0" data-search="template-search">
+                    <ul class="search-list"></ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <ul class="nav navbar-nav float-right">
+              <li class="dropdown dropdown-language nav-item"><a class="dropdown-toggle nav-link" id="dropdown-flag" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flag-icon flag-icon-ir"></i><span class="selected-language">فارسی</span></a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-flag"><a class="dropdown-item" href="#" data-language="fa"><i class="flag-icon flag-icon-ir mr-50"></i> فارسی</a><a class="dropdown-item" href="#" data-language="en"><i class="flag-icon flag-icon-us mr-50"></i> انگلیسی</a><a class="dropdown-item" href="#" data-language="fr"><i class="flag-icon flag-icon-fr mr-50"></i> فرانسوی</a><a class="dropdown-item" href="#" data-language="de"><i class="flag-icon flag-icon-de mr-50"></i> آلمانی</a><a class="dropdown-item" href="#" data-language="pt"><i class="flag-icon flag-icon-pt mr-50"></i> پرتغالی</a></div>
+              </li>
+              <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i class="ficon bx bx-fullscreen"></i></a></li>
+              <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon bx bx-search"></i></a>
+                <div class="search-input">
+                  <div class="search-input-icon"><i class="bx bx-search primary"></i></div>
+                  <input class="input" type="text" placeholder="جستجو ..." tabindex="-1" data-search="template-search">
+                  <div class="search-input-close"><i class="bx bx-x"></i></div>
+                  <ul class="search-list"></ul>
+                </div>
+              </li>
+              <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon bx bx-bell bx-tada bx-flip-horizontal"></i><span class="badge badge-pill badge-danger badge-up">5</span></a>
+                <ul class="dropdown-menu dropdown-menu-media">
+                  <li class="dropdown-menu-header">
+                    <div class="dropdown-header px-1 py-75 d-flex justify-content-between"><span class="notification-title">7 اعلان جدید</span><span class="text-bold-400 cursor-pointer">علامت خوانده شده به همه</span></div>
+                  </li>
+                  <li class="scrollable-container media-list"><a class="d-flex justify-content-between" href="javascript:void(0)">
+                      <div class="media d-flex align-items-center">
+                        <div class="media-left pr-0">
+                          <div class="avatar mr-1 m-0"><img src="../../assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="39" width="39"></div>
+                        </div>
+                        <div class="media-body">
+                          <h6 class="media-heading"><span class="text-bold-500">تبریک بابت دریافت جوایز</span> در مسابقات سالانه</h6><small class="notification-text">15 اردیبهشت 12:32 ب.ظ</small>
+                        </div>
+                      </div></a>
+                    <div class="d-flex justify-content-between read-notification cursor-pointer">
+                      <div class="media d-flex align-items-center">
+                        <div class="media-left pr-0">
+                          <div class="avatar mr-1 m-0"><img src="../../assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
+                        </div>
+                        <div class="media-body">
+                          <h6 class="media-heading"><span class="text-bold-500">پیام جدید</span> دریافت شد</h6><small class="notification-text">شما 18 پیام خوانده نشده دارید</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-between cursor-pointer">
+                      <div class="media d-flex align-items-center py-0">
+                        <div class="media-left pr-0"><img class="mr-1" src="../../assets/images/icon/sketch-mac-icon.png" alt="avatar" height="39" width="39"></div>
+                        <div class="media-body">
+                          <h6 class="media-heading"><span class="text-bold-500">به روز رسانی آماده است</span></h6><small class="notification-text">Sketch 50.2 is currently newly added</small>
+                        </div>
+                        <div class="media-right pl-0">
+                          <div class="row border-left text-center">
+                            <div class="col-12 px-50 py-50 border-bottom">
+                              <h6 class="media-heading text-bold-500 mb-0">به‌روزرسانی</h6>
+                            </div>
+                            <div class="col-12 px-50 py-50">
+                              <h6 class="media-heading mb-0">بستن</h6>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-between cursor-pointer">
+                      <div class="media d-flex align-items-center">
+                        <div class="media-left pr-0">
+                          <div class="avatar bg-primary bg-lighten-5 mr-1 m-0 p-25"><span class="avatar-content text-primary font-medium-2">ل‌د</span></div>
+                        </div>
+                        <div class="media-body">
+                          <h6 class="media-heading"><span class="text-bold-500">مشتری جدید</span> ثبت نام کرد</h6><small class="notification-text">1 ساعت پیش</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="cursor-pointer">
+                      <div class="media d-flex align-items-center justify-content-between">
+                        <div class="media-left pr-0">
+                          <div class="media-body">
+                            <h6 class="media-heading">پیشنهاد های جدید</h6>
+                          </div>
+                        </div>
+                        <div class="media-right">
+                          <div class="custom-control custom-switch">
+                            <input class="custom-control-input" type="checkbox" checked id="notificationSwtich">
+                            <label class="custom-control-label" for="notificationSwtich"></label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-between cursor-pointer">
+                      <div class="media d-flex align-items-center">
+                        <div class="media-left pr-0">
+                          <div class="avatar bg-danger bg-lighten-5 mr-1 m-0 p-25"><span class="avatar-content"><i class="bx bxs-heart text-danger"></i></span></div>
+                        </div>
+                        <div class="media-body">
+                          <h6 class="media-heading"><span class="text-bold-500">نرم افزار</span> تایید شد</h6><small class="notification-text">6 ساعت پیش</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-between read-notification cursor-pointer">
+                      <div class="media d-flex align-items-center">
+                        <div class="media-left pr-0">
+                          <div class="avatar mr-1 m-0"><img src="../../assets/images/portrait/small/avatar-s-4.jpg" alt="avatar" height="39" width="39"></div>
+                        </div>
+                        <div class="media-body">
+                          <h6 class="media-heading"><span class="text-bold-500">فایل جدید</span> ارسال شد</h6><small class="notification-text">4 ساعت پیش</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-between cursor-pointer">
+                      <div class="media d-flex align-items-center">
+                        <div class="media-left pr-0">
+                          <div class="avatar bg-rgba-danger m-0 mr-1 p-25">
+                            <div class="avatar-content"><i class="bx bx-detail text-danger"></i></div>
+                          </div>
+                        </div>
+                        <div class="media-body">
+                          <h6 class="media-heading"><span class="text-bold-500">گزارش بودجه</span> ایجاد شد</h6><small class="notification-text">25 ساعت پیش</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-between cursor-pointer">
+                      <div class="media d-flex align-items-center border-0">
+                        <div class="media-left pr-0">
+                          <div class="avatar mr-1 m-0"><img src="../../assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
+                        </div>
+                        <div class="media-body">
+                          <h6 class="media-heading"><span class="text-bold-500">مشتری جدید</span> دیدگاهی ارسال کرد</h6><small class="notification-text">2 روز پیش</small>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="dropdown-menu-footer"><a class="dropdown-item p-50 text-primary justify-content-center" href="javascript:void(0)">خواندن همه اعلان ها</a></li>
+                </ul>
+              </li>
+              <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                  <div class="user-nav d-sm-flex d-none"><span class="user-name">تونی استارک</span><span class="user-status text-muted">آماده</span></div><span><img class="round" src="../../assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span></a>
+                <div class="dropdown-menu pb-0"><a class="dropdown-item" href="page-user-profile.html"><i class="bx bx-user mr-50"></i> ویرایش پروفایل</a><a class="dropdown-item" href="app-email.html"><i class="bx bx-envelope mr-50"></i> صندوق ورودی من</a><a class="dropdown-item" href="app-todo.html"><i class="bx bx-check-square mr-50"></i> وظیفه</a><a class="dropdown-item" href="app-chat.html"><i class="bx bx-message mr-50"></i> گفتگو ها</a>
+                  <div class="dropdown-divider mb-0"></div><a class="dropdown-item" href="auth-login.html"><i class="bx bx-power-off mr-50"></i> خروج</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- END: Header-->
+
+
+    <!-- BEGIN: Main Menu-->
+    <div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
+      <div class="navbar-header">
+        <ul class="nav navbar-nav flex-row">
+          <li class="nav-item mr-auto"><a class="navbar-brand" href="../../html/vertical-menu-template-semi-dark/index.html">
+              <div class="brand-logo"><img class="logo" src="../../assets/images/logo/logo.png"></div>
+              <h2 class="brand-text mb-0">Frest</h2></a></li>
+          <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="bx bx-x d-block d-xl-none font-medium-4 primary"></i><i class="toggle-icon bx bx-disc font-medium-4 d-none d-xl-block primary" data-ticon="bx-disc"></i></a></li>
+        </ul>
+      </div>
+      <div class="shadow-bottom"></div>
+      <div class="main-menu-content">
+        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
+          <li class=" nav-item"><a href="../../html/vertical-menu-template-semi-dark/index.html"><i class="menu-livicon" data-icon="desktop"></i><span class="menu-title" data-i18n="Dashboard">داشبورد</span><span class="badge bg-rgba-danger text-danger badge-pill badge-round float-right mr-2">2</span></a>
+            <ul class="menu-content">
+              <li><a href="dashboard-ecommerce.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="eCommerce">تجارت الکترونیک</span></a>
+              </li>
+              <li><a href="dashboard-analytics.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Analytics">آمار تحلیلی</span></a>
+              </li>
+            </ul>
+          </li>
+          <li class=" navigation-header"><span>برنامه ها</span>
+          </li>
+          <li class=" nav-item"><a href="app-email.html"><i class="menu-livicon" data-icon="envelope-pull"></i><span class="menu-title" data-i18n="Email">ایمیل</span></a>
+          </li>
+          <li class=" nav-item"><a href="app-chat.html"><i class="menu-livicon" data-icon="comments"></i><span class="menu-title" data-i18n="Chat">گفتگو</span></a>
+          </li>
+          <li class=" nav-item"><a href="app-todo.html"><i class="menu-livicon" data-icon="check-alt"></i><span class="menu-title" data-i18n="Todo">وظایف</span></a>
+          </li>
+          <li class=" nav-item"><a href="app-calendar.html"><i class="menu-livicon" data-icon="calendar"></i><span class="menu-title" data-i18n="Calendar">تقویم</span></a>
+          </li>
+          <li class=" nav-item"><a href="app-kanban.html"><i class="menu-livicon" data-icon="grid"></i><span class="menu-title" data-i18n="Kanban">یادداشت ها</span></a>
+          </li>
+          <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="notebook"></i><span class="menu-title" data-i18n="Invoice">صورتحساب</span></a>
+            <ul class="menu-content">
+              <li><a href="app-invoice-list.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">لیست صورتحساب ها</span></a>
+              </li>
+              <li><a href="app-invoice.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice">صورتحساب</span></a>
+              </li>
+              <li><a href="app-invoice-edit.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice Edit">ویرایش صورتحساب</span></a>
+              </li>
+              <li><a href="app-invoice-add.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice Add">افزودن صورتحساب</span></a>
+              </li>
+            </ul>
+          </li>
+          <li class=" nav-item"><a href="app-file-manager.html"><i class="menu-livicon" data-icon="save"></i><span class="menu-title" data-i18n="File Manager">مدیریت فایل</span></a>
+          </li>
+          <li class=" navigation-header"><span>رابط کاربری</span>
+          </li>
+          <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="retweet"></i><span class="menu-title" data-i18n="Content">محتوا</span></a>
+            <ul class="menu-content">
+              <li><a href="content-grid.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Grid">توری</span></a>
+              </li>
+              <li><a href="content-typography.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Typography">تایپوگرافی</span></a>
+              </li>
+              <li><a href="content-text-utilities.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Text Utilities">ابزار متن</span></a>
+              </li>
+              <li><a href="content-syntax-highlighter.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Syntax Highlighter">هایلایت Syntax</span></a>
+              </li>
+              <li><a href="content-helper-classes.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Helper Classes">کلاس های کمکی</span></a>
+              </li>
+            </ul>
+          </li>
+          <li class=" nav-item"><a href="colors.html"><i class="menu-livicon" data-icon="drop"></i><span class="menu-title" data-i18n="Colors">رنگ ها</span></a>
+          </li>
+          <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="bulb"></i><span class="menu-title" data-i18n="Icons">آیکن‌ها</span></a>
+            <ul class="menu-content">
+              <li><a href="icons-livicons.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="LivIcons">LivIcons</span></a>
+              </li>
+              <li><a href="icons-boxicons.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="BoxIcons">Boxicons</span></a>
+              </li>
+            </ul>
+          </li>
+          <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="square"></i><span class="menu-title" data-i18n="Card">کارت</span></a>
+            <ul class="menu-content">
+              <li><a href="card-basic.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Basic">پایه</span></a>
+              </li>
+              <li><a href="card-actions.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Card Actions">عملیات های کارت</span></a>
+              </li>
+            </ul>
+          </li>
+          <li class=" nav-item"><a href="widgets.html"><i class="menu-livicon" data-icon="thumbnails-small"></i><span class="menu-title" data-i18n="Widgets">ویجت‌ها</span><span class="badge bg-rgba-primary text-primary badge-pill badge-round float-right">جدید</span></a>
+          </li>
+          <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="box-add"></i><span class="menu-title" data-i18n="Components">اجزاء</span></a>
+            <ul class="menu-content">
+              <li><a href="component-alerts.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Alerts">اعلان‌ها</span></a>
+              </li>
+              <li><a href="component-buttons-basic.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Buttons">دکمه ها</span></a>
+              </li>
+              <li><a href="component-breadcrumbs.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Breadcrumbs">مسیر ناوبری</span></a>
+              </li>
+              <li><a href="component-carousel.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Carousel">گردونه</span></a>
+              </li>
+              <li><a href="component-collapse.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Collapse">باز و بسته شونده</span></a>
+              </li>
+              <li><a href="component-dropdowns.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Dropdowns">منوی کشویی</span></a>
+              </li>
+              <li><a href="component-list-group.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="List Group">گروه لیست</span></a>
+              </li>
+              <li><a href="component-modals.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Modals">مودال ها</span></a>
+              </li>
+              <li><a href="component-pagination.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Pagination">صفحه‌بندی</span></a>
+              </li>
+              <li><a href="component-navbar.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Navbar">نوار ناوبری</span></a>
+              </li>
+              <li><a href="component-tabs-component.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Tabs Component">سربرگ ها</span></a>
+              </li>
+              <li><a href="component-pills-component.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Pills Component">سربرگ های دکمه ای</span></a>
+              </li>
+              <li><a href="component-tooltips.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Tooltips">تولتیپ ها</span></a>
+              </li>
+              <li><a href="component-popovers.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Popovers">پاپ اور</span></a>
+              </li>
+              <li><a href="component-badges.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Badges">نشان ها</span></a>
+              </li>
+              <li><a href="component-pill-badges.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Pill Badges">نشان های قرصی</span></a>
+              </li>
+              <li><a href="component-progress.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Progress">پیشرفت</span></a>
+              </li>
+              <li><a href="component-media-objects.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Media Objects">رسانه ها</span></a>
+              </li>
+              <li><a href="component-spinner.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Spinner">چرخنده</span></a>
+              </li>
+              <li><a href="component-bs-toast.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Toasts">اعلان توست</span></a>
+              </li>
+            </ul>
+          </li>
+          <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="briefcase"></i><span class="menu-title" data-i18n="Extra Components">اجزای بیشتر</span></a>
+            <ul class="menu-content">
+              <li><a href="ex-component-avatar.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Avatar">آواتار</span></a>
+              </li>
+              <li><a href="ex-component-chips.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Chips">ژتون ها</span></a>
+              </li>
+              <li><a href="ex-component-divider.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Divider">جدا کننده</span></a>
+              </li>
+            </ul>
+          </li>
+          <li class=" navigation-header"><span>فرم ها و جدول ها</span>
+          </li>
+          <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="check"></i><span class="menu-title" data-i18n="Form Elements">عناصر فرم</span></a>
+            <ul class="menu-content">
+              <li><a href="form-inputs.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Input">ورودی</span></a>
+              </li>
+              <li><a href="form-input-groups.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Input Groups">گروه های ورودی</span></a>
+              </li>
+              <li><a href="form-number-input.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Number Input">ورودی عدد</span></a>
+              </li>
+              <li><a href="form-select.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Select">انتخاب</span></a>
+              </li>
+              <li><a href="form-radio.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Radio">دکمه های رادیویی</span></a>
+              </li>
+              <li><a href="form-checkbox.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Checkbox">چک باکس</span></a>
+              </li>
+              <li><a href="form-switch.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Switch">سوییچ</span></a>
+              </li>
+              <li><a href="form-textarea.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Textarea">ناحیه متنی</span></a>
+              </li>
+              <li><a href="form-quill-editor.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Quill Editor">ویرایشگر Quill</span></a>
+              </li>
+              <li><a href="form-file-uploader.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="File Uploader">ارسال کننده فایل</span></a>
+              </li>
+              <li><a href="form-date-time-picker.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Date & Time Picker">انتخاب گر تاریخ و زمان</span></a>
+              </li>
+            </ul>
+          </li>
+          <li class=" nav-item"><a href="form-layout.html"><i class="menu-livicon" data-icon="settings"></i><span class="menu-title" data-i18n="Form Layout">طرح های فرم</span></a>
+          </li>
+          <li class=" nav-item"><a href="form-wizard.html"><i class="menu-livicon" data-icon="priority-low"></i><span class="menu-title" data-i18n="Form Wizard">فرم مرحله ای</span></a>
+          </li>
+          <li class=" nav-item"><a href="form-validation.html"><i class="menu-livicon" data-icon="check-alt"></i><span class="menu-title" data-i18n="Form Validation">اعتبارسنجی فرم</span></a>
+          </li>
+          <li class=" nav-item"><a href="form-repeater.html"><i class="menu-livicon" data-icon="priority-low"></i><span class="menu-title" data-i18n="Form Repeater">فرم تکرار شونده</span></a>
+          </li>
+          <li class=" nav-item"><a href="table.html"><i class="menu-livicon" data-icon="thumbnails-big"></i><span class="menu-title" data-i18n="Table">جدول</span></a>
+          </li>
+          <li class=" nav-item"><a href="table-extended.html"><i class="menu-livicon" data-icon="thumbnails-small"></i><span class="menu-title" data-i18n="Table extended">جدول پیشرفته</span></a>
+          </li>
+          <li class="active nav-item"><a href="table-datatable.html"><i class="menu-livicon" data-icon="morph-map"></i><span class="menu-title" data-i18n="Datatable">جدول اطلاعات</span></a>
+          </li>
+          <li class=" navigation-header"><span>صفحات</span>
+          </li>
+          <li class=" nav-item"><a href="page-user-profile.html"><i class="menu-livicon" data-icon="user"></i><span class="menu-title" data-i18n="User Profile">پروفایل کاربر</span></a>
+          </li>
+          <li class=" nav-item"><a href="page-faq.html"><i class="menu-livicon" data-icon="question-alt"></i><span class="menu-title" data-i18n="FAQ">سوالات متداول</span></a>
+          </li>
+          <li class=" nav-item"><a href="page-knowledge-base.html"><i class="menu-livicon" data-icon="info-alt"></i><span class="menu-title" data-i18n="Knowledge Base">پایگاه دانش</span></a>
+          </li>
+          <li class=" nav-item"><a href="page-search.html"><i class="menu-livicon" data-icon="search"></i><span class="menu-title" data-i18n="Search">جستجو</span></a>
+          </li>
+          <li class=" nav-item"><a href="page-account-settings.html"><i class="menu-livicon" data-icon="wrench"></i><span class="menu-title" data-i18n="Account Settings">تنظیمات حساب کاربری</span></a>
+          </li>
+          <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="users"></i><span class="menu-title" data-i18n="User">کاربران</span></a>
+            <ul class="menu-content">
+              <li><a href="page-users-list.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="List">لیست</span></a>
+              </li>
+              <li><a href="page-users-view.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="View">مشاهده</span></a>
+              </li>
+              <li><a href="page-users-edit.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Edit">ویرایش</span></a>
+              </li>
+            </ul>
+          </li>
+          <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="unlink"></i><span class="menu-title" data-i18n="Starter kit">طرح های شروع</span></a>
+            <ul class="menu-content">
+              <li><a href="../../starter-kit/vertical-menu-template-semi-dark/sk-layout-1-column.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="1 column">1 ستون</span></a>
+              </li>
+              <li><a href="../../starter-kit/vertical-menu-template-semi-dark/sk-layout-2-columns.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="2 columns">2 ستون</span></a>
+              </li>
+              <li><a href="../../starter-kit/vertical-menu-template-semi-dark/sk-layout-fixed-navbar.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Fixed navbar">نوار بالایی ثابت</span></a>
+              </li>
+              <li><a href="../../starter-kit/vertical-menu-template-semi-dark/sk-layout-fixed.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Fixed layout">طرح ثابت</span></a>
+              </li>
+              <li><a href="../../starter-kit/vertical-menu-template-semi-dark/sk-layout-static.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Static layout">طرح ایستا</span></a>
+              </li>
+            </ul>
+          </li>
+          <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="unlock"></i><span class="menu-title" data-i18n="Authentication">احراز هویت</span></a>
+            <ul class="menu-content">
+              <li><a href="auth-login.html" target="_blank"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Login">ورود</span></a>
+              </li>
+              <li><a href="auth-register.html" target="_blank"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Register">ثبت نام</span></a>
+              </li>
+              <li><a href="auth-forgot-password.html" target="_blank"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Forgot Password">فراموشی رمز عبور</span></a>
+              </li>
+              <li><a href="auth-reset-password.html" target="_blank"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Reset Password">بازنشانی رمز عبور</span></a>
+              </li>
+              <li><a href="auth-lock-screen.html" target="_blank"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Lock Screen">قفل صفحه</span></a>
+              </li>
+            </ul>
+          </li>
+          <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="share"></i><span class="menu-title" data-i18n="Miscellaneous">متفرقه</span></a>
+            <ul class="menu-content">
+              <li><a href="page-coming-soon.html" target="_blank"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Coming Soon">به زودی</span></a>
+              </li>
+              <li><a href="#"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Error">خطا</span></a>
+                <ul class="menu-content">
+                  <li><a href="error-404.html" target="_blank"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="404">404</span></a>
+                  </li>
+                  <li><a href="error-500.html" target="_blank"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="500">500</span></a>
+                  </li>
+                </ul>
+              </li>
+              <li><a href="page-not-authorized.html" target="_blank"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Not Authorized">دسترسی غیرمجاز</span></a>
+              </li>
+              <li><a href="page-maintenance.html" target="_blank"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Maintenance">تعمیرات</span></a>
+              </li>
+            </ul>
+          </li>
+          <li class=" navigation-header"><span>نمودار ها و نقشه ها</span>
+          </li>
+          <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="pie-chart"></i><span class="menu-title" data-i18n="Charts">نمودار ها</span><span class="badge badge-pill badge-round bg-rgba-info text-info float-right mr-2">3</span></a>
+            <ul class="menu-content">
+              <li><a href="chart-apex.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Apex">Apex</span></a>
+              </li>
+              <li><a href="chart-chartjs.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Chartjs">Chartjs</span></a>
+              </li>
+              <li><a href="chart-chartist.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Chartist">Chartist</span></a>
+              </li>
+            </ul>
+          </li>
+          <li class=" nav-item"><a href="maps-google.html"><i class="menu-livicon" data-icon="globe"></i><span class="menu-title" data-i18n="Google Maps">نقشه های گوگل</span></a>
+          </li>
+          <li class=" navigation-header"><span>افزونه ها</span>
+          </li>
+          <li class=" nav-item"><a href="ext-component-sweet-alerts.html"><i class="menu-livicon" data-icon="warning-alt"></i><span class="menu-title" data-i18n="Sweet Alert">هشدار Sweet</span></a>
+          </li>
+          <li class=" nav-item"><a href="ext-component-toastr.html"><i class="menu-livicon" data-icon="morph-map"></i><span class="menu-title" data-i18n="Toastr">اعلان Toastr</span></a>
+          </li>
+          <li class=" nav-item"><a href="ext-component-noui-slider.html"><i class="menu-livicon" data-icon="settings"></i><span class="menu-title" data-i18n="NoUi Slider">اسلایدر NoUi</span></a>
+          </li>
+          <li class=" nav-item"><a href="ext-component-drag-drop.html"><i class="menu-livicon" data-icon="priority-high"></i><span class="menu-title" data-i18n="Drag & Drop">کشیدن و رها کردن</span></a>
+          </li>
+          <li class=" nav-item"><a href="ext-component-tour.html"><i class="menu-livicon" data-icon="paper-plane"></i><span class="menu-title" data-i18n="Tour">تور</span></a>
+          </li>
+          <li class=" nav-item"><a href="ext-component-swiper.html"><i class="menu-livicon" data-icon="morph-orientation-tablet"></i><span class="menu-title" data-i18n="Swiper">گردونه Swiper</span></a>
+          </li>
+          <li class=" nav-item"><a href="ext-component-treeview.html"><i class="menu-livicon" data-icon="morph-sort-alt"></i><span class="menu-title" data-i18n="Treeview">نمایش درختی</span></a>
+          </li>
+          <li class=" nav-item"><a href="ext-component-block-ui.html"><i class="menu-livicon" data-icon="expand"></i><span class="menu-title" data-i18n="Block-UI">رابط کاربری بلوک</span></a>
+          </li>
+          <li class=" nav-item"><a href="ext-component-media-player.html"><i class="menu-livicon" data-icon="music"></i><span class="menu-title" data-i18n="Media Player">پخش کننده رسانه</span></a>
+          </li>
+          <li class=" nav-item"><a href="ext-component-miscellaneous.html"><i class="menu-livicon" data-icon="loader-10"></i><span class="menu-title" data-i18n="Miscellaneous">متفرقه</span></a>
+          </li>
+          <li class=" nav-item"><a href="ext-component-i18n.html"><i class="menu-livicon" data-icon="globe"></i><span class="menu-title" data-i18n="i18n">چند زبانی</span></a>
+          </li>
+          <li class=" navigation-header"><span>سایر</span>
+          </li>
+          <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="morph-menu-arrow-bottom"></i><span class="menu-title" data-i18n="Menu Levels">سطح های فهرست</span></a>
+            <ul class="menu-content">
+              <li><a href="#"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Second Level">سطح دوم</span></a>
+              </li>
+              <li><a href="#"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Second Level">سطح دوم</span></a>
+                <ul class="menu-content">
+                  <li><a href="#"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Third Level">سطح سوم</span></a>
+                  </li>
+                  <li><a href="#"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Third Level">سطح سوم</span></a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="disabled nav-item"><a href="#"><i class="menu-livicon" data-icon="morph-preview"></i><span class="menu-title" data-i18n="Disabled Menu">گزینه غیرفعال</span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- END: Main Menu-->
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+      <div class="content-overlay"></div>
+      <div class="content-wrapper">
+        <div class="content-header row">
+          <div class="content-header-left col-12 mb-2 mt-1">
+            <div class="row breadcrumbs-top">
+              <div class="col-12">
+                <h5 class="content-header-title float-left pr-1">جدول های اطلاعاتی</h5>
+                <div class="breadcrumb-wrapper">
+                  <ol class="breadcrumb p-0 mb-0">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="bx bx-home-alt"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active">جدول اطلاعات
+                    </li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content-body"><div class="row">
+    <div class="col-12">
+        <p>مستندات کامل را بخوانید در <a href="https://datatables.net/" target="_blank">اینجا</a></p>
+    </div>
+</div>
+<!-- Zero configuration table -->
+<section id="basic-datatable">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">تنظیم نشده</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body card-dashboard">
+                        <p class="card-text">DataTables اکثر امکانات را به صورت پیش فرض فعال کرده است، بنابراین تنها کاری که برای استفاده از آن در جدول های خودتان باید بکنید این است که فانکشن ایجاد کننده آن را فراخوانی کنید: <code>$().DataTable();</code>.</p>
+                        <div class="table-responsive">
+                            <table class="table zero-configuration">
+                                <thead>
+                                    <tr>
+                                        <th>نام</th>
+                                        <th>موقعیت</th>
+                                        <th>دفتر</th>
+                                        <th>سن</th>
+                                        <th>تاریخ شروع</th>
+                                        <th>حقوق</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>تونی استارک</td>
+                                        <td>طراح سیستم</td>
+                                        <td>تبریز</td>
+                                        <td>61</td>
+                                        <td>1391/04/25</td>
+                                        <td>320,800</td>
+                                    </tr>
+                                    <tr>
+                                        <td>استیو راجرز</td>
+                                        <td>حسابدار</td>
+                                        <td>تهران</td>
+                                        <td>63</td>
+                                        <td>1391/07/25</td>
+                                        <td>170,750</td>
+                                    </tr>
+                                    <tr>
+                                        <td>اولیور کویین</td>
+                                        <td>تدوینگر تکنیکال</td>
+                                        <td>اهواز</td>
+                                        <td>66</td>
+                                        <td>1389/01/12</td>
+                                        <td>86,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>بری آلن</td>
+                                        <td>توسعه دهنده جاوا اسکریپت</td>
+                                        <td>تبریز</td>
+                                        <td>22</td>
+                                        <td>1392/03/29</td>
+                                        <td>433,060</td>
+                                    </tr>
+                                    <tr>
+                                        <td>امیلیا کلارک</td>
+                                        <td>حسابدار</td>
+                                        <td>تهران</td>
+                                        <td>33</td>
+                                        <td>1398/11/28</td>
+                                        <td>162,700</td>
+                                    </tr>
+                                    <tr>
+                                        <td>کریستین رونالدو</td>
+                                        <td>متخصص سیستم</td>
+                                        <td>تبریز</td>
+                                        <td>61</td>
+                                        <td>1392/12/02</td>
+                                        <td>372,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>لیونل مسی</td>
+                                        <td>دستیار فروش</td>
+                                        <td>اهواز</td>
+                                        <td>59</td>
+                                        <td>1392/08/06</td>
+                                        <td>137,500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>بروس وین</td>
+                                        <td>متخصص سیستم</td>
+                                        <td>تهران</td>
+                                        <td>55</td>
+                                        <td>1390/10/14</td>
+                                        <td>327,900</td>
+                                    </tr>
+                                    <tr>
+                                        <td>سیسکو رامون</td>
+                                        <td>توسعه دهنده جاوا اسکریپت</td>
+                                        <td>اهواز</td>
+                                        <td>39</td>
+                                        <td>1389/09/15</td>
+                                        <td>205,500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>لورل لنس</td>
+                                        <td>مهندس نرم افزار</td>
+                                        <td>تبریز</td>
+                                        <td>23</td>
+                                        <td>1398/12/13</td>
+                                        <td>103,600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>روی هارپر</td>
+                                        <td>مدیر شرکت</td>
+                                        <td>همدان</td>
+                                        <td>30</td>
+                                        <td>1398/12/19</td>
+                                        <td>90,560</td>
+                                    </tr>
+                                    <tr>
+                                        <td>تونی استارک</td>
+                                        <td>سرپرست پشتیبانی</td>
+                                        <td>تبریز</td>
+                                        <td>22</td>
+                                        <td>1393/03/03</td>
+                                        <td>342,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>استیو راجرز</td>
+                                        <td>طراح وب</td>
+                                        <td>اهواز</td>
+                                        <td>36</td>
+                                        <td>1398/10/16</td>
+                                        <td>470,600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جسیکا آلبا</td>
+                                        <td>طراح بازاریابی ارشد</td>
+                                        <td>همدان</td>
+                                        <td>43</td>
+                                        <td>1392/12/18</td>
+                                        <td>313,500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>امیلیا کلارک</td>
+                                        <td>طراح وب</td>
+                                        <td>همدان</td>
+                                        <td>19</td>
+                                        <td>1390/03/17</td>
+                                        <td>385,750</td>
+                                    </tr>
+                                    <tr>
+                                        <td>کریستوفر نولان</td>
+                                        <td>طراح بازاریابی</td>
+                                        <td>همدان</td>
+                                        <td>66</td>
+                                        <td>1392/11/27</td>
+                                        <td>198,500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>فیل کولسن</td>
+                                        <td>Chief Financial Officer (CFO)</td>
+                                        <td>تبریز</td>
+                                        <td>64</td>
+                                        <td>1390/06/09</td>
+                                        <td>725,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>گلوریا لیتل</td>
+                                        <td>مدیر سیستم</td>
+                                        <td>تبریز</td>
+                                        <td>59</td>
+                                        <td>1389/04/10</td>
+                                        <td>237,500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جیسون استاتهام</td>
+                                        <td>مهندس نرم افزار</td>
+                                        <td>همدان</td>
+                                        <td>41</td>
+                                        <td>1392/10/13</td>
+                                        <td>132,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>برد پیت</td>
+                                        <td>Personnel Lead</td>
+                                        <td>تبریز</td>
+                                        <td>35</td>
+                                        <td>1392/09/26</td>
+                                        <td>217,500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>لئوناردو دیکاپریو</td>
+                                        <td>Development Lead</td>
+                                        <td>تبریز</td>
+                                        <td>30</td>
+                                        <td>1391/09/03</td>
+                                        <td>345,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>سایمون کاول</td>
+                                        <td>Chief Marketing Officer (CMO)</td>
+                                        <td>تبریز</td>
+                                        <td>40</td>
+                                        <td>1389/06/25</td>
+                                        <td>675,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>کارا دنورز</td>
+                                        <td>دستیار فروش</td>
+                                        <td>تبریز</td>
+                                        <td>46</td>
+                                        <td>1391/12/06</td>
+                                        <td>145,600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>بری الن</td>
+                                        <td>طراح وب</td>
+                                        <td>همدان</td>
+                                        <td>47</td>
+                                        <td>1391/03/21</td>
+                                        <td>356,250</td>
+                                    </tr>
+                                    <tr>
+                                        <td>لورل لنس</td>
+                                        <td>مدیر سیستم</td>
+                                        <td>همدان</td>
+                                        <td>21</td>
+                                        <td>1389/02/27</td>
+                                        <td>103,500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>اولیور کوئین</td>
+                                        <td>توسعه دهنده</td>
+                                        <td>اهواز</td>
+                                        <td>30</td>
+                                        <td>1390/07/14</td>
+                                        <td>86,500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>تامی مرلین</td>
+                                        <td>طراح وب</td>
+                                        <td>تبریز</td>
+                                        <td>51</td>
+                                        <td>1398/11/13</td>
+                                        <td>183,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جان دیگل</td>
+                                        <td>توسعه دهنده جاوا اسکریپت</td>
+                                        <td>مشهد</td>
+                                        <td>29</td>
+                                        <td>1391/06/27</td>
+                                        <td>183,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>روی هارپر</td>
+                                        <td>پشتیبان مشتری</td>
+                                        <td>تبریز</td>
+                                        <td>27</td>
+                                        <td>1391/01/25</td>
+                                        <td>112,000</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>نام</th>
+                                        <th>موقعیت</th>
+                                        <th>دفتر</th>
+                                        <th>سن</th>
+                                        <th>تاریخ شروع</th>
+                                        <th>حقوق</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ Zero configuration table -->
+<!-- Row grouping -->
+<section id="row-grouping">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">گروه بندی سطری</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body card-dashboard">
+                        <p class="card-text">هرچند DataTables گروهبندی سطر ها را در داخل خود ندارد، اما میتوان ظاهر و احساس گروهبندی سطر ها را در آن ایجاد کرد.</p>
+                        <div class="table-responsive">
+                            <table class="table row-grouping">
+                                <thead>
+                                    <tr>
+                                        <th>نام</th>
+                                        <th>موقعیت</th>
+                                        <th>دفتر</th>
+                                        <th>سن</th>
+                                        <th>تاریخ شروع</th>
+                                        <th>حقوق</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td>روی هارپر</td>
+                                        <td>مدیر شرکت</td>
+                                        <td>همدان</td>
+                                        <td>30</td>
+                                        <td>1398/12/19</td>
+                                        <td>90,560</td>
+                                    </tr>
+                                    <tr>
+                                        <td>تونی استارک</td>
+                                        <td>سرپرست پشتیبانی</td>
+                                        <td>تبریز</td>
+                                        <td>22</td>
+                                        <td>1393/03/03</td>
+                                        <td>342,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>گلوریا لیتل</td>
+                                        <td>مدیر سیستم</td>
+                                        <td>تبریز</td>
+                                        <td>59</td>
+                                        <td>1389/04/10</td>
+                                        <td>237,500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>لئوناردو دیکاپریو</td>
+                                        <td>Development Lead</td>
+                                        <td>تبریز</td>
+                                        <td>30</td>
+                                        <td>1391/09/03</td>
+                                        <td>345,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جان دیگل</td>
+                                        <td>دستیار فروش</td>
+                                        <td>ساری</td>
+                                        <td>23</td>
+                                        <td>1390/09/20</td>
+                                        <td>85,600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>روی هارپر</td>
+                                        <td>طراح وب</td>
+                                        <td>مشهد</td>
+                                        <td>28</td>
+                                        <td>1390/11/14</td>
+                                        <td>357,650</td>
+                                    </tr>
+                                    <tr>
+                                        <td>لورل لنس</td>
+                                        <td>Regional Marketing</td>
+                                        <td>تهران</td>
+                                        <td>20</td>
+                                        <td>1391/08/14</td>
+                                        <td>163,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ری پالمر</td>
+                                        <td>متخصص سیستم</td>
+                                        <td>ساری</td>
+                                        <td>37</td>
+                                        <td>1391/06/02</td>
+                                        <td>95,400</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جان کنستانتین</td>
+                                        <td>Technical Author</td>
+                                        <td>همدان</td>
+                                        <td>27</td>
+                                        <td>1391/05/07</td>
+                                        <td>145,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>اسکارلت یوهانسون</td>
+                                        <td>Post-Sales support</td>
+                                        <td>تبریز</td>
+                                        <td>46</td>
+                                        <td>1391/03/09</td>
+                                        <td>324,050</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>نام</th>
+                                        <th>موقعیت</th>
+                                        <th>دفتر</th>
+                                        <th>سن</th>
+                                        <th>تاریخ شروع</th>
+                                        <th>حقوق</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Row grouping -->
+
+<!-- Complex headers table -->
+<section id="headers">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">سرتیتر های پیشرفته</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body card-dashboard">
+                        <p class="card-text">در هنگام استفاده از جدول ها برای نمایش اطلاعات، اغلب آرزو خواهید کرد که اطلاعات ستون را در قالب گروه ها نمایش دهید. DataTables به طور کامل از colspan و rowspan در سرتیتر جدول پشتیبانی می کند.</p>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered complex-headers">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2" class="align-top">نام</th>
+                                        <th colspan="2">اطلاعات شغلی</th>
+                                        <th colspan="3">تماس</th>
+                                    </tr>
+                                    <tr>
+                                        <th>موقعیت</th>
+                                        <th>حقوق</th>
+                                        <th>دفتر</th>
+                                        <th>تعداد فروش</th>
+                                        <th>ایمیل</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>تونی استارک</td>
+                                        <td>طراح سیستم</td>
+                                        <td>320,800</td>
+                                        <td>تبریز</td>
+                                        <td>5421</td>
+                                        <td>t.nixon@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>استیو راجرز</td>
+                                        <td>حسابدار</td>
+                                        <td>170,750</td>
+                                        <td>تهران</td>
+                                        <td>8422</td>
+                                        <td>g.winters@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>اولیور کویین</td>
+                                        <td>تدوینگر تکنیکال</td>
+                                        <td>86,000</td>
+                                        <td>اهواز</td>
+                                        <td>1562</td>
+                                        <td>a.cox@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>بری آلن</td>
+                                        <td>توسعه دهنده جاوا اسکریپت</td>
+                                        <td>433,060</td>
+                                        <td>تبریز</td>
+                                        <td>6224</td>
+                                        <td>c.kelly@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>امیلیا کلارک</td>
+                                        <td>حسابدار</td>
+                                        <td>162,700</td>
+                                        <td>تهران</td>
+                                        <td>5407</td>
+                                        <td>a.satou@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>کریستین رونالدو</td>
+                                        <td>متخصص سیستم</td>
+                                        <td>372,000</td>
+                                        <td>تبریز</td>
+                                        <td>4804</td>
+                                        <td>b.williamson@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>لیونل مسی</td>
+                                        <td>دستیار فروش</td>
+                                        <td>137,500</td>
+                                        <td>اهواز</td>
+                                        <td>9608</td>
+                                        <td>h.chandler@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>بروس وین</td>
+                                        <td>متخصص سیستم</td>
+                                        <td>327,900</td>
+                                        <td>تهران</td>
+                                        <td>6200</td>
+                                        <td>r.davidson@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>سیسکو رامون</td>
+                                        <td>توسعه دهنده جاوا اسکریپت</td>
+                                        <td>205,500</td>
+                                        <td>اهواز</td>
+                                        <td>2360</td>
+                                        <td>c.hurst@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>لورل لنس</td>
+                                        <td>مهندس نرم افزار</td>
+                                        <td>103,600</td>
+                                        <td>تبریز</td>
+                                        <td>1667</td>
+                                        <td>s.frost@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>روی هارپر</td>
+                                        <td>مدیر شرکت</td>
+                                        <td>90,560</td>
+                                        <td>همدان</td>
+                                        <td>3814</td>
+                                        <td>j.gaines@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>تونی استارک</td>
+                                        <td>سرپرست پشتیبانی</td>
+                                        <td>342,000</td>
+                                        <td>تبریز</td>
+                                        <td>9497</td>
+                                        <td>q.flynn@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>استیو راجرز</td>
+                                        <td>طراح وب</td>
+                                        <td>470,600</td>
+                                        <td>اهواز</td>
+                                        <td>6741</td>
+                                        <td>c.marshall@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جسیکا آلبا</td>
+                                        <td>طراح بازاریابی ارشد</td>
+                                        <td>313,500</td>
+                                        <td>همدان</td>
+                                        <td>3597</td>
+                                        <td>h.kennedy@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>امیلیا کلارک</td>
+                                        <td>طراح وب</td>
+                                        <td>385,750</td>
+                                        <td>همدان</td>
+                                        <td>1965</td>
+                                        <td>t.fitzpatrick@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>کریستوفر نولان</td>
+                                        <td>طراح بازاریابی</td>
+                                        <td>198,500</td>
+                                        <td>همدان</td>
+                                        <td>1581</td>
+                                        <td>m.silva@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>فیل کولسن</td>
+                                        <td>Chief Financial Officer (CFO)</td>
+                                        <td>725,000</td>
+                                        <td>تبریز</td>
+                                        <td>3059</td>
+                                        <td>p.byrd@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>گلوریا لیتل</td>
+                                        <td>مدیر سیستم</td>
+                                        <td>237,500</td>
+                                        <td>تبریز</td>
+                                        <td>1721</td>
+                                        <td>g.little@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جیسون استاتهام</td>
+                                        <td>مهندس نرم افزار</td>
+                                        <td>132,000</td>
+                                        <td>همدان</td>
+                                        <td>2558</td>
+                                        <td>b.greer@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>برد پیت</td>
+                                        <td>Personnel Lead</td>
+                                        <td>217,500</td>
+                                        <td>تبریز</td>
+                                        <td>2290</td>
+                                        <td>d.rios@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>لئوناردو دیکاپریو</td>
+                                        <td>Development Lead</td>
+                                        <td>345,000</td>
+                                        <td>تبریز</td>
+                                        <td>1937</td>
+                                        <td>j.caldwell@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>سایمون کاول</td>
+                                        <td>Chief Marketing Officer (CMO)</td>
+                                        <td>675,000</td>
+                                        <td>تبریز</td>
+                                        <td>6154</td>
+                                        <td>y.berry@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Caesar Vance</td>
+                                        <td>Pre-Sales Support</td>
+                                        <td>106,450</td>
+                                        <td>تبریز</td>
+                                        <td>8330</td>
+                                        <td>c.vance@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جان دیگل</td>
+                                        <td>دستیار فروش</td>
+                                        <td>85,600</td>
+                                        <td>ساری</td>
+                                        <td>3023</td>
+                                        <td>d.wilder@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>آنجلینا جولی</td>
+                                        <td>Chief Executive Officer (CEO)</td>
+                                        <td>1,200,000</td>
+                                        <td>همدان</td>
+                                        <td>5797</td>
+                                        <td>a.ramos@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>سلنا گومز</td>
+                                        <td>توسعه دهنده</td>
+                                        <td>92,575</td>
+                                        <td>تبریز</td>
+                                        <td>8822</td>
+                                        <td>g.joyce@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>روی هارپر</td>
+                                        <td>طراح وب</td>
+                                        <td>357,650</td>
+                                        <td>مشهد</td>
+                                        <td>9239</td>
+                                        <td>j.chang@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>زلاتان ابراهیموویچ</td>
+                                        <td>مهندس نرم افزار</td>
+                                        <td>206,850</td>
+                                        <td>اهواز</td>
+                                        <td>1314</td>
+                                        <td>b.wagner@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>روبرتو کارلوس</td>
+                                        <td>Chief Operating Officer (COO)</td>
+                                        <td>850,000</td>
+                                        <td>اهواز</td>
+                                        <td>2947</td>
+                                        <td>f.green@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>لورل لنس</td>
+                                        <td>Regional Marketing</td>
+                                        <td>163,000</td>
+                                        <td>تهران</td>
+                                        <td>8899</td>
+                                        <td>s.itou@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ری پالمر</td>
+                                        <td>متخصص سیستم</td>
+                                        <td>95,400</td>
+                                        <td>ساری</td>
+                                        <td>2769</td>
+                                        <td>m.house@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>زین الدین زیدان</td>
+                                        <td>توسعه دهنده</td>
+                                        <td>114,500</td>
+                                        <td>همدان</td>
+                                        <td>6832</td>
+                                        <td>s.burks@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جان کنستانتین</td>
+                                        <td>Technical Author</td>
+                                        <td>145,000</td>
+                                        <td>همدان</td>
+                                        <td>3606</td>
+                                        <td>p.bartlett@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>سرجیو راموس</td>
+                                        <td>رهبر تیم</td>
+                                        <td>235,500</td>
+                                        <td>اهواز</td>
+                                        <td>2860</td>
+                                        <td>g.cortez@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>اسکارلت یوهانسون</td>
+                                        <td>Post-Sales support</td>
+                                        <td>324,050</td>
+                                        <td>تبریز</td>
+                                        <td>8240</td>
+                                        <td>m.mccray@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ایکر کاسیاس</td>
+                                        <td>طراح بازاریابی</td>
+                                        <td>85,675</td>
+                                        <td>اهواز</td>
+                                        <td>5384</td>
+                                        <td>u.butler@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>لکس لوتر</td>
+                                        <td>مدیر شرکت</td>
+                                        <td>164,500</td>
+                                        <td>اهواز</td>
+                                        <td>7031</td>
+                                        <td>h.hatfield@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>کارا دنورز</td>
+                                        <td>Secretary</td>
+                                        <td>109,850</td>
+                                        <td>اهواز</td>
+                                        <td>6318</td>
+                                        <td>h.fuentes@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>بروس وین</td>
+                                        <td>Financial Controller</td>
+                                        <td>452,500</td>
+                                        <td>اهواز</td>
+                                        <td>9422</td>
+                                        <td>v.harrell@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>کیت کین</td>
+                                        <td>مدیر شرکت</td>
+                                        <td>136,200</td>
+                                        <td>همدان</td>
+                                        <td>7580</td>
+                                        <td>t.mooney@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>کیتلین اسنو</td>
+                                        <td>کارگردان</td>
+                                        <td>645,750</td>
+                                        <td>تبریز</td>
+                                        <td>1042</td>
+                                        <td>j.bradshaw@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>سیسکو رامون</td>
+                                        <td>Support Engineer</td>
+                                        <td>234,500</td>
+                                        <td>مشهد</td>
+                                        <td>2120</td>
+                                        <td>o.liang@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>نش ولز</td>
+                                        <td>مهندس نرم افزار</td>
+                                        <td>163,500</td>
+                                        <td>همدان</td>
+                                        <td>6222</td>
+                                        <td>b.nash@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>دمی لواتو</td>
+                                        <td>Support Engineer</td>
+                                        <td>139,575</td>
+                                        <td>تهران</td>
+                                        <td>9383</td>
+                                        <td>s.yamamoto@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>تور والتون</td>
+                                        <td>توسعه دهنده</td>
+                                        <td>98,540</td>
+                                        <td>تبریز</td>
+                                        <td>8327</td>
+                                        <td>t.walton@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>استیو جابز</td>
+                                        <td>Support Engineer</td>
+                                        <td>87,500</td>
+                                        <td>اهواز</td>
+                                        <td>2927</td>
+                                        <td>f.camacho@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>بیل گیتس</td>
+                                        <td>Data Coordinator</td>
+                                        <td>138,575</td>
+                                        <td>مشهد</td>
+                                        <td>8352</td>
+                                        <td>s.baldwin@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>مارک زاکربرگ</td>
+                                        <td>مهندس نرم افزار</td>
+                                        <td>125,000</td>
+                                        <td>تبریز</td>
+                                        <td>7439</td>
+                                        <td>z.frank@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ایلان ماسک</td>
+                                        <td>مهندس نرم افزار</td>
+                                        <td>115,000</td>
+                                        <td>اهواز</td>
+                                        <td>4389</td>
+                                        <td>z.serrano@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جف بزوس</td>
+                                        <td>Junior Javascript Developer</td>
+                                        <td>75,650</td>
+                                        <td>تبریز</td>
+                                        <td>3431</td>
+                                        <td>j.acosta@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>کارا دنورز</td>
+                                        <td>دستیار فروش</td>
+                                        <td>145,600</td>
+                                        <td>تبریز</td>
+                                        <td>3990</td>
+                                        <td>c.stevens@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>بری الن</td>
+                                        <td>طراح وب</td>
+                                        <td>356,250</td>
+                                        <td>همدان</td>
+                                        <td>1016</td>
+                                        <td>h.butler@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>لورل لنس</td>
+                                        <td>مدیر سیستم</td>
+                                        <td>103,500</td>
+                                        <td>همدان</td>
+                                        <td>6733</td>
+                                        <td>l.greer@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>اولیور کوئین</td>
+                                        <td>توسعه دهنده</td>
+                                        <td>86,500</td>
+                                        <td>اهواز</td>
+                                        <td>8196</td>
+                                        <td>j.alexander@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>تامی مرلین</td>
+                                        <td>طراح وب</td>
+                                        <td>183,000</td>
+                                        <td>تبریز</td>
+                                        <td>6373</td>
+                                        <td>s.decker@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جان دیگل</td>
+                                        <td>توسعه دهنده جاوا اسکریپت</td>
+                                        <td>183,000</td>
+                                        <td>مشهد</td>
+                                        <td>5384</td>
+                                        <td>m.bruce@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>روی هارپر</td>
+                                        <td>پشتیبان مشتری</td>
+                                        <td>112,000</td>
+                                        <td>تبریز</td>
+                                        <td>4226</td>
+                                        <td>d.snider@datatables.net</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>نام</th>
+                                        <th>موقعیت</th>
+                                        <th>حقوق</th>
+                                        <th>دفتر</th>
+                                        <th>تعداد فروش</th>
+                                        <th>ایمیل</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ Complex headers table -->
+
+<!-- Add rows table -->
+<section id="add-row">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">افزودن سطر ها</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <p class="card-text">سطر های جدید میتوانند به سادگی توسط متد API <code>row.add()</code> به DataTable اضافه شوند. به سادگی فانکشن API را با اطلاعاتی که برای سطر جدید باید استفاده شوند فراخوانی کنید (به صورت آرایه یا object). سطر های چندگانه میتوانند توسط متد <code>rows.add()</code> اضافه شوند (به جمع بودن rows توجه کنید). اطلاعات میتوانند توسط متد های <code>row().data()</code> و <code>row().remove()</code> به روز رسانی شوند.
+                        </p>
+                        <button id="addRow" class="btn btn-primary mb-2 d-flex align-items-center"><i class="bx bx-plus"></i> افزودن سطر جدید</button>
+                        <div class="table-responsive">
+                            <table class="table add-rows">
+                                <thead>
+                                    <tr>
+                                        <th>ستون 1</th>
+                                        <th>ستون 2</th>
+                                        <th>ستون 3</th>
+                                        <th>ستون 4</th>
+                                        <th>ستون 5</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1.1</td>
+                                        <td>1.2</td>
+                                        <td>1.3</td>
+                                        <td>1.4</td>
+                                        <td>1.5</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>ستون 1</th>
+                                        <th>ستون 2</th>
+                                        <th>ستون 3</th>
+                                        <th>ستون 4</th>
+                                        <th>ستون 5</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ Add rows table -->
+
+<!-- Column selectors with Export Options and print table -->
+<section id="column-selectors">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">انتخابگرهای ستون با گزینه های برون بری و چاپ</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body card-dashboard">
+                        <p class="card-text">همه دکمه های برون بری اطلاعات یک گزینه exportOptions دارند که میتواند برای مشخص کردن اینکه چه اطلاعاتی و چگونه باید برون بری شوند استفاده شود. گزینه های داده شده به این پارامتر به صورت مستقیم به متد <code>buttons.exportData()</code> ارسال میشوند تا اطلاعات مورد نیاز دریافت شود.
+                        </p>
+                        <p>
+                            دکمه چاپ یک پنجره جدید در مرورگر کاربر باز خواهد کرد و به صورت خودکار عمل چاپ  را انجام خواهد داد که به کاربر اجازه چاپ جدول را می دهد. پنجره پس از اتمام چاپ و یا لغو چاپ بسته خواهد شد.
+                        </p>
+                        <div class="table-responsive">
+                            <table class="table table-striped dataex-html5-selectors">
+                                <thead>
+                                    <tr>
+                                        <th>نام</th>
+                                        <th>موقعیت</th>
+                                        <th>دفتر</th>
+                                        <th>سن</th>
+                                        <th>تاریخ شروع</th>
+                                        <th>حقوق</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>تونی استارک</td>
+                                        <td>طراح سیستم</td>
+                                        <td>تبریز</td>
+                                        <td>61</td>
+                                        <td>1391/04/25</td>
+                                        <td>320,800</td>
+                                    </tr>
+                                    <tr>
+                                        <td>استیو راجرز</td>
+                                        <td>حسابدار</td>
+                                        <td>تهران</td>
+                                        <td>63</td>
+                                        <td>1391/07/25</td>
+                                        <td>170,750</td>
+                                    </tr>
+                                    <tr>
+                                        <td>اولیور کویین</td>
+                                        <td>تدوینگر تکنیکال</td>
+                                        <td>اهواز</td>
+                                        <td>66</td>
+                                        <td>1389/01/12</td>
+                                        <td>86,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>بری آلن</td>
+                                        <td>توسعه دهنده جاوا اسکریپت</td>
+                                        <td>تبریز</td>
+                                        <td>22</td>
+                                        <td>1392/03/29</td>
+                                        <td>433,060</td>
+                                    </tr>
+                                    <tr>
+                                        <td>امیلیا کلارک</td>
+                                        <td>حسابدار</td>
+                                        <td>تهران</td>
+                                        <td>33</td>
+                                        <td>1398/11/28</td>
+                                        <td>162,700</td>
+                                    </tr>
+                                    <tr>
+                                        <td>کریستین رونالدو</td>
+                                        <td>متخصص سیستم</td>
+                                        <td>تبریز</td>
+                                        <td>61</td>
+                                        <td>1392/12/02</td>
+                                        <td>372,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>لیونل مسی</td>
+                                        <td>دستیار فروش</td>
+                                        <td>اهواز</td>
+                                        <td>59</td>
+                                        <td>1392/08/06</td>
+                                        <td>137,500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>بروس وین</td>
+                                        <td>متخصص سیستم</td>
+                                        <td>تهران</td>
+                                        <td>55</td>
+                                        <td>1390/10/14</td>
+                                        <td>327,900</td>
+                                    </tr>
+                                    <tr>
+                                        <td>سیسکو رامون</td>
+                                        <td>توسعه دهنده جاوا اسکریپت</td>
+                                        <td>اهواز</td>
+                                        <td>39</td>
+                                        <td>1389/09/15</td>
+                                        <td>205,500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>لورل لنس</td>
+                                        <td>مهندس نرم افزار</td>
+                                        <td>تبریز</td>
+                                        <td>23</td>
+                                        <td>1398/12/13</td>
+                                        <td>103,600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>روی هارپر</td>
+                                        <td>مدیر شرکت</td>
+                                        <td>همدان</td>
+                                        <td>30</td>
+                                        <td>1398/12/19</td>
+                                        <td>90,560</td>
+                                    </tr>
+                                    <tr>
+                                        <td>تونی استارک</td>
+                                        <td>سرپرست پشتیبانی</td>
+                                        <td>تبریز</td>
+                                        <td>22</td>
+                                        <td>1393/03/03</td>
+                                        <td>342,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>استیو راجرز</td>
+                                        <td>طراح وب</td>
+                                        <td>اهواز</td>
+                                        <td>36</td>
+                                        <td>1398/10/16</td>
+                                        <td>470,600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جسیکا آلبا</td>
+                                        <td>طراح بازاریابی ارشد</td>
+                                        <td>همدان</td>
+                                        <td>43</td>
+                                        <td>1392/12/18</td>
+                                        <td>313,500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>امیلیا کلارک</td>
+                                        <td>طراح وب</td>
+                                        <td>همدان</td>
+                                        <td>19</td>
+                                        <td>1390/03/17</td>
+                                        <td>385,750</td>
+                                    </tr>
+                                    <tr>
+                                        <td>کریستوفر نولان</td>
+                                        <td>طراح بازاریابی</td>
+                                        <td>همدان</td>
+                                        <td>66</td>
+                                        <td>1392/11/27</td>
+                                        <td>198,500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>فیل کولسن</td>
+                                        <td>Chief Financial Officer (CFO)</td>
+                                        <td>تبریز</td>
+                                        <td>64</td>
+                                        <td>1390/06/09</td>
+                                        <td>725,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>گلوریا لیتل</td>
+                                        <td>مدیر سیستم</td>
+                                        <td>تبریز</td>
+                                        <td>59</td>
+                                        <td>1389/04/10</td>
+                                        <td>237,500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جیسون استاتهام</td>
+                                        <td>مهندس نرم افزار</td>
+                                        <td>همدان</td>
+                                        <td>41</td>
+                                        <td>1392/10/13</td>
+                                        <td>132,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>برد پیت</td>
+                                        <td>Personnel Lead</td>
+                                        <td>تبریز</td>
+                                        <td>35</td>
+                                        <td>1392/09/26</td>
+                                        <td>217,500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>تور والتون</td>
+                                        <td>توسعه دهنده</td>
+                                        <td>تبریز</td>
+                                        <td>61</td>
+                                        <td>1393/08/11</td>
+                                        <td>98,540</td>
+                                    </tr>
+                                    <tr>
+                                        <td>استیو جابز</td>
+                                        <td>Support Engineer</td>
+                                        <td>اهواز</td>
+                                        <td>47</td>
+                                        <td>1389/07/07</td>
+                                        <td>87,500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>بیل گیتس</td>
+                                        <td>Data Coordinator</td>
+                                        <td>مشهد</td>
+                                        <td>64</td>
+                                        <td>1392/04/09</td>
+                                        <td>138,575</td>
+                                    </tr>
+                                    <tr>
+                                        <td>مارک زاکربرگ</td>
+                                        <td>مهندس نرم افزار</td>
+                                        <td>تبریز</td>
+                                        <td>63</td>
+                                        <td>1390/01/04</td>
+                                        <td>125,000</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>تامی مرلین</td>
+                                        <td>طراح وب</td>
+                                        <td>تبریز</td>
+                                        <td>51</td>
+                                        <td>1398/11/13</td>
+                                        <td>183,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جان دیگل</td>
+                                        <td>توسعه دهنده جاوا اسکریپت</td>
+                                        <td>مشهد</td>
+                                        <td>29</td>
+                                        <td>1391/06/27</td>
+                                        <td>183,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>روی هارپر</td>
+                                        <td>پشتیبان مشتری</td>
+                                        <td>تبریز</td>
+                                        <td>27</td>
+                                        <td>1391/01/25</td>
+                                        <td>112,000</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>نام</th>
+                                        <th>موقعیت</th>
+                                        <th>دفتر</th>
+                                        <th>سن</th>
+                                        <th>تاریخ شروع</th>
+                                        <th>حقوق</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Column selectors with Export Options and print table -->
+
+<!-- Scroll - horizontal and vertical table -->
+<section id="horizontal-vertical">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">اسکرول - افقی و عمودی</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body card-dashboard">
+                        <p class="card-text">در این نمونه می توانید مشاهده کنید که DataTables در هر دو جهت افقی و عمودی به صورت همزمان اسکرول می شود. توجه داشته باشید که همچنین صفحه بندی در این نمونه فعال شده است و اسکرول شدن این را حساب می کند.</p>
+                        <div class="table-responsive">
+                            <table class="table nowrap scroll-horizontal-vertical">
+                                <thead>
+                                    <tr>
+                                        <th>نام</th>
+                                        <th>نام خانوادگی</th>
+                                        <th>موقعیت</th>
+                                        <th>دفتر</th>
+                                        <th>سن</th>
+                                        <th>تاریخ شروع</th>
+                                        <th>حقوق</th>
+                                        <th>تعداد فروش</th>
+                                        <th>ایمیل</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>تایگر</td>
+                                        <td>نیکسون</td>
+                                        <td>طراح سیستم</td>
+                                        <td>تبریز</td>
+                                        <td>61</td>
+                                        <td>1391/04/25</td>
+                                        <td>320,800</td>
+                                        <td>5421</td>
+                                        <td>t.nixon@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>گرت</td>
+                                        <td>وینترز</td>
+                                        <td>حسابدار</td>
+                                        <td>تهران</td>
+                                        <td>63</td>
+                                        <td>1391/07/25</td>
+                                        <td>170,750</td>
+                                        <td>8422</td>
+                                        <td>g.winters@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>تونی</td>
+                                        <td>استارک</td>
+                                        <td>تدوینگر تکنیکال</td>
+                                        <td>اهواز</td>
+                                        <td>66</td>
+                                        <td>1389/01/12</td>
+                                        <td>86,000</td>
+                                        <td>1562</td>
+                                        <td>a.cox@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>استیو</td>
+                                        <td>راجرز</td>
+                                        <td>توسعه دهنده جاوا اسکریپت</td>
+                                        <td>تبریز</td>
+                                        <td>22</td>
+                                        <td>1392/03/29</td>
+                                        <td>433,060</td>
+                                        <td>6224</td>
+                                        <td>c.kelly@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>اولیور</td>
+                                        <td>کویین</td>
+                                        <td>حسابدار</td>
+                                        <td>تهران</td>
+                                        <td>33</td>
+                                        <td>1398/11/28</td>
+                                        <td>162,700</td>
+                                        <td>5407</td>
+                                        <td>a.satou@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>بری</td>
+                                        <td>الن</td>
+                                        <td>متخصص سیستم</td>
+                                        <td>تبریز</td>
+                                        <td>61</td>
+                                        <td>1392/12/02</td>
+                                        <td>372,000</td>
+                                        <td>4804</td>
+                                        <td>b.williamson@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ویل</td>
+                                        <td>اسمیت</td>
+                                        <td>دستیار فروش</td>
+                                        <td>اهواز</td>
+                                        <td>59</td>
+                                        <td>1392/08/06</td>
+                                        <td>137,500</td>
+                                        <td>9608</td>
+                                        <td>h.chandler@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جان</td>
+                                        <td>دیگل</td>
+                                        <td>متخصص سیستم</td>
+                                        <td>تهران</td>
+                                        <td>55</td>
+                                        <td>1390/10/14</td>
+                                        <td>327,900</td>
+                                        <td>6200</td>
+                                        <td>r.davidson@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>روی</td>
+                                        <td>هارپر</td>
+                                        <td>توسعه دهنده جاوا اسکریپت</td>
+                                        <td>اهواز</td>
+                                        <td>39</td>
+                                        <td>1389/09/15</td>
+                                        <td>205,500</td>
+                                        <td>2360</td>
+                                        <td>c.hurst@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>سارا</td>
+                                        <td>لنس</td>
+                                        <td>مهندس نرم افزار</td>
+                                        <td>تبریز</td>
+                                        <td>23</td>
+                                        <td>1398/12/13</td>
+                                        <td>103,600</td>
+                                        <td>1667</td>
+                                        <td>s.frost@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>کیتلین</td>
+                                        <td>اسنو</td>
+                                        <td>مدیر شرکت</td>
+                                        <td>همدان</td>
+                                        <td>30</td>
+                                        <td>1398/12/19</td>
+                                        <td>90,560</td>
+                                        <td>3814</td>
+                                        <td>j.gaines@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>سیسکو</td>
+                                        <td>رامون</td>
+                                        <td>سرپرست پشتیبانی</td>
+                                        <td>تبریز</td>
+                                        <td>22</td>
+                                        <td>1393/03/03</td>
+                                        <td>342,000</td>
+                                        <td>9497</td>
+                                        <td>q.flynn@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جو</td>
+                                        <td>وست</td>
+                                        <td>طراح وب</td>
+                                        <td>اهواز</td>
+                                        <td>36</td>
+                                        <td>1398/10/16</td>
+                                        <td>470,600</td>
+                                        <td>6741</td>
+                                        <td>c.marshall@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>بروس</td>
+                                        <td>وین</td>
+                                        <td>طراح بازاریابی ارشد</td>
+                                        <td>همدان</td>
+                                        <td>43</td>
+                                        <td>1392/12/18</td>
+                                        <td>313,500</td>
+                                        <td>3597</td>
+                                        <td>h.kennedy@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>تانیا</td>
+                                        <td>جانسون</td>
+                                        <td>طراح وب</td>
+                                        <td>همدان</td>
+                                        <td>19</td>
+                                        <td>1390/03/17</td>
+                                        <td>385,750</td>
+                                        <td>1965</td>
+                                        <td>t.fitzpatrick@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>محسن</td>
+                                        <td>یگانه</td>
+                                        <td>طراح بازاریابی</td>
+                                        <td>همدان</td>
+                                        <td>66</td>
+                                        <td>1392/11/27</td>
+                                        <td>198,500</td>
+                                        <td>1581</td>
+                                        <td>m.silva@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جرارد</td>
+                                        <td>پیکه</td>
+                                        <td>Chief Financial Officer (CFO)</td>
+                                        <td>تبریز</td>
+                                        <td>64</td>
+                                        <td>1390/06/09</td>
+                                        <td>725,000</td>
+                                        <td>3059</td>
+                                        <td>p.byrd@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>گلوریا</td>
+                                        <td>لیتل</td>
+                                        <td>مدیر سیستم</td>
+                                        <td>تبریز</td>
+                                        <td>59</td>
+                                        <td>1389/04/10</td>
+                                        <td>237,500</td>
+                                        <td>1721</td>
+                                        <td>g.little@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>بردلی</td>
+                                        <td>کینگ</td>
+                                        <td>مهندس نرم افزار</td>
+                                        <td>همدان</td>
+                                        <td>41</td>
+                                        <td>1392/10/13</td>
+                                        <td>132,000</td>
+                                        <td>2558</td>
+                                        <td>b.greer@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>دانا</td>
+                                        <td>راموس</td>
+                                        <td>Personnel Lead</td>
+                                        <td>تبریز</td>
+                                        <td>35</td>
+                                        <td>1392/09/26</td>
+                                        <td>217,500</td>
+                                        <td>2290</td>
+                                        <td>d.rios@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>پیتر</td>
+                                        <td>پارکر</td>
+                                        <td>Development Lead</td>
+                                        <td>تبریز</td>
+                                        <td>30</td>
+                                        <td>1391/09/03</td>
+                                        <td>345,000</td>
+                                        <td>1937</td>
+                                        <td>j.caldwell@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>یوری</td>
+                                        <td>بری</td>
+                                        <td>Chief Marketing Officer (CMO)</td>
+                                        <td>تبریز</td>
+                                        <td>40</td>
+                                        <td>1389/06/25</td>
+                                        <td>675,000</td>
+                                        <td>6154</td>
+                                        <td>y.berry@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>سزار</td>
+                                        <td>ونس</td>
+                                        <td>Pre-Sales Support</td>
+                                        <td>تبریز</td>
+                                        <td>21</td>
+                                        <td>1391/12/12</td>
+                                        <td>106,450</td>
+                                        <td>8330</td>
+                                        <td>c.vance@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>دوریس</td>
+                                        <td>ویلدر</td>
+                                        <td>دستیار فروش</td>
+                                        <td>ساری</td>
+                                        <td>23</td>
+                                        <td>1390/09/20</td>
+                                        <td>85,600</td>
+                                        <td>3023</td>
+                                        <td>d.wilder@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>آنجلیکا</td>
+                                        <td>راموس</td>
+                                        <td>Chief Executive Officer (CEO)</td>
+                                        <td>همدان</td>
+                                        <td>47</td>
+                                        <td>1389/10/09</td>
+                                        <td>1,200,000</td>
+                                        <td>5797</td>
+                                        <td>a.ramos@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>روی</td>
+                                        <td>هارپر</td>
+                                        <td>توسعه دهنده</td>
+                                        <td>تبریز</td>
+                                        <td>42</td>
+                                        <td>1390/12/22</td>
+                                        <td>92,575</td>
+                                        <td>8822</td>
+                                        <td>g.joyce@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جنیفر</td>
+                                        <td>لانس</td>
+                                        <td>طراح وب</td>
+                                        <td>مشهد</td>
+                                        <td>28</td>
+                                        <td>1390/11/14</td>
+                                        <td>357,650</td>
+                                        <td>9239</td>
+                                        <td>j.chang@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>مارتا</td>
+                                        <td>مکوری</td>
+                                        <td>Post-Sales support</td>
+                                        <td>تبریز</td>
+                                        <td>46</td>
+                                        <td>1391/03/09</td>
+                                        <td>324,050</td>
+                                        <td>8240</td>
+                                        <td>m.mccray@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>یونیتی</td>
+                                        <td>بالتر</td>
+                                        <td>طراح بازاریابی</td>
+                                        <td>اهواز</td>
+                                        <td>47</td>
+                                        <td>1389/12/09</td>
+                                        <td>85,675</td>
+                                        <td>5384</td>
+                                        <td>u.butler@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>هاوارد</td>
+                                        <td>هت فیلد</td>
+                                        <td>مدیر شرکت</td>
+                                        <td>اهواز</td>
+                                        <td>51</td>
+                                        <td>1398/12/16</td>
+                                        <td>164,500</td>
+                                        <td>7031</td>
+                                        <td>h.hatfield@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>هاوی</td>
+                                        <td>مندل</td>
+                                        <td>Secretary</td>
+                                        <td>اهواز</td>
+                                        <td>41</td>
+                                        <td>1390/02/12</td>
+                                        <td>109,850</td>
+                                        <td>6318</td>
+                                        <td>h.fuentes@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ویوین</td>
+                                        <td>هارلی</td>
+                                        <td>Financial Controller</td>
+                                        <td>اهواز</td>
+                                        <td>62</td>
+                                        <td>1389/02/14</td>
+                                        <td>452,500</td>
+                                        <td>9422</td>
+                                        <td>v.harrell@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>تیموتی</td>
+                                        <td>مونی</td>
+                                        <td>مدیر شرکت</td>
+                                        <td>همدان</td>
+                                        <td>37</td>
+                                        <td>1398/12/11</td>
+                                        <td>136,200</td>
+                                        <td>7580</td>
+                                        <td>t.mooney@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جکسون</td>
+                                        <td>بردشاور</td>
+                                        <td>کارگردان</td>
+                                        <td>تبریز</td>
+                                        <td>65</td>
+                                        <td>1398/09/26</td>
+                                        <td>645,750</td>
+                                        <td>1042</td>
+                                        <td>j.bradshaw@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>اولیویا</td>
+                                        <td>لیانگ</td>
+                                        <td>Support Engineer</td>
+                                        <td>مشهد</td>
+                                        <td>64</td>
+                                        <td>1391/02/03</td>
+                                        <td>234,500</td>
+                                        <td>2120</td>
+                                        <td>o.liang@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>برونو</td>
+                                        <td>نش</td>
+                                        <td>مهندس نرم افزار</td>
+                                        <td>همدان</td>
+                                        <td>38</td>
+                                        <td>1391/05/03</td>
+                                        <td>163,500</td>
+                                        <td>6222</td>
+                                        <td>b.nash@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ساکورا</td>
+                                        <td>یاماها</td>
+                                        <td>Support Engineer</td>
+                                        <td>تهران</td>
+                                        <td>37</td>
+                                        <td>1389/08/19</td>
+                                        <td>139,575</td>
+                                        <td>9383</td>
+                                        <td>s.yamamoto@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>تور</td>
+                                        <td>والتون</td>
+                                        <td>توسعه دهنده</td>
+                                        <td>تبریز</td>
+                                        <td>61</td>
+                                        <td>1393/08/11</td>
+                                        <td>98,540</td>
+                                        <td>8327</td>
+                                        <td>t.walton@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>فلین</td>
+                                        <td>کامرون</td>
+                                        <td>Support Engineer</td>
+                                        <td>اهواز</td>
+                                        <td>47</td>
+                                        <td>1389/07/07</td>
+                                        <td>87,500</td>
+                                        <td>2927</td>
+                                        <td>f.camacho@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>سرجیو</td>
+                                        <td>راموس</td>
+                                        <td>Data Coordinator</td>
+                                        <td>مشهد</td>
+                                        <td>64</td>
+                                        <td>1392/04/09</td>
+                                        <td>138,575</td>
+                                        <td>8352</td>
+                                        <td>s.baldwin@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>زین الدین</td>
+                                        <td>زیدان</td>
+                                        <td>مهندس نرم افزار</td>
+                                        <td>تبریز</td>
+                                        <td>63</td>
+                                        <td>1390/01/04</td>
+                                        <td>125,000</td>
+                                        <td>7439</td>
+                                        <td>z.frank@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>زوریتا</td>
+                                        <td>سرانو</td>
+                                        <td>مهندس نرم افزار</td>
+                                        <td>اهواز</td>
+                                        <td>56</td>
+                                        <td>1392/06/01</td>
+                                        <td>115,000</td>
+                                        <td>4389</td>
+                                        <td>z.serrano@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جنیفر</td>
+                                        <td>آگوست</td>
+                                        <td>Junior Javascript Developer</td>
+                                        <td>تبریز</td>
+                                        <td>43</td>
+                                        <td>1393/02/01</td>
+                                        <td>75,650</td>
+                                        <td>3431</td>
+                                        <td>j.acosta@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>کارا</td>
+                                        <td>استیون</td>
+                                        <td>دستیار فروش</td>
+                                        <td>تبریز</td>
+                                        <td>46</td>
+                                        <td>1391/12/06</td>
+                                        <td>145,600</td>
+                                        <td>3990</td>
+                                        <td>c.stevens@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>هارمونی</td>
+                                        <td>بالتر</td>
+                                        <td>طراح وب</td>
+                                        <td>همدان</td>
+                                        <td>47</td>
+                                        <td>1391/03/21</td>
+                                        <td>356,250</td>
+                                        <td>1016</td>
+                                        <td>h.butler@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>لارا</td>
+                                        <td>کینگ</td>
+                                        <td>مدیر سیستم</td>
+                                        <td>همدان</td>
+                                        <td>21</td>
+                                        <td>1389/02/27</td>
+                                        <td>103,500</td>
+                                        <td>6733</td>
+                                        <td>l.greer@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جوناس</td>
+                                        <td>الکساندر</td>
+                                        <td>توسعه دهنده</td>
+                                        <td>اهواز</td>
+                                        <td>30</td>
+                                        <td>1390/07/14</td>
+                                        <td>86,500</td>
+                                        <td>8196</td>
+                                        <td>j.alexander@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جیسون</td>
+                                        <td>تاد</td>
+                                        <td>طراح وب</td>
+                                        <td>تبریز</td>
+                                        <td>51</td>
+                                        <td>1398/11/13</td>
+                                        <td>183,000</td>
+                                        <td>6373</td>
+                                        <td>s.decker@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>محسن</td>
+                                        <td>راجرز</td>
+                                        <td>توسعه دهنده جاوا اسکریپت</td>
+                                        <td>مشهد</td>
+                                        <td>29</td>
+                                        <td>1391/06/27</td>
+                                        <td>183,000</td>
+                                        <td>5384</td>
+                                        <td>m.bruce@datatables.net</td>
+                                    </tr>
+                                    <tr>
+                                        <td>دارا</td>
+                                        <td>اشنایدر</td>
+                                        <td>پشتیبان مشتری</td>
+                                        <td>تبریز</td>
+                                        <td>27</td>
+                                        <td>1391/01/25</td>
+                                        <td>112,000</td>
+                                        <td>4226</td>
+                                        <td>d.snider@datatables.net</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ Scroll - horizontal and vertical table -->
+        </div>
+      </div>
+    </div>
+    <!-- END: Content-->
+
+
+    <!-- BEGIN: Customizer-->
+    <div class="customizer d-none d-md-block"><a class="customizer-close" href="#"><i class="bx bx-x"></i></a><a class="customizer-toggle" href="#"><i class="bx bx-cog bx bx-spin white"></i></a><div class="customizer-content p-2">
+  <h4 class="text-uppercase mb-0 mt-n50">سفارشی سازی قالب</h4>
+  <small>سفارشی سازی کنید و به صورت زنده مشاهده کنید.</small>
+  <hr>
+  <!-- Theme options starts -->
+  <h5 class="mt-n25">طرح قالب</h5>
+  <div class="theme-layouts">
+    <div class="d-flex justify-content-start">
+      <div class="mx-50">
+        <fieldset>
+          <div class="radio">
+            <input type="radio" name="layoutOptions" value="false" id="radio-light" class="layout-name" data-layout="" checked>
+            <label for="radio-light">روشن</label>
+          </div>
+        </fieldset>
+      </div>
+      <div class="mx-50">
+        <fieldset>
+          <div class="radio">
+            <input type="radio" name="layoutOptions" value="false" id="radio-dark" class="layout-name" data-layout="dark-layout">
+            <label for="radio-dark">تیره</label>
+          </div>
+        </fieldset>
+      </div>
+      <div class="mx-50">
+        <fieldset>
+          <div class="radio">
+            <input type="radio" name="layoutOptions" value="false" id="radio-semi-dark" class="layout-name" data-layout="semi-dark-layout">
+            <label for="radio-semi-dark">نیمه تیره</label>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+  <!-- Theme options starts -->
+  <hr>
+
+  <!-- Menu Colors Starts -->
+  <div id="customizer-theme-colors">
+    <h5>رنگ های فهرست</h5>
+    <ul class="list-inline unstyled-list">
+      <li class="color-box bg-primary selected" data-color="theme-primary"> </li>
+      <li class="color-box bg-success" data-color="theme-success"> </li>
+      <li class="color-box bg-danger" data-color="theme-danger"> </li>
+      <li class="color-box bg-info" data-color="theme-info"> </li>
+      <li class="color-box bg-warning" data-color="theme-warning"> </li>
+      <li class="color-box bg-dark" data-color="theme-dark"> </li>
+    </ul>
+    <hr>
+  </div>
+  <!-- Menu Colors Ends -->
+  <!-- Menu Icon Animation Starts -->
+  <div id="menu-icon-animation">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="icon-animation-title">
+        <h5 class="pt-25">انیمیشن آیکن ها</h5>
+      </div>
+      <div class="icon-animation-switch">
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" checked id="icon-animation-switch">
+          <label class="custom-control-label" for="icon-animation-switch"></label>
+        </div>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <!-- Menu Icon Animation Ends -->
+  <!-- Collapse sidebar switch starts -->
+  <div class="collapse-sidebar d-flex justify-content-between align-items-center">
+    <div class="collapse-option-title">
+      <h5 class="pt-25">جمع کردن فهرست</h5>
+    </div>
+    <div class="collapse-option-switch">
+      <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" id="collapse-sidebar-switch">
+        <label class="custom-control-label" for="collapse-sidebar-switch"></label>
+      </div>
+    </div>
+  </div>
+  <!-- Collapse sidebar switch Ends -->
+  <hr>
+
+  <!-- Navbar colors starts -->
+  <div id="customizer-navbar-colors">
+    <h5>رنگ های نوار بالایی</h5>
+    <ul class="list-inline unstyled-list">
+      <li class="color-box bg-white border selected" data-navbar-default=""> </li>
+      <li class="color-box bg-primary" data-navbar-color="bg-primary"> </li>
+      <li class="color-box bg-success" data-navbar-color="bg-success"> </li>
+      <li class="color-box bg-danger" data-navbar-color="bg-danger"> </li>
+      <li class="color-box bg-info" data-navbar-color="bg-info"> </li>
+      <li class="color-box bg-warning" data-navbar-color="bg-warning"> </li>
+      <li class="color-box bg-dark" data-navbar-color="bg-dark"> </li>
+    </ul>
+    <small><strong>نکته :</strong> این گزینه تنها در حالت نوار ثابت و در هنگام اسکرول صفحه نمایش داده خواهد شد.</small>
+    <hr>
+  </div>
+  <!-- Navbar colors starts -->
+  <!-- Navbar Type Starts -->
+  <h5 class="mt-n25">نوع نوار بالایی</h5>
+  <div class="navbar-type d-flex justify-content-start">
+    <div class="hidden-ele mx-50">
+      <fieldset>
+        <div class="radio">
+          <input type="radio" name="navbarType" value="false" id="navbar-hidden">
+          <label for="navbar-hidden">مخفی</label>
+        </div>
+      </fieldset>
+    </div>
+    <div class="mx-50">
+      <fieldset>
+        <div class="radio">
+          <input type="radio" name="navbarType" value="false" id="navbar-static">
+          <label for="navbar-static">ایستا</label>
+        </div>
+      </fieldset>
+    </div>
+    <div class="mx-50">
+      <fieldset>
+        <div class="radio">
+          <input type="radio" name="navbarType" value="false" id="navbar-sticky" checked>
+          <label for="navbar-sticky">ثابت</label>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <hr>
+  <!-- Navbar Type Starts -->
+
+  <!-- Footer Type Starts -->
+  <h5 class="mt-n25">نوع فوتر</h5>
+  <div class="footer-type d-flex justify-content-start">
+    <div class="mx-50">
+      <fieldset>
+        <div class="radio">
+          <input type="radio" name="footerType" value="false" id="footer-hidden">
+          <label for="footer-hidden">مخفی</label>
+        </div>
+      </fieldset>
+    </div>
+    <div class="mx-50">
+      <fieldset>
+        <div class="radio">
+          <input type="radio" name="footerType" value="false" id="footer-static" checked>
+          <label for="footer-static">ایستا</label>
+        </div>
+      </fieldset>
+    </div>
+    <div class="mx-50">
+      <fieldset>
+        <div class="radio">
+          <input type="radio" name="footerType" value="false" id="footer-sticky">
+          <label for="footer-sticky" class="">چسبان</label>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <!-- Footer Type Ends -->
+  <hr>
+
+  <!-- Card Shadow Starts-->
+  <div class="card-shadow d-flex justify-content-between align-items-center py-25">
+    <div class="hide-scroll-title">
+      <h5 class="pt-25">سایه کارت</h5>
+    </div>
+    <div class="card-shadow-switch">
+      <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" checked id="card-shadow-switch">
+        <label class="custom-control-label" for="card-shadow-switch"></label>
+      </div>
+    </div>
+  </div>
+  <!-- Card Shadow Ends-->
+  <hr>
+
+  <!-- Hide Scroll To Top Starts-->
+  <div class="hide-scroll-to-top d-flex justify-content-between align-items-center py-25">
+    <div class="hide-scroll-title">
+      <h5 class="pt-25">مخفی سازی دکمه اسکرول به بالا</h5>
+    </div>
+    <div class="hide-scroll-top-switch">
+      <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" id="hide-scroll-top-switch">
+        <label class="custom-control-label" for="hide-scroll-top-switch"></label>
+      </div>
+    </div>
+  </div>
+  <!-- Hide Scroll To Top Ends-->
+</div>
+    </div>
+    <!-- End: Customizer-->
+
+    <!-- Buynow Button-->
+    <div class="buy-now"><a href="#" target="_blank" class="btn btn-danger">ارتباط با ما</a>
+
+    </div>
+    <!-- demo chat-->
+    <div class="widget-chat-demo"><!-- widget chat demo footer button start -->
+<button class="btn btn-primary chat-demo-button glow px-1"><i class="livicon-evo" data-options="name: comments.svg; style: lines; size: 24px; strokeColor: #fff; autoPlay: true; repeat: loop;"></i></button>
+<!-- widget chat demo footer button ends -->
+<!-- widget chat demo start -->
+<div class="widget-chat widget-chat-demo d-none">
+  <div class="card mb-0">
+    <div class="card-header border-bottom p-0">
+      <div class="media m-75">
+        <a href="JavaScript:void(0);">
+          <div class="avatar mr-75">
+            <img src="../../assets/images/portrait/small/avatar-s-2.jpg" alt="avtar images" width="32" height="32">
+            <span class="avatar-status-online"></span>
+          </div>
+        </a>
+        <div class="media-body">
+          <h6 class="media-heading mb-0 mt-n25"><a href="javaScript:void(0);">جان اسنو</a></h6>
+          <span class="text-muted font-small-3">فعال</span>
+        </div>
+        <i class="bx bx-x widget-chat-close float-right my-auto cursor-pointer"></i>
+      </div>
+    </div>
+    <div class="card-body widget-chat-container widget-chat-demo-scroll">
+      <div class="chat-content">
+        <div class="badge badge-pill badge-light-secondary my-1">امروز</div>
+        <div class="chat">
+          <div class="chat-body">
+            <div class="chat-message">
+              <p>How can we help? 😄</p>
+              <span class="chat-time">7:45 ق.ظ</span>
+            </div>
+          </div>
+        </div>
+        <div class="chat chat-left">
+          <div class="chat-body">
+            <div class="chat-message">
+              <p>Hey John, I am looking for the best admin template.</p>
+              <p>Could you please help me to find it out? 🤔</p>
+              <span class="chat-time">7:50 ق.ظ</span>
+            </div>
+          </div>
+        </div>
+        <div class="chat">
+          <div class="chat-body">
+            <div class="chat-message">
+              <p>Stack admin is the responsive bootstrap 4 admin template.</p>
+              <span class="chat-time">8:01 ق.ظ</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer border-top p-1">
+      <form class="d-flex" onsubmit="widgetChatMessageDemo();" action="javascript:void(0);">
+        <input type="text" class="form-control chat-message-demo mr-75" placeholder="اینجا بنویسید ...">
+        <button type="submit" class="btn btn-primary glow px-1"><i class="bx bx-paper-plane"></i></button>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- widget chat demo ends -->
+
+    </div>
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    <!-- BEGIN: Footer-->
+    <footer class="footer footer-static footer-light">
+      <p class="clearfix mb-0"><span class="float-left d-inline-block">ارائه شده در وب‌سایت <a href="https://www.rtl-theme.com" target="_blank">راست‌چین</a></span><span class="float-right d-sm-inline-block d-none">ساخته شده با<i class="bx bxs-heart pink ml-50 font-small-3"></i></span>
+        <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>
+      </p>
+    </footer>
+    <!-- END: Footer-->
+
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="../../assets/vendors/js/vendors.min.js"></script>
+    <script src="../../assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.min.js"></script>
+    <script src="../../assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
+    <script src="../../assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="../../assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="../../assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="../../assets/vendors/js/tables/datatable/dataTables.buttons.min.js"></script>
+    <script src="../../assets/vendors/js/tables/datatable/buttons.html5.min.js"></script>
+    <script src="../../assets/vendors/js/tables/datatable/buttons.print.min.js"></script>
+    <script src="../../assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
+    <script src="../../assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
+    <script src="../../assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="../../assets/js/scripts/configs/vertical-menu-dark.js"></script>
+    <script src="../../assets/js/core/app-menu.js"></script>
+    <script src="../../assets/js/core/app.js"></script>
+    <script src="../../assets/js/scripts/components.js"></script>
+    <script src="../../assets/js/scripts/footer.js"></script>
+    <script src="../../assets/js/scripts/customizer.js"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="../../assets/js/scripts/datatables/datatable.js"></script>
+    <!-- END: Page JS-->
+
+  </body>
+  <!-- END: Body-->
+</html>

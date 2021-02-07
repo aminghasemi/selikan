@@ -1,18 +1,51 @@
-{% extends 'company/base.html' %}
+{% extends 'registration/base.html' %}
 {% load crispy_forms_tags %}
-{% block title %}
-ایجاد مشتری جدید
-{% endblock %}
-
-
 {% block main %}
-      <form method="post" enctype="multipart/form-data"> {% csrf_token %}
-        <div class="row">
-          <div class="col-12">
-            {{form|crispy}}
+
+<!-- // Basic multiple Column Form section start -->
+<section id="multiple-column-form">
+  <div class="row match-height">
+    <div class="col-md-6 col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">تمدید اعتبار حساب کاربری شرکت {{company.name}}</h4>
+        </div>
+        <div class="card-content">
+          <div class="card-body">
+            <p>لطفا تعداد ماه و تعداد کاربر را برای تمدید انتخاب نمایید.</p>
+            <form method="post" enctype="multipart/form-data" class="form">{% csrf_token %}
+              <div class="form-body">
+                <div class="row">
+                  <div class="col-md-6 col-12">
+                    <div class="form-label-group">
+                      {{form|crispy}}
+                    </div>
+                  </div>
+                  <div class="col-12 d-flex justify-content-end">
+                    <button class="btn btn-primary mr-1 mb-1">ثبت</button>
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
+      </div>
+    </div>
 
-            <button class="btn btn-success">ذخیره</button>
-          </form>
+
+    <div class="col-md-6 col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">هزینه تمدید اشتراک کاربری</h4>
+        </div>
+        <div class="card-content">
+          <div class="card-body">
+            <p>در حال حاضر هزینه تمدید اشتراک به ازای هر کاربر مبلغ ۱۰۰ هزار تومان در ماه می‌باشد.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- // Basic multiple Column Form section end -->
 {% endblock %}

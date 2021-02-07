@@ -1,7 +1,15 @@
 from .models import Enrolled
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import User
+from .models import User, Company
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Submit, Row, Column
+
+
+class CompanyForm(forms.ModelForm):
+    class Meta:
+        model = Company
+        fields=("name","slug","country","national_id", "economic_id", "email","phone","office_phone", "fax", "industry","billing_address_line","billing_street","billing_city", "billing_state", "billing_postcode", "website", "description", "is_active")
 
 
 class EnrollForm(forms.ModelForm):

@@ -1,5 +1,8 @@
 {% extends 'company/base.html' %}
 {% load crispy_forms_tags %}
+{% load crispy_forms_field %}
+{% load widget_tweaks %}
+{% load jalali_tags %}
 {% block title %}
 ایجاد مشتری جدید
 {% endblock %}
@@ -24,7 +27,7 @@
               {{ form.priority|as_crispy_field }}
             </div>
             <div class="col-3">
-              {{ form.due_date|as_crispy_field }}
+               {{form.due_date}}
             </div>
             <div class="col-3">
               {{ form.account|as_crispy_field }}

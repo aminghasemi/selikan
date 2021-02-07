@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from common.decorators import company_enrolled
 from .models import Account
 from common.mixins import EnrollMixin, SuperUserAccessMixin, CreatorAccessMixin
+from .forms import AccountForm
 # Create your views here.
 
 class AccountsList(EnrollMixin, LoginRequiredMixin,ListView):
@@ -25,9 +26,7 @@ class AccountsList(EnrollMixin, LoginRequiredMixin,ListView):
 
 class AccountCreate(LoginRequiredMixin, CreateView):
     model=Account
-    fields=["name", "industry", "email","phone", "billing_address_line", "billing_street", "billing_city", "billing_state",
-    "billing_postcode", "billing_country","website", "description", "is_active","status", "lead","contact_name","contacts",
-     "assigned_to","teams"]
+    form_class = AccountForm
     template_name="company/account-create-update.html"
     def get_queryset(self):
         global company
@@ -52,9 +51,7 @@ class AccountCreate(LoginRequiredMixin, CreateView):
 
 class AccountUpdate(LoginRequiredMixin, UpdateView):
     model=Account
-    fields=["name", "industry", "email","phone", "billing_address_line", "billing_street", "billing_city", "billing_state",
-    "billing_postcode", "billing_country","website", "description", "is_active","status", "lead","contact_name","contacts",
-     "assigned_to","teams"]
+    form_class = AccountForm
     template_name = "company/account-create-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')

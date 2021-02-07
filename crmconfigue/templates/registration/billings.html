@@ -1,8 +1,5 @@
 {% extends 'registration/base.html' %}
 
-{% block title %}داشبورد اصلی{% endblock %}
-
-
 {% block main %}
         <div class="row">
           <div class="col-12">
@@ -23,7 +20,7 @@
                   <tbody>
                     {% for billings in object_list %}
                       <tr>
-                        <td><a href="#">{{billings.invoice_number}}</a></td>
+                        <td>{{billings.invoice_number}}</td>
                         <td>{{billings.staff.jinvoice_date}}</td>
                         <td>{% if billings.status == 'PAID'%}
                           <span class="badge badge-success">پرداخت شده</span>
@@ -34,10 +31,8 @@
                         {% endif %} </td>
                         <td>{{billings.amount}}</td>
                         <td>
-                            {% if user.is_superuser %}
                             <a class="badge" href="{% url 'payment:billing-detail' company.slug billings.pk %}">مشاهده</a>
 
-                            {% endif %}
                         </td>
                       </tr>
                     {% endfor %}

@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from common.decorators import company_enrolled
 from .models import Contact
 from common.mixins import EnrollMixin, SuperUserAccessMixin, CreatorAccessMixin
+from .forms import ContactForm
 # Create your views here.
 
 class ContactsList(EnrollMixin, LoginRequiredMixin,ListView):
@@ -26,7 +27,7 @@ class ContactsList(EnrollMixin, LoginRequiredMixin,ListView):
 
 class ContactCreate(LoginRequiredMixin, CreateView):
     model=Contact
-    fields=["first_name", "last_name", "email","phone","office_phone", "address", "description", "assigned_to", "is_active"]
+    form_class=ContactForm
     template_name="company/contact-create-update.html"
     def get_queryset(self):
         global company
@@ -51,7 +52,7 @@ class ContactCreate(LoginRequiredMixin, CreateView):
 
 class ContactUpdate(LoginRequiredMixin, UpdateView):
     model=Contact
-    fields=["first_name", "last_name", "email","phone", "address", "description", "assigned_to", "is_active"]
+    form_class=ContactForm
     template_name = "company/contact-create-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')

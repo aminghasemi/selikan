@@ -6,9 +6,7 @@ from django.urls import reverse
 from cuser.middleware import CuserMiddleware
 from .managers import  EnrolledManager
 from datetime import timedelta
-
-
-from common.utils import COUNTRIES, ROLES
+from common.utils import COUNTRIES, ROLES, INDCHOICES, PROVINCE
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 
 
@@ -92,15 +90,30 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Company(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True,verbose_name="نام شرکت")
-    address = models.CharField(max_length=2000, blank=True, null=True,verbose_name="آدرس")
     slug=models.SlugField(max_length=100,unique=True, verbose_name ="لینک شرکت")
-    sub_domain = models.CharField(max_length=30,verbose_name="آدرس دامنه")
-    user_limit = models.IntegerField(default=5,verbose_name="محدودیت کاربر")
-    country = models.CharField(max_length=3, choices=COUNTRIES, blank=True, null=True,verbose_name="کشور")
+    sub_domain = models.CharField(max_length=30,null=True, blank=True, verbose_name="آدرس زیر دامنه")
+    user_limit = models.IntegerField(default=1,verbose_name="محدودیت کاربر")
+    country = models.CharField(max_length=3, default="IR", choices=COUNTRIES, blank=True, null=True,verbose_name="کشور")
     creator = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='crm_creator', verbose_name="ایجادکننده شرکت")
     created_time=models.DateTimeField(auto_now_add=True, verbose_name ="تاریخ ایجاد")
     staff=models.ManyToManyField(User, through='Enrolled', related_name='companystaff')
-    access_date=models.DateTimeField(default=timezone.now()+timedelta(days=15), verbose_name='تاریخ اعتبار حساب')
+    access_date=models.DateTimeField(auto_now_add=False, verbose_name='تاریخ اعتبار حساب')
+    national_id = models.CharField(max_length=64,blank=True, verbose_name="کد‌/شناسه ملی")
+    economic_id=models.CharField(max_length=64,blank=True, verbose_name="کد اقتصادی")
+    email = models.EmailField(blank=True, verbose_name="ایمیل")
+    phone = models.CharField(max_length=20, null=True, verbose_name="شماره تماس موبایل")
+    office_phone = models.CharField(max_length=20,blank=True, verbose_name="شماره تماس ثابت")
+    fax = models.CharField(max_length=20,blank=True, verbose_name="شماره فکس ")
+    industry = models.CharField(max_length=255, choices=INDCHOICES, blank=True, verbose_name="صنعت")
+    billing_address_line = models.CharField(max_length=255, blank=True, verbose_name="آدرس")
+    billing_street = models.CharField(max_length=55, blank=True, verbose_name="خیابان")
+    billing_city = models.CharField( max_length=255, blank=True, verbose_name="شهر")
+    billing_state = models.CharField(choices=PROVINCE, max_length=255, blank=True, verbose_name="استان")
+    billing_postcode = models.CharField(max_length=10, blank=True, verbose_name="کد پستی")
+    website = models.URLField(blank=True, verbose_name="وب‌سایت")
+    description = models.TextField(blank=True, verbose_name="توضیحات")
+    is_active = models.BooleanField(default=True, verbose_name="فعال")
+
     class Meta:
         verbose_name = "شرکت"
         verbose_name_plural = "شرکت‌ها"

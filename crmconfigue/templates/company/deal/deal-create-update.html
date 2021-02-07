@@ -1,0 +1,54 @@
+{% extends 'company/base.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_field %}
+{% load widget_tweaks %}
+{% load jalali_tags %}
+{% block title %}
+ایجاد مشتری جدید
+{% endblock %}
+
+
+{% block main %}
+<div class="col-md-12">
+  <div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title mb-0 float-left">اضافه کردن معامله جدید</h3>
+    </div>
+      <div class="card-body">
+        <form method="post" enctype="multipart/form-data"> {% csrf_token %}
+          <div class="row">
+            <div class="col-3">
+              {{ form.title|as_crispy_field }}
+            </div>
+            <div class="col-3">
+              {{ form.pipeline_status|as_crispy_field }}
+            </div>
+            <div class="col-3">
+              {{ form.deal_amount|as_crispy_field }}
+            </div>
+            <div class="col-3">
+               {{form.account|as_crispy_field}}
+            </div>
+            <div class="col-3">
+              {{ form.assigned_to|as_crispy_field }}
+            </div>
+            <div class="col-3">
+              {{ form.closed_on|as_crispy_field}}
+            </div>
+            <div class="col-3">
+              {{ form.teams|as_crispy_field}}
+            </div>
+            <div class="col-12">
+              {{ form.description|as_crispy_field }}
+            </div>
+            <div class="col-3">
+              {{ form.is_active|as_crispy_field}}
+            </div>
+          </div>
+              <button class="btn btn-success">ذخیره</button>
+            </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

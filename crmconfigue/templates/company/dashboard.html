@@ -1,0 +1,129 @@
+{% extends 'company/base.html' %}
+
+{% block title %}داشبورد اصلی{% endblock %}
+
+
+{% block main %}
+    <!-- Latest Update Starts -->
+    <div class="col-xl-4 col-md-6 col-12 dashboard-latest-update">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between align-items-center pb-50">
+            <h4 class="card-title">آخرین به روز رسانی</h4>
+            <div class="dropdown">
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButtonSec" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                1399
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonSec">
+                <a class="dropdown-item" href="#">1399</a>
+                <a class="dropdown-item" href="#">1398</a>
+                <a class="dropdown-item" href="#">1397</a>
+              </div>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="card-body p-0 pb-1">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item list-group-item-action border-0 d-flex align-items-center justify-content-between">
+                  <div class="list-left d-flex align-items-center">
+                    <div class="list-icon mr-1">
+                      <div class="avatar bg-rgba-primary m-0">
+                        <div class="avatar-content">
+                          <i class="bx bxs-zap text-primary font-size-base"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="list-content mt-n25">
+                      <span class="list-title">مجموع محصولات</span>
+                      <small class="text-muted d-block">1.2k محصول جدید</small>
+                    </div>
+                  </div>
+                  {% for amount in deal_amounts %}
+                  <span>{{companydeals.pipeline_status.won}}</span>
+                </li>
+                <li class="list-group-item list-group-item-action border-0 d-flex align-items-center justify-content-between">
+                  <div class="list-left d-flex align-items-center">
+                    <div class="list-icon mr-1">
+                      <div class="avatar bg-rgba-info m-0">
+                        <div class="avatar-content">
+                          <i class="bx bx-stats text-info font-size-base"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="list-content mt-n25">
+                      <span class="list-title">مجموع فروش</span>
+                      <small class="text-muted d-block">39.4k فروش جدید</small>
+                    </div>
+                  </div>
+                  <span>26 میلیون تومان</span>
+                </li>
+                <li class="list-group-item list-group-item-action border-0 d-flex align-items-center justify-content-between">
+                  <div class="list-left d-flex align-items-center">
+                    <div class="list-icon mr-1">
+                      <div class="avatar bg-rgba-danger m-0">
+                        <div class="avatar-content">
+                          <i class="bx bx-credit-card text-danger font-size-base"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="list-content mt-n25">
+                      <span class="list-title">کل درآمد</span>
+                      <small class="text-muted d-block">43.5k درآمد جدید</small>
+                    </div>
+                  </div>
+                  <span>15.89,000 <small>تومان</small></span>
+                </li>
+                <li class="list-group-item list-group-item-action border-0 d-flex align-items-center justify-content-between">
+                  <div class="list-left d-flex align-items-center">
+                    <div class="list-icon mr-1">
+                      <div class="avatar bg-rgba-success m-0">
+                        <div class="avatar-content">
+                          <i class="bx bx-dollar text-success font-size-base"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="list-content mt-n25">
+                      <span class="list-title">هزینه کل</span>
+                      <small class="text-muted d-block">مجموع هزینه ها</small>
+                    </div>
+                  </div>
+                  <span>1.25 میلیارد تومان</span>
+                </li>
+                <li class="list-group-item list-group-item-action border-0 d-flex align-items-center justify-content-between">
+                  <div class="list-left d-flex align-items-center">
+                    <div class="list-icon mr-1">
+                      <div class="avatar bg-rgba-primary m-0">
+                        <div class="avatar-content">
+                          <i class="bx bx-user text-primary font-size-base"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="list-content mt-n25">
+                      <span class="list-title">مجموع کاربران</span>
+                      <small class="text-muted d-block">کاربران جدید</small>
+                    </div>
+                  </div>
+                  <span>1.2k</span>
+                </li>
+                <li class="list-group-item list-group-item-action border-0 d-flex align-items-center justify-content-between">
+                  <div class="list-left d-flex align-items-center">
+                    <div class="list-icon mr-1">
+                      <div class="avatar bg-rgba-danger m-0">
+                        <div class="avatar-content">
+                          <i class="bx bx-edit-alt text-danger font-size-base"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="list-content mt-n25">
+                      <span class="list-title">مجموع بازدید</span>
+                      <small class="text-muted d-block">بازدید های جدید</small>
+                    </div>
+                  </div>
+                  <span>4.6k</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+{% endblock %}

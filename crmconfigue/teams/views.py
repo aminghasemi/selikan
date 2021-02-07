@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from common.decorators import company_enrolled
 from .models import Teams
 from common.mixins import EnrollMixin, SuperUserAccessMixin, CreatorAccessMixin
+from .forms import TeamForm
 # Create your views here.
 
 class TeamsList(EnrollMixin, LoginRequiredMixin,ListView):
@@ -25,7 +26,7 @@ class TeamsList(EnrollMixin, LoginRequiredMixin,ListView):
 
 class TeamCreate(LoginRequiredMixin, CreateView):
     model=Teams
-    fields=["name", "description", "users"]
+    form_class=TeamForm
     template_name="company/team-create-update.html"
     def get_queryset(self):
         global company
@@ -50,7 +51,7 @@ class TeamCreate(LoginRequiredMixin, CreateView):
 
 class TeamUpdate(LoginRequiredMixin, UpdateView):
     model=Teams
-    fields=["name", "description", "users"]
+    form_class=TeamForm
     template_name = "company/team-create-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')
