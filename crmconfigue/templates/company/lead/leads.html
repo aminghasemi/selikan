@@ -25,7 +25,13 @@
                     {% for leads in object_list %}
                       <tr>
                         <td><a href="{% url 'leads:lead-update' company.slug leads.pk %}">{{leads.title}}</a></td>
-                        <td>{{leads.status}}</td>
+                        {% if leads.lead_status.won %}
+                        <td><a class="badge badge-success" style="color:white">{{leads.lead_status}}</a></td>
+                        {% elif leads.lead_status.lost %}
+                        <td><a class="badge badge-danger" style="color:white">{{leads.lead_status}}</a></td>
+                        {% else %}
+                        <td><a class="badge badge-primary" style="color:white" >{{leads.lead_status}}</a></td>
+                        {% endif %} 
                         <td>{{leads.source}}</td>
                         <td>{{leads.assigned_to.get_full_name}}</td>
                         <td>{{leads.opportunity_amount}}</td>

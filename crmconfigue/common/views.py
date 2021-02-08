@@ -12,9 +12,9 @@ from .mixins import CreatorAccessMixin, SuperUserAccessMixin, SpecialCompanyMixi
 from .decorators import allowed_users, company_enrolled, user_limit
 from .forms import EnrollForm, ProfileForm, CompanyForm
 from django.contrib.auth.views import LoginView, PasswordChangeView
-from datetime import timedelta
-from django.utils import timezone
-
+from datetime import timedelta, datetime
+from django.utils import timezone 
+from django.db.models import Sum
 # Create your views here.
 
 
@@ -304,13 +304,23 @@ class CountryDelete(LoginRequiredMixin, DeleteView):
         return reverse_lazy('common:countries', kwargs={'slug': slug}, current_app='common')
 
 
-class Dashboard(LoginRequiredMixin, EnrollMixin, DetailView):
-    template_name="company/dashboard.html"
-    def get_object(self):
-        global company
-        slug = self.kwargs.get('slug')
-        company=get_object_or_404(Company.objects.all(), slug=slug)
-    def get_context_data(self, **kwargs):
-        context= super().get_context_data(**kwargs)
-        context['company'] = company
-        return context
+
+@login_required(login_url='login')
+@company_enrolled
+@user_limit
+def Dashboard(request, slug):
+    template_name = "company/dashboard.html"
+    #company=Company.objects.get(slug=slug)
+    company = get_object_or_404(Company, slug=slug)
+   # deals = company.companydeals.filter(pipeline_status__won=True).filter(closed_on__gte=datetime.today()-timedelta(days=30))
+  #  dealswon=deals.dealpipeline.filter(is_won=True)
+    today=datetime.now()
+    deals = company.companydeals.filter(pipeline_status__won=True).filter(closed_on__year=today.year, closed_on__month=today.month)
+    total=deals.aggregate(sum=Sum('deal_amount'))['sum']
+    totaldeals=company.companydeals.filter(closed_on__year=today.year, closed_on__month=today.month).count()
+    deals2 = company.companydeals.filter(pipeline_status__won=True).filter(closed_on__year=today.year, closed_on__month=today.month).count()
+    deals_conversionrate=deals2/totaldeals
+    return render(request, template_name, {'total': total,
+                                           'company': company,
+                                           'deals_conversionrate': deals_conversionrate,
+                                           })

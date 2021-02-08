@@ -15,7 +15,7 @@ urlpatterns = [
     path('addstaff/<slug:slug>',company_staff,name="company_add_staff"),
 
     path('profile/', Profile.as_view(), name="profile"),
-	path('<slug:slug>/dashboard/', Dashboard.as_view(), name="dashboard"),
+	path('<slug:slug>/dashboard/', Dashboard, name="dashboard"),
     path('<slug:slug>/products/', ProductsList.as_view(),name="products"),
     path('<slug:slug>/products/create/', ProductCreate.as_view(),name="product-create"),
     path('<slug:slug>/products/update/<int:pk>', ProductUpdate.as_view(),name="product-update"),

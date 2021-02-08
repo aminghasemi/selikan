@@ -81,7 +81,7 @@ $(window).on("load", function () {
 		stroke: {
 			lineCap: "round",
 		},
-		labels: ['هدف', 'بازار', 'Ebay']
+		labels: ['معاملات', 'سرنخ‌ها', 'فرصت‌ها']
 	};
 
 	var multiradialChart = new ApexCharts(

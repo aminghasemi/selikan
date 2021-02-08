@@ -16,7 +16,8 @@ class LeadStatus(models.Model):
     created_by = models.ForeignKey(User, related_name="lead_status_created_by", on_delete=models.CASCADE,  verbose_name="ساخته شده توسط")
     created_on = models.DateTimeField( auto_now_add=True, verbose_name="تاریخ ایجاد")
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="companyleadstatus", verbose_name="کاربر سایت")
-
+    won = models.BooleanField(default=False, verbose_name="در صورتی که این مرحله بیانگر مرحله پایانی و تبدیل سرنخ به مشتری است این تیک را بزنید.")
+    lost = models.BooleanField(default=False, verbose_name="در صورتی که این مرحله بیانگر مرحله پایانی و شکست در تبدیل سرنخ است این تیک را بزنید.")
     class Meta:
         verbose_name = "مرحله سرنخ"
         verbose_name_plural = "مراحل سرنخ"

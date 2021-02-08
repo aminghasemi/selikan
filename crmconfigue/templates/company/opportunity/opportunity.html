@@ -14,7 +14,8 @@
                   <thead>
                     <tr>
                       <th>عنوان فرصت</th>
-                      <th>شخص - شرکت</th>
+                      <th>وضعیت فرصت</th>
+                      <th>مشتری</th>
                       <th>مقدار</th>
                       <th>احتمال موفقیت</th>
                       <th>عملیات</th>
@@ -24,7 +25,14 @@
                     {% for opportunity in object_list %}
                       <tr>
                         <td><a href="#">{{opportunity.name}}</a></td>
-                        <td>{{opportunity.account}}  {{opportunity.contacts}}</td>
+                        {% if opportunity.opportunity_status.won %}
+                        <td><a class="badge badge-success" style="color:white">{{opportunity.opportunity_status}}</a></td>
+                        {% elif opportunity.opportunity_status.lost %}
+                        <td><a class="badge badge-danger" style="color:white">{{opportunity.opportunity_status}}</a></td>
+                        {% else %}
+                        <td><a class="badge badge-primary" style="color:white" >{{opportunity.opportunity_status}}</a></td>
+                        {% endif %}
+                        <td>{{opportunity.account}}</td>
                         <td>{{opportunity.amount}}</td>
                         <td>{{opportunity.probability}}</td>
                         <td>

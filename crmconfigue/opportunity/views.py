@@ -160,7 +160,7 @@ class OpportunitySourceDelete(LoginRequiredMixin, DeleteView):
 
 
 class OpportunityList(EnrollMixin, LoginRequiredMixin,ListView):
-    template_name = 'company/opportunity.html'
+    template_name = 'company/opportunity/opportunity.html'
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -176,7 +176,7 @@ class OpportunityList(EnrollMixin, LoginRequiredMixin,ListView):
 class OpportunityCreate(EnrollMixin, LoginRequiredMixin, CreateView):
     model=Opportunity
     form_class=OpportunityForm
-    template_name="company/opportunity-create-update.html"
+    template_name="company/opportunity/opportunity-create-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('opportunity:opportunity', kwargs={'slug': slug}, current_app='opportunity')
@@ -201,7 +201,7 @@ class OpportunityCreate(EnrollMixin, LoginRequiredMixin, CreateView):
 class OpportunityUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
     model=Opportunity
     form_class=OpportunityForm
-    template_name = "company/opportunity-create-update.html"
+    template_name = "company/opportunity/opportunity-create-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('opportunity:opportunity', kwargs={'slug': slug}, current_app='opportunity')
@@ -217,7 +217,7 @@ class OpportunityUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
 
 class OpportunityDelete(EnrollMixin, LoginRequiredMixin, DeleteView):
     model=Opportunity
-    template_name = "company/opportunity_confirm_delete.html"
+    template_name = "company/opportunity/opportunity_confirm_delete.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('opportunity:opportunity', kwargs={'slug': slug}, current_app='opportunity')

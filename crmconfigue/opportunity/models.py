@@ -15,7 +15,8 @@ class OpportunityStatus(models.Model):
     created_by = models.ForeignKey(User, related_name="opportunity_status_created_by", on_delete=models.CASCADE,  verbose_name="ساخته شده توسط")
     created_on = models.DateTimeField( auto_now_add=True, verbose_name="تاریخ ایجاد")
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="companyopportunitystatus", verbose_name="کاربر سایت")
-
+    won = models.BooleanField(default=False, verbose_name="در صورتی که این مرحله بیانگر مرحله پایانی و فرصت موفق است این تیک را بزنید.")
+    lost = models.BooleanField(default=False, verbose_name="در صورتی که این مرحله بیانگر مرحله پایانی و شکست در فرصت است این تیک را بزنید.")
     class Meta:
         verbose_name = "مرحله فرصت"
         verbose_name_plural = "مراحل فرصت"
@@ -36,22 +37,22 @@ class OpportunitySource(models.Model):
 
 class Opportunity(models.Model):
     name = models.CharField( max_length=64, verbose_name="عنوان")
-    account = models.ForeignKey(Account,related_name="opportunities",on_delete=models.CASCADE,blank=True,verbose_name="مشتری")
-    status = models.ForeignKey(OpportunityStatus, related_name="Opportunity_status",on_delete=models.CASCADE,verbose_name="مرحله")
-    source = models.ForeignKey(OpportunitySource,related_name="Opportunity_source",on_delete=models.CASCADE, blank=True, verbose_name="منبع")
+    account = models.ForeignKey(Account,related_name="opportunities",on_delete=models.SET_NULL,null=True, blank=True,verbose_name="مشتری")
+    status = models.ForeignKey(OpportunityStatus,blank=True, related_name="Opportunity_status",on_delete=models.SET_NULL, null=True,verbose_name="مرحله")
+    source = models.ForeignKey(OpportunitySource,related_name="Opportunity_source",on_delete=models.SET_NULL, null=True, blank=True, verbose_name="منبع")
     amount = models.FloatField(blank=True, verbose_name="مبلغ")
     probability = models.IntegerField(default=0, blank=True, verbose_name="احتمال")
-    contacts = models.ForeignKey(Contact,on_delete=models.CASCADE, verbose_name="مشتری")
-    converted_by = models.ForeignKey(User,related_name="Opportunity_converted_by", on_delete=models.CASCADE, blank=True, verbose_name="تکمیل‌شده توسط")
+    contacts = models.ForeignKey(Contact,blank=True, on_delete=models.SET_NULL, null=True, verbose_name="شخص")
+    converted_by = models.ForeignKey(User,related_name="Opportunity_converted_by", on_delete=models.SET_NULL, null=True, blank=True, verbose_name="تکمیل‌شده توسط")
     closed_on = models.DateField(blank=True, verbose_name="تاریخ تکمیل")
     description = models.TextField(blank=True, verbose_name="توضیحات")
-    assigned_to = models.ForeignKey(User, on_delete=models.CASCADE, related_name="opportunity_assigned_to", verbose_name="محول شده به")
-    created_by = models.ForeignKey(User,related_name="opportunity_created_by", on_delete=models.CASCADE, verbose_name="ایجاد شده توسط")
+    assigned_to = models.ForeignKey(User,blank=True, on_delete=models.SET_NULL, null=True, related_name="opportunity_assigned_to", verbose_name="محول شده به")
+    created_by = models.ForeignKey(User,related_name="opportunity_created_by", on_delete=models.SET_NULL, null=True, verbose_name="ایجاد شده توسط")
     created_on = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
     is_active = models.BooleanField(default=True, verbose_name="فعال")
-    tags = models.ForeignKey(Tags,on_delete=models.CASCADE, blank=True, verbose_name="تگ‌ها")
-    teams = models.ForeignKey(Teams,on_delete=models.CASCADE, related_name="oppurtunity_teams", verbose_name="تیم")
-    company = models.ForeignKey(Company, related_name= "companyopportunity", on_delete=models.CASCADE,  blank=True, verbose_name="کاربر سایت")
+    tags = models.ForeignKey(Tags,on_delete=models.SET_NULL, null=True, blank=True, verbose_name="تگ‌ها")
+    teams = models.ForeignKey(Teams,on_delete=models.SET_NULL, null=True,blank=True, related_name="oppurtunity_teams", verbose_name="تیم")
+    company = models.ForeignKey(Company, related_name= "companyopportunity", on_delete=models.SET_NULL, null=True,  blank=True, verbose_name="کاربر سایت")
 
     class Meta:
         ordering = ["-created_on"]
