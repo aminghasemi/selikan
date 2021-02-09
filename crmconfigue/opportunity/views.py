@@ -189,6 +189,8 @@ class OpportunityCreate(EnrollMixin, LoginRequiredMixin, CreateView):
         slug= self.kwargs.get('slug')
         company = get_object_or_404(Company , slug=slug)
         context= super().get_context_data(**kwargs)
+        context['form'].fields['status'].queryset = OpportunityStatus.objects.filter(company=company)
+        context['form'].fields['source'].queryset = OpportunitySource.objects.filter(company=company)
         context['company'] = company
         return context
     def form_valid(self, form, **kwargs):       
@@ -212,6 +214,8 @@ class OpportunityUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
         return company.companyopportunity.all()
     def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
+        context['form'].fields['status'].queryset = OpportunityStatus.objects.filter(company=company)
+        context['form'].fields['source'].queryset = OpportunitySource.objects.filter(company=company)
         context['company'] = company
         return context
 

@@ -25,13 +25,10 @@ class CompaniesList(LoginRequiredMixin, ListView):
         queryset= Company.objects.all()
         template_name="registration/home.html"
         def get_queryset(self):
-            if self.request.user.is_superuser:
-                return Company.objects.all()
-            else:
-                class1=Company.objects.filter(creator=self.request.user)
-                class2=Company.objects.filter(staff=self.request.user)
-                class3=chain(class1,class2)
-                return class3
+            class1=Company.objects.filter(creator=self.request.user)
+            class2=Company.objects.filter(staff=self.request.user)
+            class3=chain(class1,class2)
+            return class3
 
 class CompanyCreate(LoginRequiredMixin, CreateView):
     model=Company
@@ -105,11 +102,7 @@ class Profile(LoginRequiredMixin ,UpdateView):
 class Login(LoginView):
     def get_success_url(self):
         user = self.request.user
-
-        if user.is_superuser or user.is_author:
-            return reverse_lazy("common:home")
-        else:
-            return reverse_lazy("common:home")
+        return reverse_lazy("common:home")
 
 from django.http import HttpResponse
 from .forms import SignupForm

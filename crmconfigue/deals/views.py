@@ -112,6 +112,7 @@ class DealCreate(LoginRequiredMixin, CreateView):
         slug= self.kwargs.get('slug')
         company = get_object_or_404(Company , slug=slug)
         context= super().get_context_data(**kwargs)
+        context['form'].fields['pipeline_status'].queryset = Pipeline.objects.filter(company=company)
         context['company'] = company
         return context
     def form_valid(self, form, **kwargs):       
@@ -138,6 +139,7 @@ class DealUpdate(LoginRequiredMixin, UpdateView):
         return company.companydeals.all()
     def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
+        context['form'].fields['pipeline_status'].queryset = Pipeline.objects.filter(company=company)
         context['company'] = company
         return context
 class DealDelete(LoginRequiredMixin, DeleteView):
