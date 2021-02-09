@@ -11,7 +11,7 @@ from .forms import AccountForm
 # Create your views here.
 
 class AccountsList(EnrollMixin, LoginRequiredMixin,ListView):
-    template_name = 'company/task.html'
+    template_name = 'company/accounts/accounts.html'
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -27,7 +27,7 @@ class AccountsList(EnrollMixin, LoginRequiredMixin,ListView):
 class AccountCreate(LoginRequiredMixin, CreateView):
     model=Account
     form_class = AccountForm
-    template_name="company/account-create-update.html"
+    template_name="company/accounts/account-create-update.html"
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -52,7 +52,7 @@ class AccountCreate(LoginRequiredMixin, CreateView):
 class AccountUpdate(LoginRequiredMixin, UpdateView):
     model=Account
     form_class = AccountForm
-    template_name = "company/account-create-update.html"
+    template_name = "company/accounts/account-create-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('accounts:accounts', kwargs={'slug': slug}, current_app='accounts')
@@ -67,7 +67,7 @@ class AccountUpdate(LoginRequiredMixin, UpdateView):
         return context
 class AccountDelete(LoginRequiredMixin, DeleteView):
     model=Account
-    template_name = "company/account_confirm_delete.html"
+    template_name = "company/accounts/account_confirm_delete.html"
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')

@@ -37,17 +37,17 @@ class Account(models.Model):
     billing_address_line = models.CharField(max_length=255, blank=True, verbose_name="آدرس")
     billing_street = models.CharField(max_length=55, blank=True, verbose_name="خیابان")
     billing_city = models.CharField( max_length=255, blank=True, verbose_name="شهر")
-    billing_state = models.ForeignKey(Province, on_delete=models.CASCADE, max_length=255, blank=True, verbose_name="استان")
+    billing_state = models.ForeignKey(Province,  on_delete=models.SET_NULL,null=True, max_length=255, blank=True, verbose_name="استان")
     billing_postcode = models.CharField(max_length=10, blank=True, verbose_name="کد پستی")
-    billing_country = models.ForeignKey(Country, on_delete=models.CASCADE, blank=True, verbose_name="کشور")
+    billing_country = models.ForeignKey(Country, on_delete=models.SET_NULL,null=True, blank=True, verbose_name="کشور")
     website = models.URLField(blank=True, verbose_name="وب‌سایت")
     description = models.TextField(blank=True, verbose_name="توضیحات")
-    created_by = models.ForeignKey(User, related_name="account_created_by", on_delete=models.CASCADE, verbose_name="ایجاد شده توسط")
+    created_by = models.ForeignKey(User, related_name="account_created_by", on_delete=models.SET_NULL,null=True, verbose_name="ایجاد شده توسط")
     created_on = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
     is_active = models.BooleanField(default=True, verbose_name="فعال")
-    tags = models.ForeignKey(Tags, blank=True,on_delete=models.CASCADE, verbose_name="تگ‌ها")
-    contacts = models.ForeignKey("contacts.Contact",on_delete=models.CASCADE, related_name="account_contacts", verbose_name="شخص مرتبط")
-    company = models.ForeignKey(Company, related_name= "companyaccounts", on_delete=models.CASCADE,  blank=True, verbose_name="کاربر سایت")
+    tags = models.ForeignKey(Tags, blank=True, on_delete=models.SET_NULL,null=True, verbose_name="تگ‌ها")
+    contacts = models.ForeignKey("contacts.Contact",on_delete=models.SET_NULL,null=True, blank=True, related_name="account_contacts", verbose_name="شخص مرتبط")
+    company = models.ForeignKey(Company, related_name= "companyaccounts",  on_delete=models.SET_NULL,null=True,  blank=True, verbose_name="کاربر سایت")
 
     def __str__(self):
         return self.name

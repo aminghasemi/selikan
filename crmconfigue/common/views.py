@@ -312,15 +312,63 @@ def Dashboard(request, slug):
     template_name = "company/dashboard.html"
     #company=Company.objects.get(slug=slug)
     company = get_object_or_404(Company, slug=slug)
-   # deals = company.companydeals.filter(pipeline_status__won=True).filter(closed_on__gte=datetime.today()-timedelta(days=30))
+    days7_deals = company.companydeals.filter(pipeline_status__won=True).filter(closed_on__gte=datetime.today()-timedelta(days=7))
   #  dealswon=deals.dealpipeline.filter(is_won=True)
     today=datetime.now()
     deals = company.companydeals.filter(pipeline_status__won=True).filter(closed_on__year=today.year, closed_on__month=today.month)
     total=deals.aggregate(sum=Sum('deal_amount'))['sum']
-    totaldeals=company.companydeals.filter(closed_on__year=today.year, closed_on__month=today.month).count()
+    totaldeals=company.companydeals.filter(created_on__year=today.year, created_on__month=today.month).count()
     deals2 = company.companydeals.filter(pipeline_status__won=True).filter(closed_on__year=today.year, closed_on__month=today.month).count()
-    deals_conversionrate=deals2/totaldeals
+    days7_total=days7_deals.aggregate(sum=Sum('deal_amount'))['sum']
+    deals_show=company.companydeals.all().order_by('-id')[:5]
+    dealswon = company.companydeals.filter(pipeline_status__won=True).count()
+    if totaldeals!= 0:
+        deals_conversionrate=(deals2/totaldeals)*100
+    else:
+        deals_conversionrate=0
+    
+    #Queries of Leads
+    leads_current_month=company.companyleads.filter(created_on__year=today.year, created_on__month=today.month).count()
+    leads_won = company.companyleads.filter(status__won=True).filter(closed_on__year=today.year, closed_on__month=today.month).count()
+    if leads_current_month!= 0:
+        leads_conversionrate=(leads_won/leads_current_month)*100
+    else:
+        leads_conversionrate=0
+    #Queries of Opportunities
+    opportunity_current_month=company.companyopportunity.filter(created_on__year=today.year, created_on__month=today.month).count()
+    opportunity_won = company.companyopportunity.filter(status__won=True).filter(closed_on__year=today.year, closed_on__month=today.month).count()
+    if opportunity_current_month!= 0:
+        opportunity_conversionrate=(opportunity_won/opportunity_current_month)*100
+    else:
+        opportunity_conversionrate=0
+    #Queries of Accounts
+    newaccounts=company.companyaccounts.filter(created_on__year=today.year, created_on__month=today.month).count()
+    accountsall=company.companyaccounts.all().count()
+    #Queries of Tasks
+    important_tasks=company.companytask.filter(priority="بالا").order_by('-id')[:3]
+    average_tasks=company.companytask.filter(priority="معمولی").order_by('-id')[:3]
+    low_tasks=company.companytask.filter(priority="پایین").order_by('-id')[:3]
+    new_tasks_month=company.companytask.filter(created_on__year=today.year, created_on__month=today.month).count()
+    tasks_done=company.companytask.filter(created_on__year=today.year, created_on__month=today.month).count()
+    tasks_done_month=company.companytask.filter(done_on__year=today.year, done_on__month=today.month).count()
+    
+
+
     return render(request, template_name, {'total': total,
                                            'company': company,
                                            'deals_conversionrate': deals_conversionrate,
+                                           'important_tasks': important_tasks,
+                                           'average_tasks': average_tasks,
+                                           'low_tasks': low_tasks,
+                                           'tasks_done': tasks_done,
+                                           'tasks_done_month': tasks_done_month,
+                                           'days7_total': days7_total,
+                                           'deals_show': deals_show,
+                                           'totaldeals': totaldeals,
+                                           'newaccounts': newaccounts,
+                                           'accountsall': accountsall,
+                                           'leads_current_month': leads_current_month,
+                                           'leads_conversionrate': leads_conversionrate,
+                                           'opportunity_current_month': opportunity_current_month,
+                                           'opportunity_conversionrate': opportunity_conversionrate,
                                            })

@@ -32,12 +32,12 @@
                         {% else %}
                         <td><a class="badge badge-primary" style="color:white" >{{deal.pipeline_status}}</a></td>
                         {% endif %}
-                        <td>{{deal.deal_amount}}</td>
+                        <td>{{deal.deal_amount}} تومان </td>
                         <td>{{deal.assigned_to.get_full_name}}</td>
-                        <td>{{deal.account_name}}</td>
+                        <td>{{deal.account}}</td>
                         <td>
                             
-                            <a class="badge badge-light-info " href="{% url 'deals:deal-update' company.slug deal.pk %}">ویرایش</a>
+                            <a class="badge badge-light-info" href="{% url 'deals:deal-update' company.slug deal.pk %}">ویرایش</a>
                             <a class="badge badge-light-danger" href="{% url 'deals:deal-delete' company.slug deal.pk %}">حذف</a>
                           
                         </td>

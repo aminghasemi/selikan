@@ -16,17 +16,17 @@
                       <th>نام مشتری</th>
                       <th>موبایل</th>
                       <th>ایمیل</th>
-                      <th>محول شده به</th>
+                      <th>صنعت</th>
                       <th>عملیات</th>
                     </tr>
                   </thead>
                   <tbody>
                     {% for accounts in object_list %}
                       <tr>
-                        <td><a href="#">{{accounts.first_name}} {{accounts.last_name}}</a></td>
+                        <td><a href="{% url 'accounts:accounts-update' company.slug accounts.pk %}">{{accounts.name}}</a></td>
                         <td>{{accounts.phone}}</td>
                         <td>{{accounts.email}}</td>
-                        <td>{{accounts.assigned_to.get_full_name}}</td>
+                        <td>{{accounts.industry}}</td>
                         <td>
                             {% if user.is_superuser %}
                             <a class="badge" href="{% url 'accounts:accounts-update' company.slug accounts.pk %}">ویرایش</a>

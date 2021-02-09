@@ -46,7 +46,6 @@ class TaskCreate(EnrollMixin, LoginRequiredMixin, CreateView):
         form.instance.created_by = self.request.user
         slug= self.kwargs.get('slug')
         company = get_object_or_404(Company , slug=slug)
-        jalali_join = datetime2jalali(due_date).strftime('%y/%m/%d _ %H:%M:%S')
         form.instance.company= company
         return super().form_valid(form, **kwargs)
     def get_success_url(self):

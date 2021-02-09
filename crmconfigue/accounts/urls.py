@@ -9,8 +9,8 @@ app_name="accounts"
 urlpatterns = [
     path('', AccountsList.as_view(),name="accounts"),
     path('create/', AccountCreate.as_view(),name="account-create"),
-    path('update/<int:pk>', AccountUpdate.as_view(),name="account-update"),
-    path('delete/<int:pk>', AccountDelete.as_view(),name="account-delete"),
+    path('update/<int:pk>', AccountUpdate.as_view(),name="accounts-update"),
+    path('delete/<int:pk>', AccountDelete.as_view(),name="accounts-delete"),
 
 
 
