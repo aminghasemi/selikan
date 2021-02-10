@@ -26,7 +26,7 @@ class LeadStatus(models.Model):
 
 class LeadSource(models.Model):
     LeadSource_title = models.CharField(max_length=64, verbose_name="عنوان")
-    created_by = models.ForeignKey(User, related_name="lead_source_created_by", on_delete=models.CASCADE,  verbose_name="ساخته شده توسط")
+    created_by = models.ForeignKey(User, related_name="lead_source_created_by", on_delete=models.SET_NULL, null=True,  verbose_name="ساخته شده توسط")
     created_on = models.DateTimeField( auto_now_add=True, verbose_name="تاریخ ایجاد")
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="companyleadsource", verbose_name="کاربر سایت")
 
@@ -37,23 +37,23 @@ class LeadSource(models.Model):
         return self.LeadSource_title
 
 class Lead(models.Model):
-    title = models.CharField(max_length=64, verbose_name="عنوان")
-    first_name = models.CharField(max_length=64, verbose_name="نام")
-    last_name = models.CharField( max_length=64, verbose_name="نام خانوادگی")
-    email = models.EmailField(verbose_name="ایمیل")
-    phone = models.CharField(max_length=20, verbose_name="موبایل")
-    status = models.ForeignKey(LeadStatus, related_name="Lead_status",on_delete=models.CASCADE,verbose_name="مرحله سرنخ")
-    source = models.ForeignKey(LeadSource,related_name="Lead_source",on_delete=models.CASCADE, blank=True, verbose_name="منبع")
+    title = models.CharField(max_length=64,blank=True, verbose_name="عنوان")
+    first_name = models.CharField(max_length=64,blank=True, verbose_name="نام")
+    last_name = models.CharField( max_length=64,blank=True, verbose_name="نام خانوادگی")
+    email = models.EmailField(blank=True,verbose_name="ایمیل")
+    phone = models.CharField(max_length=20,blank=True, verbose_name="موبایل")
+    status = models.ForeignKey(LeadStatus, related_name="Lead_status",on_delete=models.SET_NULL, null=True,verbose_name="مرحله سرنخ")
+    source = models.ForeignKey(LeadSource,related_name="Lead_source",on_delete=models.SET_NULL, null=True, blank=True, verbose_name="منبع")
     description = models.TextField(blank=True, verbose_name="توضیحات")
-    assigned_to = models.ForeignKey(User, related_name="lead_assigned_users",on_delete=models.CASCADE, verbose_name="محول شده به")
-    created_by = models.ForeignKey(User, related_name="lead_created_by", on_delete=models.CASCADE, verbose_name="ساخته شده توسط")
+    assigned_to = models.ForeignKey(User, related_name="lead_assigned_users",on_delete=models.SET_NULL, null=True,blank=True, verbose_name="محول شده به")
+    created_by = models.ForeignKey(User, related_name="lead_created_by", on_delete=models.SET_NULL, null=True,blank=True, verbose_name="ساخته شده توسط")
     created_on = models.DateTimeField( auto_now_add=True, verbose_name="تاریخ ایجاد")
     is_active = models.BooleanField(default=True, verbose_name="فعال")
-    tags = models.ForeignKey(Tags, blank=True, on_delete=models.CASCADE, verbose_name="تگ‌ها")
-    contacts = models.ForeignKey(Contact,on_delete=models.CASCADE, related_name="lead_contacts", verbose_name="اشخاص مرتبط")
-    teams = models.ForeignKey(Teams,on_delete=models.CASCADE, related_name="lead_teams", verbose_name="تیم سرنخ")
-    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="companyleads", blank=True, verbose_name="کاربر سایت")
-    converted_by = models.ForeignKey(User, on_delete=models.CASCADE,related_name="lead_converted_by", blank=True, verbose_name="تکمیل‌شده توسط")
+    tags = models.ForeignKey(Tags, blank=True, on_delete=models.SET_NULL, null=True, verbose_name="تگ‌ها")
+    contacts = models.ForeignKey(Contact,on_delete=models.SET_NULL, null=True,blank=True, related_name="lead_contacts", verbose_name="اشخاص مرتبط")
+    teams = models.ForeignKey(Teams,on_delete=models.SET_NULL, null=True,blank=True, related_name="lead_teams", verbose_name="تیم سرنخ")
+    company = models.ForeignKey(Company, on_delete=models.SET_NULL, null=True, related_name="companyleads", blank=True, verbose_name="کاربر سایت")
+    converted_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="lead_converted_by", blank=True, verbose_name="تکمیل‌شده توسط")
     closed_on = models.DateField(blank=True, verbose_name="تاریخ تکمیل")
 
 

@@ -13,6 +13,10 @@
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
+            <li class=" nav-item"><a href="{% url 'common:dashboard' company.slug %}"><i class="menu-livicon" data-icon="dashboard"></i><span class="menu-title" data-i18n="Dashboard">داشبورد</span></a>
+            </li>
+          </ul>
+          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
             <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="us-dollar"></i><span class="menu-title" data-i18n="Dashboard">معاملات</span></a>
               <ul class="menu-content">
                 <li><a href="{% url 'deals:deals' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">لیست معاملات</span></a>

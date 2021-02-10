@@ -187,6 +187,11 @@ class LeadCreate(LoginRequiredMixin, CreateView):
         context= super().get_context_data(**kwargs)
         context['form'].fields['status'].queryset = LeadStatus.objects.filter(company=company)
         context['form'].fields['source'].queryset = LeadSource.objects.filter(company=company)
+        context['form'].fields['contacts'].queryset = company.companycontacts.filter(company=company)
+        context['form'].fields['assigned_to'].queryset = company.staff_enroll.filter(company=company)
+        context['form'].fields['converted_by'].queryset = company.staff_enroll.filter(company=company)
+        context['form'].fields['teams'].queryset = company.companyteams.filter(company=company)
+        context['form'].fields['tags'].queryset = company.companytags.filter(company=company)
         context['company'] = company
         return context
     def form_valid(self, form, **kwargs):       
@@ -215,6 +220,11 @@ class LeadUpdate(LoginRequiredMixin, UpdateView):
         context= super().get_context_data(**kwargs)
         context['form'].fields['status'].queryset = LeadStatus.objects.filter(company=company)
         context['form'].fields['source'].queryset = LeadSource.objects.filter(company=company)
+        context['form'].fields['contacts'].queryset = company.companycontacts.filter(company=company)
+        context['form'].fields['assigned_to'].queryset = company.staff_enroll.filter(company=company)
+        context['form'].fields['converted_by'].queryset = company.staff_enroll.filter(company=company)
+        context['form'].fields['teams'].queryset = company.companyteams.filter(company=company)
+        context['form'].fields['tags'].queryset = company.companytags.filter(company=company)
         context['company'] = company
         return context
 class LeadDelete(LoginRequiredMixin, DeleteView):

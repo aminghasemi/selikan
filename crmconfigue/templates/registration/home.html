@@ -7,8 +7,9 @@
 {% block main %}
 
     <!-- User Widget with Image-top Starts -->
+    <div class="row">
     {% for CompaniesList in object_list %}
-    <div class="col-xl-4 col-md-6 img-top-card">
+    <div class="col-xl-4 col-md-6 col-12 img-top-card">
       <div class="card widget-img-top">
         <div class="card-content">
           <img class="card-img-top img-fluid mb-1" src="{% static 'frest/assets/images/profile/user-uploads/startupnext.png' %}" alt="Card image cap">
@@ -34,9 +35,8 @@
           <a href="{% url 'common:dashboard' CompaniesList.slug %}" class="btn btn-primary btn-block"><b>ورود به نرم افزار</b></a>
         </div>
       </div>
-
     </div>
     {% endfor %}
-
+    </div>
     <!-- User Widget with Image-top Ends -->
 {% endblock %}

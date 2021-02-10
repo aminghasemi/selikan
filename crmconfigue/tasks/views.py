@@ -40,6 +40,8 @@ class TaskCreate(EnrollMixin, LoginRequiredMixin, CreateView):
         slug= self.kwargs.get('slug')
         company = get_object_or_404(Company , slug=slug)
         context= super().get_context_data(**kwargs)
+        context['form'].fields['account'].queryset = company.companyaccounts.filter(company=company)
+        context['form'].fields['assigned_to'].queryset = company.staff_enroll.filter(company=company)
         context['company'] = company
         return context
     def form_valid(self, form, **kwargs):       
@@ -66,6 +68,8 @@ class TaskUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
         context['company'] = company
+        context['form'].fields['account'].queryset = company.companyaccounts.filter(company=company)
+        context['form'].fields['assigned_to'].queryset = company.staff_enroll.filter(company=company)
         return context
 
 

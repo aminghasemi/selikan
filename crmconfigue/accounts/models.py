@@ -16,7 +16,7 @@ from common import utils
 class Tags(models.Model):
     name = models.CharField(max_length=20)
     slug = models.CharField(max_length=20, unique=True, blank=True)
-
+    company = models.ForeignKey(Company, related_name= "companytags",  on_delete=models.SET_NULL,null=True,  blank=True, verbose_name="تگ‌ها")
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Tags, self).save(*args, **kwargs)

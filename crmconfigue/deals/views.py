@@ -3,11 +3,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .forms import DealForm
-from common.models import Company
+from common.models import Company, Enrolled
 from django.contrib.auth.decorators import login_required
 from common.decorators import company_enrolled
 from .models import Deal, Pipeline
 from common.mixins import EnrollMixin, SuperUserAccessMixin, CreatorAccessMixin
+
 # Create your views here.
 
 
@@ -112,7 +113,10 @@ class DealCreate(LoginRequiredMixin, CreateView):
         slug= self.kwargs.get('slug')
         company = get_object_or_404(Company , slug=slug)
         context= super().get_context_data(**kwargs)
-        context['form'].fields['pipeline_status'].queryset = Pipeline.objects.filter(company=company)
+        context['form'].fields['pipeline_status'].queryset = company.companypipelines.filter(company=company)
+        context['form'].fields['account'].queryset = company.companyaccounts.filter(company=company)
+        context['form'].fields['assigned_to'].queryset = company.staff_enroll.filter(company=company)
+        context['form'].fields['teams'].queryset = company.companyteams.filter(company=company)
         context['company'] = company
         return context
     def form_valid(self, form, **kwargs):       
@@ -140,6 +144,9 @@ class DealUpdate(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
         context['form'].fields['pipeline_status'].queryset = Pipeline.objects.filter(company=company)
+        context['form'].fields['account'].queryset = company.companyaccounts.filter(company=company)
+        context['form'].fields['assigned_to'].queryset = company.staff_enroll.filter(company=company)
+        context['form'].fields['teams'].queryset = company.companyteams.filter(company=company)
         context['company'] = company
         return context
 class DealDelete(LoginRequiredMixin, DeleteView):
