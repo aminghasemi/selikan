@@ -8,6 +8,7 @@ from teams.models import Teams
 from django.urls import reverse
 from extensions.utils import jalali_converter
 from jalali_date import datetime2jalali, date2jalali
+from django_jalali.db import models as jmodels
 class Task(models.Model):
 
     STATUS_CHOICES = (
@@ -21,7 +22,7 @@ class Task(models.Model):
     title = models.CharField( max_length=200, verbose_name="عنوان")
     status = models.CharField( max_length=50, choices=STATUS_CHOICES, verbose_name="وضعیت")
     priority = models.CharField( max_length=50, choices=PRIORITY_CHOICES, verbose_name="تقدم")
-    due_date = models.DateField(null=True,blank=True, verbose_name="مهلت انجام")
+    due_date = jmodels.jDateField(null=True,blank=True, verbose_name="مهلت انجام")
     created_on = models.DateTimeField( auto_now_add=True, verbose_name="تاریخ ایجاد")
     account = models.ForeignKey(Account,null=True, related_name="accounts_tasks",blank=True,on_delete=models.SET_NULL, verbose_name="نام مشتری")
     contacts = models.ForeignKey(Contact,blank=True,null=True, related_name="contacts_tasks",on_delete=models.SET_NULL, verbose_name="نام شخص")

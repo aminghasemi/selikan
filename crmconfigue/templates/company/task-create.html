@@ -3,12 +3,24 @@
 {% load crispy_forms_field %}
 {% load widget_tweaks %}
 {% load jalali_tags %}
+{% load jformat %}
+
 {% block title %}
 ایجاد مشتری جدید
 {% endblock %}
 
 
 {% block main %}
+<script>
+  $(document).ready(function() {
+      $("#datepicker").datepicker({
+          minDate: 2,
+          maxDate: "+10D",
+          isRTL: true
+      });
+
+  });
+ </script>
 <div class="col-md-12">
   <div class="card card-primary">
     <div class="card-header">
@@ -23,7 +35,7 @@
             <div class="col-3">
               {{ form.status|as_crispy_field }}
             </div>
-            <div class="col-3">
+            <div  class="col-3">
               {{ form.priority|as_crispy_field }}
             </div>
             <div class="col-3">

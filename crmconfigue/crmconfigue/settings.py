@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_jalali',
+    'jalali_date',
     'common.apps.CommonConfig',
     'contacts.apps.ContactsConfig',
     'teams.apps.TeamsConfig',
@@ -60,7 +62,6 @@ INSTALLED_APPS = [
     'django_filters',
     'cuser',
     'phonenumber_field',
-    'jalali_date',
 ]
 
 MIDDLEWARE = [
