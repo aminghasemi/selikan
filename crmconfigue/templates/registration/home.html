@@ -12,7 +12,11 @@
     <div class="col-xl-4 col-md-6 col-12 img-top-card">
       <div class="card widget-img-top">
         <div class="card-content">
-          <img class="card-img-top img-fluid mb-1" src="{% static 'frest/assets/images/profile/user-uploads/startupnext.png' %}" alt="Card image cap">
+          {% if object_list.thumbnail == None %}
+             <img class="card-img-top img-fluid mb-1" src="{% static 'frest/assets/images/profile/user-uploads/startupnext.png' %}" alt="Card image cap" height="40" width="40">
+            {% else %}
+            <img class="card-img-top img-fluid mb-1" src="{{object_list.thumbnail.url}}" alt="Card image cap">
+           {% endif %}
           <div class="heading-elements">
           </div>
           <div class="text-center">

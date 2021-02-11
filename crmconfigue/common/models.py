@@ -26,9 +26,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False,verbose_name="کارمند")
     date_joined = models.DateTimeField(auto_now_add=True,verbose_name="تاریخ عضویت")
     role = models.CharField(max_length=50, choices=ROLES,verbose_name="نقش")
-    profile_pic = models.FileField(
-        max_length=1000, upload_to=img_url, null=True, blank=True,verbose_name="تصویر کاربر"
-    )
+    thumbnail = models.ImageField(upload_to="media",blank=True, null=True, verbose_name="تصویر کاربر")
     has_sales_access = models.BooleanField(default=False,verbose_name="دسترسی به فروش")
     has_marketing_access = models.BooleanField(default=False,verbose_name="دسترسی به بازاریابی")
 
@@ -89,6 +87,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Company(models.Model):
+    file_prepend = "users/profile_pics"
     name = models.CharField(max_length=100, blank=True, null=True,verbose_name="نام شرکت")
     slug=models.SlugField(max_length=100,unique=True, verbose_name ="لینک شرکت")
     sub_domain = models.CharField(max_length=30,null=True, blank=True, verbose_name="آدرس زیر دامنه")
@@ -113,6 +112,9 @@ class Company(models.Model):
     website = models.URLField(blank=True, verbose_name="وب‌سایت")
     description = models.TextField(blank=True, verbose_name="توضیحات")
     is_active = models.BooleanField(default=True, verbose_name="فعال")
+    logo = models.ImageField(upload_to="companies_logos",blank=True, null=True, verbose_name="لوگو شرکت")
+
+
 
     class Meta:
         verbose_name = "شرکت"

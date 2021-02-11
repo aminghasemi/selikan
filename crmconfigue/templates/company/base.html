@@ -14,8 +14,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/vendors.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/charts/apexcharts.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/extensions/swiper.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/pickers/datepicker-jalali/bootstrap-datepicker.min.css' %}">
-
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -34,14 +32,14 @@
     <link rel="stylesheet" href="{% static 'admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css' %}">
 
 
-    <!-- END: Page CSS-->
-    <script type="text/javascript" src="/my_admin/jsi18n/"></script>
-    <script type="text/javascript" src="/media/admin/js/core.js"></script>
-    <link rel="stylesheet" type="text/css" href="/media/admin/css/forms.css"/>
-    <link rel="stylesheet" type="text/css" href="/media/admin/css/base.css"/>
-    <link rel="stylesheet" type="text/css" href="/media/admin/css/global.css"/>
-    <link rel="stylesheet" type="text/css" href="/media/admin/css/widgets.css"/>
-    {{form.media}}
+
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/vendors.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/pickers/pickadate/pickadate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/pickers/daterange/daterangepicker.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/pickers/datepicker-jalali/bootstrap-datepicker.min.css' %}">
+    <!-- END: Vendor CSS-->
 
   </head>
   <!-- END: Head-->
@@ -73,7 +71,7 @@
                 </div>
               </li>
               <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                  <div class="user-nav d-sm-flex d-none"><span class="user-name">{{user.get_full_name}}</span><span class="user-status text-muted">کاربر</span></div><span><img class="round" src="{% static 'frest/assets/images/portrait/small/avatar-s-11.jpg' %}" alt="avatar" height="40" width="40"></span></a>
+                  <div class="user-nav d-sm-flex d-none"><span class="user-name">{{user.get_full_name}}</span><span class="user-status text-muted">کاربر</span></div><span><img class="round" src="{{user.thumbnail.url}}" alt="avatar" height="40" width="40"></span></a>
                 <div class="dropdown-menu pb-0"><a class="dropdown-item" href="{% url 'common:profile' %}"><i class="bx bx-user mr-50"></i> ویرایش پروفایل</a>
                   <div class="dropdown-divider mb-0"></div><a class="dropdown-item" href="{% url 'logout' %}"><i class="bx bx-power-off mr-50"></i> خروج</a>
                 </div>
@@ -122,8 +120,6 @@
     <!-- BEGIN: Page Vendor JS-->
     <script src="{% static 'frest/assets/vendors/js/charts/apexcharts.min.js' %}"></script>
     <script src="{% static 'frest/assets/vendors/js/extensions/swiper.min.js' %}"></script>
-    <script src="{% static 'frest/assets/vendors/js/pickers/datepicker-jalali/bootstrap-datepicker.min.js' %}"></script>
-    <script src="{% static 'frest/assets/vendors/js/pickers/datepicker-jalali/bootstrap-datepicker.fa.min.js' %}"></script>
     <script src="{% static 'frest/assets/vendors/js/forms/repeater/jquery.repeater.min.js' %}"></script>
     <!-- END: Page Vendor JS-->
 
@@ -143,6 +139,23 @@
     <!-- END: Page JS-->
 
 
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{% static 'frest/assets/vendors/js/pickers/pickadate/picker.js' %}"></script>
+    <script src="{% static 'frest/assets/vendors/js/pickers/pickadate/picker.date.js' %}"></script>
+    <script src="{% static 'frest/assets/vendors/js/pickers/pickadate/picker.time.js' %}"></script>
+    <script src="{% static 'frest/assets/vendors/js/pickers/pickadate/legacy.js' %}"></script>
+    <script src="{% static 'frest/assets/vendors/js/pickers/daterange/moment.min.js' %}"></script>
+    <script src="{% static 'frest/assets/vendors/js/pickers/daterange/daterangepicker.js' %}"></script>
+    <script src="{% static 'frest/assets/vendors/js/pickers/datepicker-jalali/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'frest/assets/vendors/js/pickers/datepicker-jalali/bootstrap-datepicker.fa.min.js' %}"></script>
+    <!-- END: Page Vendor JS-->
+
+
+    <!-- BEGIN: Page JS-->
+    <script src="{% static 'frest/assets/js/scripts/pickers/dateTime/pick-a-datetime.js' %}"></script>
+    <!-- END: Page JS-->
+		<script src="{% static 'admin/js/django_jalali.min.js' %}"></script>
 
   </body>
   <!-- END: Body-->

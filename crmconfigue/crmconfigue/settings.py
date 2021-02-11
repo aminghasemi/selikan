@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'django_jalali',
     'jalali_date',
     'common.apps.CommonConfig',
@@ -56,7 +57,6 @@ INSTALLED_APPS = [
     'invoice.apps.InvoiceConfig',
 
     # third party apps 
-    'django_extensions',
     'widget_tweaks',
     'crispy_forms',
     'django_filters',

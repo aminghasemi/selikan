@@ -29,7 +29,7 @@ class TaskList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
 
 class TaskCreate(EnrollMixin, LoginRequiredMixin, CreateView):
     model=Task
-    fields=["title", "status", "priority","due_date", "account", "description", "assigned_to"]
+    form_class=TaskForm
     template_name="company/task-create.html"
     def get_queryset(self):
         global company
@@ -55,7 +55,7 @@ class TaskCreate(EnrollMixin, LoginRequiredMixin, CreateView):
         return reverse_lazy('task:task', kwargs={'slug': slug}, current_app='task')
 class TaskUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
     model=Task
-    fields=["title", "status", "priority","due_date", "account", "description", "assigned_to","done_by", "done_on"]
+    form_class=TaskForm
     template_name = "company/task-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')

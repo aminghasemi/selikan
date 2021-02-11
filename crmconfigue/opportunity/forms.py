@@ -2,13 +2,16 @@ from .models import Opportunity, OpportunityStatus, OpportunitySource
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
-
+from jalali_date.fields import JalaliDateField, SplitJalaliDateTimeField
+from jalali_date.widgets import AdminJalaliDateWidget, AdminSplitJalaliDateTime
 
 class OpportunityForm(forms.ModelForm):
     class Meta:
         model = Opportunity
         fields=("name","account","status","source","amount","probability","contacts","converted_by","closed_on","description","assigned_to","is_active","tags","teams")
-
+    def __init__(self, *args, **kwargs):
+        super(OpportunityForm, self).__init__(*args, **kwargs)
+        self.fields['closed_on'] = JalaliDateField(label="تاریخ تکمیل",widget=AdminJalaliDateWidget,required=False) 
 class OpportunityStatusForm(forms.ModelForm):
     class Meta:
         model = OpportunityStatus
