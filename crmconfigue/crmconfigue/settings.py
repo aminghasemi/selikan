@@ -55,6 +55,9 @@ INSTALLED_APPS = [
     'payment.apps.PaymentConfig',
     'deals.apps.DealsConfig',
     'invoice.apps.InvoiceConfig',
+    'docs.apps.DocsConfig',
+    'target.apps.TargetConfig',
+
 
     # third party apps 
     'widget_tweaks',

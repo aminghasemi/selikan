@@ -103,7 +103,7 @@ class DealsList(EnrollMixin, LoginRequiredMixin,ListView):
 class DealCreate(LoginRequiredMixin, CreateView):
     model=Deal
     form_class = DealForm
-    template_name="company/deal/deal-create-update.html"
+    template_name="company/deal/deal-create.html"
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -132,7 +132,7 @@ class DealCreate(LoginRequiredMixin, CreateView):
 class DealUpdate(LoginRequiredMixin, UpdateView):
     model=Deal
     form_class = DealForm
-    template_name = "company/deal/deal-create-update.html"
+    template_name = "company/deal/deal-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('deals:deals', kwargs={'slug': slug}, current_app='deals')
@@ -148,6 +148,8 @@ class DealUpdate(LoginRequiredMixin, UpdateView):
         context['form'].fields['assigned_to'].queryset = company.staff_enroll.filter(company=company)
         context['form'].fields['teams'].queryset = company.companyteams.filter(company=company)
         context['company'] = company
+        pk=self.kwargs.get('pk')
+        context['docs']=company.companydocs.filter(deals_id=pk)
         return context
 class DealDelete(LoginRequiredMixin, DeleteView):
     model=Deal

@@ -40,12 +40,12 @@ class Opportunity(models.Model):
     account = models.ForeignKey(Account,related_name="opportunities",on_delete=models.SET_NULL,null=True, blank=True,verbose_name="مشتری")
     status = models.ForeignKey(OpportunityStatus,blank=True, related_name="Opportunity_status",on_delete=models.SET_NULL, null=True,verbose_name="مرحله")
     source = models.ForeignKey(OpportunitySource,related_name="Opportunity_source",on_delete=models.SET_NULL, null=True, blank=True, verbose_name="منبع")
-    amount = models.FloatField(blank=True, verbose_name="مبلغ")
-    probability = models.IntegerField(default=0, blank=True, verbose_name="احتمال")
+    amount = models.FloatField(blank=True,null=True, verbose_name="مبلغ")
+    probability = models.IntegerField(default=0, blank=True,null=True, verbose_name="احتمال")
     contacts = models.ForeignKey(Contact,blank=True, on_delete=models.SET_NULL, null=True, verbose_name="شخص")
     converted_by = models.ForeignKey(User,related_name="Opportunity_converted_by", on_delete=models.SET_NULL, null=True, blank=True, verbose_name="تکمیل‌شده توسط")
-    closed_on = models.DateField(blank=True, verbose_name="تاریخ تکمیل")
-    description = models.TextField(blank=True, verbose_name="توضیحات")
+    closed_on = models.DateField(blank=True,null=True, verbose_name="تاریخ تکمیل")
+    description = models.TextField(blank=True,null=True, verbose_name="توضیحات")
     assigned_to = models.ForeignKey(User,blank=True, on_delete=models.SET_NULL, null=True, related_name="opportunity_assigned_to", verbose_name="محول شده به")
     created_by = models.ForeignKey(User,related_name="opportunity_created_by", on_delete=models.SET_NULL, null=True, verbose_name="ایجاد شده توسط")
     created_on = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
@@ -53,6 +53,7 @@ class Opportunity(models.Model):
     tags = models.ForeignKey(Tags,on_delete=models.SET_NULL, null=True, blank=True, verbose_name="تگ‌ها")
     teams = models.ForeignKey(Teams,on_delete=models.SET_NULL, null=True,blank=True, related_name="oppurtunity_teams", verbose_name="تیم")
     company = models.ForeignKey(Company, related_name= "companyopportunity", on_delete=models.SET_NULL, null=True,  blank=True, verbose_name="کاربر سایت")
+    archive = models.BooleanField(default=False, verbose_name="بایگانی شود؟")
 
     class Meta:
         ordering = ["-created_on"]

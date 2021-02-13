@@ -13,25 +13,21 @@
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th>نام مشتری</th>
-                      <th>موبایل</th>
-                      <th>ایمیل</th>
-                      <th>محول شده به</th>
+                      <th>عنوان</th>
+                      <th>فایل</th>
+                      <th>توضیحات</th>
                       <th>عملیات</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {% for Contacts in object_list %}
+                    {% for doc in object_list %}
                       <tr>
-                        <td><a href="#">{{Contacts.first_name}} {{Contacts.last_name}}</a></td>
-                        <td>{{Contacts.phone}}</td>
-                        <td>{{Contacts.email}}</td>
-                        <td>{{Contacts.assigned_to.get_full_name}}</td>
+                        <td><a href="{% url 'doc:doc-update' company.slug doc.pk %}">{{doc.title}}</a></td>
+                        <td>{{doc.file}}</td>
+                        <td>{{doc.description}}</td>
                         <td>
-                            {% if user.is_superuser %}
-                            <a class="badge" href="{% url 'contacts:contact-update' company.slug Contacts.pk %}">ویرایش</a>
-                            <a class="badge" href="{% url 'contacts:contact-delete' company.slug Contacts.pk %}">حذف</a>
-                            {% endif %}
+                            <a class="badge" href="{% url 'doc:doc-update' company.slug doc.pk %}">ویرایش</a>
+                            <a class="badge" href="{% url 'doc:doc-delete' company.slug doc.pk %}">حذف</a>
                         </td>
                       </tr>
                     {% endfor %}

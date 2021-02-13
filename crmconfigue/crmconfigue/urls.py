@@ -31,6 +31,7 @@ urlpatterns = [
     path('<slug:slug>/tasks/', include('tasks.urls')),
     path('<slug:slug>/payment/', include('payment.urls')),
     path('<slug:slug>/invoice/', include('invoice.urls')),
+    path('<slug:slug>/docs/', include('docs.urls')),
     path('login/', Login.as_view(), name='login'),
     path('register/', Register.as_view(), name='register'),
     path('', include('django.contrib.auth.urls')),

@@ -153,7 +153,7 @@ def activate(request, uidb64, token):
 
 
 class ProductsList(EnrollMixin, LoginRequiredMixin,ListView):
-    template_name = 'company/products.html'
+    template_name = 'company/common/products.html'
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -169,7 +169,7 @@ class ProductsList(EnrollMixin, LoginRequiredMixin,ListView):
 class ProductCreate(LoginRequiredMixin, CreateView):
     model=Product
     fields=["name", "code", "unit", "price", "description"]
-    template_name="company/product-create-update.html"
+    template_name="company/common/product-create-update.html"
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -194,7 +194,7 @@ class ProductCreate(LoginRequiredMixin, CreateView):
 class ProductUpdate(LoginRequiredMixin, UpdateView):
     model=Product
     fields=["name", "code", "unit", "price", "description"]
-    template_name = "company/product-create-update.html"
+    template_name = "company/common/product-create-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('common:products', kwargs={'slug': slug}, current_app='common')
@@ -209,7 +209,7 @@ class ProductUpdate(LoginRequiredMixin, UpdateView):
         return context
 class ProductDelete(LoginRequiredMixin, DeleteView):
     model=Product
-    template_name = "company/product_confirm_delete.html"
+    template_name = "company/common/product_confirm_delete.html"
     success_url= reverse_lazy('common:products')
     def get_queryset(self):
         global company
@@ -225,7 +225,7 @@ class ProductDelete(LoginRequiredMixin, DeleteView):
         return reverse_lazy('common:products', kwargs={'slug': slug}, current_app='common')
 
 class CountriesList(EnrollMixin, LoginRequiredMixin,ListView):
-    template_name = 'company/countries.html'
+    template_name = 'company/common/countries.html'
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -241,7 +241,7 @@ class CountriesList(EnrollMixin, LoginRequiredMixin,ListView):
 class CountryCreate(LoginRequiredMixin, CreateView):
     model=Country
     fields=["name", "short_name"]
-    template_name="company/country-create-update.html"
+    template_name="company/common/country-create-update.html"
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -266,7 +266,7 @@ class CountryCreate(LoginRequiredMixin, CreateView):
 class CountryUpdate(LoginRequiredMixin, UpdateView):
     model=Country
     fields=["name", "short_name"]
-    template_name = "company/country-create-update.html"
+    template_name = "company/common/country-create-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('common:countries', kwargs={'slug': slug}, current_app='common')
@@ -281,7 +281,7 @@ class CountryUpdate(LoginRequiredMixin, UpdateView):
         return context
 class CountryDelete(LoginRequiredMixin, DeleteView):
     model=Country
-    template_name = "company/country_confirm_delete.html"
+    template_name = "company/common/country_confirm_delete.html"
     success_url= reverse_lazy('common:countries')
     def get_queryset(self):
         global company

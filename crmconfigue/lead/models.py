@@ -55,6 +55,7 @@ class Lead(models.Model):
     company = models.ForeignKey(Company, on_delete=models.SET_NULL, null=True, related_name="companyleads", blank=True, verbose_name="کاربر سایت")
     converted_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="lead_converted_by", blank=True, verbose_name="تکمیل‌شده توسط")
     closed_on = models.DateField(blank=True, verbose_name="تاریخ تکمیل")
+    archive = models.BooleanField(default=False, verbose_name="بایگانی شود؟")
 
 
     class Meta:

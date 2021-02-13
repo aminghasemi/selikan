@@ -48,6 +48,7 @@ class Account(models.Model):
     tags = models.ForeignKey(Tags, blank=True, on_delete=models.SET_NULL,null=True, verbose_name="تگ‌ها")
     contacts = models.ForeignKey("contacts.Contact",on_delete=models.SET_NULL,null=True, blank=True, related_name="account_contacts", verbose_name="شخص مرتبط")
     company = models.ForeignKey(Company, related_name= "companyaccounts",  on_delete=models.SET_NULL,null=True,  blank=True, verbose_name="کاربر سایت")
+    archive = models.BooleanField(default=False, verbose_name="بایگانی شود؟")
 
     def __str__(self):
         return self.name

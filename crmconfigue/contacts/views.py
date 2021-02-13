@@ -12,7 +12,7 @@ from .forms import ContactForm
 # Create your views here.
 
 class ContactsList(EnrollMixin, LoginRequiredMixin,ListView):
-    template_name = 'company/contacts.html'
+    template_name = 'company/contacts/contacts.html'
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -28,7 +28,7 @@ class ContactsList(EnrollMixin, LoginRequiredMixin,ListView):
 class ContactCreate(LoginRequiredMixin, CreateView):
     model=Contact
     form_class=ContactForm
-    template_name="company/contact-create-update.html"
+    template_name="company/contacts/contact-create.html"
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -53,7 +53,7 @@ class ContactCreate(LoginRequiredMixin, CreateView):
 class ContactUpdate(LoginRequiredMixin, UpdateView):
     model=Contact
     form_class=ContactForm
-    template_name = "company/contact-create-update.html"
+    template_name = "company/contacts/contact-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('contacts:contacts', kwargs={'slug': slug}, current_app='contacts')
@@ -65,10 +65,12 @@ class ContactUpdate(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
         context['company'] = company
+        pk=self.kwargs.get('pk')
+        context['docs']=company.companydocs.filter(contacts_id=pk)
         return context
 class ContactDelete(LoginRequiredMixin, DeleteView):
     model=Contact
-    template_name = "company/contact_confirm_delete.html"
+    template_name = "company/contacts/contact_confirm_delete.html"
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')

@@ -27,7 +27,7 @@ class AccountsList(EnrollMixin, LoginRequiredMixin,ListView):
 class AccountCreate(LoginRequiredMixin, CreateView):
     model=Account
     form_class = AccountForm
-    template_name="company/accounts/account-create-update.html"
+    template_name="company/accounts/account-create.html"
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -52,7 +52,7 @@ class AccountCreate(LoginRequiredMixin, CreateView):
 class AccountUpdate(LoginRequiredMixin, UpdateView):
     model=Account
     form_class = AccountForm
-    template_name = "company/accounts/account-create-update.html"
+    template_name = "company/accounts/account-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('accounts:accounts', kwargs={'slug': slug}, current_app='accounts')
@@ -64,6 +64,8 @@ class AccountUpdate(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
         context['company'] = company
+        pk=self.kwargs.get('pk')
+        context['docs']=company.companydocs.filter(account_id=pk)
         return context
 class AccountDelete(LoginRequiredMixin, DeleteView):
     model=Account

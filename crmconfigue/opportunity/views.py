@@ -176,7 +176,7 @@ class OpportunityList(EnrollMixin, LoginRequiredMixin,ListView):
 class OpportunityCreate(EnrollMixin, LoginRequiredMixin, CreateView):
     model=Opportunity
     form_class=OpportunityForm
-    template_name="company/opportunity/opportunity-create-update.html"
+    template_name="company/opportunity/opportunity-create.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('opportunity:opportunity', kwargs={'slug': slug}, current_app='opportunity')
@@ -210,7 +210,7 @@ class OpportunityCreate(EnrollMixin, LoginRequiredMixin, CreateView):
 class OpportunityUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
     model=Opportunity
     form_class=OpportunityForm
-    template_name = "company/opportunity/opportunity-create-update.html"
+    template_name = "company/opportunity/opportunity-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('opportunity:opportunity', kwargs={'slug': slug}, current_app='opportunity')
@@ -230,6 +230,8 @@ class OpportunityUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
         context['form'].fields['contacts'].queryset = company.companycontacts.filter(company=company)
         context['form'].fields['tags'].queryset = company.companytags.filter(company=company)
         context['company'] = company
+        pk=self.kwargs.get('pk')
+        context['docs']=company.companydocs.filter(opportunities_id=pk)
         return context
 
 class OpportunityDelete(EnrollMixin, LoginRequiredMixin, DeleteView):

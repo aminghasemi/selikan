@@ -42,20 +42,52 @@
             <div class="col-12">
               {{ form.description|as_crispy_field }}
             </div>
+
+
+
+          <div class="col-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title mb-0 float-left">فایل‌های مرتبط با وظیفه</h3>
+                 </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover table-light">
+                  <thead>
+                    <tr>
+                      <th>عنوان</th>
+                      <th>توضیحات</th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for doc in docs %}
+                      <tr>
+                        <td><a href="{% url 'doc:doc-update' company.slug doc.pk %}">{{doc.title}}</a></td>
+                        <td>{{doc.description}}</td>
+                        <td>
+                            <a class="badge badge-info" href="{% url 'doc:doc-update' company.slug doc.pk %}">ویرایش</a>
+                            <a class="badge badge-danger" href="{% url 'doc:doc-delete' company.slug doc.pk %}">حذف</a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            <!-- /.card -->
+          </div>
+          </div>
+
+
+
+            <div class="col-12">
+              {{ form.archive|as_crispy_field }}
+            </div>
           </div>
               <button class="btn btn-success">ذخیره</button>
             </form>
-            <div class="input-group">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="far fa-calendar-alt"></i>
-                  </span>
-                </div>
-                <input type="text" class=".pdatepicker">
-              </div>
       </div>
-      <input type="text" class="persiandate" placeholder="تاریخ" id=".pdatepicker">
     </div>
   </div>
 </div>

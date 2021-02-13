@@ -28,6 +28,8 @@ class Contact(models.Model):
     billing_country = models.ForeignKey(Country,  on_delete=models.SET_NULL,null=True, blank=True, verbose_name="کشور")
     company = models.ForeignKey(Company, related_name="companycontacts",  on_delete=models.SET_NULL,null=True, blank=True, verbose_name="شرکت")
     birthday=models.DateField(null=True, blank=True, verbose_name="تاریخ تولد")
+    archive = models.BooleanField(default=False, verbose_name="بایگانی شود؟")
+
     def __str__(self):
         return self.first_name
     def jcreated_on(self):

@@ -9,7 +9,7 @@ from jalali_date.widgets import AdminJalaliDateWidget, AdminSplitJalaliDateTime
 class DealForm(forms.ModelForm):
     class Meta:
         model = Deal
-        fields=("title","pipeline_status", "description", "assigned_to","account","deal_amount", "is_active", "closed_on","teams")
+        fields=("title","pipeline_status", "description", "assigned_to","account","deal_amount", "is_active", "closed_on","teams", "archive")
     def __init__(self, *args, **kwargs):
         super(DealForm, self).__init__(*args, **kwargs)
         self.fields['closed_on'] = JalaliDateField(label="تاریخ تکمیل",widget=AdminJalaliDateWidget,required=False)  

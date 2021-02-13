@@ -12,7 +12,7 @@ from common.decorators import company_enrolled
 # Create your views here.
 
 class InvoiceList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
-    template_name = 'company/invoices.html'
+    template_name = 'company/invoice/invoices.html'
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -28,7 +28,7 @@ class InvoiceList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
 class InvoiceCreate(EnrollMixin, LoginRequiredMixin, CreateView):
     model=Invoice
     fields=["title", "invoice_number", "status","date", "account", "description", "teams", "tax"]
-    template_name="company/invoice-create-update.html"
+    template_name="company/invoice/invoice-create-update.html"
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -53,7 +53,7 @@ class InvoiceCreate(EnrollMixin, LoginRequiredMixin, CreateView):
 class InvoiceUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
     model=Invoice
     fields=["title", "invoice_number", "status","date", "account", "description", "teams", "tax"]
-    template_name = "company/invoice-create-update.html"
+    template_name = "company/invoice/invoice-create-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('invoice:invoice', kwargs={'slug': slug}, current_app='invoice')
@@ -71,7 +71,7 @@ class InvoiceUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
   
 class InvoiceDelete(EnrollMixin, LoginRequiredMixin, DeleteView):
     model=Invoice
-    template_name = "company/task_confirm_delete.html"
+    template_name = "company/invoice/invoice_confirm_delete.html"
 
     def get_queryset(self):
         global company
@@ -98,7 +98,7 @@ class InvoiceDelete(EnrollMixin, LoginRequiredMixin, DeleteView):
 class Invoice_itemCreate(EnrollMixin, LoginRequiredMixin, CreateView):
     model=Invoice
     fields=["product_name", "amount", "total_item_amount","date", "account", "description", "teams", "tax"]
-    template_name="company/invoice-create.html"
+    template_name="company/invoice/invoice-create.html"
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')

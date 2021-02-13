@@ -9,6 +9,7 @@ from django.urls import reverse
 from extensions.utils import jalali_converter
 from jalali_date import datetime2jalali, date2jalali
 from django_jalali.db import models as jmodels
+
 class Task(models.Model):
 
     STATUS_CHOICES = (
@@ -33,8 +34,10 @@ class Task(models.Model):
     done_by = models.ForeignKey(User, null=True,related_name="task_done_by", on_delete=models.SET_NULL, blank=True, verbose_name="تکمیل‌شده توسط")
     description = models.TextField(blank=True, verbose_name="توضیحات")
     done_on=models.DateField(null=True, blank=True, verbose_name="تاریخ تکمیل")
+    archive = models.BooleanField(default=False, verbose_name="بایگانی شود؟")
+
     def __str__(self):
-        return "%s, %s"%(self.title, self.due_date)
+        return (self.title)
 
     def jcreated_on(self):
         return jalali_converter(self.created_on)

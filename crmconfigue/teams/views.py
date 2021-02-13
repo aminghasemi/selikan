@@ -11,7 +11,7 @@ from .forms import TeamForm
 # Create your views here.
 
 class TeamsList(EnrollMixin, LoginRequiredMixin,ListView):
-    template_name = 'company/teams.html'
+    template_name = 'company/teams/teams.html'
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -27,7 +27,7 @@ class TeamsList(EnrollMixin, LoginRequiredMixin,ListView):
 class TeamCreate(LoginRequiredMixin, CreateView):
     model=Teams
     form_class=TeamForm
-    template_name="company/team-create-update.html"
+    template_name="company/teams/team-create-update.html"
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -52,7 +52,7 @@ class TeamCreate(LoginRequiredMixin, CreateView):
 class TeamUpdate(LoginRequiredMixin, UpdateView):
     model=Teams
     form_class=TeamForm
-    template_name = "company/team-create-update.html"
+    template_name = "company/teams/team-create-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('teams:teams', kwargs={'slug': slug}, current_app='teams')
@@ -67,7 +67,7 @@ class TeamUpdate(LoginRequiredMixin, UpdateView):
         return context
 class TeamDelete(LoginRequiredMixin, DeleteView):
     model=Teams
-    template_name = "company/team_confirm_delete.html"
+    template_name = "company/teams/team_confirm_delete.html"
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')

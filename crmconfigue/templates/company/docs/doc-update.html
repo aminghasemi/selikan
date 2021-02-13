@@ -1,0 +1,57 @@
+{% extends 'company/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+ایجاد مشتری جدید
+{% endblock %}
+
+
+{% block main %}
+<div class="col-md-12">
+  <div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title mb-0 float-left">اضافه کردن کار جدید</h3>
+    </div>
+      <div class="card-body">
+        <form method="post" enctype="multipart/form-data"> {% csrf_token %}
+          <div class="row">
+            <div class="col-3">
+              {{ form.title|as_crispy_field }}
+            </div>
+            <div class="col-3">
+              {{ form.leads|as_crispy_field }}
+            </div>
+            <div class="col-3">
+              {{ form.account|as_crispy_field }}
+            </div>
+            <div class="col-3">
+              {{ form.contacts|as_crispy_field }}
+            </div>
+            <div class="col-3">
+              {{ form.deals|as_crispy_field }}
+            </div>
+            <div class="col-3">
+              {{ form.opportunities|as_crispy_field}}
+            </div>
+            <div class="col-3">
+              {{ form.tasks|as_crispy_field}}
+            </div>
+            <div class="col-3">
+              {{ form.teams|as_crispy_field}}
+            </div>
+            <div class="col-12">
+              {{ form.doc|as_crispy_field}}
+            </div>
+            <div class="col-12">
+              {{ form.description|as_crispy_field }}
+            </div>
+          </div>
+            <div class="col-12">
+              {{ form.archive|as_crispy_field}}
+            </div>
+              <button class="btn btn-success">ذخیره</button>
+            </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

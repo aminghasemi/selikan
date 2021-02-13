@@ -97,6 +97,16 @@
             </li>
           </ul>
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
+            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="box"></i><span class="menu-title" data-i18n="Dashboard">فایل‌ها</span></a>
+              <ul class="menu-content">
+                <li><a href="{% url 'doc:docs' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">لیست‌ فایل‌ها</span></a>
+                </li>
+                <li><a href="{% url 'doc:doc-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد فایل جدید</span></a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
             <li class=" nav-item"><a href="{% url 'common:company-update' company.slug %}"><i class="menu-livicon" data-icon="gears"></i><span class="menu-title" data-i18n="Dashboard">تنظیمات CRM</span></a>
           </ul>
         </div>

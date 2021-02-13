@@ -175,7 +175,7 @@ class LeadsList(EnrollMixin, LoginRequiredMixin,ListView):
 class LeadCreate(LoginRequiredMixin, CreateView):
     model=Lead
     form_class=LeadForm
-    template_name="company/lead/lead-create-update.html"
+    template_name="company/lead/lead-create.html"
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -207,7 +207,7 @@ class LeadCreate(LoginRequiredMixin, CreateView):
 class LeadUpdate(LoginRequiredMixin, UpdateView):
     model=Lead
     form_class= LeadForm
-    template_name = "company/lead/lead-create-update.html"
+    template_name = "company/lead/lead-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('leads:leads', kwargs={'slug': slug}, current_app='leads')
@@ -226,6 +226,8 @@ class LeadUpdate(LoginRequiredMixin, UpdateView):
         context['form'].fields['teams'].queryset = company.companyteams.filter(company=company)
         context['form'].fields['tags'].queryset = company.companytags.filter(company=company)
         context['company'] = company
+        pk=self.kwargs.get('pk')
+        context['docs']=company.companydocs.filter(leads_id=pk)
         return context
 class LeadDelete(LoginRequiredMixin, DeleteView):
     model=Lead

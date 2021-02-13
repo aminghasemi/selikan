@@ -33,7 +33,7 @@ class Deal(models.Model):
     description = models.TextField(blank=True,  verbose_name="توضیحات")
     assigned_to = models.ForeignKey(User,on_delete=models.SET_NULL,null=True, related_name="deal_assigned_users", blank=True, verbose_name="محول شده به")
     account_name = models.CharField(max_length=255,  blank=True, verbose_name="نام حساب")
-    deal_amount = models.FloatField(blank=True, verbose_name="مبلغ معامله")
+    deal_amount = models.FloatField(blank=True, null=True, verbose_name="مبلغ معامله")
     created_by = models.ForeignKey(User, related_name="deal_created_by", on_delete=models.CASCADE, verbose_name="ساخته شده توسط")
     created_on = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
     is_active = models.BooleanField(default=True, verbose_name="فعال")
@@ -43,6 +43,7 @@ class Deal(models.Model):
     product= models.ForeignKey(Product, on_delete=models.SET_NULL,null=True, related_name="dealproducts",  blank=True, verbose_name="محصول")
     converted_by = models.ForeignKey(User, on_delete=models.SET_NULL,null=True,related_name="deal_converted_by", blank=True, verbose_name="تکمیل‌شده توسط")
     closed_on = models.DateField(blank=True,null=True, verbose_name="تاریخ تکمیل")
+    archive = models.BooleanField(default=False, verbose_name="بایگانی شود؟")
 
 
     class Meta:

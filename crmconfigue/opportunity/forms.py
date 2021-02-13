@@ -8,7 +8,7 @@ from jalali_date.widgets import AdminJalaliDateWidget, AdminSplitJalaliDateTime
 class OpportunityForm(forms.ModelForm):
     class Meta:
         model = Opportunity
-        fields=("name","account","status","source","amount","probability","contacts","converted_by","closed_on","description","assigned_to","is_active","tags","teams")
+        fields=("name","account","status","source","amount","probability","contacts","converted_by","closed_on","description","assigned_to","is_active","tags","teams", "archive")
     def __init__(self, *args, **kwargs):
         super(OpportunityForm, self).__init__(*args, **kwargs)
         self.fields['closed_on'] = JalaliDateField(label="تاریخ تکمیل",widget=AdminJalaliDateWidget,required=False) 
