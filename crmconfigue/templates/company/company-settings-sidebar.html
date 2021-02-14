@@ -13,6 +13,16 @@
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
+            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="gear"></i><span class="menu-title" data-i18n="Dashboard">تنظیمات اهداف</span></a>
+              <ul class="menu-content">
+                <li><a href="{% url 'targets:targetsubjectlist' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">موضوعات اهدف</span></a>
+                </li>
+                <li><a href="{% url 'targets:targetsubjects-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد موضوع جدید</span></a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
             <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="gear"></i><span class="menu-title" data-i18n="Dashboard">تنظیمات معاملات</span></a>
               <ul class="menu-content">
                 <li><a href="{% url 'deals:pipelines' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">مراحل فروش</span></a>

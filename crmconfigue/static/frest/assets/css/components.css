@@ -36,8 +36,8 @@
 - Daterange CSS
 -------------------------------------------------------------------*/
 
-@import url(font/primary-iran-yekan.css);
-@import url(font/secondary-iran-yekan.css);
+@import url(font/primary-sahel.css);
+@import url(font/secondary-shabnam.css);
 
 /* Template Css */
 /* ----------- */
@@ -725,7 +725,7 @@ body.footer-hidden footer {
 	-webkit-align-items: center;
 	-ms-flex-align: center;
 	align-items: center;
-	color: #8494A7;
+	color: #d4dbe4;
 	padding: 10px 12px;
 }
 

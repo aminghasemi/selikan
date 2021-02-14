@@ -17,6 +17,20 @@
             </li>
           </ul>
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
+            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="trophy"></i><span class="menu-title" data-i18n="Dashboard">هدف‌گذاری</span></a>
+              <ul class="menu-content">
+                <li><a href="{% url 'targets:companytargets' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">لیست اهداف شرکت</span></a>
+                </li>
+                <li><a href="{% url 'targets:companytargets-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد هدف شرکت جدید</span></a>
+                </li>
+                <li><a href="{% url 'targets:stafftargets' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">لیست اهداف کارمندان</span></a>
+                </li>
+                <li><a href="{% url 'targets:stafftargets-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد هدف کارمند جدید</span></a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
             <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="us-dollar"></i><span class="menu-title" data-i18n="Dashboard">معاملات</span></a>
               <ul class="menu-content">
                 <li><a href="{% url 'deals:deals' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">لیست معاملات</span></a>
@@ -102,6 +116,16 @@
                 <li><a href="{% url 'doc:docs' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">لیست‌ فایل‌ها</span></a>
                 </li>
                 <li><a href="{% url 'doc:doc-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد فایل جدید</span></a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
+            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="notebook"></i><span class="menu-title" data-i18n="Dashboard">گزارش‌ها</span></a>
+              <ul class="menu-content">
+                <li><a href="{% url 'reports:dealreports' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">گزارش‌های معاملات</span></a>
+                </li>
+                <li><a href="{% url 'reports:dealreport-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد گزارش معاملات جدید</span></a>
                 </li>
               </ul>
             </li>

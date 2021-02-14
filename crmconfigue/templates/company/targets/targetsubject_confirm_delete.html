@@ -1,13 +1,13 @@
-{% extends 'company/base.html' %}
+{% extends 'company/company-settings-base.html' %}
 
 {% block title %}
-لیست مشتریان
+لیست محصولات/خدمات شرکت
 {% endblock %}
 
 
 {% block main %}
 <form method="post">{% csrf_token %}
-    <p>آیا از حذف سرنخ "{{object}}" اطمینان دارید؟</p>
+    <p>آیا از حذف این موضوع "{{object}}" اطمینان دارید؟</p>
     <button type="submit" class="btn btn-primary  btn-sm">حذف</button>
 </form>
 

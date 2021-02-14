@@ -56,7 +56,8 @@ INSTALLED_APPS = [
     'deals.apps.DealsConfig',
     'invoice.apps.InvoiceConfig',
     'docs.apps.DocsConfig',
-    'target.apps.TargetConfig',
+    'targets.apps.TargetsConfig',
+    'reports.apps.ReportsConfig',
 
 
     # third party apps 

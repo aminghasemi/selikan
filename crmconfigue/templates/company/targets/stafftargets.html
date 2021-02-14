@@ -1,0 +1,50 @@
+{% extends 'company/base.html' %}
+
+{% block title %}داشبورد اصلی{% endblock %}
+
+
+{% block main %}
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>نام کارمند</th>
+                      <th>عنوان هدف</th>
+                      <th>موضوع</th>
+                      <th>میزان هدف</th>
+                      <th>وضعیت فعلی</th>
+                      <th>تاریخ شروع</th>
+                      <th>تاریخ پایان</th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for targets in object_list %}
+                      <tr>
+                        <td>{{targets.staff}}</td>
+                        <td><a href="{% url 'targets:stafftargets-update' company.slug targets.pk %}">{{targets.title}}</a></td>
+                        <td><a class="badge badge-success" style="color:white">{{targets.target_subject}}</a></td>
+                        <td>{{targets.target}}</td>
+                        <td>{{targets.current}}</td>
+                        <td>{{targets.start_date}}</td>
+                        <td>{{targets.end_date}}</td>
+                        <td>
+                            <a class="badge badge-warning" href="{% url 'targets:stafftargets-update' company.slug targets.pk %}">ویرایش</a>
+                            <a class="badge badge-danger" href="{% url 'targets:stafftargets-delete' company.slug targets.pk %}">حذف</a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+{% endblock %}
