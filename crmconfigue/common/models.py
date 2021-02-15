@@ -193,6 +193,8 @@ class Enrolled(models.Model):
         verbose_name = "کارمند"
         verbose_name_plural = "کارمندان"
 
+    def __str__(self):
+        return self.staff.get_full_name()
 
     def __unicode__(self):
         return u'{0}'.format(self.staff)
