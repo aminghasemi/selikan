@@ -1,0 +1,111 @@
+{% extends 'company/base.html' %}
+
+{% block title %}داشبورد اصلی{% endblock %}
+
+
+{% block main %}
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>عنوان گزارش</th>
+                      <th>مرحله سرنخ</th>
+                      <th>منبع سرنخ</th>
+                      <th>تاریخ شروع گزارش</th>
+                      <th>تاریخ پایان گزارش</th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                        <td><h5><a href="{% url 'reports:leadreport-detail' company.slug leadreport.pk %}">{{leadreport.title}}</a></h5></td>
+                        {% if leadreport.lead_status is null %}
+                        <td >کل مراحل</td>
+                        {% else %}
+                        <td>{{leadreport.lead_status}}</td>
+                        {% endif %}
+                        {% if leadreport.lead_source is null %}
+                        <td >کل منابع</td>
+                        {% else %}
+                        <td>{{leadreport.lead_source}}</td>
+                        {% endif %}
+                        <td>{{leadreport.startdate}}</td>
+                        <td>{{leadreport.enddate}}</td>
+                        <td>
+                            <a class="badge" href="{% url 'reports:leadreport-update' company.slug leadreport.pk %}">ویرایش</a>
+                            <a class="badge" href="{% url 'reports:leadreport-delete' company.slug leadreport.pk %}">حذف</a>
+                        </td>
+                      </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>عنوان معامله</th>
+                      <th>مرحله سرنخ</th>
+                      <th>منبع سرنخ</th>
+                      <th>محول شده به</th>
+                      <th> نام تیم </th>
+                      <th> تگ‌های سرنخ </th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for lead in leads %}
+                      <tr>
+                        <td><a href="{% url 'leads:lead-update' company.slug lead.pk %}">{{lead.title}}</a></td>
+                        {% if lead.lead_status.won %}
+                        <td><a class="badge badge-success" style="color:white">{{lead.lead_status}}</a></td>
+                        {% elif lead.lead_status.lost %}
+                        <td><a class="badge badge-danger" style="color:white">{{lead.lead_status}}</a></td>
+                        {% else %}
+                        <td><a class="badge badge-primary" style="color:white" >{{lead.lead_status}}</a></td>
+                        {% endif %}
+                        <td>{{lead.lead_source}} تومان </td>
+                        <td>{{lead.assigned_to.get_full_name}}</td>
+                        <td>{{lead.lead_teams}}</td>
+                        <td>{{lead.lead_tags}}</td>
+                        <td>
+                            
+                            <a class="badge badge-light-info" href="{% url 'leads:lead-update' company.slug lead.pk %}">ویرایش</a>
+                            <a class="badge badge-light-danger" href="{% url 'leads:lead-delete' company.slug lead.pk %}">حذف</a>
+                          
+                        </td>
+                    </tr>
+                    {% endfor %}
+                      <tr>
+                      <th>مجموع تعداد سرنخ‌ها</th>
+                    </tr>
+                        <td>{{total_leads_count}}</td>
+
+                    <tr>
+
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+{% endblock %}

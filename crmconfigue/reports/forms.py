@@ -1,4 +1,4 @@
-from .models import Dealreport
+from .models import Dealreport, Leadreport, Opportunityreport
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
@@ -13,11 +13,26 @@ class DealreportForm(forms.ModelForm):
     class Meta:
         model = Dealreport    
         fields=("title", "pipeline_status", "converted_by","startdate", "enddate", "product", "archive")
-#    due_date=forms.DateField(label="مهلت انجام",input_formats=MY_DATE_FORMATS,widget=forms.TextInput(attrs={'class': 'shamsi-datepicker'} ))  
-  #  done_on=forms.DateField(label="تاریخ تکمیل",input_formats=MY_DATE_FORMATS,widget=AdminJalaliDateWidget )  
     def __init__(self, *args, **kwargs):
         super(DealreportForm, self).__init__(*args, **kwargs)
         self.fields['startdate'] = JalaliDateField(label="تاریخ شروع گزارش",widget=AdminJalaliDateWidget)
         self.fields['enddate'] = JalaliDateField(label="تاریخ پایان گزارش",widget=AdminJalaliDateWidget)  
   
-#        self.fields['due_date'] = JalaliDateField(label="مهلت انجام",input_formats=MY_DATE_FORMATS,widget=forms.TextInput(attrs={'class': 'shamsi-datepicker'} ))  
+
+class LeadreportForm(forms.ModelForm):
+    class Meta:
+        model = Leadreport    
+        fields=("title", "lead_status","lead_source","lead_tags","lead_teams", "converted_by","startdate", "enddate", "archive")
+    def __init__(self, *args, **kwargs):
+        super(LeadreportForm, self).__init__(*args, **kwargs)
+        self.fields['startdate'] = JalaliDateField(label="تاریخ شروع گزارش",widget=AdminJalaliDateWidget)
+        self.fields['enddate'] = JalaliDateField(label="تاریخ پایان گزارش",widget=AdminJalaliDateWidget)  
+  
+class OpportunityreportForm(forms.ModelForm):
+    class Meta:
+        model = Opportunityreport    
+        fields=("title", "opportunity_status","opportunity_source","opportunity_tags","opportunity_teams", "converted_by","startdate", "enddate", "archive")
+    def __init__(self, *args, **kwargs):
+        super(OpportunityreportForm, self).__init__(*args, **kwargs)
+        self.fields['startdate'] = JalaliDateField(label="تاریخ شروع گزارش",widget=AdminJalaliDateWidget)
+        self.fields['enddate'] = JalaliDateField(label="تاریخ پایان گزارش",widget=AdminJalaliDateWidget)  

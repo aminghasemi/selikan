@@ -127,6 +127,14 @@
                 </li>
                 <li><a href="{% url 'reports:dealreport-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد گزارش معاملات جدید</span></a>
                 </li>
+                <li><a href="{% url 'reports:leadreports' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">گزارش‌های سرنخ‌ها</span></a>
+                </li>
+                <li><a href="{% url 'reports:leadreport-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد گزارش سرنخ جدید</span></a>
+                </li>
+                <li><a href="{% url 'reports:opportunityreports' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">گزارش‌های فرصت‌ها</span></a>
+                </li>
+                <li><a href="{% url 'reports:opportunityreport-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد گزارش فرصت جدید</span></a>
+                </li>
               </ul>
             </li>
           </ul>

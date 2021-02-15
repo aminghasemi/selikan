@@ -48,7 +48,7 @@ class LeadStatusCreate(LoginRequiredMixin, CreateView):
         return super().form_valid(form, **kwargs)
     def get_success_url(self):
         slug= self.kwargs.get('slug')
-        return reverse_lazy('lead:leadstatus', kwargs={'slug': slug}, current_app='leads')
+        return reverse_lazy('leads:leadstatus', kwargs={'slug': slug}, current_app='leads')
 
 class LeadStatusUpdate(LoginRequiredMixin, UpdateView):
     model=LeadStatus
@@ -56,7 +56,7 @@ class LeadStatusUpdate(LoginRequiredMixin, UpdateView):
     template_name = "company/lead/leadstatus-create-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')
-        return reverse_lazy('lead:leadstatus', kwargs={'slug': slug}, current_app='leads')
+        return reverse_lazy('leads:leadstatus', kwargs={'slug': slug}, current_app='leads')
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')
@@ -121,7 +121,7 @@ class LeadSourceCreate(LoginRequiredMixin, CreateView):
         return super().form_valid(form, **kwargs)
     def get_success_url(self):
         slug= self.kwargs.get('slug')
-        return reverse_lazy('lead:leadsource', kwargs={'slug': slug}, current_app='leads')
+        return reverse_lazy('leads:leadsource', kwargs={'slug': slug}, current_app='leads')
 
 class LeadSourceUpdate(LoginRequiredMixin, UpdateView):
     model=LeadSource
@@ -129,7 +129,7 @@ class LeadSourceUpdate(LoginRequiredMixin, UpdateView):
     template_name = "company/lead/leadsource-create-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')
-        return reverse_lazy('lead:leadsource', kwargs={'slug': slug}, current_app='leads')
+        return reverse_lazy('leads:leadsource', kwargs={'slug': slug}, current_app='leads')
     def get_queryset(self):
         global company
         slug= self.kwargs.get('slug')

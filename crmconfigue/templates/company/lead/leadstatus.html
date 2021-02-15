@@ -21,11 +21,11 @@
                   <tbody>
                     {% for leadstatus in object_list %}
                       <tr>
-                        <td><a href="{% url 'leads:leadstatus-update' company.slug leadstatus.pk %}">{{leadstatus.LeadStatus.title}}</a></td>
+                        <td><a href="{% url 'leads:leadstatus-update' company.slug leadstatus.pk %}">{{leadstatus.LeadStatus_title}}</a></td>
                         <td>{{leadstatus.LeadStatus_number}}</td>
                         <td>
-                            <a class="badge-warning" href="{% url 'leads:leadstatus-update' company.slug leadstatus.pk %}">ویرایش</a>
-                            <a class="badge-danger" href="{% url 'leads:leadstatus-delete' company.slug leadstatus.pk %}">حذف</a>
+                            <a class="badge badge-warning" href="{% url 'leads:leadstatus-update' company.slug leadstatus.pk %}">ویرایش</a>
+                            <a class="badge badge-danger" href="{% url 'leads:leadstatus-delete' company.slug leadstatus.pk %}">حذف</a>
                         </td>
                       </tr>
                     {% endfor %}

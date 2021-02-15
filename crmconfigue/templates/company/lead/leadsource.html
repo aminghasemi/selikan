@@ -20,10 +20,10 @@
                   <tbody>
                     {% for leadsource in object_list %}
                       <tr>
-                        <td><a href="{% url 'leads:leadsource-update' company.slug leadsource.pk %}">{{leadsource.LeadSource.title}}</a></td>
+                        <td><a href="{% url 'leads:leadsource-update' company.slug leadsource.pk %}">{{leadsource.LeadSource_title}}</a></td>
                         <td>
-                            <a class="badge-warning" href="{% url 'leads:leadsource-update' company.slug leadsource.pk %}">ویرایش</a>
-                            <a class="badge-danger" href="{% url 'leads:leadsource-delete' company.slug leadsource.pk %}">حذف</a>
+                            <a class="badge badge-warning" href="{% url 'leads:leadsource-update' company.slug leadsource.pk %}">ویرایش</a>
+                            <a class="badge badge-danger" href="{% url 'leads:leadsource-delete' company.slug leadsource.pk %}">حذف</a>
                         </td>
                       </tr>
                     {% endfor %}
