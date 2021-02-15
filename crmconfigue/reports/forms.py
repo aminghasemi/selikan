@@ -1,4 +1,4 @@
-from .models import Dealreport, Leadreport, Opportunityreport
+from .models import Dealreport, Leadreport, Opportunityreport, Taskreport, Staffreport
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
@@ -36,3 +36,21 @@ class OpportunityreportForm(forms.ModelForm):
         super(OpportunityreportForm, self).__init__(*args, **kwargs)
         self.fields['startdate'] = JalaliDateField(label="تاریخ شروع گزارش",widget=AdminJalaliDateWidget)
         self.fields['enddate'] = JalaliDateField(label="تاریخ پایان گزارش",widget=AdminJalaliDateWidget)  
+
+class TaskreportForm(forms.ModelForm):
+    class Meta:
+        model = Taskreport    
+        fields=("title", "task_status","task_priority","task_tags","task_teams", "done_by","startdate", "enddate", "archive")
+    def __init__(self, *args, **kwargs):
+        super(TaskreportForm, self).__init__(*args, **kwargs)
+        self.fields['startdate'] = JalaliDateField(label="تاریخ شروع گزارش",widget=AdminJalaliDateWidget)
+        self.fields['enddate'] = JalaliDateField(label="تاریخ پایان گزارش",widget=AdminJalaliDateWidget)  
+
+class StaffreportForm(forms.ModelForm):
+    class Meta:
+        model = Staffreport    
+        fields=("title", "staff","startdate", "enddate", "archive")
+    def __init__(self, *args, **kwargs):
+        super(StaffreportForm, self).__init__(*args, **kwargs)
+        self.fields['startdate'] = JalaliDateField(label="تاریخ شروع گزارش",widget=AdminJalaliDateWidget)
+        self.fields['enddate'] = JalaliDateField(label="تاریخ پایان گزارش",widget=AdminJalaliDateWidget)

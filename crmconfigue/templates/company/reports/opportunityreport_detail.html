@@ -1,0 +1,114 @@
+{% extends 'company/base.html' %}
+
+{% block title %}داشبورد اصلی{% endblock %}
+
+
+{% block main %}
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>عنوان گزارش</th>
+                      <th>مرحله سرنخ</th>
+                      <th>منبع سرنخ</th>
+                      <th>تاریخ شروع گزارش</th>
+                      <th>تاریخ پایان گزارش</th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                        <td><h5><a href="{% url 'reports:opportunityreport-detail' company.slug opportunityreport.pk %}">{{opportunityreport.title}}</a></h5></td>
+                        {% if opportunityreport.opportunity_status is null %}
+                        <td >کل مراحل</td>
+                        {% else %}
+                        <td>{{opportunityreport.opportunity_status}}</td>
+                        {% endif %}
+                        {% if opportunityreport.opportunity_source is null %}
+                        <td >کل منابع</td>
+                        {% else %}
+                        <td>{{opportunityreport.opportunity_source}}</td>
+                        {% endif %}
+                        <td>{{opportunityreport.startdate}}</td>
+                        <td>{{opportunityreport.enddate}}</td>
+                        <td>
+                            <a class="badge" href="{% url 'reports:opportunityreport-update' company.slug opportunityreport.pk %}">ویرایش</a>
+                            <a class="badge" href="{% url 'reports:opportunityreport-delete' company.slug opportunityreport.pk %}">حذف</a>
+                        </td>
+                      </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>عنوان فرصت</th>
+                      <th>مرحله فرصت</th>
+                      <th>منبع فرصت</th>
+                      <th>محول شده به</th>
+                      <th> نام تیم </th>
+                      <th> تگ‌های فرصت </th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for opportunity in opportunities %}
+                      <tr>
+                        <td><a href="{% url 'opportunity:opportunity-update' company.slug opportunity.pk %}">{{opportunity.title}}</a></td>
+                        {% if opportunity.opportunity_status.won %}
+                        <td><a class="badge badge-success" style="color:white">{{opportunity.opportunity_status}}</a></td>
+                        {% elif opportunity.opportunity_status.lost %}
+                        <td><a class="badge badge-danger" style="color:white">{{opportunity.opportunity_status}}</a></td>
+                        {% else %}
+                        <td><a class="badge badge-primary" style="color:white" >{{opportunity.opportunity_status}}</a></td>
+                        {% endif %}
+                        <td>{{opportunity.opportunity_source}} تومان </td>
+                        <td>{{opportunity.assigned_to.get_full_name}}</td>
+                        <td>{{opportunity.opportunity_teams}}</td>
+                        <td>{{opportunity.opportunity_tags}}</td>
+                        <td>
+                            
+                            <a class="badge badge-light-info" href="{% url 'opportunity:opportunity-update' company.slug opportunity.pk %}">ویرایش</a>
+                            <a class="badge badge-light-danger" href="{% url 'opportunity:opportunity-delete' company.slug opportunity.pk %}">حذف</a>
+                          
+                        </td>
+                    </tr>
+                    {% endfor %}
+                      <tr>
+                      <th>مجموع تعداد فرصت‌‌ها</th>
+                    </tr>
+                        <td>{{total_opportunities_count}}</td>
+
+                    <tr>
+
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+
+
+        
+{% endblock %}

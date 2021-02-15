@@ -1,0 +1,54 @@
+{% extends 'company/base.html' %}
+
+{% block title %}داشبورد اصلی{% endblock %}
+
+
+{% block main %}
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>عنوان گزارش</th>
+                      <th>مرحله سرنخ</th>
+                      <th>منبع سرنخ</th>
+                      <th>تاریخ شروع گزارش</th>
+                      <th>تاریخ پایان گزارش</th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for taskreport in object_list %}
+                      <tr>
+                        <td><a href="{% url 'reports:taskreport-detail' company.slug taskreport.pk %}">{{taskreport.title}}</a></td>
+                        {% if taskreport.task_status is null %}
+                        <td >کل وضعیت‌ها</td>
+                        {% else %}
+                        <td>{{taskreport.task_status}}</td>
+                        {% endif %}
+                        {% if taskreport.task_priority is null %}
+                        <td >کل تقدم وظایف</td>
+                        {% else %}
+                        <td>{{taskreport.task_priority}}</td>
+                        {% endif %}
+                        <td>{{taskreport.startdate}}</td>
+                        <td>{{taskreport.enddate}}</td>
+                        <td>
+                            <a class="badge" href="{% url 'reports:taskreport-update' company.slug taskreport.pk %}">ویرایش</a>
+                            <a class="badge" href="{% url 'reports:taskreport-delete' company.slug taskreport.pk %}">حذف</a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+{% endblock %}

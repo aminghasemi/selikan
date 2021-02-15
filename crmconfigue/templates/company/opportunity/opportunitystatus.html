@@ -21,11 +21,11 @@
                   <tbody>
                     {% for opportunitystatus in object_list %}
                       <tr>
-                        <td><a href="{% url 'opportunity:opportunitystatus-update' company.slug opportunitystatus.pk %}">{{opportunitystatus.OpportunityStatus.title}}</a></td>
+                        <td><a href="{% url 'opportunity:opportunitystatus-update' company.slug opportunitystatus.pk %}">{{opportunitystatus.OpportunityStatus_title}}</a></td>
                         <td>{{opportunitystatus.OpportunityStatus_number}}</td>
                         <td>
-                            <a class="badge-warning" href="{% url 'opportunity:opportunitystatus-update' company.slug opportunitystatus.pk %}">ویرایش</a>
-                            <a class="badge-danger" href="{% url 'opportunity:opportunitystatus-delete' company.slug opportunitystatus.pk %}">حذف</a>
+                            <a class="badge badge-warning" href="{% url 'opportunity:opportunitystatus-update' company.slug opportunitystatus.pk %}">ویرایش</a>
+                            <a class="badge badge-danger" href="{% url 'opportunity:opportunitystatus-delete' company.slug opportunitystatus.pk %}">حذف</a>
                         </td>
                       </tr>
                     {% endfor %}

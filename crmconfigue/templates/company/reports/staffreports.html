@@ -1,0 +1,48 @@
+{% extends 'company/base.html' %}
+
+{% block title %}داشبورد اصلی{% endblock %}
+
+
+{% block main %}
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>عنوان گزارش</th>
+                      <th>نام کارمند</th>
+                      <th>تاریخ شروع گزارش</th>
+                      <th>تاریخ پایان گزارش</th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for staffreport in object_list %}
+                      <tr>
+                        <td><a href="{% url 'reports:staffreport-detail' company.slug staffreport.pk %}">{{staffreport.title}}</a></td>
+                        {% if staffreport.staff is null %}
+                        <td >کل کارمندان</td>
+                        {% else %}
+                        <td>{{staffreport.staff}}</td>
+                        {% endif %}
+                        <td>{{staffreport.startdate}}</td>
+                        <td>{{staffreport.enddate}}</td>
+                        <td>
+                            <a class="badge" href="{% url 'reports:staffreport-update' company.slug staffreport.pk %}">ویرایش</a>
+                            <a class="badge" href="{% url 'reports:staffreport-delete' company.slug staffreport.pk %}">حذف</a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+{% endblock %}

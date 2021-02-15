@@ -1,7 +1,7 @@
 import arrow
 from django.db import models
 from common.models import User, Company
-from accounts.models import Account
+from accounts.models import Account, Tags
 from contacts.models import Contact
 from django.utils.translation import ugettext_lazy as _
 from teams.models import Teams
@@ -35,6 +35,7 @@ class Task(models.Model):
     description = models.TextField(blank=True, verbose_name="توضیحات")
     done_on=models.DateField(null=True, blank=True, verbose_name="تاریخ تکمیل")
     archive = models.BooleanField(default=False, verbose_name="بایگانی شود؟")
+    tags = models.ForeignKey(Tags, blank=True, on_delete=models.SET_NULL, null=True, verbose_name="تگ‌ها")
 
     def __str__(self):
         return (self.title)

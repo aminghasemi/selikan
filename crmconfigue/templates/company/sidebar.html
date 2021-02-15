@@ -135,6 +135,14 @@
                 </li>
                 <li><a href="{% url 'reports:opportunityreport-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد گزارش فرصت جدید</span></a>
                 </li>
+                <li><a href="{% url 'reports:taskreports' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">گزارش‌های وظایف</span></a>
+                </li>
+                <li><a href="{% url 'reports:taskreport-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد گزارش وظایف جدید</span></a>
+                </li>
+                <li><a href="{% url 'reports:staffreports' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">گزارش‌های کارمندان</span></a>
+                </li>
+                <li><a href="{% url 'reports:staffreport-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد گزارش کارمند جدید</span></a>
+                </li>
               </ul>
             </li>
           </ul>

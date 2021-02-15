@@ -26,11 +26,11 @@
                       <tr>
                         <td><a href="{% url 'opportunity:opportunity-update' company.slug opportunity.pk %}">{{opportunity.name}}</a></td>
                         {% if opportunity.opportunity_status.won %}
-                        <td><a class="badge badge-success" style="color:white">{{opportunity.opportunity_status}}</a></td>
+                        <td><a class="badge badge-success" style="color:white">{{opportunity.status}}</a></td>
                         {% elif opportunity.opportunity_status.lost %}
-                        <td><a class="badge badge-danger" style="color:white">{{opportunity.opportunity_status}}</a></td>
+                        <td><a class="badge badge-danger" style="color:white">{{opportunity.status}}</a></td>
                         {% else %}
-                        <td><a class="badge badge-primary" style="color:white" >{{opportunity.opportunity_status}}</a></td>
+                        <td><a class="badge badge-primary" style="color:white" >{{opportunity.status}}</a></td>
                         {% endif %}
                         <td>{{opportunity.account}}</td>
                         <td>{{opportunity.amount}}</td>

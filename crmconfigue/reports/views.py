@@ -8,9 +8,9 @@ from common.decorators import allowed_users, company_enrolled, user_limit
 from django.db.models import Sum
 
 from common.models import Company
-from .models import Dealreport, Leadreport, Opportunityreport
+from .models import Dealreport, Leadreport, Opportunityreport, Taskreport, Staffreport
 from common.mixins import EnrollMixin, SuperUserAccessMixin, CreatorAccessMixin, SpecialCompanyMixin
-from .forms import DealreportForm, LeadreportForm, OpportunityreportForm
+from .forms import DealreportForm, LeadreportForm, OpportunityreportForm, TaskreportForm, StaffreportForm
 # Create your views here.
 
 
@@ -229,9 +229,9 @@ def Leadreport_detail(request, slug, pk):
     company = get_object_or_404(Company, slug=slug)
     leadreport=get_object_or_404(Leadreport, pk=pk)
     lead_status=leadreport.lead_status
-    lead_source=leadreport.lead_status
-    lead_teams=leadreport.lead_status
-    lead_tags=leadreport.lead_status
+    lead_source=leadreport.lead_source
+    lead_teams=leadreport.lead_teams
+    lead_tags=leadreport.lead_tags
     startdate=leadreport.startdate
     enddate=leadreport.enddate
     converted_by=leadreport.converted_by
@@ -367,9 +367,9 @@ def Opportunityreport_detail(request, slug, pk):
     company = get_object_or_404(Company, slug=slug)
     opportunityreport=get_object_or_404(Opportunityreport, pk=pk)
     opportunity_status=opportunityreport.opportunity_status
-    opportunity_source=opportunityreport.opportunity_status
-    opportunity_teams=opportunityreport.opportunity_status
-    opportunity_tags=opportunityreport.opportunity_status
+    opportunity_source=opportunityreport.opportunity_source
+    opportunity_teams=opportunityreport.opportunity_teams
+    opportunity_tags=opportunityreport.opportunity_tags
     startdate=opportunityreport.startdate
     enddate=opportunityreport.enddate
     converted_by=opportunityreport.converted_by
@@ -404,4 +404,248 @@ def Opportunityreport_detail(request, slug, pk):
                                             'product' : product,
                                             'total_opportunities_count': total_opportunities_count,
                                             'opportunityreport': opportunityreport,
+                                            })
+
+
+
+
+
+class Taskreportlist(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
+    template_name = 'company/reports/taskreports.html'
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companytaskreports.all()
+    def get_context_data(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+
+class TaskreportCreate(EnrollMixin, LoginRequiredMixin, CreateView):
+    model=Taskreport
+    form_class=TaskreportForm
+    template_name="company/reports/taskreport-create.html"
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companytaskreports.all()
+    def get_context_data(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        context['form'].fields['task_tags'].queryset = company.companytags.filter(company=company)
+        context['form'].fields['task_teams'].queryset = company.companyteams.filter(company=company)
+        context['form'].fields['done_by'].queryset = company.staff_enroll.filter(company=company)
+        context['company'] = company
+        return context
+    def form_valid(self, form, **kwargs):       
+        form.instance.created_by = self.request.user
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        form.instance.company= company
+        return super().form_valid(form, **kwargs)
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('reports:taskreports', kwargs={'slug': slug}, current_app='reports')
+class TaskreportUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
+    model=Taskreport
+    form_class=TaskreportForm
+    template_name = "company/reports/taskreport-update.html"
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('reports:taskreports', kwargs={'slug': slug}, current_app='reports')
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companytaskreports.all()
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        context['form'].fields['task_tags'].queryset = company.companytags.filter(company=company)
+        context['form'].fields['task_teams'].queryset = company.companyteams.filter(company=company)
+        context['form'].fields['done_by'].queryset = company.staff_enroll.filter(company=company)
+        return context
+
+
+  
+class TaskreportDelete(EnrollMixin, LoginRequiredMixin, DeleteView):
+    model=Taskreport
+    template_name = "company/reports/taskreport_confirm_delete.html"
+
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companytaskreports.all()
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('reports:taskreports', kwargs={'slug': slug}, current_app='reports')
+
+@login_required(login_url='login')
+@company_enrolled
+@user_limit
+def Taskreport_detail(request, slug, pk):
+    template_name = "company/reports/taskreport_detail.html"
+    #company=Company.objects.get(slug=slug)
+    company = get_object_or_404(Company, slug=slug)
+    taskreport=get_object_or_404(Taskreport, pk=pk)
+    task_status=taskreport.task_status
+    task_priority=taskreport.task_priority
+    task_teams=taskreport.task_teams
+    task_tags=taskreport.task_tags
+    startdate=taskreport.startdate
+    enddate=taskreport.enddate
+    done_by=taskreport.done_by
+    if task_status is None:
+        tasks1=company.companytask.filter(created_on__range=(startdate, enddate))
+    else:
+        tasks1=company.companytask.filter(status=task_status).filter(created_on__range=(startdate, enddate))
+    if task_priority is None:
+        tasks2=tasks1
+    else:
+        tasks2=tasks1.filter(priority=task_priority).filter(created_on__range=(startdate, enddate))
+    if done_by is None:
+        tasks3=tasks2
+    else:
+        tasks2=tasks2.filter(done_by=done_by)
+    if task_teams is None:
+        tasks3=tasks2
+    else:
+        tasks3=tasks2.filter(teams=task_teams)
+    if task_tags is None:
+        tasks=tasks3
+    else:
+        tasks=tasks3.filter(tags=task_tags)
+    total_tasks_count=tasks.count()
+    return render(request, template_name, {'tasks': tasks,
+                                           'company': company,
+                                            'task_status': task_status,
+                                            'startdate': startdate,
+                                            'enddate': enddate,
+                                            'done_by': done_by,
+                                            'total_tasks_count': total_tasks_count,
+                                            'taskreport': taskreport,
+                                            })
+
+
+
+class Staffreportlist(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
+    template_name = 'company/reports/staffreports.html'
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companystaffreports.all()
+    def get_context_data(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+
+class StaffreportCreate(EnrollMixin, LoginRequiredMixin, CreateView):
+    model=Staffreport
+    form_class=StaffreportForm
+    template_name="company/reports/staffreport-create.html"
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companystaffreports.all()
+    def get_context_data(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        context['form'].fields['staff'].queryset = company.staff_enroll.filter(company=company)
+        context['company'] = company
+        return context
+    def form_valid(self, form, **kwargs):       
+        form.instance.created_by = self.request.user
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        form.instance.company= company
+        return super().form_valid(form, **kwargs)
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('reports:staffreports', kwargs={'slug': slug}, current_app='reports')
+class StaffreportUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
+    model=Staffreport
+    form_class=StaffreportForm
+    template_name = "company/reports/staffreport-update.html"
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('reports:staffreports', kwargs={'slug': slug}, current_app='reports')
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companystaffreports.all()
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        context['form'].fields['staff'].queryset = company.staff_enroll.filter(company=company)
+        return context
+
+
+  
+class StaffreportDelete(EnrollMixin, LoginRequiredMixin, DeleteView):
+    model=Staffreport
+    template_name = "company/reports/staffreport_confirm_delete.html"
+
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companystaffreports.all()
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('reports:staffreports', kwargs={'slug': slug}, current_app='reports')
+
+@login_required(login_url='login')
+@company_enrolled
+@user_limit
+def Staffreport_detail(request, slug, pk):
+    template_name = "company/reports/staffreport_detail.html"
+    #company=Company.objects.get(slug=slug)
+    company = get_object_or_404(Company, slug=slug)
+    staffreport=get_object_or_404(Staffreport, pk=pk)
+    staff=staffreport.staff
+    startdate=staffreport.startdate
+    enddate=staffreport.enddate
+    staff_deals=company.companydeals.filter(converted_by=staff).filter(created_on__range=(startdate, enddate))
+    staff_leads=company.companyleads.filter(converted_by=staff).filter(created_on__range=(startdate, enddate))
+    staff_opportunities=company.companyopportunity.filter(converted_by=staff).filter(created_on__range=(startdate, enddate))
+    staff_tasks=company.companytask.filter(done_by=staff).filter(created_on__range=(startdate, enddate))
+    total_staff_deals=staff_deals.count()
+    total_staff_leads=staff_leads.count()
+    total_staff_opportunity=staff_opportunities.count()
+    total_staff_tasks=staff_tasks.count()
+    total_amount_deals=staff_deals.aggregate(sum=Sum('deal_amount'))['sum']
+    return render(request, template_name, {'staff': staff,
+                                           'company': company,
+                                            'staff_deals': staff_deals,
+                                            'staff_leads': staff_leads,
+                                            'staff_opportunities': staff_opportunities,
+                                            'staff_tasks': staff_tasks,
+                                            'startdate': startdate,
+                                            'enddate': enddate,
+                                            'total_staff_deals': total_staff_deals,
+                                            'total_staff_leads': total_staff_leads,
+                                            'total_staff_opportunity': total_staff_opportunity,
+                                            'total_staff_tasks': total_staff_tasks,
+                                            'staffreport': staffreport,
+                                            'total_amount_deals': total_amount_deals,
                                             })

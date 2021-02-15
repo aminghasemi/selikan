@@ -20,10 +20,10 @@
                   <tbody>
                     {% for opportunitysource in object_list %}
                       <tr>
-                        <td><a href="{% url 'opportunity:opportunitysource-update' company.slug opportunitysource.pk %}">{{opportunitysource.OpportunitySource.title}}</a></td>
+                        <td><a href="{% url 'opportunity:opportunitysource-update' company.slug opportunitysource.pk %}">{{opportunitysource.OpportunitySource_title}}</a></td>
                         <td>
-                            <a class="badge-warning" href="{% url 'opportunity:opportunitysource-update' company.slug opportunitysource.pk %}">ویرایش</a>
-                            <a class="badge-danger" href="{% url 'opportunity:opportunitysource-delete' company.slug opportunitysource.pk %}">حذف</a>
+                            <a class="badge badge-warning" href="{% url 'opportunity:opportunitysource-update' company.slug opportunitysource.pk %}">ویرایش</a>
+                            <a class="badge badge-danger" href="{% url 'opportunity:opportunitysource-delete' company.slug opportunitysource.pk %}">حذف</a>
                         </td>
                       </tr>
                     {% endfor %}

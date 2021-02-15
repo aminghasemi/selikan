@@ -1,0 +1,330 @@
+{% extends 'company/base.html' %}
+
+{% block title %}داشبورد اصلی{% endblock %}
+
+
+{% block main %}
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>عنوان گزارش</th>
+                      <th>نام کارمند</th>
+                      <th>تاریخ شروع گزارش</th>
+                      <th>تاریخ پایان گزارش</th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                        <td><h5><a href="{% url 'reports:staffreport-detail' company.slug staffreport.pk %}">{{staffreport.title}}</a></h5></td>
+                        {% if staffreport.staff is null %}
+                        <td >کل کارمندان</td>
+                        {% else %}
+                        <td>{{staffreport.staff}}</td>
+                        {% endif %}
+                        <td>{{staffreport.startdate}}</td>
+                        <td>{{staffreport.enddate}}</td>
+                        <td>
+                            <a class="badge" href="{% url 'reports:staffreport-update' company.slug staffreport.pk %}">ویرایش</a>
+                            <a class="badge" href="{% url 'reports:staffreport-delete' company.slug staffreport.pk %}">حذف</a>
+                        </td>
+                      </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+
+
+
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <br>
+              <h3 class="card-title mb-0 float-left" style="text-align:center">گزارش معاملات</h3>
+              <br>
+              </div>
+            </div>
+          </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>عنوان معامله</th>
+                      <th>مرحله فروش</th>
+                      <th>مبلغ</th>
+                      <th>محول شده به</th>
+                      <th> نام مشتری </th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for deal in deal_leads %}
+                      <tr>
+                        <td><a href="{% url 'deals:deal-update' company.slug deal.pk %}">{{deal.title}}</a></td>
+                        {% if deal.pipeline_status.won %}
+                        <td><a class="badge badge-success" style="color:white">{{deal.pipeline_status}}</a></td>
+                        {% elif deal.pipeline_status.lost %}
+                        <td><a class="badge badge-danger" style="color:white">{{deal.pipeline_status}}</a></td>
+                        {% else %}
+                        <td><a class="badge badge-primary" style="color:white" >{{deal.pipeline_status}}</a></td>
+                        {% endif %}
+                        <td>{{deal.deal_amount}} تومان </td>
+                        <td>{{deal.assigned_to.get_full_name}}</td>
+                        <td>{{deal.account}}</td>
+                        <td>
+                            
+                            <a class="badge badge-light-info" href="{% url 'deals:deal-update' company.slug deal.pk %}">ویرایش</a>
+                            <a class="badge badge-light-danger" href="{% url 'deals:deal-delete' company.slug deal.pk %}">حذف</a>
+                          
+                        </td>
+                    </tr>
+                    {% endfor %}
+                      <tr>
+                      <th>مجموع تعداد معاملات</th>
+                      <th>مجموع مبالغ معاملات</th>
+                    </tr>
+                        <td>{{total_staff_deals}}</td>
+                        <td>{{total_amount_deals}} تومان </td>
+
+                    <tr>
+
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+
+
+        
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <br>
+              <h3 class="card-title mb-0 float-left" style="text-align:center">گزارش سرنخ‌ها</h3>
+              <br>
+              </div>
+            </div>
+          </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>عنوان سرنخ</th>
+                      <th>مرحله سرنخ</th>
+                      <th>منبع سرنخ</th>
+                      <th>محول شده به</th>
+                      <th> نام تیم </th>
+                      <th> تگ‌های سرنخ </th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for lead in staff_leads %}
+                      <tr>
+                        <td><a href="{% url 'leads:lead-update' company.slug lead.pk %}">{{lead.title}}</a></td>
+                        {% if lead.lead_status.won %}
+                        <td><a class="badge badge-success" style="color:white">{{lead.lead_status}}</a></td>
+                        {% elif lead.lead_status.lost %}
+                        <td><a class="badge badge-danger" style="color:white">{{lead.lead_status}}</a></td>
+                        {% else %}
+                        <td><a class="badge badge-primary" style="color:white" >{{lead.lead_status}}</a></td>
+                        {% endif %}
+                        <td>{{lead.lead_source}}</td>
+                        <td>{{lead.assigned_to.get_full_name}}</td>
+                        <td>{{lead.lead_teams}}</td>
+                        <td>{{lead.lead_tags}}</td>
+                        <td>
+                            
+                            <a class="badge badge-light-info" href="{% url 'leads:lead-update' company.slug lead.pk %}">ویرایش</a>
+                            <a class="badge badge-light-danger" href="{% url 'leads:lead-delete' company.slug lead.pk %}">حذف</a>
+                          
+                        </td>
+                    </tr>
+                    {% endfor %}
+                      <tr>
+                      <th>مجموع تعداد سرنخ‌ها</th>
+                    </tr>
+                        <td>{{total_staff_leads}}</td>
+
+                    <tr>
+
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+
+
+
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <br>
+              <h3 class="card-title mb-0 float-left" style="text-align:center">گزارش فرصت‌ها</h3>
+              <br>
+              </div>
+            </div>
+          </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>عنوان فرصت</th>
+                      <th>مرحله فرصت</th>
+                      <th>منبع فرصت</th>
+                      <th>محول شده به</th>
+                      <th> نام تیم </th>
+                      <th> تگ‌های فرصت </th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for opportunity in staff_opportunities %}
+                      <tr>
+                        <td><a href="{% url 'opportunity:opportunity-update' company.slug opportunity.pk %}">{{opportunity.title}}</a></td>
+                        {% if opportunity.opportunity_status.won %}
+                        <td><a class="badge badge-success" style="color:white">{{opportunity.opportunity_status}}</a></td>
+                        {% elif opportunity.opportunity_status.lost %}
+                        <td><a class="badge badge-danger" style="color:white">{{opportunity.opportunity_status}}</a></td>
+                        {% else %}
+                        <td><a class="badge badge-primary" style="color:white" >{{opportunity.opportunity_status}}</a></td>
+                        {% endif %}
+                        <td>{{opportunity.opportunity_source}} تومان </td>
+                        <td>{{opportunity.assigned_to.get_full_name}}</td>
+                        <td>{{opportunity.opportunity_teams}}</td>
+                        <td>{{opportunity.opportunity_tags}}</td>
+                        <td>
+                            
+                            <a class="badge badge-light-info" href="{% url 'opportunity:opportunity-update' company.slug opportunity.pk %}">ویرایش</a>
+                            <a class="badge badge-light-danger" href="{% url 'opportunity:opportunity-delete' company.slug opportunity.pk %}">حذف</a>
+                          
+                        </td>
+                    </tr>
+                    {% endfor %}
+                      <tr>
+                      <th>مجموع تعداد فرصت‌ها</th>
+                    </tr>
+                        <td>{{total_staff_opportunity}}</td>
+
+                    <tr>
+
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <br>
+              <h3 class="card-title mb-0 float-left" style="text-align:center">گزارش وظایف</h3>
+              <br>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  
+                  <thead>
+                    <tr>
+                      <th>عنوان</th>
+                      <th>وضعیت</th>
+                      <th>تقدم</th>
+                      <th>محول شده به</th>
+                      <th> نام تیم </th>
+                      <th> تگ‌های وظایف </th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for task in staff_tasks %}
+                      <tr>
+                        <td><a href="{% url 'task:task-update' company.slug task.pk %}">{{task.title}}</a></td>
+                        {% if task.task_status.won %}
+                        <td><a class="badge badge-success" style="color:white">{{task.task_status}}</a></td>
+                        {% elif task.task_status.lost %}
+                        <td><a class="badge badge-danger" style="color:white">{{task.task_status}}</a></td>
+                        {% else %}
+                        <td><a class="badge badge-primary" style="color:white" >{{task.task_status}}</a></td>
+                        {% endif %}
+                        <td>{{task.task_priority}}</td>
+                        <td>{{task.assigned_to.get_full_name}}</td>
+                        <td>{{task.task_teams}}</td>
+                        <td>{{task.task_tags}}</td>
+                        <td>
+                            
+                            <a class="badge badge-light-info" href="{% url 'task:task-update' company.slug task.pk %}">ویرایش</a>
+                            <a class="badge badge-light-danger" href="{% url 'task:task-delete' company.slug task.pk %}">حذف</a>
+                          
+                        </td>
+                    </tr>
+                    {% endfor %}
+                      <tr>
+                      <th>مجموع تعداد وظایف</th>
+                    </tr>
+                        <td>{{total_staff_tasks}}</td>
+
+                    <tr>
+
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+
+
+{% endblock %}

@@ -1,6 +1,6 @@
 import arrow
 from django.db import models
-from common.models import User, Company, Product
+from common.models import User, Company, Product, Enrolled
 from accounts.models import Account
 from contacts.models import Contact
 from django.utils.translation import ugettext_lazy as _
@@ -94,6 +94,72 @@ class Opportunityreport(models.Model):
         ordering = ["-created_on"]
         verbose_name = "گزارش فرصت‌ها"
         verbose_name_plural = "گزارشات فرصت‌ها"
+
+    def __str__(self):
+        return (self.title)
+
+    def jcreated_on(self):
+        return jalali_converter(self.created_on)
+    def jdone_on(self):
+        return jalali_converter(self.startdate)
+    def jdue_date(self):
+        return jalali_converter(self.enddate)
+
+class Taskreport(models.Model):
+
+    STATUS_CHOICES = (
+        ("جدید", "جدید"),
+        ("در حال انجام", "در حال انجام"),
+        ("پایان یافته", "پایان یافته"),
+    )
+
+    PRIORITY_CHOICES = (("پایین", "پایین"), ("معمولی", "معمولی"), ("بالا", "بالا"))
+
+
+    title=models.CharField( max_length=200, verbose_name="عنوان")
+    task_status = models.CharField( max_length=50, null=True, blank=True, choices=STATUS_CHOICES, verbose_name="وضعیت")
+    task_priority = models.CharField( max_length=50, choices=PRIORITY_CHOICES,null=True, blank=True, verbose_name="تقدم")
+    created_by = models.ForeignKey(User, related_name="task_report_created_by", on_delete=models.CASCADE, verbose_name="ساخته شده توسط")
+    created_on = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
+    done_by = models.ForeignKey(User, on_delete=models.SET_NULL,null=True,related_name="report_task_converted_by", blank=True, verbose_name="تکمیل‌شده توسط")
+    startdate = models.DateField(blank=True,null=True, verbose_name="تاریخ تکمیل")
+    enddate= models.DateField(blank=True,null=True, verbose_name="تاریخ تکمیل")
+    company = models.ForeignKey(Company, on_delete=models.SET_NULL,null=True, related_name="companytaskreports",  blank=True, verbose_name="شرکت")
+   # product= models.ForeignKey(Product,on_delete=models.SET_NULL,null=True,  related_name="reports_taskproducts",  blank=True, verbose_name="محصول")
+    archive = models.BooleanField(default=False, verbose_name="بایگانی شود؟")
+    task_tags = models.ForeignKey(Tags, related_name="report_task_tags", blank=True,on_delete=models.SET_NULL,null=True,  verbose_name="تگ‌های فرصت‌ها")
+    task_teams = models.ForeignKey(Teams, related_name="report_task_teams", blank=True,on_delete=models.SET_NULL,null=True,  verbose_name="تیم‌ها")
+
+    class Meta:
+        ordering = ["-created_on"]
+        verbose_name = "گزارش وظایف"
+        verbose_name_plural = "گزارشات وظایف"
+
+    def __str__(self):
+        return (self.title)
+
+    def jcreated_on(self):
+        return jalali_converter(self.created_on)
+    def jdone_on(self):
+        return jalali_converter(self.startdate)
+    def jdue_date(self):
+        return jalali_converter(self.enddate)
+
+class Staffreport(models.Model):
+
+    title=models.CharField( max_length=200, verbose_name="عنوان")
+    staff = models.ForeignKey(Enrolled, related_name="report_staff", blank=True,on_delete=models.SET_NULL,null=True,  verbose_name="نام کارمند")
+    created_by = models.ForeignKey(User, related_name="staff_report_created_by", on_delete=models.CASCADE, verbose_name="ساخته شده توسط")
+    created_on = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
+    startdate = models.DateField(blank=True,null=True, verbose_name="تاریخ تکمیل")
+    enddate= models.DateField(blank=True,null=True, verbose_name="تاریخ تکمیل")
+    company = models.ForeignKey(Company, on_delete=models.SET_NULL,null=True, related_name="companystaffreports",  blank=True, verbose_name="شرکت")
+    archive = models.BooleanField(default=False, verbose_name="بایگانی شود؟")
+
+    class Meta:
+        ordering = ["-created_on"]
+        verbose_name = "گزارش کارمندان"
+        verbose_name_plural = "گزارشات کارمندان"
 
     def __str__(self):
         return (self.title)

@@ -1,0 +1,111 @@
+{% extends 'company/base.html' %}
+
+{% block title %}داشبورد اصلی{% endblock %}
+
+
+{% block main %}
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>عنوان گزارش</th>
+                      <th>وضعیت</th>
+                      <th>تقدم</th>
+                      <th>تاریخ شروع گزارش</th>
+                      <th>تاریخ پایان گزارش</th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                        <td><h5><a href="{% url 'reports:taskreport-detail' company.slug taskreport.pk %}">{{taskreport.title}}</a></h5></td>
+                        {% if taskreport.task_status is null %}
+                        <td >کل مراحل</td>
+                        {% else %}
+                        <td>{{taskreport.task_status}}</td>
+                        {% endif %}
+                        {% if taskreport.task_priority is null %}
+                        <td >کل منابع</td>
+                        {% else %}
+                        <td>{{taskreport.task_priority}}</td>
+                        {% endif %}
+                        <td>{{taskreport.startdate}}</td>
+                        <td>{{taskreport.enddate}}</td>
+                        <td>
+                            <a class="badge" href="{% url 'reports:taskreport-update' company.slug taskreport.pk %}">ویرایش</a>
+                            <a class="badge" href="{% url 'reports:taskreport-delete' company.slug taskreport.pk %}">حذف</a>
+                        </td>
+                      </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>عنوان</th>
+                      <th>وضعیت</th>
+                      <th>تقدم</th>
+                      <th>محول شده به</th>
+                      <th> نام تیم </th>
+                      <th> تگ‌های وظایف </th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for task in tasks %}
+                      <tr>
+                        <td><a href="{% url 'task:task-update' company.slug task.pk %}">{{task.title}}</a></td>
+                        {% if task.task_status.won %}
+                        <td><a class="badge badge-success" style="color:white">{{task.task_status}}</a></td>
+                        {% elif task.task_status.lost %}
+                        <td><a class="badge badge-danger" style="color:white">{{task.task_status}}</a></td>
+                        {% else %}
+                        <td><a class="badge badge-primary" style="color:white" >{{task.task_status}}</a></td>
+                        {% endif %}
+                        <td>{{task.task_priority}}</td>
+                        <td>{{task.assigned_to.get_full_name}}</td>
+                        <td>{{task.task_teams}}</td>
+                        <td>{{task.task_tags}}</td>
+                        <td>
+                            
+                            <a class="badge badge-light-info" href="{% url 'task:task-update' company.slug task.pk %}">ویرایش</a>
+                            <a class="badge badge-light-danger" href="{% url 'task:task-delete' company.slug task.pk %}">حذف</a>
+                          
+                        </td>
+                    </tr>
+                    {% endfor %}
+                      <tr>
+                      <th>مجموع تعداد وظایف</th>
+                    </tr>
+                        <td>{{total_tasks_count}}</td>
+
+                    <tr>
+
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+{% endblock %}
