@@ -4,6 +4,13 @@
 
 
 {% block main %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'common:home' %}"><i class="bx bx-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="{% url 'common:dashboard' company.slug %}">{{company.name}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">گزارش‌های فرصت‌ها</li>
+  </ol>
+</nav>
         <div class="row">
           <div class="col-12">
             <div class="card">

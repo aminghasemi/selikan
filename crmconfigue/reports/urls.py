@@ -8,6 +8,8 @@ from .views import (
     Opportunityreportlist, OpportunityreportCreate, OpportunityreportUpdate, OpportunityreportDelete, Opportunityreport_detail,
     Taskreportlist, TaskreportCreate, TaskreportUpdate, TaskreportDelete, Taskreport_detail,
     Staffreportlist, StaffreportCreate, StaffreportUpdate, StaffreportDelete, Staffreport_detail,
+    Companyreportlist, CompanyreportCreate, CompanyreportUpdate, CompanyreportDelete, Companyreport_detail,
+
 
 )
 app_name="reports"
@@ -38,4 +40,9 @@ urlpatterns = [
     path('staffreports/update/<int:pk>', StaffreportUpdate.as_view(),name="staffreport-update"),
     path('staffreports/delete/<int:pk>', StaffreportDelete.as_view(),name="staffreport-delete"),
     path('staffreports/report/<int:pk>', Staffreport_detail,name="staffreport-detail"),
+    path('companyreports', Companyreportlist.as_view(),name="companyreports"),
+    path('companyreports/create/', CompanyreportCreate.as_view(),name="companyreport-create"),
+    path('companyreports/update/<int:pk>', CompanyreportUpdate.as_view(),name="companyreport-update"),
+    path('companyreports/delete/<int:pk>', CompanyreportDelete.as_view(),name="companyreport-delete"),
+    path('companyreports/report/<int:pk>', Companyreport_detail,name="companyreport-detail"),
 ]

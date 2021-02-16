@@ -40,6 +40,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/pickers/daterange/daterangepicker.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/pickers/datepicker-jalali/bootstrap-datepicker.min.css' %}">
     <!-- END: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="% static 'frest/assets/vendors/css/tables/datatable/datatables.min.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
   </head>
   <!-- END: Head-->
@@ -157,10 +159,28 @@
     <!-- END: Page Vendor JS-->
 
 
+        <!-- BEGIN: Page Vendor JS-->
+        <script src="{% static 'frest/assets/vendors/js/tables/datatable/datatables.min.js' %}"></script>
+        <script src="{% static 'frest/assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js' %}"></script>
+        <script src="{% static 'frest/assets/vendors/js/tables/datatable/dataTables.buttons.min.js' %}"></script>
+        <script src="{% static 'frest/assets/vendors/js/tables/datatable/buttons.html5.min.js' %}"></script>
+        <script src="{% static 'frest/assets/vendors/js/tables/datatable/buttons.print.min.js' %}"></script>
+        <script src="{% static 'frest/assets/vendors/js/tables/datatable/buttons.bootstrap.min.js' %}"></script>
+        <script src="{% static 'frest/assets/vendors/js/tables/datatable/pdfmake.min.js' %}"></script>
+        <script src="{% static 'frest/assets/vendors/js/tables/datatable/vfs_fonts.js' %}"></script>
+        <!-- END: Page Vendor JS-->
     <!-- BEGIN: Page JS-->
     <script src="{% static 'frest/assets/js/scripts/pickers/dateTime/pick-a-datetime.js' %}"></script>
     <!-- END: Page JS-->
 		<script src="{% static 'admin/js/django_jalali.min.js' %}"></script>
+    <script src="{% static 'frest/assets/js/scripts/pages/app-invoice.js' %}"></script>
+    <script src="{% static 'frest/assets/js/scripts/datatables/datatable.js' %}"></script>
+    <script src="{% static 'frest/assets/js/scripts/datatables/datatables.min.js' %}"></script>
+    <script src="{% static 'frest/assets/js/scripts/datatables/dataTables.bootstrap4.min.js' %}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
 
   </body>
   <!-- END: Body-->

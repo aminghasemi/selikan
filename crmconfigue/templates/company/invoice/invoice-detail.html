@@ -1,0 +1,235 @@
+{% extends 'company/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+ایجاد مشتری جدید
+{% endblock %}
+
+
+{% block main %}
+
+  <div class="content-header row">
+  </div>
+  <div class="content-body"><!-- app invoice View Page -->
+<section class="invoice-view-wrapper">
+<div class="row">
+<!-- invoice view page -->
+<div class="col-xl-9 col-md-8 col-12">
+<div class="card invoice-print-area">
+  <div class="card-content">
+    <div class="card-body pb-0 mx-25">
+      <!-- header section -->
+      <div class="row line-height-2 mt-n50">
+        <div class="col-xl-4 col-md-12 mb-50 mb-xl-0">
+          <span class="invoice-number mr-50">شماره فاکتور:</span>
+          <span>{{invoice.invoice_number}}</span>
+        </div>
+        <div class="col-xl-8 col-md-12">
+          <div class="d-flex align-items-center justify-content-xl-end flex-wrap">
+            <div class="mr-3">
+              <small class="text-muted">تاریخ تنظیم:</small>
+              <span>{{invoice.date}}</span>
+            </div>
+            <div>
+              <small class="text-muted">تاریخ اعتبار:</small>
+              <span>{{invoice.expire_date}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- logo and title -->
+      <div class="row my-3">
+        <div class="col-sm-12">
+          <h4 class="text-primary" style="text-align:center">صورتحساب</h4>
+          <h2 style="text-align:center">{{invoice.title}}</h2>
+        </div>
+
+      </div>
+      <hr>
+      <!-- invoice address and contact -->
+      <div class="row invoice-info">
+        <div class="col-6 mt-1">
+          <h6 class="invoice-from">صورتحساب از</h6>
+          <div class="mb-75">
+            <span>{{company.name}}</span>
+          </div>
+          <div class="mb-75">
+            <span>{{company.billing_address_line}}{{company.billing_street}}{{company.billing_city}}</span>
+          </div>
+          <div class="mb-75">
+            <span>{{company.email}}</span>
+          </div>
+          <div class="mb-75">
+            <span class="ltr-text">{{company.phone}}</span>
+          </div>
+          <div class="mb-75">
+            <span class="ltr-text">{{company.national_id}} :شناسه ملی</span>
+          </div>
+          <div class="mb-75">
+            <span class="ltr-text">{{company.economic_id}} :کد اقتصادی</span>
+          </div>
+        </div>
+        <div class="col-6 mt-1">
+          <h6 class="invoice-to">صورتحساب به</h6>
+          <div class="mb-75">
+            <span>{{invoice.account.name}}</span>
+          </div>
+          <div class="mb-75">
+            <span>{{invoice.account.billing_address_line}}{{invoice.account.billing_street}}{{invoice.account.billing_city}}</span>
+          </div>
+          <div class="mb-75">
+            <span>{{invoice.account.email}}</span>
+          </div>
+          <div class="mb-75">
+            <span class="ltr-text">{{invoice.account.phone}}</span>
+          </div>
+          <div class="mb-75">
+            <span class="ltr-text">{{invoice.account.national_id}} :شناسه ملی</span>
+          </div>
+          <div class="mb-75">
+            <span class="ltr-text">{{invoice.account.economic_id}} :کد اقتصادی</span>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div>
+    <!-- product details table-->
+    <div class="invoice-product-details table-responsive mx-md-25">
+      <table class="table table-borderless mb-0">
+        <div class="card-header">
+          <h3 class="card-title mb-0 float-left">آیتم‌های فاکتور</h3>
+        </div>
+        <thead>
+          <tr class="border-0">
+            <th scope="col">شرح</th>
+            <th scope="col">قیمت</th>
+            <th scope="col">تعداد</th>
+            <th scope="col" class="text-right">مجموع</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for invoice_item in invoice_item %}
+          <tr>
+            <td>{{invoice_item.product_name}}</td>
+            <td>{{invoice_item.product_name.price}}</td>
+            <td>{{invoice_item.amount}}</td>
+            <td class="text-primary text-right font-weight-bold">{{invoice_item.total_item_amount}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        
+      </table>
+    </div>
+
+        <!-- // Basic multiple Column Form section start -->
+        <section id="multiple-column-form">
+          <div class="row match-height">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">افزودن آیتم جدید به فاکتور</h4>
+                </div>
+                <div class="card-content">
+                  <div class="card-body">
+                    {% if new_item %}
+                    
+                      <div class="alert alert-success" role="alert">
+                      آیتم انتخاب شده به فاکتور اضافه شد.
+                        </div>
+                      <form method="post" class="form">{% csrf_token %}
+                      <div class="form-body">
+                        <div class="row">
+                            <div class="col-6">
+                              {{invoice_item_form.product_name|as_crispy_field}}
+                            </div>
+                            <div class="col-6">
+                              {{invoice_item_form.amount|as_crispy_field}}
+                            </div>
+                          <div class="col-12 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary mr-1 mb-1">ثبت</button>
+                            <button type="reset" class="btn btn-light-secondary mr-1 mb-1">بازنشانی</button>
+                          </div>
+                        </div>
+                      </div>
+                      </form>
+                    {% else %}
+                      <form method="post" class="form">{% csrf_token %}
+                      <div class="form-body">
+                        <div class="row">
+                            <div class="col-6">
+                              {{invoice_item_form.product_name|as_crispy_field}}
+                            </div>
+                            <div class="col-6">
+                              {{invoice_item_form.amount|as_crispy_field}}
+                            </div>
+                          <div class="col-12 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary mr-1 mb-1">ثبت</button>
+                            <button type="reset" class="btn btn-light-secondary mr-1 mb-1">بازنشانی</button>
+                          </div>
+                        </div>
+                        </div>
+                    </form>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- // Basic multiple Column Form section end -->
+        
+    <!-- invoice subtotal -->
+    <div class="card-body pt-0 mx-25">
+      <hr>
+      <div class="row">
+        <div class="col-4 col-sm-6 mt-75">
+          <p>با تشکر از کسب و کار شما.</p>
+        </div>
+        <div class="col-8 col-sm-6 d-flex justify-content-end mt-75">
+          <div class="invoice-subtotal">
+            <div class="invoice-calc d-flex justify-content-between">
+              <span class="invoice-title">جمع کل</span>
+              <span class="invoice-value">{{invoice.total_amount}} تومان</span>
+            </div>
+            <div class="invoice-calc d-flex justify-content-between">
+              <span class="invoice-title">مبلغ تخفیف</span>
+              <span class="invoice-value">{{invoice.total_bargain}} تومان</span>
+            </div>
+            <div class="invoice-calc d-flex justify-content-between">
+              <span class="invoice-title">مبلغ مالیات</span>
+              <span class="invoice-value">{{invoice.total_tax}} تومان</span>
+            </div>
+            <hr>
+            <div class="invoice-calc d-flex justify-content-between">
+              <span class="invoice-title">جمع صورتحساب</span>
+              <span class="invoice-value">{{invoice.final_total_amount}} تومان</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- invoice action  -->
+<div class="col-xl-3 col-md-4 col-12">
+<div class="card invoice-action-wrapper shadow-none border">
+  <div class="card-body">
+    <div class="invoice-action-btn">
+      <button class="btn btn-light-primary btn-block invoice-print">
+        <span>چاپ</span>
+      </button>
+    </div>
+    <div class="invoice-action-btn">
+      <a href="{% url 'invoice:invoice-update' company.slug invoice.pk %}" class="btn btn-light-primary btn-block">
+        <span>ویرایش صورتحساب</span>
+      </a>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</section>
+
+</div>
+
+{% endblock %}

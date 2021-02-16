@@ -12,4 +12,4 @@ class DealForm(forms.ModelForm):
         fields=("title","pipeline_status", "description", "assigned_to","account","deal_amount", "is_active", "closed_on","teams", "archive")
     def __init__(self, *args, **kwargs):
         super(DealForm, self).__init__(*args, **kwargs)
-        self.fields['closed_on'] = JalaliDateField(label="تاریخ تکمیل",widget=AdminJalaliDateWidget,required=False)  
+        self.fields['closed_on'] = JalaliDateField(label="تاریخ تکمیل",widget=AdminJalaliDateWidget,required=False)

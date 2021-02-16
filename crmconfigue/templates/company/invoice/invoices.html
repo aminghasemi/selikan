@@ -4,6 +4,13 @@
 
 
 {% block main %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'common:home' %}"><i class="bx bx-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="{% url 'common:dashboard' company.slug %}">{{company.name}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">فاکتورها</li>
+  </ol>
+</nav>
         <div class="row">
           <div class="col-12">
             <div class="card">
@@ -15,7 +22,6 @@
                     <tr>
                       <th>عنوان فاکتور</th>
                       <th>نوع فاکتور</th>
-                      <th>مبلغ</th>
                       <th>شماره فاکتور</th>
                       <th> نام مشتری </th>
                       <th>عملیات</th>
@@ -24,9 +30,8 @@
                   <tbody>
                     {% for invoice in object_list %}
                       <tr>
-                        <td><a href="{% url 'invoice:invoice-update' company.slug invoice.pk %}">{{invoice.title}}</a></td>
+                        <td><a href="{% url 'invoice:invoice-detail' company.slug invoice.pk %}">{{invoice.title}}</a></td>
                         <td>{{invoice.status}}</td>
-                        <td>{{invoice.total_amount}}</td>
                         <td>{{invoice.invoice_number}}</td>
                         <td>{{invoice.account}}</td>
                         <td>

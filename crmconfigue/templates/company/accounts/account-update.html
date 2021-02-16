@@ -62,9 +62,7 @@
             <div class="col-3">
               {{ form.website|as_crispy_field}}
             </div>
-            <div class="col-3">
-              {{ form.is_active|as_crispy_field}}
-            </div>
+
             <div class="col-3">
               {{ form.tags|as_crispy_field}}
             </div>
@@ -109,12 +107,49 @@
           </div>
           </div>
 
+          <div class="col-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title mb-0 float-left">فاکتورهای مرتبط با مشتری</h3>
+                 </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover table-light">
+                  <thead>
+                    <tr>
+                      <th>عنوان</th>
+                      <th>شماره فاکتور</th>
+                      <th>نوع فاکتور</th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for invoice in invoices %}
+                      <tr>
+                        <td><a href="{% url 'invoice:invoice-detail' company.slug invoice.pk %}">{{invoice.title}}</a></td>
+                        <td>{{invoice.invoice_number}}</td>
+                        <td>{{invoice.status}}</td>
+                        <td>
+                            <a class="badge badge-info" href="{% url 'invoice:invoice-update' company.slug invoice.pk %}">ویرایش</a>
+                            <a class="badge badge-danger" href="{% url 'invoice:invoice-delete' company.slug invoice.pk %}">حذف</a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            <!-- /.card -->
+          </div>
+          </div>
 
-
+          <div class="col-12">
+            {{ form.is_active|as_crispy_field}}
+          </div>
             <div class="col-12">
               {{ form.archive|as_crispy_field }}
             </div>
-            
+
           </div>
               <button class="btn btn-success">ذخیره</button>
             </form>

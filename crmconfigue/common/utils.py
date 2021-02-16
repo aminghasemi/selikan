@@ -34,7 +34,7 @@ def jwt_payload_handler(user):
 
 
 INDCHOICES = (
-    ("ADVERTISING", "ADVERTISING"),
+    ("تبلیغات", "ADVERTISING"),
     ("AGRICULTURE", "AGRICULTURE"),
     ("APPAREL & ACCESSORIES", "APPAREL & ACCESSORIES"),
     ("AUTOMOTIVE", "AUTOMOTIVE"),

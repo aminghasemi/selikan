@@ -8,7 +8,7 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{% url 'common:home' %}"><i class="bx bx-home"></i></a></li>
     <li class="breadcrumb-item"><a href="{% url 'common:dashboard' company.slug %}">{{company.name}}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">گزارش‌های سرنخ‌ها</li>
+    <li class="breadcrumb-item active" aria-current="page">گزارش‌های شرکت</li>
   </ol>
 </nav>
         <div class="row">
@@ -21,32 +21,20 @@
                   <thead>
                     <tr>
                       <th>عنوان گزارش</th>
-                      <th>مرحله سرنخ</th>
-                      <th>منبع سرنخ</th>
                       <th>تاریخ شروع گزارش</th>
                       <th>تاریخ پایان گزارش</th>
                       <th>عملیات</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {% for leadreport in object_list %}
+                    {% for companyreport in object_list %}
                       <tr>
-                        <td><a href="{% url 'reports:leadreport-detail' company.slug leadreport.pk %}">{{leadreport.title}}</a></td>
-                        {% if leadreport.lead_status is null %}
-                        <td >کل مراحل</td>
-                        {% else %}
-                        <td>{{leadreport.lead_status}}</td>
-                        {% endif %}
-                        {% if leadreport.lead_source is null %}
-                        <td >کل منابع</td>
-                        {% else %}
-                        <td>{{leadreport.lead_source}}</td>
-                        {% endif %}
-                        <td>{{leadreport.startdate}}</td>
-                        <td>{{leadreport.enddate}}</td>
+                        <td><a href="{% url 'reports:companyreport-detail' company.slug companyreport.pk %}">{{companyreport.title}}</a></td>
+                        <td>{{companyreport.startdate}}</td>
+                        <td>{{companyreport.enddate}}</td>
                         <td>
-                            <a class="badge" href="{% url 'reports:leadreport-update' company.slug leadreport.pk %}">ویرایش</a>
-                            <a class="badge" href="{% url 'reports:leadreport-delete' company.slug leadreport.pk %}">حذف</a>
+                            <a class="badge" href="{% url 'reports:companyreport-update' company.slug companyreport.pk %}">ویرایش</a>
+                            <a class="badge" href="{% url 'reports:companyreport-delete' company.slug companyreport.pk %}">حذف</a>
                         </td>
                       </tr>
                     {% endfor %}

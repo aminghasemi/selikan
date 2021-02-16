@@ -12,6 +12,7 @@
       </div>
       <div class="card-content">
         <div class="card-body">
+          <h5>سازنده شرکت: {{company.creator}}</h5>
         </div>
         <!-- table head dark -->
         <div class="table-responsive">
@@ -22,6 +23,7 @@
                 <th>نام کاربری</th>
                 <th>ایمیل</th>
                 <th>تاریح عضویت</th>
+                <th>عملیات</th>
               </tr>
             </thead>
             <tbody>
@@ -31,6 +33,12 @@
                 <td>{{ person.staff.username }}</td>
                 <td class="text-bold-500">{{ person.staff.email }}</td>
                 <td class="text-bold-500">{{ person.jdate }}</td>
+                <td>
+                  {% if user.is_superuser %}
+                  <a class="badge badge-danger" href="{% url 'common:staff-delete' company.slug person.pk %}">حذف</a>
+
+                  {% endif %}
+              </td>
               </tr>
               {% endfor %}
             </tbody>
@@ -42,7 +50,6 @@
 </div>
 <!-- Table head options end -->
 
-{% if request.user.is_superuser %}
 <!-- // Basic multiple Column Form section start -->
 <section id="multiple-column-form">
   <div class="row match-height">
@@ -59,7 +66,8 @@
               کاربر انتخاب شده به عنوان کارمند جدید به شرکت اضافه شد.
             </div>
             {% else %}
-            <form class="form">
+            <form method="post" class="form">{% csrf_token %}
+
               <div class="form-body">
                 <div class="row">
                   <div class=" col-12">
@@ -69,7 +77,6 @@
                     </div>
                   </div>
                   <div class="col-12 d-flex justify-content-end">
-                    {% csrf_token %}
                     <button type="submit" class="btn btn-primary mr-1 mb-1">ثبت</button>
                     <button type="reset" class="btn btn-light-secondary mr-1 mb-1">بازنشانی</button>
                     {% endif %}
@@ -84,7 +91,6 @@
   </div>
 </section>
 <!-- // Basic multiple Column Form section end -->
-{% endif%}
 
 
 

@@ -1,0 +1,14 @@
+{% extends 'registration/base.html' %}
+
+{% block title %}
+لیست کارمندان
+{% endblock %}
+
+
+{% block main %}
+<form method="post">{% csrf_token %}
+    <p>آیا از حذف کارمند "{{object}}" اطمینان دارید؟</p>
+    <button type="submit" class="btn btn-primary  btn-sm">حذف</button>
+</form>
+
+{% endblock %}

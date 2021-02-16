@@ -1,4 +1,4 @@
-from .models import Dealreport, Leadreport, Opportunityreport, Taskreport, Staffreport
+from .models import Dealreport, Leadreport, Opportunityreport, Taskreport, Staffreport, Companyreport
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
@@ -52,5 +52,14 @@ class StaffreportForm(forms.ModelForm):
         fields=("title", "staff","startdate", "enddate", "archive")
     def __init__(self, *args, **kwargs):
         super(StaffreportForm, self).__init__(*args, **kwargs)
+        self.fields['startdate'] = JalaliDateField(label="تاریخ شروع گزارش",widget=AdminJalaliDateWidget)
+        self.fields['enddate'] = JalaliDateField(label="تاریخ پایان گزارش",widget=AdminJalaliDateWidget)
+
+class CompanyreportForm(forms.ModelForm):
+    class Meta:
+        model = Companyreport    
+        fields=("title", "startdate", "enddate", "archive")
+    def __init__(self, *args, **kwargs):
+        super(CompanyreportForm, self).__init__(*args, **kwargs)
         self.fields['startdate'] = JalaliDateField(label="تاریخ شروع گزارش",widget=AdminJalaliDateWidget)
         self.fields['enddate'] = JalaliDateField(label="تاریخ پایان گزارش",widget=AdminJalaliDateWidget)

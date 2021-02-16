@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from cuser.middleware import CuserMiddleware
 from itertools import chain
-from .models import Company, User, Product, Country
+from .models import Company, User, Product, Country, Enrolled
 from .mixins import CreatorAccessMixin, SuperUserAccessMixin, SpecialCompanyMixin, EnrollMixin
 from .decorators import allowed_users, company_enrolled, user_limit
 from .forms import EnrollForm, ProfileForm, CompanyForm
@@ -79,6 +79,22 @@ def company_staff(request, slug):
                                            'company': company,
                                            'new_staff': new_staff,
                                            'enroll_form': enroll_form,})
+class StaffDelete(LoginRequiredMixin,CreatorAccessMixin, DeleteView):
+    model=Enrolled
+    template_name = "registration/staff_confirm_delete.html"
+
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.staff_enroll.all()
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('common:company_add_staff', kwargs={'slug': slug}, current_app='common')
 
 class Profile(LoginRequiredMixin ,UpdateView):
     model = User

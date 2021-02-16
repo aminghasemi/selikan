@@ -170,3 +170,28 @@ class Staffreport(models.Model):
         return jalali_converter(self.startdate)
     def jdue_date(self):
         return jalali_converter(self.enddate)
+
+class Companyreport(models.Model):
+
+    title=models.CharField( max_length=200, verbose_name="عنوان")
+    created_by = models.ForeignKey(User, related_name="company_report_created_by", on_delete=models.CASCADE, verbose_name="ساخته شده توسط")
+    created_on = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
+    startdate = models.DateField(blank=True,null=True, verbose_name="تاریخ تکمیل")
+    enddate= models.DateField(blank=True,null=True, verbose_name="تاریخ تکمیل")
+    company = models.ForeignKey(Company, on_delete=models.SET_NULL,null=True, related_name="companycompanyreports",  blank=True, verbose_name="شرکت")
+    archive = models.BooleanField(default=False, verbose_name="بایگانی شود؟")
+
+    class Meta:
+        ordering = ["-created_on"]
+        verbose_name = "گزارش شرکت"
+        verbose_name_plural = "گزارشات شرکت"
+
+    def __str__(self):
+        return (self.title)
+
+    def jcreated_on(self):
+        return jalali_converter(self.created_on)
+    def jdone_on(self):
+        return jalali_converter(self.startdate)
+    def jdue_date(self):
+        return jalali_converter(self.enddate)

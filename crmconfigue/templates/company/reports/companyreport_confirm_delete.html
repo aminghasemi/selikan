@@ -1,0 +1,13 @@
+{% extends 'company/base.html' %}
+
+{% block title %}
+{% endblock %}
+
+
+{% block main %}
+<form method="post">{% csrf_token %}
+    <p>آیا از حذف گزارش شرکت  "{{object}}" اطمینان دارید؟</p>
+    <button type="submit" class="btn btn-primary  btn-sm">حذف</button>
+</form>
+
+{% endblock %}

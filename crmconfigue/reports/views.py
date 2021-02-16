@@ -8,9 +8,9 @@ from common.decorators import allowed_users, company_enrolled, user_limit
 from django.db.models import Sum
 
 from common.models import Company
-from .models import Dealreport, Leadreport, Opportunityreport, Taskreport, Staffreport
+from .models import Dealreport, Leadreport, Opportunityreport, Taskreport, Staffreport, Companyreport
 from common.mixins import EnrollMixin, SuperUserAccessMixin, CreatorAccessMixin, SpecialCompanyMixin
-from .forms import DealreportForm, LeadreportForm, OpportunityreportForm, TaskreportForm, StaffreportForm
+from .forms import DealreportForm, LeadreportForm, OpportunityreportForm, TaskreportForm, StaffreportForm, CompanyreportForm
 # Create your views here.
 
 
@@ -647,5 +647,118 @@ def Staffreport_detail(request, slug, pk):
                                             'total_staff_opportunity': total_staff_opportunity,
                                             'total_staff_tasks': total_staff_tasks,
                                             'staffreport': staffreport,
+                                            'total_amount_deals': total_amount_deals,
+                                            })
+
+
+
+class Companyreportlist(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
+    template_name = 'company/reports/companyreports.html'
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companycompanyreports.all()
+    def get_context_data(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+
+class CompanyreportCreate(EnrollMixin, LoginRequiredMixin, CreateView):
+    model=Companyreport
+    form_class=CompanyreportForm
+    template_name="company/reports/companyreport-create.html"
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companycompanyreports.all()
+    def get_context_data(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+    def form_valid(self, form, **kwargs):       
+        form.instance.created_by = self.request.user
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        form.instance.company= company
+        return super().form_valid(form, **kwargs)
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('reports:companyreports', kwargs={'slug': slug}, current_app='reports')
+
+class CompanyreportUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
+    model=Companyreport
+    form_class=CompanyreportForm
+    template_name = "company/reports/companyreport-update.html"
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('reports:companyreports', kwargs={'slug': slug}, current_app='reports')
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companycompanyreports.all()
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+
+
+  
+class CompanyreportDelete(EnrollMixin, LoginRequiredMixin, DeleteView):
+    model=Companyreport
+    template_name = "company/reports/companyreport_confirm_delete.html"
+
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companycompanyreports.all()
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('reports:companyreports', kwargs={'slug': slug}, current_app='reports')
+
+@login_required(login_url='login')
+@company_enrolled
+@user_limit
+def Companyreport_detail(request, slug, pk):
+    template_name = "company/reports/companyreport_detail.html"
+    #company=Company.objects.get(slug=slug)
+    company = get_object_or_404(Company, slug=slug)
+    companyreport=get_object_or_404(Companyreport, pk=pk)
+    company=companyreport.company
+    startdate=companyreport.startdate
+    enddate=companyreport.enddate
+    company_deals=company.companydeals.filter(created_on__range=(startdate, enddate))
+    company_leads=company.companyleads.filter(created_on__range=(startdate, enddate))
+    company_opportunities=company.companyopportunity.filter(created_on__range=(startdate, enddate))
+    company_tasks=company.companytask.filter(created_on__range=(startdate, enddate))
+    total_company_deals=company_deals.count()
+    total_company_leads=company_leads.count()
+    total_company_opportunity=company_opportunities.count()
+    total_company_tasks=company_tasks.count()
+    total_amount_deals=company_deals.aggregate(sum=Sum('deal_amount'))['sum']
+    return render(request, template_name, {'company': company,
+                                           'company': company,
+                                            'company_deals': company_deals,
+                                            'company_leads': company_leads,
+                                            'company_opportunities': company_opportunities,
+                                            'company_tasks': company_tasks,
+                                            'startdate': startdate,
+                                            'enddate': enddate,
+                                            'total_company_deals': total_company_deals,
+                                            'total_company_leads': total_company_leads,
+                                            'total_company_opportunity': total_company_opportunity,
+                                            'total_company_tasks': total_company_tasks,
+                                            'companyreport': companyreport,
                                             'total_amount_deals': total_amount_deals,
                                             })

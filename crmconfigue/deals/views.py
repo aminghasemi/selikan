@@ -150,6 +150,7 @@ class DealUpdate(LoginRequiredMixin, UpdateView):
         context['company'] = company
         pk=self.kwargs.get('pk')
         context['docs']=company.companydocs.filter(deals_id=pk)
+        context['invoices']=company.companyinvoice.filter(deal_id=pk)
         return context
 class DealDelete(LoginRequiredMixin, DeleteView):
     model=Deal

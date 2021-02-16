@@ -3,6 +3,7 @@ from django.db import models
 from common.models import User, Company, Product
 from accounts.models import Account
 from contacts.models import Contact
+from deals.models import Deal
 from django.utils.translation import ugettext_lazy as _
 from teams.models import Teams
 from django.urls import reverse
@@ -19,16 +20,28 @@ class Invoice(models.Model):
     title = models.CharField( max_length=200, verbose_name="عنوان")
     invoice_number=models.CharField(max_length=25, verbose_name="شماره فاکتور")
     status = models.CharField( max_length=50, choices=STATUS_CHOICES, verbose_name="وضعیت")
-    date = models.DateField(null=True,blank=True, verbose_name="تاریخ فاکتور")
+    date = models.DateField(null=True,blank=True, verbose_name="تاریخ تنظیم")
     created_on = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
-    account = models.ForeignKey(Account,null=True, related_name="accounts_invoices",blank=True,on_delete=models.SET_NULL, verbose_name="نام مشتری")
-    created_by = models.ForeignKey(User,related_name="invoice_created",null=True,blank=True,on_delete=models.SET_NULL, verbose_name="ایجاد شده توسط")
-    teams = models.ForeignKey(Teams,null=True,blank=True, related_name="invoice_teams",on_delete=models.SET_NULL, verbose_name="تیم")
+    account = models.ForeignKey(Account,null=True, related_name="invoice_account",blank=True,on_delete=models.SET_NULL, verbose_name="نام مشتری")
+    created_by = models.ForeignKey(User,related_name="invoice_created_by",null=True,blank=True,on_delete=models.SET_NULL, verbose_name="ایجاد شده توسط")
+    deal = models.ForeignKey(Deal,null=True,blank=True, related_name="invoice_deal",on_delete=models.SET_NULL, verbose_name="معامله")
     company = models.ForeignKey(Company, on_delete=models.SET_NULL,null=True, related_name='companyinvoice', blank=True, verbose_name="کاربر سایت")
     description = models.TextField(blank=True, verbose_name="توضیحات")
-    done_on=models.DateField(null=True, blank=True, verbose_name="تاریخ تکمیل")
-    tax=models.IntegerField(null=True, blank=True, verbose_name="مالیات")
-    total_amount=models.FloatField(null=True, blank=True, verbose_name="جمع مبلغ فاکتور")
+    tax=models.DecimalField(default=0,decimal_places=0, max_digits=20, null=True, blank=True, verbose_name=" درصد مالیات")
+    bargain=models.DecimalField(default=0,decimal_places=0, max_digits=20, null=True, blank=True, verbose_name="درصد تخفیف")
+    total_amount=models.DecimalField(default=0,decimal_places=0, max_digits=20, blank=True, verbose_name="جمع مبلغ فاکتور")
+    expire_date=models.DateField(null=True,blank=True, verbose_name="تاریخ اعتبار ")
+    archive = models.BooleanField(default=False, verbose_name="بایگانی شود؟")
+    total_bargain=models.DecimalField(decimal_places=0, max_digits=20 ,null=True, blank=True, verbose_name=" مبلغ تخفیف")
+    total_tax=models.DecimalField(decimal_places=0, max_digits=20 ,null=True, blank=True, verbose_name=" مبلغ مالیات")
+    final_total_amount=models.DecimalField(decimal_places=0, max_digits=20 ,null=True, blank=True, verbose_name="جمع نهایی مبلغ فاکتور")
+    
+    def save(self):
+        self.total_bargain= ((self.total_amount)*(self.bargain/100))
+        self.total_tax= ((self.total_amount)*(self.tax/100))
+        self.final_total_amount=(self.total_amount)+(self.total_tax)-(self.total_bargain)
+        return super(Invoice, self).save()
+
     def __str__(self):
         return self.title
 
@@ -58,17 +71,17 @@ class Invoice(models.Model):
         verbose_name_plural = "فاکتورها"
 
 
-class Inovice_item(models.Model):
+class Invoice_item(models.Model):
     product_name=models.ForeignKey(Product, on_delete=models.SET_NULL,null=True, related_name='invoice_item_product', blank=True, verbose_name="آیتم فاکتور")
     amount=models.IntegerField(null=True, blank=True, verbose_name="تعداد")
-    total_item_amount=models.FloatField(null=True, blank=True, verbose_name="مجموع")
+    total_item_amount=models.DecimalField(decimal_places=0, max_digits=20 ,null=True, blank=True, verbose_name="مجموع")
     created_on = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
     created_by = models.ForeignKey(User,related_name="invoice_item_created",null=True,blank=True,on_delete=models.SET_NULL, verbose_name="ایجاد شده توسط")
     invoice = models.ForeignKey(Invoice, on_delete=models.SET_NULL,null=True, related_name='Invoiceitem', blank=True, verbose_name="فاکتور")
 
     def save(self):
         self.total_item_amount= (self.amount*self.product_name.price)
-        return super(Inovice_item, self).save()
+        return super(Invoice_item, self).save()
     class Meta:
         verbose_name = "آیتم فاکتور"
         verbose_name_plural = "آیتم‌های فاکتور"
