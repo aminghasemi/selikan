@@ -1,7 +1,6 @@
 {% extends 'company/base.html' %}
 
-{% block title %}داشبورد اصلی{% endblock %}
-
+{% load jalali_tags %}
 
 {% block main %}
 <nav aria-label="breadcrumb">
@@ -36,8 +35,8 @@
                         {% else %}
                         <td>{{staffreport.staff}}</td>
                         {% endif %}
-                        <td>{{staffreport.startdate}}</td>
-                        <td>{{staffreport.enddate}}</td>
+                        <td>{{staffreport.startdate|to_jalali}}</td>
+                        <td>{{staffreport.enddate|to_jalali}}</td>
                         <td>
                             <a class="badge" href="{% url 'reports:staffreport-update' company.slug staffreport.pk %}">ویرایش</a>
                             <a class="badge" href="{% url 'reports:staffreport-delete' company.slug staffreport.pk %}">حذف</a>

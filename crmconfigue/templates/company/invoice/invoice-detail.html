@@ -1,9 +1,6 @@
 {% extends 'company/base.html' %}
 {% load crispy_forms_tags %}
-{% block title %}
-ایجاد مشتری جدید
-{% endblock %}
-
+{% load humanize%}
 
 {% block main %}
 
@@ -110,9 +107,9 @@
         {% for invoice_item in invoice_item %}
           <tr>
             <td>{{invoice_item.product_name}}</td>
-            <td>{{invoice_item.product_name.price}}</td>
-            <td>{{invoice_item.amount}}</td>
-            <td class="text-primary text-right font-weight-bold">{{invoice_item.total_item_amount}}</td>
+            <td>{{invoice_item.product_name.price|intcomma:False}}</td>
+            <td>{{invoice_item.amount|intcomma:False}}</td>
+            <td class="text-primary text-right font-weight-bold">{{invoice_item.total_item_amount|intcomma:False}}</td>
           </tr>
           {% endfor %}
         </tbody>
@@ -188,20 +185,20 @@
           <div class="invoice-subtotal">
             <div class="invoice-calc d-flex justify-content-between">
               <span class="invoice-title">جمع کل</span>
-              <span class="invoice-value">{{invoice.total_amount}} تومان</span>
+              <span class="invoice-value">{{invoice.total_amount|intcomma:False}} تومان</span>
             </div>
             <div class="invoice-calc d-flex justify-content-between">
               <span class="invoice-title">مبلغ تخفیف</span>
-              <span class="invoice-value">{{invoice.total_bargain}} تومان</span>
+              <span class="invoice-value">{{invoice.total_bargain|intcomma:False}} تومان</span>
             </div>
             <div class="invoice-calc d-flex justify-content-between">
               <span class="invoice-title">مبلغ مالیات</span>
-              <span class="invoice-value">{{invoice.total_tax}} تومان</span>
+              <span class="invoice-value">{{invoice.total_tax|intcomma:False}} تومان</span>
             </div>
             <hr>
             <div class="invoice-calc d-flex justify-content-between">
               <span class="invoice-title">جمع صورتحساب</span>
-              <span class="invoice-value">{{invoice.final_total_amount}} تومان</span>
+              <span class="invoice-value">{{invoice.final_total_amount|intcomma:False}} تومان</span>
             </div>
           </div>
         </div>

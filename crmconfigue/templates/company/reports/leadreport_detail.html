@@ -1,7 +1,7 @@
 {% extends 'company/base.html' %}
 
-{% block title %}داشبورد اصلی{% endblock %}
-
+{% load humanize %}
+{% load jalali_tags %}
 
 {% block main %}
 
@@ -35,8 +35,8 @@
                         {% else %}
                         <td>{{leadreport.lead_source}}</td>
                         {% endif %}
-                        <td>{{leadreport.startdate}}</td>
-                        <td>{{leadreport.enddate}}</td>
+                        <td>{{leadreport.startdate|to_jalali}}</td>
+                        <td>{{leadreport.enddate|to_jalali}}</td>
                         <td>
                             <a class="badge" href="{% url 'reports:leadreport-update' company.slug leadreport.pk %}">ویرایش</a>
                             <a class="badge" href="{% url 'reports:leadreport-delete' company.slug leadreport.pk %}">حذف</a>
@@ -79,7 +79,7 @@
                         {% else %}
                         <td><a class="badge badge-primary" style="color:white" >{{lead.lead_status}}</a></td>
                         {% endif %}
-                        <td>{{lead.lead_source}} تومان </td>
+                        <td>{{lead.lead_source}} </td>
                         <td>{{lead.assigned_to.get_full_name}}</td>
                         <td>{{lead.lead_teams}}</td>
                         <td>{{lead.lead_tags}}</td>
@@ -94,7 +94,7 @@
                       <tr>
                       <th>مجموع تعداد سرنخ‌ها</th>
                     </tr>
-                        <td>{{total_leads_count}}</td>
+                        <td>{{total_leads_count|intcomma:False}}</td>
 
                     <tr>
 

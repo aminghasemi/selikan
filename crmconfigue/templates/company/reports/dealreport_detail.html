@@ -1,8 +1,7 @@
 {% extends 'company/base.html' %}
 
-{% block title %}داشبورد اصلی{% endblock %}
-
-
+{% load humanize %}
+{% load jalali_tags %}
 {% block main %}
 
         <div class="row">
@@ -29,8 +28,8 @@
                         {% else %}
                         <td>{{dealreport.pipeline_status}}</td>
                         {% endif %}
-                        <td>{{dealreport.startdate}}</td>
-                        <td>{{dealreport.enddate}}</td>
+                        <td>{{dealreport.startdate|to_jalali}}</td>
+                        <td>{{dealreport.enddate|to_jalali}}</td>
                         <td>
                             <a class="badge" href="{% url 'reports:dealreport-update' company.slug dealreport.pk %}">ویرایش</a>
                             <a class="badge" href="{% url 'reports:dealreport-delete' company.slug dealreport.pk %}">حذف</a>
@@ -72,7 +71,7 @@
                         {% else %}
                         <td><a class="badge badge-primary" style="color:white" >{{deal.pipeline_status}}</a></td>
                         {% endif %}
-                        <td>{{deal.deal_amount}} تومان </td>
+                        <td>{{deal.deal_amount|intcomma:False}} تومان </td>
                         <td>{{deal.assigned_to.get_full_name}}</td>
                         <td>{{deal.account}}</td>
                         <td>
@@ -87,8 +86,8 @@
                       <th>مجموع تعداد معاملات</th>
                       <th>مجموع مبالغ معاملات</th>
                     </tr>
-                        <td>{{total_deals_count}}</td>
-                        <td>{{total_amount_deals}} تومان </td>
+                        <td>{{total_deals_count|intcomma:False}}</td>
+                        <td>{{total_amount_deals|intcomma:False}} تومان </td>
 
                     <tr>
 

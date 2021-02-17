@@ -1,7 +1,6 @@
 {% extends 'company/base.html' %}
 
-{% block title %}داشبورد اصلی{% endblock %}
-
+{% load humanize %}
 
 {% block main %}
 <nav aria-label="breadcrumb">
@@ -40,7 +39,7 @@
                         <td><a class="badge badge-primary" style="color:white" >{{opportunity.status}}</a></td>
                         {% endif %}
                         <td>{{opportunity.account}}</td>
-                        <td>{{opportunity.amount}}</td>
+                        <td>{{opportunity.amount|intcomma:False}}</td>
                         <td>{{opportunity.probability}}</td>
                         <td>
                             {% if user.is_superuser %}

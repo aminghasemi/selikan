@@ -1,7 +1,6 @@
 {% extends 'company/base.html' %}
 
-{% block title %}داشبورد اصلی{% endblock %}
-
+{% load jalali_tags %}
 
 {% block main %}
 <nav aria-label="breadcrumb">
@@ -42,8 +41,8 @@
                         {% else %}
                         <td>{{taskreport.task_priority}}</td>
                         {% endif %}
-                        <td>{{taskreport.startdate}}</td>
-                        <td>{{taskreport.enddate}}</td>
+                        <td>{{taskreport.startdate|to_jalali}}</td>
+                        <td>{{taskreport.enddate|to_jalali}}</td>
                         <td>
                             <a class="badge" href="{% url 'reports:taskreport-update' company.slug taskreport.pk %}">ویرایش</a>
                             <a class="badge" href="{% url 'reports:taskreport-delete' company.slug taskreport.pk %}">حذف</a>

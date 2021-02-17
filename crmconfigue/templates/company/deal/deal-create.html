@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% load crispy_forms_field %}
 {% load widget_tweaks %}
-{% load jalali_tags %}
+{% load humanize %}
 {% block title %}
 ایجاد مشتری جدید
 {% endblock %}
@@ -24,7 +24,7 @@
               {{ form.pipeline_status|as_crispy_field }}
             </div>
             <div class="col-3">
-              {{ form.deal_amount|as_crispy_field }}
+              {{ form.deal_amount|as_crispy_field|intcomma:False }}
             </div>
             <div class="col-3">
                {{form.account|as_crispy_field}}

@@ -1,7 +1,6 @@
 {% extends 'company/base.html' %}
 
-{% block title %}داشبورد اصلی{% endblock %}
-
+{% load jalali_tags %}
 
 {% block main %}
 <nav aria-label="breadcrumb">
@@ -30,8 +29,8 @@
                     {% for companyreport in object_list %}
                       <tr>
                         <td><a href="{% url 'reports:companyreport-detail' company.slug companyreport.pk %}">{{companyreport.title}}</a></td>
-                        <td>{{companyreport.startdate}}</td>
-                        <td>{{companyreport.enddate}}</td>
+                        <td>{{companyreport.startdate|to_jalali}}</td>
+                        <td>{{companyreport.enddate|to_jalali}}</td>
                         <td>
                             <a class="badge" href="{% url 'reports:companyreport-update' company.slug companyreport.pk %}">ویرایش</a>
                             <a class="badge" href="{% url 'reports:companyreport-delete' company.slug companyreport.pk %}">حذف</a>

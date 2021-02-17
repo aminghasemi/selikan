@@ -1,7 +1,6 @@
 {% extends 'company/base.html' %}
 
-{% block title %}داشبورد اصلی{% endblock %}
-
+{% load jalali_tags %}
 
 {% block main %}
 <nav aria-label="breadcrumb">
@@ -39,10 +38,8 @@
                         <td>{{task.status}}</td>
                         <td>{{task.priority}}</td>
                         <td>
-                            {% if user.is_superuser %}
                             <a class="badge" href="{% url 'task:task-update' company.slug task.pk %}">ویرایش</a>
                             <a class="badge" href="{% url 'task:task-delete' company.slug task.pk %}">حذف</a>
-                            {% endif %}
                         </td>
                       </tr>
                     {% endfor %}

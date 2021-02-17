@@ -1,8 +1,7 @@
 {% extends 'company/base.html' %}
 
-{% block title %}داشبورد اصلی{% endblock %}
-
-
+{% load humanize %}
+{% load jalali_tags %}
 {% block main %}
 
         <div class="row">
@@ -35,8 +34,8 @@
                         {% else %}
                         <td>{{opportunityreport.opportunity_source}}</td>
                         {% endif %}
-                        <td>{{opportunityreport.startdate}}</td>
-                        <td>{{opportunityreport.enddate}}</td>
+                        <td>{{opportunityreport.startdate|to_jalali}}</td>
+                        <td>{{opportunityreport.enddate|to_jalali}}</td>
                         <td>
                             <a class="badge" href="{% url 'reports:opportunityreport-update' company.slug opportunityreport.pk %}">ویرایش</a>
                             <a class="badge" href="{% url 'reports:opportunityreport-delete' company.slug opportunityreport.pk %}">حذف</a>
@@ -94,7 +93,7 @@
                       <tr>
                       <th>مجموع تعداد فرصت‌‌ها</th>
                     </tr>
-                        <td>{{total_opportunities_count}}</td>
+                        <td>{{total_opportunities_count|intcomma:False}}</td>
 
                     <tr>
 

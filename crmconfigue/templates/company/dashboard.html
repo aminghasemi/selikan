@@ -1,8 +1,8 @@
 {% extends 'company/base.html' %}
 {% load static %}
 {% block title %}داشبورد اصلی{% endblock %}
-
-
+{% load humanize %}
+{% load jalali_tags %}
 {% block main %}
 
     <!-- BEGIN: Content-->
@@ -19,7 +19,7 @@
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-end">
               <div class="dashboard-content-left">
-                <h1 class="text-primary font-large-2 text-bold-500 line-height-1 mb-2 primary-font">{{total}} <small>تومان</small></h1>
+                <h1 class="text-primary font-large-2 text-bold-500 line-height-1 mb-2 primary-font">{{ total|intcomma:False }} <small>تومان</small></h1>
                 <p>فروخته‌اید</p>
                 <a type="button" href="{% url 'deals:deals' company.slug %}" class="btn btn-primary glow" style=color:white>مشاهده معاملات</a>
               </div>
@@ -191,10 +191,10 @@
                   </div>
                   <div class="list-content mt-n25">
                     <span class="list-title">مجموع فروش </span>
-                    <small class="text-muted d-block">تعداد فروش: {{totaldeals}} </small>
+                    <small class="text-muted d-block">تعداد فروش: {{totaldeals|intcomma:False}} </small>
                   </div>
                 </div>
-                <span>{{total}} تومان</span>
+                <span>{{total|intcomma:False}} تومان</span>
               </li>
               <li class="list-group-item list-group-item-action border-0 d-flex align-items-center justify-content-between">
                 <div class="list-left d-flex align-items-center">
@@ -331,7 +331,7 @@
                         </a>
                         <div class="media-body">
                           <a class="media-heading mb-0 mt-n25 primary-font" href="{% url 'task:task-update' company.slug important_tasks.pk %}">{{important_tasks.title}}</a>
-                          <span class="font-small-2">مهلت انجام:{{important_tasks.due_date}} </span>
+                          <span class="font-small-2">مهلت انجام:{{important_tasks.due_date|to_jalali}} </span>
                         </div>
                       </div>
                     </td>
@@ -356,7 +356,7 @@
                         </a>
                         <div class="media-body">
                           <a class="media-heading mb-0 mt-n25 primary-font" href="{% url 'task:task-update' company.slug average_tasks.pk %}">{{average_tasks.title}} </a>
-                          <span class="font-small-2">مهلت انجام:{{average_tasks.due_date}} </span>
+                          <span class="font-small-2">مهلت انجام:{{average_tasks.due_date|to_jalali}} </span>
                         </div>
                       </div>
                     </td>
@@ -381,7 +381,7 @@
                         </a>
                         <div class="media-body">
                           <a class="media-heading mb-0 mt-n25 primary-font" href="{% url 'task:task-update' company.slug low_tasks.pk %}">{{low_tasks.title}} </a>
-                          <span class="font-small-2">مهلت انجام:{{low_tasks.due_date}} </span>
+                          <span class="font-small-2">مهلت انجام:{{low_tasks.due_date|to_jalali}} </span>
                         </div>
                       </div>
                     </td>
@@ -415,7 +415,7 @@
                     <!-- data -->
                     <div class="statistics-data my-auto">
                       <div class="statistics">
-                        <span class="font-medium-2 mr-50 text-bold-600">{{days7_total}}</span>
+                        <span class="font-medium-2 mr-50 text-bold-600">{{days7_total|intcomma:False}}</span>
                       </div>
                       <div class="statistics-date">
                         <i class="bx bx-radio-circle font-small-1 text-success mr-25 align-middle"></i>
@@ -432,7 +432,7 @@
                     <!-- data-2 -->
                     <div class="statistics-data my-auto">
                       <div class="statistics">
-                        <span class="font-medium-2 mr-50 text-bold-600">{{total}}</span>
+                        <span class="font-medium-2 mr-50 text-bold-600">{{total|intcomma:False}}</span>
                       </div>
                       <div class="statistics-date">
                         <i class="bx bx-radio-circle font-small-1 text-success mr-25 align-middle"></i>
@@ -468,7 +468,7 @@
                 <td class="py-1">
                   <i class="bx bx-trending-up text-success align-middle mr-50"></i><span>{{deals.pipeline_status}}</span>
                 </td>
-                <td class="py-1">{{deals.deal_amount}} تومان</td>
+                <td class="py-1">{{deals.deal_amount|intcomma:False}} تومان</td>
                 <td class="text-secondary py-1">{{deals.account}}</td>
               </tr>
             {% endfor %}

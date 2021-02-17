@@ -2,6 +2,7 @@
 
 {% block title %}داشبورد اصلی{% endblock %}
 
+{% load humanize %}
 
 {% block main %}
 <nav aria-label="breadcrumb">
@@ -39,7 +40,7 @@
                         {% else %}
                         <td><a class="badge badge-primary" style="color:white" >{{deal.pipeline_status}}</a></td>
                         {% endif %}
-                        <td>{{deal.deal_amount}} تومان </td>
+                        <td>{{ deal.deal_amount|intcomma:False }} تومان </td>
                         <td>{{deal.assigned_to.get_full_name}}</td>
                         <td>{{deal.account}}</td>
                         <td>

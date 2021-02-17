@@ -1,13 +1,12 @@
 {% extends 'company/base.html' %}
 
-{% block title %}داشبورد اصلی{% endblock %}
-
+{% load jalali_tags %}
 
 {% block main %}<nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{% url 'common:home' %}"><i class="bx bx-home"></i></a></li>
     <li class="breadcrumb-item"><a href="{% url 'common:dashboard' company.slug %}">{{company.name}}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">گزارش‌های فروش</li>
+    <li class="breadcrumb-item active" aria-current="page">گزارش‌های معاملات</li>
   </ol>
 </nav>
         <div class="row">
@@ -35,8 +34,8 @@
                         {% else %}
                         <td>{{dealreport.pipeline_status}}</td>
                         {% endif %}
-                        <td>{{dealreport.startdate}}</td>
-                        <td>{{dealreport.enddate}}</td>
+                        <td>{{dealreport.startdate|to_jalali}}</td>
+                        <td>{{dealreport.enddate|to_jalali}}</td>
                         <td>
                             <a class="badge" href="{% url 'reports:dealreport-update' company.slug dealreport.pk %}">ویرایش</a>
                             <a class="badge" href="{% url 'reports:dealreport-delete' company.slug dealreport.pk %}">حذف</a>

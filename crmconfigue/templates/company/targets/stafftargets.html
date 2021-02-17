@@ -1,8 +1,7 @@
 {% extends 'company/base.html' %}
 
-{% block title %}داشبورد اصلی{% endblock %}
-
-
+{% load humanize %}
+{% load jalali_tags %}
 {% block main %}
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
@@ -36,10 +35,10 @@
                         <td>{{targets.staff}}</td>
                         <td><a href="{% url 'targets:stafftargets-update' company.slug targets.pk %}">{{targets.title}}</a></td>
                         <td><a class="badge badge-success" style="color:white">{{targets.target_subject}}</a></td>
-                        <td>{{targets.target}}</td>
-                        <td>{{targets.current}}</td>
-                        <td>{{targets.start_date}}</td>
-                        <td>{{targets.end_date}}</td>
+                        <td>{{targets.target|intcomma:False}}</td>
+                        <td>{{targets.current|intcomma:False}}</td>
+                        <td>{{targets.start_date|to_jalali}}</td>
+                        <td>{{targets.end_date|to_jalali}}</td>
                         <td>
                             <a class="badge badge-warning" href="{% url 'targets:stafftargets-update' company.slug targets.pk %}">ویرایش</a>
                             <a class="badge badge-danger" href="{% url 'targets:stafftargets-delete' company.slug targets.pk %}">حذف</a>

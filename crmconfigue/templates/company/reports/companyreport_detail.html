@@ -1,8 +1,7 @@
 {% extends 'company/base.html' %}
 
-{% block title %}داشبورد اصلی{% endblock %}
-
-
+{% load humanize %}
+{% load jalali_tags %}
 {% block main %}
 
         <div class="row">
@@ -24,8 +23,8 @@
                       <tr>
                         <td><h5><a href="{% url 'reports:companyreport-detail' company.slug companyreport.pk %}">{{companyreport.title}}</a></h5></td>
 
-                        <td>{{companyreport.startdate}}</td>
-                        <td>{{companyreport.enddate}}</td>
+                        <td>{{companyreport.startdate|to_jalali}}</td>
+                        <td>{{companyreport.enddate|to_jalali}}</td>
                         <td>
                             <a class="badge" href="{% url 'reports:companyreport-update' company.slug companyreport.pk %}">ویرایش</a>
                             <a class="badge" href="{% url 'reports:companyreport-delete' company.slug companyreport.pk %}">حذف</a>
@@ -79,7 +78,7 @@
                         {% else %}
                         <td><a class="badge badge-primary" style="color:white" >{{deal.pipeline_status}}</a></td>
                         {% endif %}
-                        <td>{{deal.deal_amount}} تومان </td>
+                        <td>{{deal.deal_amount|intcomma:False}} تومان </td>
                         <td>{{deal.assigned_to.get_full_name}}</td>
                         <td>{{deal.account}}</td>
                         <td>
@@ -94,8 +93,8 @@
                       <th>مجموع تعداد معاملات</th>
                       <th>مجموع مبالغ معاملات</th>
                     </tr>
-                        <td>{{total_company_deals}}</td>
-                        <td>{{total_amount_deals}} تومان </td>
+                        <td>{{total_company_deals|intcomma:False}}</td>
+                        <td>{{total_amount_deals|intcomma:False}} تومان </td>
 
                     <tr>
 
@@ -165,7 +164,7 @@
                       <tr>
                       <th>مجموع تعداد سرنخ‌ها</th>
                     </tr>
-                        <td>{{total_company_leads}}</td>
+                        <td>{{total_company_leads|intcomma:False}}</td>
 
                     <tr>
 
@@ -231,7 +230,7 @@
                       <tr>
                       <th>مجموع تعداد فرصت‌ها</th>
                     </tr>
-                        <td>{{total_company_opportunity}}</td>
+                        <td>{{total_company_opportunity|intcomma:False}}</td>
 
                     <tr>
 
@@ -300,7 +299,7 @@
                       <tr>
                       <th>مجموع تعداد وظایف</th>
                     </tr>
-                        <td>{{total_company_tasks}}</td>
+                        <td>{{total_company_tasks|intcomma:False}}</td>
 
                     <tr>
 

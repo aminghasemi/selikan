@@ -1,8 +1,7 @@
 {% extends 'company/base.html' %}
 
-{% block title %}داشبورد اصلی{% endblock %}
-
-
+{% load humanize %}
+{% load jalali_tags %}
 {% block main %}
 
         <div class="row">
@@ -29,8 +28,8 @@
                         {% else %}
                         <td>{{staffreport.staff}}</td>
                         {% endif %}
-                        <td>{{staffreport.startdate}}</td>
-                        <td>{{staffreport.enddate}}</td>
+                        <td>{{staffreport.startdate|to_jalali}}</td>
+                        <td>{{staffreport.enddate|to_jalali}}</td>
                         <td>
                             <a class="badge" href="{% url 'reports:staffreport-update' company.slug staffreport.pk %}">ویرایش</a>
                             <a class="badge" href="{% url 'reports:staffreport-delete' company.slug staffreport.pk %}">حذف</a>
@@ -84,7 +83,7 @@
                         {% else %}
                         <td><a class="badge badge-primary" style="color:white" >{{deal.pipeline_status}}</a></td>
                         {% endif %}
-                        <td>{{deal.deal_amount}} تومان </td>
+                        <td>{{deal.deal_amount|intcomma:False}} تومان </td>
                         <td>{{deal.assigned_to.get_full_name}}</td>
                         <td>{{deal.account}}</td>
                         <td>
@@ -99,8 +98,8 @@
                       <th>مجموع تعداد معاملات</th>
                       <th>مجموع مبالغ معاملات</th>
                     </tr>
-                        <td>{{total_staff_deals}}</td>
-                        <td>{{total_amount_deals}} تومان </td>
+                        <td>{{total_staff_deals|intcomma:False}}</td>
+                        <td>{{total_amount_deals|intcomma:False}} تومان </td>
 
                     <tr>
 
@@ -170,7 +169,7 @@
                       <tr>
                       <th>مجموع تعداد سرنخ‌ها</th>
                     </tr>
-                        <td>{{total_staff_leads}}</td>
+                        <td>{{total_staff_leads|intcomma:False}}</td>
 
                     <tr>
 
@@ -242,7 +241,7 @@
                       <tr>
                       <th>مجموع تعداد فرصت‌ها</th>
                     </tr>
-                        <td>{{total_staff_opportunity}}</td>
+                        <td>{{total_staff_opportunity|intcomma:False}}</td>
 
                     <tr>
 
@@ -311,7 +310,7 @@
                       <tr>
                       <th>مجموع تعداد وظایف</th>
                     </tr>
-                        <td>{{total_staff_tasks}}</td>
+                        <td>{{total_staff_tasks|intcomma:False}}</td>
 
                     <tr>
 
