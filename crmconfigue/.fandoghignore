@@ -1,0 +1,11 @@
+db.sqlite3
+*.pyc
+venv
+*.log
+*.pot
+*.mo
+__pycache__/
+local_settings.py
+.env
+venv/
+.git

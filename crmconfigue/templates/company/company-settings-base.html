@@ -68,11 +68,11 @@
               </li>
               <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                   <div class="user-nav d-sm-flex d-none"><span class="user-name">{{user.get_full_name}}</span><span class="user-status text-muted">کاربر</span></div><
-                    {% if object_list.thumbnail is True %}
+                    {% if user.thumbnail %}
                     <span><img class="round" src="{{user.thumbnail.url}}" alt="avatar" height="40" width="40"></span></a>
                   {% else %}
-                    <span><img class="round" src="#" alt="avatar" height="40" width="40"></span></a>
-                {% endif %}                  <div class="dropdown-menu pb-0"><a class="dropdown-item" href="{% url 'common:profile' %}"><i class="bx bx-user mr-50"></i> ویرایش پروفایل</a>
+                    <span><img class="round" src="{% static 'frest/assets/images/placeholder.png' %}" alt="avatar" height="40" width="40"></span></a>
+                  {% endif %}               <div class="dropdown-menu pb-0"><a class="dropdown-item" href="{% url 'common:profile' %}"><i class="bx bx-user mr-50"></i> ویرایش پروفایل</a>
                   <div class="dropdown-divider mb-0"></div><a class="dropdown-item" href="{% url 'logout' %}"><i class="bx bx-power-off mr-50"></i> خروج</a>
                 </div>
               </li>
