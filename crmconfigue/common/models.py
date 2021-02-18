@@ -9,7 +9,6 @@ from datetime import timedelta
 from common.utils import COUNTRIES, ROLES, INDCHOICES, PROVINCE
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 
-
 def img_url(self, filename):
     hash_ = int(time.time())
     return "%s/%s/%s" % ("profile_pics", hash_, filename)
@@ -26,7 +25,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False,verbose_name="کارمند")
     date_joined = models.DateTimeField(auto_now_add=True,verbose_name="تاریخ عضویت")
     role = models.CharField(max_length=50, choices=ROLES,verbose_name="نقش")
-    thumbnail = models.ImageField(upload_to="media",blank=True, null=True, verbose_name="تصویر کاربر")
+    thumbnail = models.FileField(upload_to="media",blank=True, null=True, verbose_name="تصویر کاربر")
     has_sales_access = models.BooleanField(default=False,verbose_name="دسترسی به فروش")
     has_marketing_access = models.BooleanField(default=False,verbose_name="دسترسی به بازاریابی")
 
@@ -87,32 +86,31 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Company(models.Model):
-    file_prepend = "users/profile_pics"
-    name = models.CharField(max_length=100, blank=True, null=True,verbose_name="نام شرکت")
-    slug=models.SlugField(max_length=100,unique=True, verbose_name ="لینک شرکت")
-    sub_domain = models.CharField(max_length=30,null=True, blank=True, verbose_name="آدرس زیر دامنه")
-    user_limit = models.IntegerField(default=1,verbose_name="محدودیت کاربر")
+    name = models.CharField(max_length=100,verbose_name="نام شرکت")
+    slug=models.SlugField(max_length=100,unique=True, verbose_name ="<لینک شرکت>/selikan.ir")
+#    sub_domain = models.CharField(max_length=30,null=True, blank=True, verbose_name="آدرس زیر دامنه")
+    user_limit = models.IntegerField(default=1,blank=True, null=True,verbose_name="محدودیت کاربر")
     country = models.CharField(max_length=3, default="IR", choices=COUNTRIES, blank=True, null=True,verbose_name="کشور")
     creator = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='crm_creator', verbose_name="ایجادکننده شرکت")
     created_time=models.DateTimeField(auto_now_add=True, verbose_name ="تاریخ ایجاد")
-    staff=models.ManyToManyField(User, through='Enrolled', related_name='companystaff')
+    staff=models.ManyToManyField(User, through='Enrolled',blank=True, related_name='companystaff')
     access_date=models.DateTimeField(auto_now_add=False, verbose_name='تاریخ اعتبار حساب')
-    national_id = models.CharField(max_length=64,blank=True, verbose_name="کد‌/شناسه ملی")
-    economic_id=models.CharField(max_length=64,blank=True, verbose_name="کد اقتصادی")
-    email = models.EmailField(blank=True, verbose_name="ایمیل")
+    national_id = models.CharField(max_length=64,blank=True,null=True, verbose_name="کد‌/شناسه ملی")
+    economic_id=models.CharField(max_length=64,blank=True,null=True, verbose_name="کد اقتصادی")
+    email = models.EmailField(blank=True,null=True, verbose_name="ایمیل")
     phone = models.CharField(max_length=20, null=True, verbose_name="شماره تماس موبایل")
-    office_phone = models.CharField(max_length=20,blank=True, verbose_name="شماره تماس ثابت")
-    fax = models.CharField(max_length=20,blank=True, verbose_name="شماره فکس ")
-    industry = models.CharField(max_length=255, choices=INDCHOICES, blank=True, verbose_name="صنعت")
-    billing_address_line = models.CharField(max_length=255, blank=True, verbose_name="آدرس")
-    billing_street = models.CharField(max_length=55, blank=True, verbose_name="خیابان")
-    billing_city = models.CharField( max_length=255, blank=True, verbose_name="شهر")
-    billing_state = models.CharField(choices=PROVINCE, max_length=255, blank=True, verbose_name="استان")
-    billing_postcode = models.CharField(max_length=10, blank=True, verbose_name="کد پستی")
-    website = models.URLField(blank=True, verbose_name="وب‌سایت")
-    description = models.TextField(blank=True, verbose_name="توضیحات")
+    office_phone = models.CharField(max_length=20,blank=True,null=True, verbose_name="شماره تماس ثابت")
+    fax = models.CharField(max_length=20,blank=True,null=True, verbose_name="شماره فکس ")
+    industry = models.CharField(max_length=255, choices=INDCHOICES, blank=True,null=True, verbose_name="صنعت")
+    billing_address_line = models.CharField(max_length=255, blank=True, null=True, verbose_name="آدرس")
+    billing_street = models.CharField(max_length=55, blank=True,null=True, verbose_name="خیابان")
+    billing_city = models.CharField( max_length=255, blank=True,null=True, verbose_name="شهر")
+    billing_state = models.CharField(choices=PROVINCE, max_length=255, blank=True,null=True, verbose_name="استان")
+    billing_postcode = models.CharField(max_length=10, blank=True,null=True, verbose_name="کد پستی")
+    website = models.CharField(max_length=100,blank=True,null=True, verbose_name="وب‌سایت")
+    description = models.TextField(blank=True,null=True, verbose_name="توضیحات")
     is_active = models.BooleanField(default=True, verbose_name="فعال")
-    logo = models.ImageField(upload_to="companies_logos",blank=True, null=True, verbose_name="لوگو شرکت")
+    thumbnail = models.FileField(upload_to="company",blank=True, null=True, verbose_name="لوگو شرکت")
 
 
 
@@ -246,8 +244,8 @@ class Country(models.Model):
         return self.name
 
 class Province(models.Model):
-    name=models.CharField( max_length=255, blank=True, null=True,verbose_name="نام کشور")
-    short_name=models.CharField(max_length=3, choices=COUNTRIES, blank=True, null=True,verbose_name="نام کوتاه کشور")
+    name=models.CharField( max_length=255, blank=True, null=True,verbose_name="نام استان")
+    short_name=models.CharField(max_length=3, choices=COUNTRIES, blank=True, null=True,verbose_name="نام کوتاه استان")
 
     class Meta:
         verbose_name = "استان"

@@ -11,6 +11,7 @@
     <!-- Greetings Content Starts -->
     <div class="col-xl-4 col-md-6 col-12 dashboard-greetings">
       <div class="card">
+        {% if total %}
         <div class="card-header">
           <h3 class="greeting-text mt-n25">تبریک می‌گوییم!</h3>
           <p class="mb-0">شما در این ماه</p>
@@ -29,6 +30,30 @@
             </div>
           </div>
         </div>
+        {% else %}
+        <div class="card-header">
+          <p class="mb-0">شما در این ماه</p>
+        </div>
+        <div class="card-content">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-end">
+              <div class="dashboard-content-left">
+                <br>
+                <br>
+                <br>
+                <h3 class="text-danger  text-bold-500 line-height-1 mb-2 primary-font">تاکنون فروشی نداشته‌اید!</h3>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <a type="button" href="{% url 'deals:deals' company.slug %}" class="btn btn-primary glow" style=color:white>مشاهده معاملات</a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      {% endif %}
       </div>
     </div>
     <!-- Multi Radial Chart Starts -->
@@ -194,7 +219,11 @@
                     <small class="text-muted d-block">تعداد فروش: {{totaldeals|intcomma:False}} </small>
                   </div>
                 </div>
+                {% if total %}
                 <span>{{total|intcomma:False}} تومان</span>
+                {% else %}
+                <span>صفر</span>
+                {% endif %}
               </li>
               <li class="list-group-item list-group-item-action border-0 d-flex align-items-center justify-content-between">
                 <div class="list-left d-flex align-items-center">
@@ -415,8 +444,11 @@
                     <!-- data -->
                     <div class="statistics-data my-auto">
                       <div class="statistics">
-                        <span class="font-medium-2 mr-50 text-bold-600">{{days7_total|intcomma:False}}</span>
-                      </div>
+                        {% if total %}
+                        <span class="font-medium-2 mr-50 text-bold-600">{{day7_total|intcomma:False}} تومان </span>
+                        {% else %}
+                        <span>صفر</span>
+                        {% endif %}                      </div>
                       <div class="statistics-date">
                         <i class="bx bx-radio-circle font-small-1 text-success mr-25 align-middle"></i>
                         <small class="text-muted">میزان فروش ۷ روز گذشته</small>
@@ -432,7 +464,11 @@
                     <!-- data-2 -->
                     <div class="statistics-data my-auto">
                       <div class="statistics">
-                        <span class="font-medium-2 mr-50 text-bold-600">{{total|intcomma:False}}</span>
+                        {% if total %}
+                        <span class="font-medium-2 mr-50 text-bold-600">{{total|intcomma:False}} تومان </span>
+                        {% else %}
+                        <span>صفر</span>
+                        {% endif %}
                       </div>
                       <div class="statistics-date">
                         <i class="bx bx-radio-circle font-small-1 text-success mr-25 align-middle"></i>

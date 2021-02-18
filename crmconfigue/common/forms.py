@@ -9,7 +9,9 @@ from crispy_forms.layout import Layout, Submit, Row, Column
 class CompanyForm(forms.ModelForm):
     class Meta:
         model = Company
-        fields=("name","slug","country","national_id","logo", "economic_id", "email","phone","office_phone", "fax", "industry","billing_address_line","billing_street","billing_city", "billing_state", "billing_postcode", "website", "description", "is_active")
+        fields=("name","slug","country","national_id","thumbnail", "economic_id",
+		 "email","phone","office_phone", "fax", "industry","billing_address_line","billing_street",
+		 "billing_city", "billing_state", "billing_postcode", "website", "description", "is_active")
 
 
 class EnrollForm(forms.ModelForm):

@@ -11,6 +11,17 @@
     <li class="breadcrumb-item active" aria-current="page">فاکتورها</li>
   </ol>
 </nav>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <br>
+      <div class="col-3">
+        <a class="btn btn-info" href="{% url 'invoice:invoice-create' company.slug  %}">ایجاد فاکتور جدید</a>
+      </div>
+      <br>
+    </div>
+  </div>
+</div>
         <div class="row">
           <div class="col-12">
             <div class="card">
@@ -23,7 +34,8 @@
                       <th>عنوان فاکتور</th>
                       <th>نوع فاکتور</th>
                       <th>شماره فاکتور</th>
-                      <th> نام مشتری </th>
+                      <th>تاریخ تنظیم</th>
+                      <th>تاریخ اعتبار</th>
                       <th>عملیات</th>
                     </tr>
                   </thead>
@@ -33,11 +45,12 @@
                         <td><a href="{% url 'invoice:invoice-detail' company.slug invoice.pk %}">{{invoice.title}}</a></td>
                         <td>{{invoice.status}}</td>
                         <td>{{invoice.invoice_number}}</td>
-                        <td>{{invoice.account}}</td>
+                        <td>{{invoice.date}}</td>
+                        <td>{{invoice.expire_date}}</td>
                         <td>
                             
-                            <a class="badge" href="{% url 'invoice:invoice-update' company.slug invoice.pk %}">ویرایش</a>
-                            <a class="badge" href="{% url 'invoice:invoice-delete' company.slug invoice.pk %}">حذف</a>
+                            <a class="badge badge-warning" href="{% url 'invoice:invoice-update' company.slug invoice.pk %}">ویرایش</a>
+                            <a class="badge badge-danger" href="{% url 'invoice:invoice-delete' company.slug invoice.pk %}">حذف</a>
                           
                         </td>
                       </tr>
@@ -50,4 +63,5 @@
             <!-- /.card -->
           </div>
         </div>
+
 {% endblock %}

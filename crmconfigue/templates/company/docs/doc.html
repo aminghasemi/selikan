@@ -21,7 +21,6 @@
                   <thead>
                     <tr>
                       <th>عنوان</th>
-                      <th>فایل</th>
                       <th>توضیحات</th>
                       <th>عملیات</th>
                     </tr>
@@ -30,7 +29,6 @@
                     {% for doc in object_list %}
                       <tr>
                         <td><a href="{% url 'doc:doc-update' company.slug doc.pk %}">{{doc.title}}</a></td>
-                        <td>{{doc.file}}</td>
                         <td>{{doc.description}}</td>
                         <td>
                             <a class="badge" href="{% url 'doc:doc-update' company.slug doc.pk %}">ویرایش</a>

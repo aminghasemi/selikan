@@ -4,9 +4,9 @@ from .models import Company, User, Address, Enrolled, Product, Country
 
 
 class company_admin(admin.ModelAdmin):
-    list_display= ('name','sub_domain','user_limit','creator','created_time')
+    list_display= ('name','user_limit','creator','created_time')
     list_filter= ('name',)
-    search_fields= ('name','sub_domain')
+    search_fields= ('name',)
 
 admin.site.register(Company,company_admin)
 

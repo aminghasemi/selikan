@@ -1,9 +1,8 @@
 {% extends 'registration/base.html' %}
 {% load static %}
-{% block css %}
+{% load jalali_tags %}
+{% load humanize %}
 
-<link rel="stylesheet" type="text/css" href="../../assets/css/pages/app-invoice.css">
-{% endblock %}
 
 {% block main %}
 
@@ -26,11 +25,11 @@
                 <div class="d-flex align-items-center justify-content-xl-end flex-wrap">
                   <div class="mr-3">
                     <small class="text-muted">تاریخ تنظیم:</small>
-                    <span>{{object.jinvoice_date}}</span>
+                    <span>{{object.invoice_date|to_jalali:'%y/%m/%d'}}</span>
                   </div>
                   <div>
                     <small class="text-muted">تاریخ اعتبار:</small>
-                    <span>{{object.jinvoice_date}}</span>
+                    <span>{{object.invoice_date|to_jalali:'%y/%m/%d'}}</span>
                   </div>
                 </div>
               </div>
@@ -102,7 +101,7 @@
                   <td>{{object.status}}</td>
                   <td>{{object.month_number}}</td>
                   <td>{{object.staff_number}}</td>
-                  <td class="text-primary text-right font-weight-bold">{{object.amount}}</td>
+                  <td class="text-primary text-right font-weight-bold">{{ object.amount|intcomma:False }}</td>
                 </tr>
               </tbody>
             </table>
@@ -119,7 +118,7 @@
                 <div class="invoice-subtotal">
                   <div class="invoice-calc d-flex justify-content-between">
                     <span class="invoice-title">جمع جزء</span>
-                    <span class="invoice-value">{{object.amount}}</span>
+                    <span class="invoice-value">{{object.amount|intcomma:False}}</span>
                   </div>
                   <div class="invoice-calc d-flex justify-content-between">
                     <span class="invoice-title">تخفیف</span>
@@ -132,7 +131,7 @@
                   <hr>
                   <div class="invoice-calc d-flex justify-content-between">
                     <span class="invoice-title">جمع صورتحساب</span>
-                    <span class="invoice-value">{{object.amount}} </span>
+                    <span class="invoice-value">{{object.amount|intcomma:False}} </span>
                   </div>
                 </div>
               </div>

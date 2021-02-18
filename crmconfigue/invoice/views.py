@@ -52,7 +52,7 @@ class InvoiceCreate(EnrollMixin, LoginRequiredMixin, CreateView):
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         pk= self.kwargs.get('pk')
-        return reverse_lazy('invoice:invoice-detail', kwargs={'slug': slug, 'pk': pk}, current_app='invoice')
+        return reverse_lazy('invoice:invoice-detail', kwargs={'slug': slug, 'pk': self.object.pk}, current_app='invoice')
 
 class InvoiceUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
     model=Invoice

@@ -45,6 +45,7 @@ class CompanyUpdate(LoginRequiredMixin,CreatorAccessMixin, UpdateView):
     form_class=CompanyForm
     template_name = "registration/company-update.html"
     success_url= reverse_lazy('common:home')
+    
 class CompanyDelete(LoginRequiredMixin,CreatorAccessMixin, DeleteView):
     model=Company
     template_name = "registration/Company_confirm_delete.html"

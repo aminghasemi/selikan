@@ -13,7 +13,7 @@ from teams.models import Teams
 
 
 class Pipeline(models.Model):
-    pipeline_number=models.IntegerField(verbose_name="شماره مرحله")
+    pipeline_number=models.IntegerField(verbose_name="ترتیب در فرایند")
     pipeline_title = models.CharField(max_length=64, verbose_name="عنوان")
     created_by = models.ForeignKey(User, related_name="pipline_created_by", on_delete=models.CASCADE,  verbose_name="ساخته شده توسط")
     created_on = models.DateTimeField( auto_now_add=True, verbose_name="تاریخ ایجاد")
