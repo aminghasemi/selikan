@@ -13,23 +13,13 @@
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="gear"></i><span class="menu-title" data-i18n="Dashboard">تنظیمات اهداف</span></a>
-              <ul class="menu-content">
-                <li><a href="{% url 'targets:targetsubjectlist' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">موضوعات اهداف</span></a>
-                </li>
-                <li><a href="{% url 'targets:targetsubjects-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد موضوع جدید</span></a>
-                </li>
-              </ul>
+            <li class=" nav-item"><a href="{% url 'targets:targetsubjectlist' company.slug %}"><i class="menu-livicon" data-icon="gear"></i><span class="menu-title" data-i18n="Dashboard">تنظیمات اهداف</span></a>
+
             </li>
           </ul>
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="gear"></i><span class="menu-title" data-i18n="Dashboard">تنظیمات معاملات</span></a>
-              <ul class="menu-content">
-                <li><a href="{% url 'deals:pipelines' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">مراحل فروش</span></a>
-                </li>
-                <li><a href="{% url 'deals:pipeline-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد مرحله فروش جدید</span></a>
-                </li>
-              </ul>
+            <li class=" nav-item"><a href="{% url 'deals:pipelines' company.slug %}"><i class="menu-livicon" data-icon="gear"></i><span class="menu-title" data-i18n="Dashboard">تنظیمات معاملات</span></a>
+
             </li>
           </ul>
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
@@ -37,11 +27,7 @@
               <ul class="menu-content">
                 <li><a href="{% url 'leads:leadstatus' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce"> مراحل سرنخ</span></a>
                 </li>
-                <li><a href="{% url 'leads:leadstatus-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد مرحله سرنخ جدید</span></a>
-                </li>
                 <li><a href="{% url 'leads:leadsource' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">منابع سرنخ‌ها</span></a>
-                </li>
-                <li><a href="{% url 'leads:leadsource-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد منبع سرنخ جدید</span></a>
                 </li>
               </ul>
             </li>
@@ -51,23 +37,13 @@
               <ul class="menu-content">
                 <li><a href="{% url 'opportunity:opportunitystatus' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">لیست مراحل فرصت‌ها</span></a>
                 </li>
-                <li><a href="{% url 'opportunity:opportunitystatus-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد مرحله فرصت جدید</span></a>
-                </li>
                 <li><a href="{% url 'opportunity:opportunitysource' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">منابع فرصت‌ها</span></a>
-                </li>
-                <li><a href="{% url 'opportunity:opportunitysource-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد منبع فرصت جدید</span></a>
                 </li>
               </ul>
             </li>
           </ul>
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="gear"></i><span class="menu-title" data-i18n="Dashboard">تنظیمات محصولات</span></a>
-              <ul class="menu-content">
-                <li><a href="{% url 'common:products' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">لیست محصولات شرکت</span></a>
-                </li>
-                <li><a href="{% url 'common:product-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد محصول جدید</span></a>
-                </li>
-              </ul>
+            <li class=" nav-item"><a href="{% url 'common:products' company.slug %}"><i class="menu-livicon" data-icon="gear"></i><span class="menu-title" data-i18n="Dashboard">تنظیمات محصولات</span></a>
             </li>
           </ul>
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
@@ -76,8 +52,6 @@
                 <li><a href="{% url 'common:company-update' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ویرایش اطلاعات شرکت</span></a>
                 </li>
                 <li><a href="{% url 'common:countries' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">کشور‌های مرتبط</span></a>
-                </li>
-                <li><a href="{% url 'common:country-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد کشور مرتبط  جدید</span></a>
                 </li>
               </ul>
             </li>

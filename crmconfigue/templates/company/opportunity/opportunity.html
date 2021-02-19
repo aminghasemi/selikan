@@ -16,6 +16,14 @@
 
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
+                <div class="card-header d-flex justify-content-between align-items-center pb-1">
+                  <a class="btn btn-info" href="{% url 'opportunity:opportunity-create' company.slug  %}">ایجاد فرصت جدید</a>
+                  <div class="col-md-6 col-12 text-md-right">
+                    <a type="button" class="btn  btn-warning glow mt-md-2 mb-1" href="{% url 'opportunity:opportunitystatus' company.slug %}"><i class="bx bx-cog"></i> تنظیمات مراحل فرصت‌ها</a>
+                    <a type="button" class="btn  btn-warning glow mt-md-2 mb-1" href="{% url 'opportunity:opportunitysource' company.slug %}"><i class="bx bx-cog"></i> تنظیمات منابع فرصت‌ها</a>
+                  </div>
+                </div>
+                </div>
                 <table class="table table-hover">
                   <thead>
                     <tr>

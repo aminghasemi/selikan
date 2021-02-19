@@ -16,6 +16,12 @@
 
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
+                <div class="card-header d-flex justify-content-between align-items-center pb-1">
+                  <a class="btn btn-info" href="{% url 'targets:companytargets-create' company.slug  %}">ایجاد هدف شرکت جدید</a>
+                  <div class="col-md-3 col-12 text-md-right">
+                    <a type="button" class="btn  btn-warning glow mt-md-2 mb-1" href="{% url 'targets:targetsubjectlist' company.slug %}"><i class="bx bx-cog"></i> تنظیمات موضوعات اهداف</a>
+                        </div>
+                </div>
                 <table class="table table-hover">
                   <thead>
                     <tr>

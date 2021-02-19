@@ -17,10 +17,13 @@
 
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
+                <div class="card-header d-flex justify-content-between align-items-center pb-1">
+                  <a class="btn btn-info" href="{% url 'contacts:contact-create' company.slug  %}">ایجاد شخص جدید</a>
+                </div>
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th>نام مشتری</th>
+                      <th>نام شخص</th>
                       <th>موبایل</th>
                       <th>ایمیل</th>
                       <th>محول شده به</th>

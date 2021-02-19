@@ -93,24 +93,29 @@ CallbackURL = 'http://localhost:8000/verify/' # Important: need to edit for real
 
 def send_request(request, pk):
     billing=get_object_or_404(Billing, pk=pk)
-    amount= billing.amount
+   # amount= billing.amount
+    amount=1000
     email= request.user.email
     description = "خرید اشتراک سلیکان"
+    CallbackURL='http://127.0.0.1:8000/verify/'
     result = client.service.PaymentRequest(MERCHANT, amount, description, email, CallbackURL=CallbackURL)
     if result.Status == 100:
         return redirect('https://www.zarinpal.com/pg/StartPay/' + str(result.Authority))
     else:
         return HttpResponse('Error code: ' + str(result.Status))
 
-def verify(request, self, slug):
+def verify(request):
     if request.GET.get('Status') == 'OK':
         result = client.service.PaymentVerification(MERCHANT, request.GET['Authority'], amount)
         if result.Status == 100:
+            pk=request.kwargs.get('pk')
+            slug=request.kwargs.get('slug')
             company = get_object_or_404(Company, slug=slug)
-            pk=self.kwargs.get('pk')
             billing=get_object_or_404(Billing, pk=pk)
             billing.object.status="PAID"
-            company.access_date = datetime.now() + timedelta(days=30)
+            paid_month=billing.month_number*30
+            company.user_limit=billing.staff_number
+            company.access_date = datetime.now() + timedelta(days=paid_month)
             return HttpResponse('Transaction success.\nRefID: ' + str(result.RefID))
         elif result.Status == 101:
             return HttpResponse('Transaction submitted : ' + str(result.Status))

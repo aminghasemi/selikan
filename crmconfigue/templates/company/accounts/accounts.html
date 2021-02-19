@@ -17,7 +17,12 @@
 
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-                <table class="table table-hover id="userDatatable">
+                <div class="card-header d-flex justify-content-between align-items-center pb-1">
+                  <a class="btn btn-info" href="{% url 'accounts:account-create' company.slug  %}">ایجاد مشتری جدید</a>
+
+                    </div>
+
+                <table class="table table-hover">
                   <thead>
                     <tr>
                       <th>نام مشتری</th>

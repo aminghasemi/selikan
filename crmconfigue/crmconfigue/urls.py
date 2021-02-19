@@ -18,7 +18,7 @@ from django.urls import path, include, re_path
 from django.conf.urls import url
 from django.contrib.auth import views
 from common.views import Login, Register, activate
-from payment.views import send_request
+from payment.views import send_request, verify
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('common.urls')),
@@ -38,6 +38,7 @@ urlpatterns = [
     path('register/', Register.as_view(), name='register'),
     path('', include('django.contrib.auth.urls')),
     path('<int:pk>/request', send_request, name='request'),
+    path('verify/', verify, name='verify'),
     re_path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', activate, name='activate'),
 ]
 

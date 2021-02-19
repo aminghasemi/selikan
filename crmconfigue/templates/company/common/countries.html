@@ -10,11 +10,13 @@
 
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
+                <div class="card-header d-flex justify-content-between align-items-center pb-1">
+                  <a class="btn btn-info" href="{% url 'common:country-create' company.slug  %}">ایجاد کشور جدید</a>
+                </div>
                 <table class="table table-hover">
                   <thead>
                     <tr>
                       <th>نام کشور</th>
-                      <th>نام کوتاه</th>
                       <th>عملیات</th>
                     </tr>
                   </thead>
@@ -22,11 +24,10 @@
                     {% for country in object_list %}
                       <tr>
                         <td><a href="{% url 'common:country-update' company.slug country.pk %}">{{country.name}}</a></td>
-
                         <td>
                             
-                            <a class="badge" href="{% url 'common:country-update' company.slug country.pk %}">ویرایش</a>
-                            <a class="badge" href="{% url 'common:country-delete' company.slug country.pk %}">حذف</a>
+                            <a class="badge badge-warning" href="{% url 'common:country-update' company.slug country.pk %}">ویرایش</a>
+                            <a class="badge badge-danger" href="{% url 'common:country-delete' company.slug country.pk %}">حذف</a>
                           
                         </td>
                       </tr>

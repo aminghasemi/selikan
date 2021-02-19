@@ -247,7 +247,7 @@ class CountriesList(EnrollMixin, LoginRequiredMixin,ListView):
         global company
         slug= self.kwargs.get('slug')
         company = get_object_or_404(Company , slug=slug)
-        return company.companyproducts.all()
+        return company.companycountries.all()
     def get_context_data(self, **kwargs):
         slug= self.kwargs.get('slug')
         company = get_object_or_404(Company , slug=slug)

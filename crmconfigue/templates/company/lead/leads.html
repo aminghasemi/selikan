@@ -17,6 +17,13 @@
 
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
+                <div class="card-header d-flex justify-content-between align-items-center pb-1">
+                  <a class="btn btn-info" href="{% url 'leads:lead-create' company.slug  %}">ایجاد سرنخ جدید</a>
+                  <div class="col-md-6 col-12 text-md-right">
+                    <a type="button" class="btn  btn-warning glow mt-md-2 mb-1" href="{% url 'leads:leadstatus' company.slug %}"><i class="bx bx-cog"></i> تنظیمات مراحل سرنخ‌ها</a>
+                    <a type="button" class="btn  btn-warning glow mt-md-2 mb-1" href="{% url 'leads:leadsource' company.slug %}"><i class="bx bx-cog"></i> تنظیمات منابع سرنخ‌ها</a>
+                  </div>
+                </div>
                 <table class="table table-hover">
                   <thead>
                     <tr>

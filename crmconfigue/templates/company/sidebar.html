@@ -21,103 +21,50 @@
               <ul class="menu-content">
                 <li><a href="{% url 'targets:companytargets' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">لیست اهداف شرکت</span></a>
                 </li>
-                <li><a href="{% url 'targets:companytargets-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد هدف شرکت جدید</span></a>
-                </li>
                 <li><a href="{% url 'targets:stafftargets' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">لیست اهداف کارمندان</span></a>
                 </li>
-                <li><a href="{% url 'targets:stafftargets-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد هدف کارمند جدید</span></a>
-                </li>
               </ul>
             </li>
           </ul>
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="us-dollar"></i><span class="menu-title" data-i18n="Dashboard">معاملات</span></a>
-              <ul class="menu-content">
-                <li><a href="{% url 'deals:deals' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">لیست معاملات</span></a>
-                </li>
-                <li><a href="{% url 'deals:deal-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد معامله جدید</span></a>
-                </li>
-              </ul>
+            <li class=" nav-item"><a href="{% url 'deals:deals' company.slug %}"><i class="menu-livicon" data-icon="us-dollar"></i><span class="menu-title" data-i18n="Dashboard">معاملات</span></a>
             </li>
           </ul>
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="building"></i><span class="menu-title" data-i18n="Dashboard">مشتریان</span></a>
-              <ul class="menu-content">
-                <li><a href="{% url 'accounts:accounts' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">لیست مشتریان</span></a>
-                </li>
-                <li><a href="{% url 'accounts:account-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد مشتری جدید</span></a>
-                </li>
-              </ul>
+            <li class=" nav-item"><a href="{% url 'accounts:accounts' company.slug %}"><i class="menu-livicon" data-icon="building"></i><span class="menu-title" data-i18n="Dashboard">مشتریان</span></a>
+
             </li>
           </ul>
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="search"></i><span class="menu-title" data-i18n="Dashboard">سرنخ‌ها</span></a>
-              <ul class="menu-content">
-                <li><a href="{% url 'leads:leads' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">لیست سرنخ‌ها</span></a>
-                </li>
-                <li><a href="{% url 'leads:lead-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد سرنخ جدید</span></a>
-                </li>
-              </ul>
+            <li class=" nav-item"><a href="{% url 'leads:leads' company.slug %}"><i class="menu-livicon" data-icon="search"></i><span class="menu-title" data-i18n="Dashboard">سرنخ‌ها</span></a>
+
             </li>
           </ul>
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="priority-high"></i><span class="menu-title" data-i18n="Dashboard">وظایف و کارها</span></a>
-              <ul class="menu-content">
-                <li><a href="{% url 'task:task' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">لیست وظایف</span></a>
-                </li>
-                <li><a href="{% url 'task:task-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد وظیفه جدید</span></a>
-                </li>
-              </ul>
+            <li class=" nav-item"><a href="{% url 'task:task' company.slug %}"><i class="menu-livicon" data-icon="priority-high"></i><span class="menu-title" data-i18n="Dashboard">وظایف و کارها</span></a>
+
             </li>
           </ul>
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="idea"></i><span class="menu-title" data-i18n="Dashboard">فرصت‌ها</span></a>
-              <ul class="menu-content">
-                <li><a href="{% url 'opportunity:opportunity' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">لیست فرصت‌ها</span></a>
-                </li>
-                <li><a href="{% url 'opportunity:opportunity-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد فرصت جدید</span></a>
-                </li>
-              </ul>
+            <li class=" nav-item"><a href="{% url 'opportunity:opportunity' company.slug %}"><i class="menu-livicon" data-icon="idea"></i><span class="menu-title" data-i18n="Dashboard">فرصت‌ها</span></a>
+
             </li>
           </ul>
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="users"></i><span class="menu-title" data-i18n="Dashboard">اشخاص</span></a>
-              <ul class="menu-content">
-                <li><a href="{% url 'contacts:contacts' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">لیست اشخاص</span></a>
-                </li>
-                <li><a href="{% url 'contacts:contact-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد شخص جدید</span></a>
-                </li>
-              </ul>
+            <li class=" nav-item"><a href="{% url 'contacts:contacts' company.slug %}"><i class="menu-livicon" data-icon="users"></i><span class="menu-title" data-i18n="Dashboard">اشخاص</span></a>
+
             </li>
           </ul>
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="headphones"></i><span class="menu-title" data-i18n="Dashboard">تیم‌ها</span></a>
-              <ul class="menu-content">
-                <li><a href="{% url 'teams:teams' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">لیست‌ تیم‌ها</span></a>
-                </li>
-                <li><a href="{% url 'teams:team-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد تیم جدید</span></a>
-                </li>
-              </ul>
+            <li class=" nav-item"><a href="{% url 'teams:teams' company.slug %}"><i class="menu-livicon" data-icon="headphones"></i><span class="menu-title" data-i18n="Dashboard">تیم‌ها</span></a>
             </li>
           </ul>
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="print-doc"></i><span class="menu-title" data-i18n="Dashboard">فاکتورها</span></a>
-              <ul class="menu-content">
-                <li><a href="{% url 'invoice:invoices' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">لیست‌ فاکتورها</span></a>
-                </li>
-                <li><a href="{% url 'invoice:invoice-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد فاکتور جدید</span></a>
-                </li>
-              </ul>
+            <li class=" nav-item"><a href="{% url 'invoice:invoices' company.slug %}"><i class="menu-livicon" data-icon="print-doc"></i><span class="menu-title" data-i18n="Dashboard">فاکتورها</span></a>
             </li>
           </ul>
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="box"></i><span class="menu-title" data-i18n="Dashboard">فایل‌ها</span></a>
-              <ul class="menu-content">
-                <li><a href="{% url 'doc:docs' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">لیست‌ فایل‌ها</span></a>
-                </li>
-                <li><a href="{% url 'doc:doc-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد فایل جدید</span></a>
-                </li>
-              </ul>
+            <li class=" nav-item"><a href="{% url 'doc:docs' company.slug %}"><i class="menu-livicon" data-icon="box"></i><span class="menu-title" data-i18n="Dashboard">فایل‌ها</span></a>
             </li>
           </ul>
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
@@ -125,28 +72,22 @@
               <ul class="menu-content">
                 <li><a href="{% url 'reports:companyreports' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">گزارش‌های شرکت</span></a>
                 </li>
-                <li><a href="{% url 'reports:companyreport-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد گزارش شرکت جدید</span></a>
-                </li>
+
                 <li><a href="{% url 'reports:dealreports' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">گزارش‌های معاملات</span></a>
                 </li>
-                <li><a href="{% url 'reports:dealreport-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد گزارش معاملات جدید</span></a>
-                </li>
+
                 <li><a href="{% url 'reports:leadreports' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">گزارش‌های سرنخ‌ها</span></a>
                 </li>
-                <li><a href="{% url 'reports:leadreport-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد گزارش سرنخ جدید</span></a>
-                </li>
+
                 <li><a href="{% url 'reports:opportunityreports' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">گزارش‌های فرصت‌ها</span></a>
                 </li>
-                <li><a href="{% url 'reports:opportunityreport-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد گزارش فرصت جدید</span></a>
-                </li>
+
                 <li><a href="{% url 'reports:taskreports' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">گزارش‌های وظایف</span></a>
                 </li>
-                <li><a href="{% url 'reports:taskreport-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد گزارش وظایف جدید</span></a>
-                </li>
+
                 <li><a href="{% url 'reports:staffreports' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">گزارش‌های کارمندان</span></a>
                 </li>
-                <li><a href="{% url 'reports:staffreport-create' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="user"></i><span class="menu-item" data-i18n="Analytics">ایجاد گزارش کارمند جدید</span></a>
-                </li>
+
 
               </ul>
             </li>

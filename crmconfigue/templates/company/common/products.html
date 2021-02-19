@@ -9,6 +9,9 @@
 
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
+                <div class="card-header d-flex justify-content-between align-items-center pb-1">
+                  <a class="btn btn-info" href="{% url 'common:product-create' company.slug  %}">ایجاد محصول جدید</a>
+                </div>
                 <table class="table table-hover">
                   <thead>
                     <tr>
@@ -28,8 +31,8 @@
                         <td>{{product.price}}</td>
                         <td>
                             
-                            <a class="badge" href="{% url 'common:product-update' company.slug product.pk %}">ویرایش</a>
-                            <a class="badge" href="{% url 'common:product-delete' company.slug product.pk %}">حذف</a>
+                            <a class="badge badge-warning" href="{% url 'common:product-update' company.slug product.pk %}">ویرایش</a>
+                            <a class="badge badge-danger" href="{% url 'common:product-delete' company.slug product.pk %}">حذف</a>
                           
                         </td>
                       </tr>

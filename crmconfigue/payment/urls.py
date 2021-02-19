@@ -13,5 +13,5 @@ urlpatterns = [
     path('preview/<int:pk>', BillingPreview.as_view(), name="billing-preview"),
     path('list/', BillingList.as_view(),name="billing-list"),
     path('detail/<int:pk>', BillingDetail.as_view(),name="billing-detail"),
-    url(r'^verify/$', views.verify , name='verify'),
+ #   url(r'^verify/$', views.verify , name='verify'),
 ]

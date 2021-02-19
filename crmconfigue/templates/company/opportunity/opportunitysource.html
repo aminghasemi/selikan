@@ -10,6 +10,12 @@
 
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
+                <div class="card-header d-flex justify-content-between align-items-center pb-1">
+                  <a class="btn btn-info" href="{% url 'opportunity:opportunitysource-create' company.slug  %}">ایجاد منبع فرصت جدید</a>
+                  <div class="col-md-3 col-12 text-md-right">
+                    <a type="button" class="btn  btn-success glow mt-md-2 mb-1" href="{% url 'opportunity:opportunity' company.slug %}"><i class="bx bx-reply"></i> بازگشت به فرصت‌ها</a>
+                        </div>
+                </div>
                 <table class="table table-hover">
                   <thead>
                     <tr>
