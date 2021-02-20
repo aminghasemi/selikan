@@ -6,11 +6,11 @@ from common.models import Company
 from django.contrib.auth.decorators import login_required
 from common.decorators import company_enrolled
 from .models import Account
-from common.mixins import EnrollMixin, SuperUserAccessMixin, CreatorAccessMixin
+from common.mixins import EnrollMixin, SuperUserAccessMixin, CreatorAccessMixin, SpecialCompanyMixin
 from .forms import AccountForm
 # Create your views here.
 
-class AccountsList(EnrollMixin, LoginRequiredMixin,ListView):
+class AccountsList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
     template_name = 'company/accounts/accounts.html'
     def get_queryset(self):
         global company
@@ -24,7 +24,7 @@ class AccountsList(EnrollMixin, LoginRequiredMixin,ListView):
         context['company'] = company
         return context
 
-class AccountCreate(LoginRequiredMixin, CreateView):
+class AccountCreate(LoginRequiredMixin,SpecialCompanyMixin, CreateView):
     model=Account
     form_class = AccountForm
     template_name="company/accounts/account-create.html"
@@ -49,7 +49,7 @@ class AccountCreate(LoginRequiredMixin, CreateView):
         slug= self.kwargs.get('slug')
         return reverse_lazy('accounts:accounts', kwargs={'slug': slug}, current_app='accounts')
 
-class AccountUpdate(LoginRequiredMixin, UpdateView):
+class AccountUpdate(LoginRequiredMixin,SpecialCompanyMixin, UpdateView):
     model=Account
     form_class = AccountForm
     template_name = "company/accounts/account-update.html"
@@ -68,7 +68,7 @@ class AccountUpdate(LoginRequiredMixin, UpdateView):
         context['docs']=company.companydocs.filter(account_id=pk)
         context['invoices']=company.companyinvoice.filter(account_id=pk)
         return context
-class AccountDelete(LoginRequiredMixin, DeleteView):
+class AccountDelete(LoginRequiredMixin,SpecialCompanyMixin, DeleteView):
     model=Account
     template_name = "company/accounts/account_confirm_delete.html"
     def get_queryset(self):

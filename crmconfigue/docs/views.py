@@ -26,7 +26,7 @@ class DocList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
         context['company'] = company
         return context
 
-class DocCreate(EnrollMixin, LoginRequiredMixin, CreateView):
+class DocCreate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, CreateView):
     model=Doc
     form_class=DocForm
     template_name="company/docs/doc-create.html"
@@ -57,7 +57,7 @@ class DocCreate(EnrollMixin, LoginRequiredMixin, CreateView):
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('doc:docs', kwargs={'slug': slug}, current_app='doc')
-class DocUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
+class DocUpdate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, UpdateView):
     model=Doc
     form_class=DocForm
     template_name = "company/docs/doc-update.html"
@@ -83,7 +83,7 @@ class DocUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
 
 
   
-class DocDelete(EnrollMixin, LoginRequiredMixin, DeleteView):
+class DocDelete(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, DeleteView):
     model=Doc
     template_name = "company/docs/doc_confirm_delete.html"
 

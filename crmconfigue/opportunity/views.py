@@ -7,12 +7,12 @@ from common.models import Company
 from django.contrib.auth.decorators import login_required
 from common.decorators import company_enrolled
 from .models import Opportunity, OpportunityStatus, OpportunitySource
-from common.mixins import EnrollMixin, SuperUserAccessMixin, CreatorAccessMixin
+from common.mixins import EnrollMixin, SuperUserAccessMixin, SpecialCompanyMixin, CreatorAccessMixin
 from .forms import OpportunityForm, OpportunityStatusForm, OpportunitySourceForm
 # Create your views here.
 
 
-class OpportunityStatusList(EnrollMixin, LoginRequiredMixin,ListView):
+class OpportunityStatusList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
     template_name = 'company/opportunity/opportunitystatus.html'
     def get_queryset(self):
         global company
@@ -26,7 +26,7 @@ class OpportunityStatusList(EnrollMixin, LoginRequiredMixin,ListView):
         context['company'] = company
         return context
 
-class OpportunityStatusCreate(LoginRequiredMixin, CreateView):
+class OpportunityStatusCreate(LoginRequiredMixin,SpecialCompanyMixin, CreateView):
     model=OpportunityStatus
     form_class=OpportunityStatusForm
     template_name="company/opportunity/opportunitystatus-create-update.html"
@@ -51,7 +51,7 @@ class OpportunityStatusCreate(LoginRequiredMixin, CreateView):
         slug= self.kwargs.get('slug')
         return reverse_lazy('opportunity:opportunitystatus', kwargs={'slug': slug}, current_app='opportunity')
 
-class OpportunityStatusUpdate(LoginRequiredMixin, UpdateView):
+class OpportunityStatusUpdate(LoginRequiredMixin,SpecialCompanyMixin, UpdateView):
     model=OpportunityStatus
     form_class=OpportunityStatusForm
     template_name = "company/opportunity/opportunitystatus-create-update.html"
@@ -67,7 +67,7 @@ class OpportunityStatusUpdate(LoginRequiredMixin, UpdateView):
         context= super().get_context_data(**kwargs)
         context['company'] = company
         return context
-class OpportunityStatusDelete(LoginRequiredMixin, DeleteView):
+class OpportunityStatusDelete(LoginRequiredMixin,SpecialCompanyMixin, DeleteView):
     model=OpportunityStatus
     template_name = "company/opportunity/opportunitystatus_confirm_delete.html"
     success_url= reverse_lazy('opportunity:opportunitystatus')
@@ -85,7 +85,7 @@ class OpportunityStatusDelete(LoginRequiredMixin, DeleteView):
         return reverse_lazy('opportunity:opportunitystatus', kwargs={'slug': slug}, current_app='opportunity')
 
 
-class OpportunitySourceList(EnrollMixin, LoginRequiredMixin,ListView):
+class OpportunitySourceList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
     template_name = 'company/opportunity/opportunitysource.html'
     def get_queryset(self):
         global company
@@ -99,7 +99,7 @@ class OpportunitySourceList(EnrollMixin, LoginRequiredMixin,ListView):
         context['company'] = company
         return context
 
-class OpportunitySourceCreate(LoginRequiredMixin, CreateView):
+class OpportunitySourceCreate(LoginRequiredMixin,SpecialCompanyMixin, CreateView):
     model=OpportunitySource
     form_class=OpportunitySourceForm
     template_name="company/opportunity/opportunitysource-create-update.html"
@@ -124,7 +124,7 @@ class OpportunitySourceCreate(LoginRequiredMixin, CreateView):
         slug= self.kwargs.get('slug')
         return reverse_lazy('opportunity:opportunitysource', kwargs={'slug': slug}, current_app='opportunity')
 
-class OpportunitySourceUpdate(LoginRequiredMixin, UpdateView):
+class OpportunitySourceUpdate(LoginRequiredMixin,SpecialCompanyMixin, UpdateView):
     model=OpportunitySource
     form_class=OpportunitySourceForm
     template_name = "company/opportunity/opportunitysource-create-update.html"
@@ -140,7 +140,7 @@ class OpportunitySourceUpdate(LoginRequiredMixin, UpdateView):
         context= super().get_context_data(**kwargs)
         context['company'] = company
         return context
-class OpportunitySourceDelete(LoginRequiredMixin, DeleteView):
+class OpportunitySourceDelete(LoginRequiredMixin,SpecialCompanyMixin, DeleteView):
     model=OpportunitySource
     template_name = "company/opportunity/opportunitysource_confirm_delete.html"
     success_url= reverse_lazy('opportunity:opportunitysource')
@@ -159,7 +159,7 @@ class OpportunitySourceDelete(LoginRequiredMixin, DeleteView):
 
 
 
-class OpportunityList(EnrollMixin, LoginRequiredMixin,ListView):
+class OpportunityList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
     template_name = 'company/opportunity/opportunity.html'
     def get_queryset(self):
         global company
@@ -173,7 +173,7 @@ class OpportunityList(EnrollMixin, LoginRequiredMixin,ListView):
         context['company'] = company
         return context
 
-class OpportunityCreate(EnrollMixin, LoginRequiredMixin, CreateView):
+class OpportunityCreate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, CreateView):
     model=Opportunity
     form_class=OpportunityForm
     template_name="company/opportunity/opportunity-create.html"
@@ -207,7 +207,7 @@ class OpportunityCreate(EnrollMixin, LoginRequiredMixin, CreateView):
         form.instance.company= company
         return super().form_valid(form, **kwargs)
 
-class OpportunityUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
+class OpportunityUpdate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, UpdateView):
     model=Opportunity
     form_class=OpportunityForm
     template_name = "company/opportunity/opportunity-update.html"
@@ -234,7 +234,7 @@ class OpportunityUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
         context['docs']=company.companydocs.filter(opportunities_id=pk)
         return context
 
-class OpportunityDelete(EnrollMixin, LoginRequiredMixin, DeleteView):
+class OpportunityDelete(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, DeleteView):
     model=Opportunity
     template_name = "company/opportunity/opportunity_confirm_delete.html"
     def get_success_url(self):

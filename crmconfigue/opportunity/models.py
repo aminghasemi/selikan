@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from extensions.utils import jalali_converter
 from accounts.models import Account, Tags
 from contacts.models import Contact
-from common.models import User, Company
+from common.models import User, Company, Enrolled
 from common.utils import STAGES, SOURCES, CURRENCY_CODES
 from teams.models import Teams
 
@@ -43,10 +43,10 @@ class Opportunity(models.Model):
     amount = models.FloatField(blank=True,null=True, verbose_name="مبلغ")
     probability = models.IntegerField(default=0, blank=True,null=True, verbose_name="احتمال")
     contacts = models.ForeignKey(Contact,blank=True, on_delete=models.SET_NULL, null=True, verbose_name="شخص")
-    converted_by = models.ForeignKey(User,related_name="Opportunity_converted_by", on_delete=models.SET_NULL, null=True, blank=True, verbose_name="تکمیل‌شده توسط")
+    converted_by = models.ForeignKey(Enrolled,related_name="Opportunity_converted_by", on_delete=models.SET_NULL, null=True, blank=True, verbose_name="تکمیل‌شده توسط")
     closed_on = models.DateField(blank=True,null=True, verbose_name="تاریخ تکمیل")
     description = models.TextField(blank=True,null=True, verbose_name="توضیحات")
-    assigned_to = models.ForeignKey(User,blank=True, on_delete=models.SET_NULL, null=True, related_name="opportunity_assigned_to", verbose_name="محول شده به")
+    assigned_to = models.ForeignKey(Enrolled,blank=True, on_delete=models.SET_NULL, null=True, related_name="opportunity_assigned_to", verbose_name="محول شده به")
     created_by = models.ForeignKey(User,related_name="opportunity_created_by", on_delete=models.SET_NULL, null=True, verbose_name="ایجاد شده توسط")
     created_on = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
     is_active = models.BooleanField(default=True, verbose_name="فعال")

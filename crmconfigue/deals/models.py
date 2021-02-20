@@ -7,7 +7,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from extensions.utils import jalali_converter
 
 from accounts.models import Tags, Account
-from common.models import User, Company, Product
+from common.models import User, Company, Product, Enrolled
 from contacts.models import Contact
 from teams.models import Teams
 
@@ -31,7 +31,7 @@ class Deal(models.Model):
     title = models.CharField(max_length=64, verbose_name="عنوان")
     pipeline_status = models.ForeignKey(Pipeline, related_name="dealpipeline",on_delete=models.CASCADE, verbose_name="مرحله فروش")
     description = models.TextField(blank=True,  verbose_name="توضیحات")
-    assigned_to = models.ForeignKey(User,on_delete=models.SET_NULL,null=True, related_name="deal_assigned_users", blank=True, verbose_name="محول شده به")
+    assigned_to = models.ForeignKey(Enrolled,on_delete=models.SET_NULL,null=True, related_name="deal_assigned_users", blank=True, verbose_name="محول شده به")
     account_name = models.CharField(max_length=255,  blank=True, verbose_name="نام حساب")
     deal_amount = models.DecimalField(decimal_places=0, max_digits=20,blank=True, null=True, verbose_name="مبلغ معامله")
   #  deal_amount = models.IntegerField(blank=True, null=True, verbose_name="مبلغ معامله")
@@ -42,7 +42,7 @@ class Deal(models.Model):
     teams = models.ForeignKey(Teams,blank=True, on_delete=models.SET_NULL,null=True, related_name="deal_teams", verbose_name="تیم معالمه")
     company = models.ForeignKey(Company, on_delete=models.SET_NULL,null=True, related_name="companydeals",  blank=True, verbose_name="شرکت")
     product= models.ForeignKey(Product, on_delete=models.SET_NULL,null=True, related_name="dealproducts",  blank=True, verbose_name="محصول")
-    converted_by = models.ForeignKey(User, on_delete=models.SET_NULL,null=True,related_name="deal_converted_by", blank=True, verbose_name="تکمیل‌شده توسط")
+    converted_by = models.ForeignKey(Enrolled, on_delete=models.SET_NULL,null=True,related_name="deal_converted_by", blank=True, verbose_name="تکمیل‌شده توسط")
     closed_on = models.DateField(blank=True,null=True, verbose_name="تاریخ تکمیل")
     archive = models.BooleanField(default=False, verbose_name="بایگانی شود؟")
 

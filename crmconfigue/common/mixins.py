@@ -2,6 +2,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404
 from .models import Company
 from django.utils import timezone
+from django.shortcuts import redirect
 
 
 class EnrollMixin():
@@ -32,3 +33,11 @@ class SpecialCompanyMixin():
             return super().dispatch(request, *args, **kwargs)
         else:
             raise Http404("مدت زمان اعتبار این شرکت به پایان رسیده است.")
+class UserlimitMixin():
+    def dispatch(self, request, *args, **kwargs):
+        slug= self.kwargs.get('slug')
+        company= get_object_or_404(Company, slug=slug)
+        if company.user_limit>company.staff.count():
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            raise redirect('common:company_add_staff', kwargs={'slug': slug}, current_app='common')

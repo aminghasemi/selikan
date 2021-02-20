@@ -1,8 +1,8 @@
 {% extends 'registration/base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block main %}
-
-
+{% load jalali_tags %}
 <!-- Table head options start -->
 <div class="row" id="table-head">
   <div class="col-12">
@@ -12,7 +12,7 @@
       </div>
       <div class="card-content">
         <div class="card-body">
-          <h5>سازنده شرکت: {{company.creator}}</h5>
+        <p>حد نصاب تعداد کاربران: {{company.user_limit}}</p>
         </div>
         <!-- table head dark -->
         <div class="table-responsive">
@@ -28,18 +28,33 @@
               </tr>
             </thead>
             <tbody>
+              <tr>
+                {% if company.creator.thumbnail %}
+              <td><img class="round" src="{{company.creator.thumbnail.url}}" alt="avatar" height="40" width="40"></td>
+              {% else %}
+              <td><img class="round" src="{% static 'frest/assets/images/placeholder.png' %}" alt="avatar" height="40" width="40"></td>
+              {% endif %}
+              <td class="text-bold-500">{{ company.creator.get_full_name }}</td>
+              <td>{{ company.creator.username }}</td>
+              <td class="text-bold-500">{{ company.creator.email }}</td>
+              <td class="text-bold-500">{{ company.creator.date_joined|to_jalali:'%y/%m/%d' }}</td>
+              <td>
+                <span class="badge badge-primary">سازنده شرکت</span>
+            </td>
+            </tr>
               {% for person in companystaff %}
               <tr>
-                <td><img class="round" src="{{person.staff.thumbnail.url}}" alt="avatar" height="40" width="40"></td>
-                <td class="text-bold-500">{{ person.staff.get_full_name }}</td>
+                  {% if person.thumbnail %}
+                <td><img class="round" src="{{person.thumbnail.url}}" alt="avatar" height="40" width="40"></td>
+                {% else %}
+                <td><img class="round" src="{% static 'frest/assets/images/placeholder.png' %}" alt="avatar" height="40" width="40"></td>
+                {% endif %}
+                <td class="text-bold-500">{{ person.staff.get_full_name }}  {% if person.staff == company.creator %}        <span class="badge badge-primary">سازنده شرکت</span>{% endif %}</td>
                 <td>{{ person.staff.username }}</td>
                 <td class="text-bold-500">{{ person.staff.email }}</td>
-                <td class="text-bold-500">{{ person.jdate }}</td>
+                <td class="text-bold-500">{{ person.date|to_jalali:'%y/%m/%d' }}</td>
                 <td>
-                  {% if user.is_superuser %}
                   <a class="badge badge-danger" href="{% url 'common:staff-delete' company.slug person.pk %}">حذف</a>
-
-                  {% endif %}
               </td>
               </tr>
               {% endfor %}
@@ -51,7 +66,7 @@
   </div>
 </div>
 <!-- Table head options end -->
-
+{% if company.user_limit > staff_count %}
 <!-- // Basic multiple Column Form section start -->
 <section id="multiple-column-form">
   <div class="row match-height">
@@ -63,19 +78,24 @@
         <div class="card-content">
           <div class="card-body">
             {% if new_staff %}
-            
-            <div class="alert alert-success" role="alert">
-              کاربر انتخاب شده به عنوان کارمند جدید به شرکت اضافه شد.
+            {% if error %}
+            <div class="alert alert-danger" role="alert">
+               کاربر با ایمیل وارد شده قبلا در شرکت عضو شده است.
             </div>
             {% else %}
+            <div class="alert alert-success" role="alert">
+              درخواست عضویت به کاربر با ایمیل وارد شده ارسال شد. پس از تایید، کاربر عضو کارمندان شرکت خواهد شد.
+            </div>
+            {% endif %}
+              {% else %}
             <form method="post" class="form">{% csrf_token %}
 
               <div class="form-body">
                 <div class="row">
                   <div class=" col-12">
                     <div class="form-label-group">
-                      {{enroll_form.staff|as_crispy_field}}
-                        <label for="first-name-column">نام کاربر</label>
+                      {{enroll_form.email|as_crispy_field}}
+                        <label for="first-name-column">ایمیل کاربر</label>
                     </div>
                   </div>
                   <div class="col-12 d-flex justify-content-end">
@@ -93,7 +113,16 @@
   </div>
 </section>
 <!-- // Basic multiple Column Form section end -->
-
-
+{% else %}
+  <div class="alert alert-danger alert-dismissible mb-2" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="بستن">
+      <span aria-hidden="true">×</span>
+    </button>
+    <div class="d-flex align-items-center">
+      <i class="bx bx-error"></i>
+      <span>محدودیت افزودن تعداد کاربران برای  شما به حد نصاب رسیده است. لطفا جهت افزایش اعتبار حسابتان <a href="{% url 'payment:billing-create' company.slug %}">اینجا</a> کلیک کنید.</span>
+    </div>
+  </div>
+{% endif %}
 
 {% endblock %}

@@ -27,7 +27,7 @@ class TaskList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
         context['company'] = company
         return context
 
-class TaskCreate(EnrollMixin, LoginRequiredMixin, CreateView):
+class TaskCreate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, CreateView):
     model=Task
     form_class=TaskForm
     template_name="company/tasks/task-create.html"
@@ -54,7 +54,7 @@ class TaskCreate(EnrollMixin, LoginRequiredMixin, CreateView):
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('task:task', kwargs={'slug': slug}, current_app='task')
-class TaskUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
+class TaskUpdate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, UpdateView):
     model=Task
     form_class=TaskForm
     template_name = "company/tasks/task-update.html"
@@ -78,7 +78,7 @@ class TaskUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
 
 
   
-class TaskDelete(EnrollMixin, LoginRequiredMixin, DeleteView):
+class TaskDelete(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, DeleteView):
     model=Task
     template_name = "company/tasks/task_confirm_delete.html"
 

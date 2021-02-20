@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, get_object_or_404
 from .models import Company, Enrolled
 from django.db.models import Count
-
+from django.shortcuts import redirect
 def unauthenticated_user(view_func):
     def wrapper_func(request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -39,9 +39,9 @@ def user_limit(view_func):
         #classroom=class_room.objects.get(slug=slug)
         company= get_object_or_404(Company, slug=slug)
         staff_count=company.staff_enroll.count()
-        if  company.user_limit>staff_count:
+        if  company.user_limit>=staff_count:
         #if classroom.objects.get(students=request.user.profile) or classroom.objects.get(teachers=request.user.profile):
             return view_func(request, slug, *args, **kwargs)
         else:
-            return HttpResponse('محدودیت تعداد کاربران شرکت')
+            return redirect('common:company_add_staff', slug=slug)
     return wrapper_func

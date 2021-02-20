@@ -28,7 +28,7 @@ class Dealreportlist(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListVie
         context['company'] = company
         return context
 
-class DealreportCreate(EnrollMixin, LoginRequiredMixin, CreateView):
+class DealreportCreate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, CreateView):
     model=Dealreport
     form_class=DealreportForm
     template_name="company/reports/dealreport-create.html"
@@ -55,7 +55,7 @@ class DealreportCreate(EnrollMixin, LoginRequiredMixin, CreateView):
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('reports:dealreports', kwargs={'slug': slug}, current_app='reports')
-class DealreportUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
+class DealreportUpdate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, UpdateView):
     model=Dealreport
     form_class=DealreportForm
     template_name = "company/reports/dealreport-update.html"
@@ -77,7 +77,7 @@ class DealreportUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
 
 
   
-class DealreportDelete(EnrollMixin, LoginRequiredMixin, DeleteView):
+class DealreportDelete(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, DeleteView):
     model=Dealreport
     template_name = "company/reports/dealreport_confirm_delete.html"
 
@@ -150,7 +150,7 @@ class Leadreportlist(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListVie
         context['company'] = company
         return context
 
-class LeadreportCreate(EnrollMixin, LoginRequiredMixin, CreateView):
+class LeadreportCreate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, CreateView):
     model=Leadreport
     form_class=LeadreportForm
     template_name="company/reports/leadreport-create.html"
@@ -179,7 +179,7 @@ class LeadreportCreate(EnrollMixin, LoginRequiredMixin, CreateView):
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('reports:leadreports', kwargs={'slug': slug}, current_app='reports')
-class LeadreportUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
+class LeadreportUpdate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, UpdateView):
     model=Leadreport
     form_class=LeadreportForm
     template_name = "company/reports/leadreport-update.html"
@@ -203,7 +203,7 @@ class LeadreportUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
 
 
   
-class LeadreportDelete(EnrollMixin, LoginRequiredMixin, DeleteView):
+class LeadreportDelete(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, DeleteView):
     model=Leadreport
     template_name = "company/reports/leadreport_confirm_delete.html"
 
@@ -288,7 +288,7 @@ class Opportunityreportlist(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,
         context['company'] = company
         return context
 
-class OpportunityreportCreate(EnrollMixin, LoginRequiredMixin, CreateView):
+class OpportunityreportCreate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, CreateView):
     model=Opportunityreport
     form_class=OpportunityreportForm
     template_name="company/reports/opportunityreport-create.html"
@@ -317,7 +317,7 @@ class OpportunityreportCreate(EnrollMixin, LoginRequiredMixin, CreateView):
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('reports:opportunityreports', kwargs={'slug': slug}, current_app='reports')
-class OpportunityreportUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
+class OpportunityreportUpdate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, UpdateView):
     model=Opportunityreport
     form_class=OpportunityreportForm
     template_name = "company/reports/opportunityreport-update.html"
@@ -341,7 +341,7 @@ class OpportunityreportUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
 
 
   
-class OpportunityreportDelete(EnrollMixin, LoginRequiredMixin, DeleteView):
+class OpportunityreportDelete(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, DeleteView):
     model=Opportunityreport
     template_name = "company/reports/opportunityreport_confirm_delete.html"
 
@@ -424,7 +424,7 @@ class Taskreportlist(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListVie
         context['company'] = company
         return context
 
-class TaskreportCreate(EnrollMixin, LoginRequiredMixin, CreateView):
+class TaskreportCreate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, CreateView):
     model=Taskreport
     form_class=TaskreportForm
     template_name="company/reports/taskreport-create.html"
@@ -451,7 +451,7 @@ class TaskreportCreate(EnrollMixin, LoginRequiredMixin, CreateView):
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('reports:taskreports', kwargs={'slug': slug}, current_app='reports')
-class TaskreportUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
+class TaskreportUpdate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, UpdateView):
     model=Taskreport
     form_class=TaskreportForm
     template_name = "company/reports/taskreport-update.html"
@@ -473,7 +473,7 @@ class TaskreportUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
 
 
   
-class TaskreportDelete(EnrollMixin, LoginRequiredMixin, DeleteView):
+class TaskreportDelete(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, DeleteView):
     model=Taskreport
     template_name = "company/reports/taskreport_confirm_delete.html"
 
@@ -552,7 +552,7 @@ class Staffreportlist(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListVi
         context['company'] = company
         return context
 
-class StaffreportCreate(EnrollMixin, LoginRequiredMixin, CreateView):
+class StaffreportCreate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, CreateView):
     model=Staffreport
     form_class=StaffreportForm
     template_name="company/reports/staffreport-create.html"
@@ -577,7 +577,7 @@ class StaffreportCreate(EnrollMixin, LoginRequiredMixin, CreateView):
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('reports:staffreports', kwargs={'slug': slug}, current_app='reports')
-class StaffreportUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
+class StaffreportUpdate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, UpdateView):
     model=Staffreport
     form_class=StaffreportForm
     template_name = "company/reports/staffreport-update.html"
@@ -597,7 +597,7 @@ class StaffreportUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
 
 
   
-class StaffreportDelete(EnrollMixin, LoginRequiredMixin, DeleteView):
+class StaffreportDelete(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, DeleteView):
     model=Staffreport
     template_name = "company/reports/staffreport_confirm_delete.html"
 
@@ -666,7 +666,7 @@ class Companyreportlist(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,List
         context['company'] = company
         return context
 
-class CompanyreportCreate(EnrollMixin, LoginRequiredMixin, CreateView):
+class CompanyreportCreate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, CreateView):
     model=Companyreport
     form_class=CompanyreportForm
     template_name="company/reports/companyreport-create.html"
@@ -691,7 +691,7 @@ class CompanyreportCreate(EnrollMixin, LoginRequiredMixin, CreateView):
         slug= self.kwargs.get('slug')
         return reverse_lazy('reports:companyreports', kwargs={'slug': slug}, current_app='reports')
 
-class CompanyreportUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
+class CompanyreportUpdate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, UpdateView):
     model=Companyreport
     form_class=CompanyreportForm
     template_name = "company/reports/companyreport-update.html"
@@ -710,7 +710,7 @@ class CompanyreportUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
 
 
   
-class CompanyreportDelete(EnrollMixin, LoginRequiredMixin, DeleteView):
+class CompanyreportDelete(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, DeleteView):
     model=Companyreport
     template_name = "company/reports/companyreport_confirm_delete.html"
 

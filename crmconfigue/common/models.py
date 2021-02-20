@@ -47,19 +47,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         return self.username
-    
-    def jdate_joined(self):
-        return jalali_converter(self.date_joined)        
 
-    @property
-    def get_app_name(self):
-        if self.company:
-            return self.company.sub_domain + "." + settings.APPLICATION_NAME
-        else:
-            return settings.APPLICATION_NAME
-
-    def documents(self):
-        return self.document_uploaded.all()
 
     def get_full_name(self):
         full_name = None
@@ -70,10 +58,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         else:
             full_name = self.email
         return full_name
-
-    @property
-    def created_on_arrow(self):
-        return arrow.get(self.date_joined).humanize()
 
     def __str__(self):
         return self.email
@@ -180,8 +164,20 @@ class Address(models.Model):
         return address
 
 
+class Enroll_Invitation(models.Model):
+    email=models.EmailField(max_length=255, unique=True,verbose_name="ایمیل")
+    created_by=models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='invitation_creator', verbose_name="ایجادکننده دعوت")
+    created_on=models.DateTimeField(auto_now_add=True, verbose_name ="تاریخ ایجاد")
+    company=models.ForeignKey(Company, on_delete=models.SET_NULL, related_name="companyinvitations", null=True, blank=True, verbose_name="نام شرکت")
+    
+    class Meta:
+        verbose_name = "کاربر دعوت شده"
+        verbose_name_plural = "کاربران دعوت شده"
+
+
+
 class Enrolled(models.Model):
-    staff = models.ForeignKey(User, related_name='staff',on_delete=models.CASCADE,  null=True, blank=True,verbose_name="کارمند")
+    staff = models.OneToOneField(User, unique=True, related_name='staff',on_delete=models.CASCADE,  null=True, blank=True,verbose_name="کارمند")
     company = models.ForeignKey(Company, on_delete=models.CASCADE , related_name='staff_enroll', null=True, blank=True, verbose_name="نام شرکت")
     date =models.DateTimeField(auto_now_add=True, verbose_name="تاریخ عضویت")
     previous_attempts = models.IntegerField(default=0)
@@ -211,8 +207,8 @@ class Product(models.Model):
     name=models.CharField( max_length=255, blank=True, null=True,verbose_name="نام محصول")
     code=models.CharField( max_length=255, blank=True, null=True,verbose_name="کد محصول")
     unit=models.CharField( max_length=255, blank=True, null=True,verbose_name="واحد اندازه‌گیری")
-    price=models.FloatField(blank=True, null=True, verbose_name="قیمت واحد محصول")
-    description=models.CharField( max_length=255, blank=True, null=True,verbose_name="توضیحات")
+    price=models.DecimalField(max_digits=20, decimal_places=0,blank=True, null=True, verbose_name="قیمت واحد محصول")
+    description=models.TextField(blank=True, null=True,verbose_name="توضیحات")
     created_by=models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='product_creator', verbose_name="ایجادکننده محصول")
     created_on=models.DateTimeField(auto_now_add=True, verbose_name ="تاریخ ایجاد")
     company=models.ForeignKey(Company, on_delete=models.SET_NULL, related_name="companyproducts", null=True, blank=True, verbose_name="محصولات شرکت")

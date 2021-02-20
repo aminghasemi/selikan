@@ -1,6 +1,6 @@
 import arrow
 from django.db import models
-from common.models import User, Company
+from common.models import User, Company, Enrolled
 from accounts.models import Account, Tags
 from contacts.models import Contact
 from django.utils.translation import ugettext_lazy as _
@@ -27,11 +27,11 @@ class Task(models.Model):
     created_on = models.DateTimeField( auto_now_add=True, verbose_name="تاریخ ایجاد")
     account = models.ForeignKey(Account,null=True, related_name="accounts_tasks",blank=True,on_delete=models.SET_NULL, verbose_name="نام مشتری")
     contacts = models.ForeignKey(Contact,blank=True,null=True, related_name="contacts_tasks",on_delete=models.SET_NULL, verbose_name="نام شخص")
-    assigned_to = models.ForeignKey(User,blank=True,null=True, related_name="users_tasks",on_delete=models.SET_NULL, verbose_name="محول شده به")
+    assigned_to = models.ForeignKey(Enrolled,blank=True,null=True, related_name="users_tasks",on_delete=models.SET_NULL, verbose_name="محول شده به")
     created_by = models.ForeignKey(User,related_name="task_created",null=True,blank=True,on_delete=models.SET_NULL, verbose_name="ایجاد شده توسط")
     teams = models.ForeignKey(Teams,null=True,blank=True, related_name="tasks_teams",on_delete=models.SET_NULL, verbose_name="تیم")
     company = models.ForeignKey(Company, on_delete=models.SET_NULL,null=True, related_name='companytask', blank=True, verbose_name="کاربر سایت")
-    done_by = models.ForeignKey(User, null=True,related_name="task_done_by", on_delete=models.SET_NULL, blank=True, verbose_name="تکمیل‌شده توسط")
+    done_by = models.ForeignKey(Enrolled, null=True,related_name="task_done_by", on_delete=models.SET_NULL, blank=True, verbose_name="تکمیل‌شده توسط")
     description = models.TextField(blank=True, verbose_name="توضیحات")
     done_on=models.DateField(null=True, blank=True, verbose_name="تاریخ تکمیل")
     archive = models.BooleanField(default=False, verbose_name="بایگانی شود؟")

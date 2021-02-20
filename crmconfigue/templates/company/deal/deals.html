@@ -3,7 +3,7 @@
 {% block title %}داشبورد اصلی{% endblock %}
 
 {% load humanize %}
-
+{% load jalali_tags %}
 {% block main %}
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
@@ -38,7 +38,19 @@
                   <tbody>
                     {% for deal in object_list %}
                       <tr>
-                        <td><a href="{% url 'deals:deal-update' company.slug deal.pk %}">{{deal.title}}</a></td>
+                        <td>
+                        <a href="{% url 'deals:deal-update' company.slug deal.pk %}">{{deal.title}}
+                          {% if warning_date >= deal.created_on %}
+                          <a class="nav-link nav-link-label" href="#" style="color:orange" data-toggle="dropdown" aria-expanded="false"><i class="ficon bx bx-bell bx-tada bx-flip-horizontal"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-media">
+                              <div class="media-body mr-1 ml-1 mt-1 mb-1">
+                                <span class="media-heading">از زمان ایجاد این معامله مدت زیادی می‌گذرد. لطفا بررسی نمایید.</span><p><small class="notification-text">تاریخ ایجاد معامله: {{deal.created_on|to_jalali}}</small></p>
+                              </div>
+                            </ul>
+                          </a>
+                          {% endif %}
+                        </a>
+                        </td>
                         {% if deal.pipeline_status.won %}
                         <td><a class="badge badge-success" style="color:white">{{deal.pipeline_status}}</a></td>
                         {% elif deal.pipeline_status.lost %}
@@ -47,8 +59,16 @@
                         <td><a class="badge badge-primary" style="color:white" >{{deal.pipeline_status}}</a></td>
                         {% endif %}
                         <td>{{ deal.deal_amount|intcomma:False }} تومان </td>
-                        <td>{{deal.assigned_to.get_full_name}}</td>
+                        {% if deal.assigned_to is null %}
+                        <td style="color:red">تعریف‌نشده</td>
+                        {% else %}
+                        <td>{{deal.assigned_to}}</td>
+                        {% endif %}
+                        {% if deal.account is null %}
+                        <td style="color:red">تعریف‌نشده</td>
+                        {% else %}
                         <td>{{deal.account}}</td>
+                        {% endif %}
                         <td>
                             
                             <a class="badge badge-light-info" href="{% url 'deals:deal-update' company.slug deal.pk %}">ویرایش</a>

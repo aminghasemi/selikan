@@ -26,7 +26,7 @@ class InvoiceList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
         context['company'] = company
         return context
 
-class InvoiceCreate(EnrollMixin, LoginRequiredMixin, CreateView):
+class InvoiceCreate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, CreateView):
     model=Invoice
     form_class= InvoiceForm
     template_name="company/invoice/invoice-create-update.html"
@@ -54,7 +54,7 @@ class InvoiceCreate(EnrollMixin, LoginRequiredMixin, CreateView):
         pk= self.kwargs.get('pk')
         return reverse_lazy('invoice:invoice-detail', kwargs={'slug': slug, 'pk': self.object.pk}, current_app='invoice')
 
-class InvoiceUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
+class InvoiceUpdate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, UpdateView):
     model=Invoice
     form_class= InvoiceForm
     template_name = "company/invoice/invoice-create-update.html"
@@ -74,7 +74,7 @@ class InvoiceUpdate(EnrollMixin, LoginRequiredMixin, UpdateView):
 
 
   
-class InvoiceDelete(EnrollMixin, LoginRequiredMixin, DeleteView):
+class InvoiceDelete(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, DeleteView):
     model=Invoice
     template_name = "company/invoice/invoice_confirm_delete.html"
 

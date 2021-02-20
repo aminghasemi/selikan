@@ -2,7 +2,7 @@
 
 {% block title %}داشبورد اصلی{% endblock %}
 
-
+{% load jalali_tags %}
 {% block main %}
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
@@ -23,9 +23,10 @@
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th>عنوان فاکتور</th>
+                      <th>مشتری</th>
                       <th>نوع فاکتور</th>
                       <th>شماره فاکتور</th>
+                      <th>معامله</th>
                       <th>تاریخ تنظیم</th>
                       <th>تاریخ اعتبار</th>
                       <th>عملیات</th>
@@ -34,11 +35,12 @@
                   <tbody>
                     {% for invoice in object_list %}
                       <tr>
-                        <td><a href="{% url 'invoice:invoice-detail' company.slug invoice.pk %}">{{invoice.title}}</a></td>
+                        <td><a href="{% url 'invoice:invoice-detail' company.slug invoice.pk %}">{{invoice.account}}</a></td>
                         <td>{{invoice.status}}</td>
                         <td>{{invoice.invoice_number}}</td>
-                        <td>{{invoice.date}}</td>
-                        <td>{{invoice.expire_date}}</td>
+                        <td>{{invoice.deal}}</td>
+                        <td>{{invoice.date|to_jalali}}</td>
+                        <td>{{invoice.expire_date|to_jalali}}</td>
                         <td>
                             
                             <a class="badge badge-warning" href="{% url 'invoice:invoice-update' company.slug invoice.pk %}">ویرایش</a>

@@ -7,12 +7,14 @@ from common.models import Company, Enrolled
 from django.contrib.auth.decorators import login_required
 from common.decorators import company_enrolled
 from .models import Deal, Pipeline
-from common.mixins import EnrollMixin, SuperUserAccessMixin, CreatorAccessMixin
-
+from common.mixins import EnrollMixin,SpecialCompanyMixin, SuperUserAccessMixin, CreatorAccessMixin
+from datetime import timedelta
+from django.utils import timezone
+from datetime import datetime
 # Create your views here.
 
 
-class PipelinesList(EnrollMixin, LoginRequiredMixin,ListView):
+class PipelinesList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
     template_name = 'company/deal/pipelines.html'
     def get_queryset(self):
         global company
@@ -26,7 +28,7 @@ class PipelinesList(EnrollMixin, LoginRequiredMixin,ListView):
         context['company'] = company
         return context
 
-class PipelineCreate(LoginRequiredMixin, CreateView):
+class PipelineCreate(LoginRequiredMixin,SpecialCompanyMixin, CreateView):
     model=Pipeline
     fields=["pipeline_number","pipeline_title","won", "lost"]
     template_name="company/deal/pipeline-create-update.html"
@@ -51,7 +53,7 @@ class PipelineCreate(LoginRequiredMixin, CreateView):
         slug= self.kwargs.get('slug')
         return reverse_lazy('deals:pipelines', kwargs={'slug': slug}, current_app='deals')
 
-class PipelineUpdate(LoginRequiredMixin, UpdateView):
+class PipelineUpdate(LoginRequiredMixin,SpecialCompanyMixin, UpdateView):
     model=Pipeline
     fields=["pipeline_number","pipeline_title","won", "lost"]
     template_name = "company/deal/pipeline-create-update.html"
@@ -67,7 +69,7 @@ class PipelineUpdate(LoginRequiredMixin, UpdateView):
         context= super().get_context_data(**kwargs)
         context['company'] = company
         return context
-class PipelineDelete(LoginRequiredMixin, DeleteView):
+class PipelineDelete(LoginRequiredMixin,SpecialCompanyMixin, DeleteView):
     model=Pipeline
     template_name = "company/deal/pipeline_confirm_delete.html"
     success_url= reverse_lazy('deals:pipelines')
@@ -86,7 +88,7 @@ class PipelineDelete(LoginRequiredMixin, DeleteView):
 
 
 
-class DealsList(EnrollMixin, LoginRequiredMixin,ListView):
+class DealsList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
     template_name = 'company/deal/deals.html'
     def get_queryset(self):
         global company
@@ -97,10 +99,12 @@ class DealsList(EnrollMixin, LoginRequiredMixin,ListView):
         slug= self.kwargs.get('slug')
         company = get_object_or_404(Company , slug=slug)
         context= super().get_context_data(**kwargs)
+        warning_date=datetime.now() - timedelta(days=1)
         context['company'] = company
+        context['warning_date']= warning_date
       #  context['deals']= company.companydeals.all()
         return context
-class DealCreate(LoginRequiredMixin, CreateView):
+class DealCreate(LoginRequiredMixin, SpecialCompanyMixin,CreateView):
     model=Deal
     form_class = DealForm
     template_name="company/deal/deal-create.html"
@@ -129,7 +133,7 @@ class DealCreate(LoginRequiredMixin, CreateView):
         slug= self.kwargs.get('slug')
         return reverse_lazy('deals:deals', kwargs={'slug': slug}, current_app='deals')
 
-class DealUpdate(LoginRequiredMixin, UpdateView):
+class DealUpdate(LoginRequiredMixin,SpecialCompanyMixin, UpdateView):
     model=Deal
     form_class = DealForm
     template_name = "company/deal/deal-update.html"
@@ -152,7 +156,7 @@ class DealUpdate(LoginRequiredMixin, UpdateView):
         context['docs']=company.companydocs.filter(deals_id=pk)
         context['invoices']=company.companyinvoice.filter(deal_id=pk)
         return context
-class DealDelete(LoginRequiredMixin, DeleteView):
+class DealDelete(LoginRequiredMixin,SpecialCompanyMixin, DeleteView):
     model=Deal
     template_name = "company/deal/deal_confirm_delete.html"
     success_url= reverse_lazy('deals:deals')

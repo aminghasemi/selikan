@@ -7,6 +7,19 @@
 {% block main %}
 
     <!-- User Widget with Image-top Starts -->
+    {% if enroll_invitations %}
+    {% for enroll in enroll_invitations %}
+    <div class="alert alert-warning alert-dismissible mb-2" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="بستن">
+        <span aria-hidden="true">×</span>
+      </button>
+      <div class="d-flex align-items-center">
+        <i class="bx bx-error"></i>
+        <span>از شما برای عضویت در شرکت {{enroll.company}} دعوت شده است. برای مشاهده <a href="{% url 'common:enroll'  %}">اینجا</a> کلیک کنید</span>
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
     <div class="row">
     {% for CompaniesList in object_list %}
     <div class="col-xl-4 col-md-6 col-12 img-top-card">

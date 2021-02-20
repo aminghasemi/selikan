@@ -1,5 +1,5 @@
 from django.db import models
-from common.models import User, Company
+from common.models import User, Company, Enrolled
 from extensions.utils import jalali_converter
 
 
@@ -72,7 +72,7 @@ class StaffTargets(models.Model):
     is_active = models.BooleanField(default=True, verbose_name="فعال")
     company = models.ForeignKey(Company, on_delete=models.SET_NULL,null=True, related_name="companytargets_staff",  blank=True, verbose_name="شرکت")
     archive = models.BooleanField(default=False, verbose_name="بایگانی شود؟")
-    staff = models.ForeignKey(User,blank=True,null=True, related_name="target_staff",on_delete=models.SET_NULL, verbose_name="نام کارمند")
+    staff = models.ForeignKey(Enrolled,blank=True,null=True, related_name="target_staff",on_delete=models.SET_NULL, verbose_name="نام کارمند")
     class Meta:
         verbose_name = "هدف کارمند"
         verbose_name_plural = "اهداف کارمندان"

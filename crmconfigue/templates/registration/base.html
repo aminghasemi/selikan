@@ -83,7 +83,8 @@
                     <span><img class="round" src="{{user.thumbnail.url}}" alt="avatar" height="40" width="40"></span></a>
                   {% else %}
                     <span><img class="round" src="{% static 'frest/assets/images/placeholder.png' %}" alt="avatar" height="40" width="40"></span></a>
-                  {% endif %}            <div class="dropdown-menu pb-0"><a class="dropdown-item" href="{% url 'common:profile' %}"><i class="bx bx-user mr-50"></i> ویرایش پروفایل</a>
+                  {% endif %}            
+                  <div class="dropdown-menu pb-0"><a class="dropdown-item" href="{% url 'common:profile' %}"><i class="bx bx-user mr-50"></i> ویرایش پروفایل</a>
                   <div class="dropdown-divider mb-0"></div><a class="dropdown-item" href="{% url 'logout' %}"><i class="bx bx-power-off mr-50"></i> خروج</a>
                 </div>
               </li>

@@ -7,11 +7,11 @@ from common.models import Company
 from django.contrib.auth.decorators import login_required
 from common.decorators import company_enrolled
 from .models import Contact
-from common.mixins import EnrollMixin, SuperUserAccessMixin, CreatorAccessMixin
+from common.mixins import EnrollMixin, SuperUserAccessMixin,SpecialCompanyMixin, CreatorAccessMixin
 from .forms import ContactForm
 # Create your views here.
 
-class ContactsList(EnrollMixin, LoginRequiredMixin,ListView):
+class ContactsList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
     template_name = 'company/contacts/contacts.html'
     def get_queryset(self):
         global company
@@ -25,7 +25,7 @@ class ContactsList(EnrollMixin, LoginRequiredMixin,ListView):
         context['company'] = company
         return context
 
-class ContactCreate(LoginRequiredMixin, CreateView):
+class ContactCreate(LoginRequiredMixin,SpecialCompanyMixin, CreateView):
     model=Contact
     form_class=ContactForm
     template_name="company/contacts/contact-create.html"
@@ -39,6 +39,7 @@ class ContactCreate(LoginRequiredMixin, CreateView):
         company = get_object_or_404(Company , slug=slug)
         context= super().get_context_data(**kwargs)
         context['company'] = company
+        context['form'].fields['account'].queryset = company.companyaccounts.filter(company=company)
         return context
     def form_valid(self, form, **kwargs):       
         form.instance.created_by = self.request.user
@@ -50,7 +51,7 @@ class ContactCreate(LoginRequiredMixin, CreateView):
         slug= self.kwargs.get('slug')
         return reverse_lazy('contacts:contacts', kwargs={'slug': slug}, current_app='contacts')
 
-class ContactUpdate(LoginRequiredMixin, UpdateView):
+class ContactUpdate(LoginRequiredMixin,SpecialCompanyMixin, UpdateView):
     model=Contact
     form_class=ContactForm
     template_name = "company/contacts/contact-update.html"
@@ -65,10 +66,11 @@ class ContactUpdate(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
         context['company'] = company
+        context['form'].fields['account'].queryset = company.companyaccounts.filter(company=company)
         pk=self.kwargs.get('pk')
         context['docs']=company.companydocs.filter(contacts_id=pk)
         return context
-class ContactDelete(LoginRequiredMixin, DeleteView):
+class ContactDelete(LoginRequiredMixin,SpecialCompanyMixin, DeleteView):
     model=Contact
     template_name = "company/contacts/contact_confirm_delete.html"
     def get_queryset(self):

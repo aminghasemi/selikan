@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Company, User, Address, Enrolled, Product, Country
+from .models import Company, User, Address, Enrolled, Product, Country, Enroll_Invitation
 # Register your models here.
 
 
@@ -17,10 +17,10 @@ class UserAdmin(admin.ModelAdmin):
     search_fields = ('username', 'email')
 
 
-@admin.register(Address)
-class AddressAdmin(admin.ModelAdmin):
-    list_display = ('city', 'state')
-    search_fields = ('username', 'email')
+@admin.register(Enroll_Invitation)
+class Enroll_InvitationAdmin(admin.ModelAdmin):
+    list_display = ('email', 'company','created_by')
+    search_fields = ('email', 'company','created_by')
 
 @admin.register(Enrolled)
 class EnrolledAdmin(admin.ModelAdmin):

@@ -4,7 +4,7 @@ from .models import Invoice, Invoice_item
 
 @admin.register(Invoice)
 class PackagesAdmin(admin.ModelAdmin):
-    list_display = ('title','invoice_number', 'company')
+    list_display = ('invoice_number', 'company')
 
 @admin.register(Invoice_item)
 class PackagesAdmin(admin.ModelAdmin):

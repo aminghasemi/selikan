@@ -33,6 +33,9 @@
               {{ form.phone|as_crispy_field }}
             </div>
             <div class="col-3">
+              {{ form.whatsapp_phone|as_crispy_field }}
+            </div>
+            <div class="col-3">
               {{ form.office_phone|as_crispy_field}}
             </div>
             <div class="col-3">
@@ -65,9 +68,6 @@
 
             <div class="col-3">
               {{ form.tags|as_crispy_field}}
-            </div>
-            <div class="col-3">
-              {{ form.contacts|as_crispy_field}}
             </div>
             <div class="col-12">
               {{ form.description|as_crispy_field }}

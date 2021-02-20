@@ -7,11 +7,11 @@ from common.models import Company
 from django.contrib.auth.decorators import login_required
 from common.decorators import company_enrolled
 from .models import Lead, LeadStatus, LeadSource
-from common.mixins import EnrollMixin, SuperUserAccessMixin, CreatorAccessMixin
+from common.mixins import EnrollMixin, SuperUserAccessMixin,SpecialCompanyMixin, CreatorAccessMixin
 from .forms import LeadForm, LeadStatusForm, LeadSourceForm
 # Create your views here.
 
-class LeadStatusList(EnrollMixin, LoginRequiredMixin,ListView):
+class LeadStatusList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
     template_name = 'company/lead/leadstatus.html'
     def get_queryset(self):
         global company
@@ -25,7 +25,7 @@ class LeadStatusList(EnrollMixin, LoginRequiredMixin,ListView):
         context['company'] = company
         return context
 
-class LeadStatusCreate(LoginRequiredMixin, CreateView):
+class LeadStatusCreate(LoginRequiredMixin,SpecialCompanyMixin, CreateView):
     model=LeadStatus
     form_class=LeadStatusForm
     template_name="company/lead/leadstatus-create-update.html"
@@ -50,7 +50,7 @@ class LeadStatusCreate(LoginRequiredMixin, CreateView):
         slug= self.kwargs.get('slug')
         return reverse_lazy('leads:leadstatus', kwargs={'slug': slug}, current_app='leads')
 
-class LeadStatusUpdate(LoginRequiredMixin, UpdateView):
+class LeadStatusUpdate(LoginRequiredMixin,SpecialCompanyMixin, UpdateView):
     model=LeadStatus
     form_class=LeadStatusForm
     template_name = "company/lead/leadstatus-create-update.html"
@@ -66,7 +66,7 @@ class LeadStatusUpdate(LoginRequiredMixin, UpdateView):
         context= super().get_context_data(**kwargs)
         context['company'] = company
         return context
-class LeadStatusDelete(LoginRequiredMixin, DeleteView):
+class LeadStatusDelete(LoginRequiredMixin,SpecialCompanyMixin, DeleteView):
     model=LeadStatus
     template_name = "company/lead/leadstatus_confirm_delete.html"
     success_url= reverse_lazy('leads:leadstatus')
@@ -84,7 +84,7 @@ class LeadStatusDelete(LoginRequiredMixin, DeleteView):
         return reverse_lazy('leads:leadstatus', kwargs={'slug': slug}, current_app='leads')
 
 
-class LeadSourceList(EnrollMixin, LoginRequiredMixin,ListView):
+class LeadSourceList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
     template_name = 'company/lead/leadsource.html'
     def get_queryset(self):
         global company
@@ -98,7 +98,7 @@ class LeadSourceList(EnrollMixin, LoginRequiredMixin,ListView):
         context['company'] = company
         return context
 
-class LeadSourceCreate(LoginRequiredMixin, CreateView):
+class LeadSourceCreate(LoginRequiredMixin,SpecialCompanyMixin, CreateView):
     model=LeadSource
     form_class=LeadSourceForm
     template_name="company/lead/leadsource-create-update.html"
@@ -123,7 +123,7 @@ class LeadSourceCreate(LoginRequiredMixin, CreateView):
         slug= self.kwargs.get('slug')
         return reverse_lazy('leads:leadsource', kwargs={'slug': slug}, current_app='leads')
 
-class LeadSourceUpdate(LoginRequiredMixin, UpdateView):
+class LeadSourceUpdate(LoginRequiredMixin,SpecialCompanyMixin, UpdateView):
     model=LeadSource
     form_class=LeadSourceForm
     template_name = "company/lead/leadsource-create-update.html"
@@ -139,7 +139,7 @@ class LeadSourceUpdate(LoginRequiredMixin, UpdateView):
         context= super().get_context_data(**kwargs)
         context['company'] = company
         return context
-class LeadSourceDelete(LoginRequiredMixin, DeleteView):
+class LeadSourceDelete(LoginRequiredMixin,SpecialCompanyMixin, DeleteView):
     model=LeadSource
     template_name = "company/lead/leadsource_confirm_delete.html"
     success_url= reverse_lazy('leads:leadsource')
@@ -158,7 +158,7 @@ class LeadSourceDelete(LoginRequiredMixin, DeleteView):
 
 
 
-class LeadsList(EnrollMixin, LoginRequiredMixin,ListView):
+class LeadsList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
     template_name = 'company/lead/leads.html'
     def get_queryset(self):
         global company
@@ -172,7 +172,7 @@ class LeadsList(EnrollMixin, LoginRequiredMixin,ListView):
         context['company'] = company
         return context
 
-class LeadCreate(LoginRequiredMixin, CreateView):
+class LeadCreate(LoginRequiredMixin,SpecialCompanyMixin, CreateView):
     model=Lead
     form_class=LeadForm
     template_name="company/lead/lead-create.html"
@@ -204,7 +204,7 @@ class LeadCreate(LoginRequiredMixin, CreateView):
         slug= self.kwargs.get('slug')
         return reverse_lazy('leads:leads', kwargs={'slug': slug}, current_app='leads')
 
-class LeadUpdate(LoginRequiredMixin, UpdateView):
+class LeadUpdate(LoginRequiredMixin,SpecialCompanyMixin, UpdateView):
     model=Lead
     form_class= LeadForm
     template_name = "company/lead/lead-update.html"
@@ -229,7 +229,7 @@ class LeadUpdate(LoginRequiredMixin, UpdateView):
         pk=self.kwargs.get('pk')
         context['docs']=company.companydocs.filter(leads_id=pk)
         return context
-class LeadDelete(LoginRequiredMixin, DeleteView):
+class LeadDelete(LoginRequiredMixin,SpecialCompanyMixin, DeleteView):
     model=Lead
     template_name = "company/lead/lead_confirm_delete.html"
     success_url= reverse_lazy('leads:leads')

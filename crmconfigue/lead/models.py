@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 from extensions.utils import jalali_converter
 from accounts.models import Tags
-from common.models import User, Company
+from common.models import User, Company, Enrolled
 from contacts.models import Contact
 from teams.models import Teams
 
@@ -45,7 +45,7 @@ class Lead(models.Model):
     status = models.ForeignKey(LeadStatus, related_name="Lead_status",on_delete=models.SET_NULL, null=True,verbose_name="مرحله سرنخ")
     source = models.ForeignKey(LeadSource,related_name="Lead_source",on_delete=models.SET_NULL, null=True, blank=True, verbose_name="منبع")
     description = models.TextField(blank=True, verbose_name="توضیحات")
-    assigned_to = models.ForeignKey(User, related_name="lead_assigned_users",on_delete=models.SET_NULL, null=True,blank=True, verbose_name="محول شده به")
+    assigned_to = models.ForeignKey(Enrolled, related_name="lead_assigned_users",on_delete=models.SET_NULL, null=True,blank=True, verbose_name="محول شده به")
     created_by = models.ForeignKey(User, related_name="lead_created_by", on_delete=models.SET_NULL, null=True,blank=True, verbose_name="ساخته شده توسط")
     created_on = models.DateTimeField( auto_now_add=True, verbose_name="تاریخ ایجاد")
     is_active = models.BooleanField(default=True, verbose_name="فعال")
@@ -53,7 +53,7 @@ class Lead(models.Model):
     contacts = models.ForeignKey(Contact,on_delete=models.SET_NULL, null=True,blank=True, related_name="lead_contacts", verbose_name="اشخاص مرتبط")
     teams = models.ForeignKey(Teams,on_delete=models.SET_NULL, null=True,blank=True, related_name="lead_teams", verbose_name="تیم سرنخ")
     company = models.ForeignKey(Company, on_delete=models.SET_NULL, null=True, related_name="companyleads", blank=True, verbose_name="کاربر سایت")
-    converted_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="lead_converted_by", blank=True, verbose_name="تکمیل‌شده توسط")
+    converted_by = models.ForeignKey(Enrolled, on_delete=models.SET_NULL, null=True, related_name="lead_converted_by", blank=True, verbose_name="تکمیل‌شده توسط")
     closed_on = models.DateField(blank=True, verbose_name="تاریخ تکمیل")
     archive = models.BooleanField(default=False, verbose_name="بایگانی شود؟")
 

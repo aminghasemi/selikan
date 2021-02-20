@@ -7,10 +7,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from cuser.middleware import CuserMiddleware
 from itertools import chain
-from .models import Company, User, Product, Country, Enrolled
+from .models import Company, User, Product, Country, Enrolled, Enroll_Invitation
 from .mixins import CreatorAccessMixin, SuperUserAccessMixin, SpecialCompanyMixin, EnrollMixin
 from .decorators import allowed_users, company_enrolled, user_limit
-from .forms import EnrollForm, ProfileForm, CompanyForm
+from .forms import EnrollForm, ProfileForm, CompanyForm, Enroll_InvitationForm
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from datetime import timedelta, datetime
 from django.utils import timezone 
@@ -22,13 +22,18 @@ def home(request):
     return render(request, 'statichome/home.html')
 
 class CompaniesList(LoginRequiredMixin, ListView):
-        queryset= Company.objects.all()
-        template_name="registration/home.html"
-        def get_queryset(self):
-            class1=Company.objects.filter(creator=self.request.user)
-            class2=Company.objects.filter(staff=self.request.user)
-            class3=chain(class1,class2)
-            return class3
+    queryset= Company.objects.all()
+    template_name="registration/home.html"
+    def get_queryset(self):
+        class1=Company.objects.filter(creator=self.request.user)
+        class2=Company.objects.filter(staff=self.request.user)
+        class3=chain(class1,class2)
+        return class3
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        enroll_invitations=Enroll_Invitation.objects.filter(email=self.request.user.email)
+        context['enroll_invitations'] = enroll_invitations
+        return context
 
 class CompanyCreate(LoginRequiredMixin, CreateView):
     model=Company
@@ -39,6 +44,7 @@ class CompanyCreate(LoginRequiredMixin, CreateView):
         form.instance.creator = self.request.user
         form.instance.access_date=timezone.now()+timedelta(days=15)
         return super().form_valid(form)
+
 
 class CompanyUpdate(LoginRequiredMixin,CreatorAccessMixin, UpdateView):
     model=Company
@@ -51,34 +57,61 @@ class CompanyDelete(LoginRequiredMixin,CreatorAccessMixin, DeleteView):
     template_name = "registration/Company_confirm_delete.html"
     success_url= reverse_lazy('common:home')
 
+class EnrollCreate(LoginRequiredMixin, CreateView):
+    model=Enrolled
+    form_class=EnrollForm
+    template_name= "registration/enroll.html"
+    success_url= reverse_lazy('common:home')
+    def form_valid(self, form, **kwargs):  
+        enroll_invitations=Enroll_Invitation.objects.get(email=self.request.user.email)
+        form.instance.staff= self.request.user
+        form.instance.company = enroll_invitations.company
+        return super().form_valid(form, **kwargs)
+    def get_context_data(self, **kwargs):
+        enroll_invitations=Enroll_Invitation.objects.filter(email=self.request.user.email)
+        context= super().get_context_data(**kwargs)
+        context['enroll_invitations'] = enroll_invitations
+        return context
+
+
+
+
 
 @login_required(login_url='login')
 @company_enrolled
-@user_limit
 def company_staff(request, slug):
     template_name = 'registration/company_add_staff.html'
     #company=Company.objects.get(slug=slug)
     company = get_object_or_404(Company, slug=slug)
     companystaff = company.staff_enroll.all()
+    staff_count=company.staff_enroll.all().count()+1
     new_staff = None
+    error= None
     if request.method == 'POST':
         def form_valid(self, form):
             form.instance.company = company
+            form.instance.created_by= self.request.user
             return super(company_staff, self).form_valid(form)
-        enroll_form = EnrollForm(data=request.POST)
+        enroll_form = Enroll_InvitationForm(data=request.POST)
         if enroll_form.is_valid():
 
-            # Create Comment object but don't save to database yet
             new_staff = enroll_form.save(commit=False)
+            # Create Comment object but don't save to database yet
             # Assign the current post to the comment
             new_staff.company = company
+            new_staff.created_by=request.user
             # Save the comment to the database
-            new_staff.save()
+            if new_staff.email!= company.creator.email and company.staff_enroll.filter(staff__email=new_staff.email).count()==0:
+                new_staff.save()
+            else:
+                error="کاربر وارد شده با این ایمیل قبلا در شرکت عضو شده است."
     else:
-        enroll_form = EnrollForm()
+        enroll_form = Enroll_InvitationForm()
     return render(request, template_name, {'companystaff': companystaff,
                                            'company': company,
                                            'new_staff': new_staff,
+                                           'error': error,
+                                           'staff_count': staff_count,
                                            'enroll_form': enroll_form,})
 class StaffDelete(LoginRequiredMixin,CreatorAccessMixin, DeleteView):
     model=Enrolled
@@ -169,7 +202,7 @@ def activate(request, uidb64, token):
 
 
 
-class ProductsList(EnrollMixin, LoginRequiredMixin,ListView):
+class ProductsList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
     template_name = 'company/common/products.html'
     def get_queryset(self):
         global company
@@ -183,7 +216,7 @@ class ProductsList(EnrollMixin, LoginRequiredMixin,ListView):
         context['company'] = company
         return context
 
-class ProductCreate(LoginRequiredMixin, CreateView):
+class ProductCreate(LoginRequiredMixin,SpecialCompanyMixin, CreateView):
     model=Product
     fields=["name", "code", "unit", "price", "description"]
     template_name="company/common/product-create-update.html"
@@ -208,7 +241,7 @@ class ProductCreate(LoginRequiredMixin, CreateView):
         slug= self.kwargs.get('slug')
         return reverse_lazy('common:products', kwargs={'slug': slug}, current_app='common')
 
-class ProductUpdate(LoginRequiredMixin, UpdateView):
+class ProductUpdate(LoginRequiredMixin,SpecialCompanyMixin, UpdateView):
     model=Product
     fields=["name", "code", "unit", "price", "description"]
     template_name = "company/common/product-create-update.html"
@@ -224,7 +257,7 @@ class ProductUpdate(LoginRequiredMixin, UpdateView):
         context= super().get_context_data(**kwargs)
         context['company'] = company
         return context
-class ProductDelete(LoginRequiredMixin, DeleteView):
+class ProductDelete(LoginRequiredMixin,SpecialCompanyMixin, DeleteView):
     model=Product
     template_name = "company/common/product_confirm_delete.html"
     success_url= reverse_lazy('common:products')
@@ -241,7 +274,7 @@ class ProductDelete(LoginRequiredMixin, DeleteView):
         slug= self.kwargs.get('slug')
         return reverse_lazy('common:products', kwargs={'slug': slug}, current_app='common')
 
-class CountriesList(EnrollMixin, LoginRequiredMixin,ListView):
+class CountriesList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
     template_name = 'company/common/countries.html'
     def get_queryset(self):
         global company
@@ -255,7 +288,7 @@ class CountriesList(EnrollMixin, LoginRequiredMixin,ListView):
         context['company'] = company
         return context
 
-class CountryCreate(LoginRequiredMixin, CreateView):
+class CountryCreate(LoginRequiredMixin,SpecialCompanyMixin, CreateView):
     model=Country
     fields=["name", "short_name"]
     template_name="company/common/country-create-update.html"
@@ -280,7 +313,7 @@ class CountryCreate(LoginRequiredMixin, CreateView):
         slug= self.kwargs.get('slug')
         return reverse_lazy('common:countries', kwargs={'slug': slug}, current_app='common')
 
-class CountryUpdate(LoginRequiredMixin, UpdateView):
+class CountryUpdate(LoginRequiredMixin,SpecialCompanyMixin, UpdateView):
     model=Country
     fields=["name", "short_name"]
     template_name = "company/common/country-create-update.html"
@@ -296,7 +329,7 @@ class CountryUpdate(LoginRequiredMixin, UpdateView):
         context= super().get_context_data(**kwargs)
         context['company'] = company
         return context
-class CountryDelete(LoginRequiredMixin, DeleteView):
+class CountryDelete(LoginRequiredMixin,SpecialCompanyMixin, DeleteView):
     model=Country
     template_name = "company/common/country_confirm_delete.html"
     success_url= reverse_lazy('common:countries')

@@ -8,7 +8,6 @@ from common.models import User, Company, Country, Province
 from common.utils import INDCHOICES, COUNTRIES
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.text import slugify
-from contacts.models import Contact
 from teams.models import Teams
 from common import utils
 
@@ -27,26 +26,26 @@ class Tags(models.Model):
 
 class Account(models.Model):
     name = models.CharField(max_length=64, verbose_name="نام مشتری")
-    national_id = models.CharField(max_length=64,blank=True, verbose_name="کد‌/شناسه ملی")
-    economic_id=models.CharField(max_length=64,blank=True, verbose_name="کد اقتصادی")
-    email = models.EmailField(blank=True, verbose_name="ایمیل")
-    phone = models.CharField(max_length=20, verbose_name="شماره تماس موبایل")
-    office_phone = models.CharField(max_length=20,blank=True, verbose_name="شماره تماس ثابت")
-    fax = models.CharField(max_length=20,blank=True, verbose_name="شماره فکس ")
-    industry = models.CharField(max_length=255, choices=INDCHOICES, blank=True, verbose_name="صنعت")
-    billing_address_line = models.CharField(max_length=255, blank=True, verbose_name="آدرس")
-    billing_street = models.CharField(max_length=55, blank=True, verbose_name="خیابان")
-    billing_city = models.CharField( max_length=255, blank=True, verbose_name="شهر")
+    national_id = models.CharField(max_length=64,blank=True,null=True, verbose_name="کد‌/شناسه ملی")
+    economic_id=models.CharField(max_length=64,blank=True,null=True, verbose_name="کد اقتصادی")
+    email = models.EmailField(blank=True,null=True, verbose_name="ایمیل")
+    phone = models.CharField(max_length=20,null=True,blank=True, verbose_name="شماره تماس موبایل")
+    whatsapp_phone = models.CharField(max_length=20,null=True, blank=True, verbose_name="شماره تماس واتساپ")
+    office_phone = models.CharField(max_length=20,blank=True,null=True, verbose_name="شماره تماس ثابت")
+    fax = models.CharField(max_length=20,blank=True,null=True, verbose_name="شماره فکس ")
+    industry = models.CharField(max_length=255, choices=INDCHOICES, blank=True,null=True, verbose_name="صنعت")
+    billing_address_line = models.CharField(max_length=255, blank=True,null=True, verbose_name="آدرس")
+    billing_street = models.CharField(max_length=55, blank=True,null=True, verbose_name="خیابان")
+    billing_city = models.CharField( max_length=255, blank=True,null=True, verbose_name="شهر")
     billing_state = models.ForeignKey(Province,  on_delete=models.SET_NULL,null=True, max_length=255, blank=True, verbose_name="استان")
-    billing_postcode = models.CharField(max_length=10, blank=True, verbose_name="کد پستی")
+    billing_postcode = models.CharField(max_length=10, blank=True,null=True, verbose_name="کد پستی")
     billing_country = models.ForeignKey(Country, on_delete=models.SET_NULL,null=True, blank=True, verbose_name="کشور")
-    website = models.URLField(blank=True, verbose_name="وب‌سایت")
-    description = models.TextField(blank=True, verbose_name="توضیحات")
+    website = models.CharField(blank=True,null=True, verbose_name="وب‌سایت", max_length=200)
+    description = models.TextField(blank=True,null=True, verbose_name="توضیحات")
     created_by = models.ForeignKey(User, related_name="account_created_by", on_delete=models.SET_NULL,null=True, verbose_name="ایجاد شده توسط")
     created_on = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
     is_active = models.BooleanField(default=True, verbose_name="فعال")
     tags = models.ForeignKey(Tags, blank=True, on_delete=models.SET_NULL,null=True, verbose_name="تگ‌ها")
-    contacts = models.ForeignKey("contacts.Contact",on_delete=models.SET_NULL,null=True, blank=True, related_name="account_contacts", verbose_name="شخص مرتبط")
     company = models.ForeignKey(Company, related_name= "companyaccounts",  on_delete=models.SET_NULL,null=True,  blank=True, verbose_name="کاربر سایت")
     archive = models.BooleanField(default=False, verbose_name="بایگانی شود؟")
 
@@ -105,9 +104,8 @@ class Account(models.Model):
 
 class Email(models.Model):
     from_account = models.ForeignKey(
-        Account, related_name="sent_email", on_delete=models.SET_NULL, null=True, verbose_name="از حساب"
-    )
-    recipients = models.ManyToManyField(Contact, related_name="recieved_email", verbose_name="دریافت کنندگان")
+    Account, related_name="sent_email", on_delete=models.SET_NULL, null=True, verbose_name="از حساب")
+    recipients = models.ManyToManyField("contacts.Contact", related_name="recieved_email", verbose_name="دریافت کنندگان")
     message_subject = models.TextField(null=True, verbose_name="موضوع ایمیل")
     message_body = models.TextField(null=True, verbose_name="متن ایمیل")
     timezone = models.CharField(max_length=100, default="UTC", verbose_name="منطقه زمانی")
@@ -131,7 +129,7 @@ class EmailLog(models.Model):
         Email, related_name="email_log", on_delete=models.SET_NULL, null=True, verbose_name="ایمیل"
     )
     contact = models.ForeignKey(
-        Contact, related_name="contact_email_log", on_delete=models.SET_NULL, null=True, verbose_name="شخص"
+        "contacts.Contact", related_name="contact_email_log", on_delete=models.SET_NULL, null=True, verbose_name="شخص"
     )
     is_sent = models.BooleanField(default=False, verbose_name="وضعیت ارسال")
     

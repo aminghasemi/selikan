@@ -7,11 +7,11 @@ from common.models import Company
 from django.contrib.auth.decorators import login_required
 from common.decorators import company_enrolled
 from .models import Targetsubject, CompanyTargets, StaffTargets
-from common.mixins import EnrollMixin, SuperUserAccessMixin, CreatorAccessMixin
+from common.mixins import EnrollMixin, SuperUserAccessMixin,SpecialCompanyMixin, CreatorAccessMixin
 from .forms import CompanyTargetsForm, StaffTargetsForm, TargetsubjectForm
 # Create your views here.
 
-class TargetsubjectList(EnrollMixin, LoginRequiredMixin,ListView):
+class TargetsubjectList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
     template_name = 'company/targets/targetsubjectlist.html'
     def get_queryset(self):
         global company
@@ -25,7 +25,7 @@ class TargetsubjectList(EnrollMixin, LoginRequiredMixin,ListView):
         context['company'] = company
         return context
 
-class TargetsubjectCreate(LoginRequiredMixin, CreateView):
+class TargetsubjectCreate(LoginRequiredMixin,SpecialCompanyMixin, CreateView):
     model=Targetsubject
     form_class=TargetsubjectForm
     template_name="company/targets/targetsubject-create-update.html"
@@ -50,7 +50,7 @@ class TargetsubjectCreate(LoginRequiredMixin, CreateView):
         slug= self.kwargs.get('slug')
         return reverse_lazy('targets:targetsubjectlist', kwargs={'slug': slug}, current_app='targets')
 
-class TargetsubjectUpdate(LoginRequiredMixin, UpdateView):
+class TargetsubjectUpdate(LoginRequiredMixin,SpecialCompanyMixin, UpdateView):
     model=Targetsubject
     form_class=TargetsubjectForm
     template_name = "company/targets/targetsubject-create-update.html"
@@ -66,7 +66,7 @@ class TargetsubjectUpdate(LoginRequiredMixin, UpdateView):
         context= super().get_context_data(**kwargs)
         context['company'] = company
         return context
-class TargetsubjectDelete(LoginRequiredMixin, DeleteView):
+class TargetsubjectDelete(LoginRequiredMixin,SpecialCompanyMixin, DeleteView):
     model=Targetsubject
     template_name = "company/targets/targetsubject_confirm_delete.html"
     success_url= reverse_lazy('targets:targetsubjectlist')
@@ -85,7 +85,7 @@ class TargetsubjectDelete(LoginRequiredMixin, DeleteView):
 
 
 
-class CompanyTargetsList(EnrollMixin, LoginRequiredMixin,ListView):
+class CompanyTargetsList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
     template_name = 'company/targets/companytargets.html'
     def get_queryset(self):
         global company
@@ -99,7 +99,7 @@ class CompanyTargetsList(EnrollMixin, LoginRequiredMixin,ListView):
         context['company'] = company
         return context
 
-class CompanyTargetsCreate(LoginRequiredMixin, CreateView):
+class CompanyTargetsCreate(LoginRequiredMixin,SpecialCompanyMixin, CreateView):
     model=CompanyTargets
     form_class=CompanyTargetsForm
     template_name="company/targets/companytargets-create.html"
@@ -125,7 +125,7 @@ class CompanyTargetsCreate(LoginRequiredMixin, CreateView):
         slug= self.kwargs.get('slug')
         return reverse_lazy('targets:companytargets', kwargs={'slug': slug}, current_app='targets')
 
-class CompanyTargetsUpdate(LoginRequiredMixin, UpdateView):
+class CompanyTargetsUpdate(LoginRequiredMixin,SpecialCompanyMixin, UpdateView):
     model=CompanyTargets
     form_class= CompanyTargetsForm
     template_name = "company/targets/companytargets-update.html"
@@ -142,7 +142,7 @@ class CompanyTargetsUpdate(LoginRequiredMixin, UpdateView):
      #   context['form'].fields['subject'].queryset = Targetsubject.objects.filter(company=company)
         context['company'] = company
         return context
-class CompanyTargetsDelete(LoginRequiredMixin, DeleteView):
+class CompanyTargetsDelete(LoginRequiredMixin,SpecialCompanyMixin, DeleteView):
     model=CompanyTargets
     template_name = "company/targets/companytargets_confirm_delete.html"
     success_url= reverse_lazy('targets:companytargets')
@@ -160,7 +160,7 @@ class CompanyTargetsDelete(LoginRequiredMixin, DeleteView):
         return reverse_lazy('targets:companytargets', kwargs={'slug': slug}, current_app='targets')
 
 
-class StaffTargetsList(EnrollMixin, LoginRequiredMixin,ListView):
+class StaffTargetsList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
     template_name = 'company/targets/stafftargets.html'
     def get_queryset(self):
         global company
@@ -174,7 +174,7 @@ class StaffTargetsList(EnrollMixin, LoginRequiredMixin,ListView):
         context['company'] = company
         return context
 
-class StaffTargetsCreate(LoginRequiredMixin, CreateView):
+class StaffTargetsCreate(LoginRequiredMixin,SpecialCompanyMixin, CreateView):
     model=StaffTargets
     form_class=StaffTargetsForm
     template_name="company/targets/stafftargets-create.html"
@@ -201,7 +201,7 @@ class StaffTargetsCreate(LoginRequiredMixin, CreateView):
         slug= self.kwargs.get('slug')
         return reverse_lazy('targets:stafftargets', kwargs={'slug': slug}, current_app='targets')
 
-class StaffTargetsUpdate(LoginRequiredMixin, UpdateView):
+class StaffTargetsUpdate(LoginRequiredMixin,SpecialCompanyMixin, UpdateView):
     model=StaffTargets
     form_class= StaffTargetsForm
     template_name = "company/targets/stafftargets-update.html"
@@ -219,7 +219,7 @@ class StaffTargetsUpdate(LoginRequiredMixin, UpdateView):
         context['form'].fields['staff'].queryset = company.staff_enroll.filter(company=company)
         context['company'] = company
         return context
-class StaffTargetsDelete(LoginRequiredMixin, DeleteView):
+class StaffTargetsDelete(LoginRequiredMixin,SpecialCompanyMixin, DeleteView):
     model=StaffTargets
     template_name = "company/targets/stafftargets_confirm_delete.html"
     success_url= reverse_lazy('targets:stafftargets')

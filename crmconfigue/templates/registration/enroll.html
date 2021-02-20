@@ -1,0 +1,40 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}داشبورد اصلی{% endblock %}
+
+
+{% block main %}
+{% for enroll_invitations in enroll_invitations %}
+<section id="multiple-column-form">
+    <div class="row match-height">
+      <div class="col-md-6 col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">عضویت در شرکت {{enroll_invitations.company}}</h4>
+          </div>
+          <div class="card-content">
+            <div class="card-body">
+              <p>{{enroll_invitations.created_by.get_full_name}} از شما دعوت کرده است تا در شرکت {{enroll_invitations.company}} عضو شوید. آیا تمایل به عضویت دارید؟</p>
+              <form method="post" enctype="multipart/form-data" class="form">{% csrf_token %}
+                <div class="form-body">
+                  <div class="row">
+                    <div class="col-md-6 col-12">
+                      <div class="form-label-group">
+                      </div>
+                    </div>
+                    <div class="col-12 d-flex justify-content-end">
+                      <button class="btn btn-success mr-1 mb-1">قبول عضویت</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+  {% endfor %}
+
+{% endblock %}

@@ -85,6 +85,7 @@
           <div class="mb-75">
             <span class="ltr-text">{{invoice.account.economic_id}} :کد اقتصادی</span>
           </div>
+
         </div>
       </div>
       <hr>
@@ -179,8 +180,10 @@
       <hr>
       <div class="row">
         <div class="col-4 col-sm-6 mt-75">
-          <p>با تشکر از کسب و کار شما.</p>
-        </div>
+          <div class="col-12">
+            <h6 class="ltr-text">{{invoice.description}} :توضیحات فاکتور</h6>
+          </div>
+                </div>
         <div class="col-8 col-sm-6 d-flex justify-content-end mt-75">
           <div class="invoice-subtotal">
             <div class="invoice-calc d-flex justify-content-between">

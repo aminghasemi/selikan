@@ -6,29 +6,32 @@ from extensions.utils import jalali_converter
 from common.models import Address, User, Company, Country, Province
 from phonenumber_field.modelfields import PhoneNumberField
 from teams.models import Teams
-
+from accounts.models import Account
 
 class Contact(models.Model):
-    first_name = models.CharField(verbose_name="نام", max_length=255)
-    last_name = models.CharField(verbose_name="نام خانوادگی", max_length=255)
-    email = models.EmailField(blank=True,verbose_name="ایمیل")
-    phone = models.CharField(max_length=20,blank=True, verbose_name="موبایل")
-    office_phone = models.CharField(max_length=20,blank=True, verbose_name="تلفن ثابت")
-    fax = models.CharField(max_length=20,blank=True, verbose_name="شماره فکس ")
-    address = models.CharField(verbose_name="آدرس",blank=True, max_length=350)
-    description = models.TextField(blank=True,verbose_name="توضیحات")
+    first_name = models.CharField(verbose_name="نام",null=True,blank=True, max_length=255)
+    last_name = models.CharField(verbose_name="نام خانوادگی",null=True,blank=True, max_length=255)
+    position = models.CharField(verbose_name="سمت",null=True,blank=True, max_length=255)
+    email = models.EmailField(blank=True,null=True,verbose_name="ایمیل")
+    phone = models.CharField(max_length=20,blank=True,null=True, verbose_name="موبایل")
+    whatsapp_phone = models.CharField(max_length=20,null=True,blank=True, verbose_name="شماره تماس واتساپ")
+    office_phone = models.CharField(max_length=20,blank=True,null=True, verbose_name="تلفن ثابت")
+    fax = models.CharField(max_length=20,blank=True,null=True, verbose_name="شماره فکس ")
+    address = models.CharField(verbose_name="آدرس",blank=True,null=True, max_length=350)
+    description = models.TextField(blank=True,null=True,verbose_name="توضیحات")
     created_by = models.ForeignKey(User, related_name="contact_created_by",  on_delete=models.SET_NULL,null=True, verbose_name="ساخته شده توسط")
     created_on = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
     is_active = models.BooleanField(default=True,verbose_name="فعال")
-    billing_address_line = models.CharField(max_length=255, blank=True, verbose_name="آدرس")
-    billing_street = models.CharField(max_length=55, blank=True, verbose_name="خیابان")
-    billing_city = models.CharField( max_length=255, blank=True, verbose_name="شهر")
+    billing_address_line = models.CharField(max_length=255, blank=True,null=True, verbose_name="آدرس")
+    billing_street = models.CharField(max_length=55, blank=True,null=True, verbose_name="خیابان")
+    billing_city = models.CharField( max_length=255, blank=True,null=True, verbose_name="شهر")
     billing_state = models.ForeignKey(Province,  on_delete=models.SET_NULL,null=True, max_length=255, blank=True, verbose_name="استان")
-    billing_postcode = models.CharField(max_length=10, blank=True, verbose_name="کد پستی")
+    billing_postcode = models.CharField(max_length=10, blank=True,null=True, verbose_name="کد پستی")
     billing_country = models.ForeignKey(Country,  on_delete=models.SET_NULL,null=True, blank=True, verbose_name="کشور")
     company = models.ForeignKey(Company, related_name="companycontacts",  on_delete=models.SET_NULL,null=True, blank=True, verbose_name="شرکت")
     birthday=models.DateField(null=True, blank=True, verbose_name="تاریخ تولد")
     archive = models.BooleanField(default=False, verbose_name="بایگانی شود؟")
+    account = models.ForeignKey(Account,on_delete=models.SET_NULL,null=True, blank=True, related_name="account_contacts", verbose_name="مشتری مرتبط")
 
     def __str__(self):
         return self.first_name

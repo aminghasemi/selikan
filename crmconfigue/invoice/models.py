@@ -16,10 +16,15 @@ class Invoice(models.Model):
         ("فاکتور","فاکتور"),
         ("کنسل شده", "کنسل شده"),
     )
-
-    title = models.CharField( max_length=200, verbose_name="عنوان")
+    PAID_CHOICES = (
+        ("نقدی", "نقدی"),
+        ("اعتباری","اعتباری"),
+        ("غیر نقدی", "غیر نقدی"),
+        ("چک", "چک"),
+    )
     invoice_number=models.CharField(max_length=25, verbose_name="شماره فاکتور")
-    status = models.CharField( max_length=50, choices=STATUS_CHOICES, verbose_name="وضعیت")
+    status = models.CharField( max_length=50, choices=STATUS_CHOICES,null=True,blank=True, verbose_name="وضعیت")
+    paid_status = models.CharField( max_length=50, choices=PAID_CHOICES,null=True,blank=True, verbose_name="نحوه پرداخت")
     date = models.DateField(null=True,blank=True, verbose_name="تاریخ تنظیم")
     created_on = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
     account = models.ForeignKey(Account,null=True, related_name="invoice_account",blank=True,on_delete=models.SET_NULL, verbose_name="نام مشتری")

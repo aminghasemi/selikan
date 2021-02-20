@@ -46,10 +46,10 @@
                 <div class="card-body">
                     <div class="row">
                       <div class="col-3">
-                        {{ form.title|as_crispy_field }}
+                        {{ form.status|as_crispy_field }}
                       </div>
                       <div class="col-3">
-                        {{ form.status|as_crispy_field }}
+                        {{ form.paid_status|as_crispy_field }}
                       </div>
                       <div class="col-3">
                         {{ form.account|as_crispy_field }}
@@ -63,6 +63,10 @@
                       <div class="col-3">
                         {{ form.tax|as_crispy_field}}
                       </div>
+                      <div class="col-12">
+                        {{ form.description|as_crispy_field}}
+                      </div>
+ 
                     </div>
                         <button class="btn btn-success">ذخیره اطلاعات و وارد کردن آیتم‌های فاکتور</button>
                       </form>
