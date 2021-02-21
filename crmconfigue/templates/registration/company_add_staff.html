@@ -8,7 +8,7 @@
   <div class="col-12">
     <div class="card">
       <div class="card-header">
-        <h4 class="card-title">افزودن کاربر جدید به شرکت</h4>
+        <h4 class="card-title">لیست کاربران شرکت</h4>
       </div>
       <div class="card-content">
         <div class="card-body">
@@ -65,6 +65,9 @@
     </div>
   </div>
 </div>
+
+
+
 <!-- Table head options end -->
 {% if company.user_limit > staff_count %}
 <!-- // Basic multiple Column Form section start -->
@@ -101,13 +104,14 @@
                   <div class="col-12 d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary mr-1 mb-1">ثبت</button>
                     <button type="reset" class="btn btn-light-secondary mr-1 mb-1">بازنشانی</button>
-                    {% endif %}
                   </div>
                 </div>
               </div>
             </form>
+            {% endif %}
+
           </div>
-        </div>
+      </div>
       </div>
     </div>
   </div>
@@ -125,4 +129,43 @@
   </div>
 {% endif %}
 
+
+{% if companyinvitations %}
+<div class="row" id="table-head">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">لیست دعوت‌نامه‌های ارسال شده شرکت</h4>
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+        </div>
+        <!-- table head dark -->
+        <div class="table-responsive">
+          <table class="table mb-0">
+            <thead class="thead-dark">
+              <tr>
+                <th>ایمیل</th>
+                <th>وضعیت</th>
+                <th>عملیات</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for companyinvitations in companyinvitations %}
+              <tr>
+              <td class="text-bold-500">{{ companyinvitations.email }}</td>
+              <td><span class="badge badge-warning">در انتظار پاسخ از طرف کاربر</span></td>
+              <td>
+                <a class="badge badge-danger" href="{% url 'common:enroll-delete-addstaff' company.slug companyinvitations.pk %}">حذف</a>
+              </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
 {% endblock %}

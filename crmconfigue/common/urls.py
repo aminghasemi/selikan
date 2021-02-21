@@ -2,7 +2,7 @@ from django.urls import path, re_path, reverse
 from django.contrib.auth import views
 from django.conf.urls import url
 
-from .views import Dashboard, home,EnrollCreate, CompaniesList, CompanyCreate, CompanyUpdate, CompanyDelete, company_staff,StaffDelete, Profile ,ProductsList,ProductCreate,ProductUpdate,ProductDelete, CountriesList, CountryCreate, CountryUpdate, CountryDelete
+from .views import Dashboard, home,EnrollCreate,Enroll_InvitationDelete,Enroll_InvitationDelete_addstaff, CompaniesList, CompanyCreate, CompanyUpdate, CompanyDelete, company_staff,StaffDelete, Profile ,ProductsList,ProductCreate,ProductUpdate,ProductDelete, CountriesList, CountryCreate, CountryUpdate, CountryDelete
 
 app_name="common"
 urlpatterns = [
@@ -15,6 +15,10 @@ urlpatterns = [
     path('<slug:slug>/addstaff',company_staff,name="company_add_staff"),
     path('deletestaff/<slug:slug>/<int:pk>', StaffDelete.as_view(),name="staff-delete"),
     path('addstaff/', EnrollCreate.as_view(),name="enroll"),
+    path('enrolldelete/<int:pk>', Enroll_InvitationDelete.as_view(),name="enroll-delete"),
+    path('<slug:slug>/enrolldelete-addstaff/<int:pk>', Enroll_InvitationDelete_addstaff.as_view(),name="enroll-delete-addstaff"),
+
+
 
     path('profile/', Profile.as_view(), name="profile"),
 	path('<slug:slug>/dashboard/', Dashboard, name="dashboard"),

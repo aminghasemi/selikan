@@ -15,6 +15,7 @@ from django.contrib.auth.views import LoginView, PasswordChangeView
 from datetime import timedelta, datetime
 from django.utils import timezone 
 from django.db.models import Sum
+from django.http import HttpResponse, HttpResponseRedirect 
 # Create your views here.
 
 
@@ -66,16 +67,45 @@ class EnrollCreate(LoginRequiredMixin, CreateView):
         enroll_invitations=Enroll_Invitation.objects.get(email=self.request.user.email)
         form.instance.staff= self.request.user
         form.instance.company = enroll_invitations.company
-        return super().form_valid(form, **kwargs)
+        self.object=form.save()
+        enroll_invitations.delete()
+        return HttpResponseRedirect(self.get_success_url())
     def get_context_data(self, **kwargs):
         enroll_invitations=Enroll_Invitation.objects.filter(email=self.request.user.email)
         context= super().get_context_data(**kwargs)
         context['enroll_invitations'] = enroll_invitations
         return context
+    def get_success_url(self):
+        return reverse_lazy('common:home')
 
+class Enroll_InvitationDelete(LoginRequiredMixin, DeleteView):
+    template_name= "registration/enroll_invitation_confirm_delete.html"
+    model= Enroll_Invitation
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+    def get_context_data(self, **kwargs):
+        enroll_invitations=Enroll_Invitation.objects.filter(email=self.request.user.email)
+        context= super().get_context_data(**kwargs)
+        context['enroll_invitations'] = enroll_invitations
+        return context
+    def get_success_url(self):
+        return reverse_lazy('common:home')
 
-
-
+class Enroll_InvitationDelete_addstaff(LoginRequiredMixin, DeleteView):
+    template_name= "registration/invitations_confirm_delete.html"
+    model= Enroll_Invitation
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companyinvitations.all()
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('common:company_add_staff', kwargs={'slug': slug}, current_app='common')
 
 @login_required(login_url='login')
 @company_enrolled
@@ -84,6 +114,7 @@ def company_staff(request, slug):
     #company=Company.objects.get(slug=slug)
     company = get_object_or_404(Company, slug=slug)
     companystaff = company.staff_enroll.all()
+    companyinvitations=company.companyinvitations.all()
     staff_count=company.staff_enroll.all().count()+1
     new_staff = None
     error= None
@@ -108,6 +139,7 @@ def company_staff(request, slug):
     else:
         enroll_form = Enroll_InvitationForm()
     return render(request, template_name, {'companystaff': companystaff,
+                                           'companyinvitations': companyinvitations,
                                            'company': company,
                                            'new_staff': new_staff,
                                            'error': error,

@@ -66,6 +66,10 @@ class AccountUpdate(LoginRequiredMixin,SpecialCompanyMixin, UpdateView):
         context['company'] = company
         pk=self.kwargs.get('pk')
         context['docs']=company.companydocs.filter(account_id=pk)
+        context['deals']=company.companydeals.filter(account_id=pk)
+        context['contacts']=company.companycontacts.filter(account_id=pk)
+        context['tasks']=company.companytask.filter(account_id=pk)
+
         context['invoices']=company.companyinvoice.filter(account_id=pk)
         return context
 class AccountDelete(LoginRequiredMixin,SpecialCompanyMixin, DeleteView):

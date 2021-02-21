@@ -9,93 +9,82 @@
 
 
 {% block main %}
-<div class="col-md-12">
-  <div class="card card-primary">
-    <div class="card-header">
-      <h3 class="card-title mb-0 float-left">افزودن و ویرایش مشتریان</h3>
+<section id="content-types">
+  <form method="post" enctype="multipart/form-data"> {% csrf_token %}
+  <div class="row">
+    <div class="col-xl-4 col-md-6 col-sm-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <h4 class="card-title">اطلاعات پایه مشتری</h4>
+            <div>{{ form.name|as_crispy_field }}</div>
+            <div>{{ form.phone|as_crispy_field }}</div>
+            <div>{{ form.whatsapp_phone|as_crispy_field }}</div>
+            <div>{{ form.email|as_crispy_field }}</div>
+            <div>{{ form.office_phone|as_crispy_field }}</div>
+            <div>{{ form.office_phone|as_crispy_field }}</div>
+          </div>
+        </div>
+      </div>
     </div>
-      <div class="card-body">
-        <form method="post" enctype="multipart/form-data"> {% csrf_token %}
-          <div class="row">
-            <div class="col-3">
-              {{ form.name|as_crispy_field }}
-            </div>
-            <div class="col-3">
-              {{ form.national_id|as_crispy_field }}
-            </div>
-            <div class="col-3">
-              {{ form.economic_id|as_crispy_field }}
-            </div>
-            <div class="col-3">
-               {{form.email|as_crispy_field}}
-            </div>
-            <div class="col-3">
-              {{ form.phone|as_crispy_field }}
-            </div>
-            <div class="col-3">
-              {{ form.whatsapp_phone|as_crispy_field }}
-            </div>
-            <div class="col-3">
-              {{ form.office_phone|as_crispy_field}}
-            </div>
-            <div class="col-3">
-              {{ form.fax|as_crispy_field}}
-            </div>
-            <div class="col-3">
-              {{ form.industry|as_crispy_field}}
-            </div>
-            <div class="col-6">
-              {{ form.billing_address_line|as_crispy_field}}
-            </div>
-            <div class="col-6">
-              {{ form.billing_street|as_crispy_field}}
-            </div>
-            <div class="col-3">
-              {{ form.billing_city|as_crispy_field}}
-            </div>
-            <div class="col-3">
-              {{ form.billing_state|as_crispy_field}}
-            </div>
-            <div class="col-3">
-              {{ form.billing_postcode|as_crispy_field}}
-            </div>
-            <div class="col-3">
-              {{ form.billing_country|as_crispy_field}}
-            </div>
-            <div class="col-3">
-              {{ form.website|as_crispy_field}}
-            </div>
+    <div class="col-xl-4 col-md-6 col-sm-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <h4 class="card-title">اطلاعات ثبتی مشتری</h4>
+            <div>{{ form.national_id|as_crispy_field }}</div>
+            <div>{{ form.economic_id|as_crispy_field }}</div>
+            <div>{{ form.website|as_crispy_field }}</div>
+            <div>{{ form.industry|as_crispy_field }}</div>
+            <div>{{ form.fax|as_crispy_field }}</div>
+            <div>{{ form.tags|as_crispy_field }}</div>
 
-            <div class="col-3">
-              {{ form.tags|as_crispy_field}}
-            </div>
-            <div class="col-12">
-              {{ form.description|as_crispy_field }}
-            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-          <div class="col-12">
-            <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title mb-0 float-left">فایل‌های مرتبط با مشتری</h3>
-                 </div>
+    <div class="col-xl-4 col-md-6 col-sm-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <h4 class="card-title">اطلاعات پستی مشتری</h4>
+            <div>{{ form.billing_address_line|as_crispy_field }}</div>
+            <div>{{ form.billing_street|as_crispy_field }}</div>
+            <div>{{ form.billing_city|as_crispy_field }}</div>
+            <div>{{ form.billing_state|as_crispy_field }}</div>
+            <div>{{ form.billing_postcode|as_crispy_field }}</div>
+            <div>{{ form.billing_country|as_crispy_field }}</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="content-types">
+  <div class="row">
+    <div class="col-xl-4 col-md-6 col-sm-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <h4 class="card-title">اشخاص مرتبط با مشتری</h4>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover table-light">
                   <thead>
                     <tr>
-                      <th>عنوان</th>
-                      <th>توضیحات</th>
-                      <th>عملیات</th>
+                      <th>نام و نام خانوادگی</th>
+                      <th>سمت</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {% for doc in docs %}
+                    {% for contacts in contacts %}
                       <tr>
-                        <td><a href="{% url 'doc:doc-update' company.slug doc.pk %}">{{doc.title}}</a></td>
-                        <td>{{doc.description}}</td>
+                        <td><a href="{% url 'contatcs:contact-update' company.slug contacts.pk %}">{{contatcs.first_name}}{{contatcs.last_name}}</a></td>
                         <td>
-                            <a class="badge badge-info" href="{% url 'doc:doc-update' company.slug doc.pk %}">ویرایش</a>
-                            <a class="badge badge-danger" href="{% url 'doc:doc-delete' company.slug doc.pk %}">حذف</a>
+                            {{contatcs.position}}
                         </td>
                       </tr>
                     {% endfor %}
@@ -103,32 +92,67 @@
                 </table>
               </div>
               <!-- /.card-body -->
-            <!-- /.card -->
-          </div>
-          </div>
 
-          <div class="col-12">
-            <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title mb-0 float-left">فاکتورهای مرتبط با مشتری</h3>
-                 </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-md-6 col-sm-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <h4 class="card-title">معاملات مرتبط با مشتری</h4>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover table-light">
                   <thead>
                     <tr>
-                      <th>عنوان</th>
+                      <th>عنوان معامله</th>
+                      <th>مرحله فروش</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for deal in deals %}
+                      <tr>
+                        <td><a href="{% url 'deals:deal-update' company.slug deal.pk %}">{{deal.title}}</a></td>
+                        <td>
+                            {{deal.pipeline_status}}
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-4 col-md-6 col-sm-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <h4 class="card-title">فاکتور‌های مرتبط با مشتری</h4>
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover table-light">
+                  <thead>
+                    <tr>
                       <th>شماره فاکتور</th>
-                      <th>نوع فاکتور</th>
                       <th>عملیات</th>
                     </tr>
                   </thead>
                   <tbody>
                     {% for invoice in invoices %}
                       <tr>
-                        <td><a href="{% url 'invoice:invoice-detail' company.slug invoice.pk %}">{{invoice.title}}</a></td>
-                        <td>{{invoice.invoice_number}}</td>
-                        <td>{{invoice.status}}</td>
+                        <td><a href="{% url 'invoice:deal-update' company.slug invoice.pk %}">{{invoice.invoice_number}}</a></td>
                         <td>
                             <a class="badge badge-info" href="{% url 'invoice:invoice-update' company.slug invoice.pk %}">ویرایش</a>
                             <a class="badge badge-danger" href="{% url 'invoice:invoice-delete' company.slug invoice.pk %}">حذف</a>
@@ -139,10 +163,108 @@
                 </table>
               </div>
               <!-- /.card-body -->
-            <!-- /.card -->
           </div>
-          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<section id="content-types">
+  <div class="row">
+    <div class="col-xl-4 col-md-6 col-sm-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <h4 class="card-title">وظایف مرتبط با مشتری</h4>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover table-light">
+                  <thead>
+                    <tr>
+                      <th>عنوان وظیفه</th>
+                      <th>مرحله انجام</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for task in tasks %}
+                      <tr>
+                        <td><a href="{% url 'task:task-update' company.slug task.pk %}">{{task.title}}</a></td>
+                        <td>
+                            {{task.status}}
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-md-6 col-sm-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <h4 class="card-title">فایل‌های مرتبط با مشتری</h4>
+            <div class="card-body table-responsive p-0">
+              <table class="table table-hover table-light">
+                <thead>
+                  <tr>
+                    <th>عنوان</th>
+                    <th>عملیات</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for doc in docs %}
+                    <tr>
+                      <td><a href="{% url 'doc:doc-update' company.slug doc.pk %}">{{doc.title}}</a></td>
+                      <td>
+                          <a class="badge badge-info" href="{% url 'doc:doc-update' company.slug doc.pk %}">ویرایش</a>
+                          <a class="badge badge-danger" href="{% url 'doc:doc-delete' company.slug doc.pk %}">حذف</a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-4 col-md-6 col-sm-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <h4 class="card-title">نظرات مرتبط با مشتری</h4>
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="col-md-12">
+  <div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title mb-0 float-left">توضیحات</h3>
+    </div>
+      <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              {{ form.description|as_crispy_field }}
+            </div>
           <div class="col-12">
             {{ form.is_active|as_crispy_field}}
           </div>
@@ -151,7 +273,7 @@
             </div>
 
           </div>
-              <button class="btn btn-success">ذخیره</button>
+              <button class="btn btn-success">ذخیره تغییرات</button>
             </form>
       </div>
       
@@ -159,4 +281,6 @@
     </div>
   </div>
 </div>
+</form>
+
 {% endblock %}

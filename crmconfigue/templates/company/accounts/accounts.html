@@ -40,10 +40,8 @@
                         <td>{{accounts.email}}</td>
                         <td>{{accounts.industry}}</td>
                         <td>
-                            {% if user.is_superuser %}
-                            <a class="badge" href="{% url 'accounts:accounts-update' company.slug accounts.pk %}">ویرایش</a>
-                            <a class="badge" href="{% url 'accounts:accounts-delete' company.slug accounts.pk %}">حذف</a>
-                            {% endif %}
+                            <a class="badge badge-warning" href="{% url 'accounts:accounts-update' company.slug accounts.pk %}">ویرایش</a>
+                            <a class="badge badge-danger" href="{% url 'accounts:accounts-delete' company.slug accounts.pk %}">حذف</a>
                         </td>
                       </tr>
                     {% endfor %}
