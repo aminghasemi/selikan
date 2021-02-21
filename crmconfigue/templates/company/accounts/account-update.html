@@ -118,8 +118,13 @@
                       <tr>
                         <td><a href="{% url 'deals:deal-update' company.slug deal.pk %}">{{deal.title}}</a></td>
                         <td>
-                            {{deal.pipeline_status}}
-                        </td>
+                          {% if deal.pipeline_status.won %}
+                          <td><a class="badge badge-success" style="color:white">{{deal.pipeline_status}}</a></td>
+                          {% elif deal.pipeline_status.lost %}
+                          <td><a class="badge badge-danger" style="color:white">{{deal.pipeline_status}}</a></td>
+                          {% else %}
+                          <td><a class="badge badge-primary" style="color:white" >{{deal.pipeline_status}}</a></td>
+                          {% endif %}                        </td>
                       </tr>
                     {% endfor %}
                   </tbody>
