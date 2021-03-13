@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <title>نرم افزار مدیریت ارتباط با مشتریان سلیکان</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'frest/assets/images/ico/favicon.ico' %}">
+    <link rel="shortcut icon" type="image" href="{% static 'frest/assets/images/ico/favicon-50.png' %}">
 	<meta name="theme-color" content="#5A8DEE">
     
     <!-- BEGIN: Vendor CSS-->
@@ -60,10 +60,10 @@
                 <li class="nav-item mobile-menu d-xl-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ficon bx bx-menu"></i></a></li>
               </ul>
               <ul class="nav navbar-nav bookmark-icons">
-                <li><a class="btn btn-outline-primary mr-1" href="{% url 'common:home' %}">پنل مدیریت</a></li>
-                <li><a class="btn btn-outline-info mr-1" href="#">آموزش</a></li>
-                <li><a class="btn btn-outline-warning mr-1" href="#">پشتیبانی</a></li>
-                <li><a class="btn btn-outline-success mr-1" href="#">تماس با ما</a></li>
+                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="{% url 'common:home' %}" data-toggle="tooltip" data-placement="bottom" title="پنل مدیریت"><i class="ficon bx bx-collection"></i></a></li>
+                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="bottom" title="گفتگو"><i class="ficon bx bx-chat"></i></a></li>
+                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="bottom" title="وظایف"><i class="ficon bx bx-check-circle"></i></a></li>
+                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="bottom" title="تقویم"><i class="ficon bx bx-calendar-alt"></i></a></li>
               </ul>
             </div>
             <ul class="nav navbar-nav float-right">

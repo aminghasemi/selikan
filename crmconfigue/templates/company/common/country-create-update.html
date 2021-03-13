@@ -6,13 +6,19 @@
 
 
 {% block main %}
-      <form method="post" enctype="multipart/form-data"> {% csrf_token %}
-        <div class="row">
-          <div class="col-12">
-            {{form|crispy}}
-          </div>
+<form method="post" enctype="multipart/form-data"> {% csrf_token %}
+  <div class="row">
+    <div class="col-12">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title mb-0 float-left">افزودن و ویرایش کشور‌های مرتبط</h3>
         </div>
-
-            <button class="btn btn-success">ذخیره</button>
-          </form>
+          <div class="card-body">
+      {{form|crispy}}
+    </div>
+  </div>
+  </div>
+  </div>
+      <button class="btn btn-success">ذخیره</button>
+    </form>
 {% endblock %}

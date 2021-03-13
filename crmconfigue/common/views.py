@@ -250,7 +250,7 @@ class ProductsList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView)
 
 class ProductCreate(LoginRequiredMixin,SpecialCompanyMixin, CreateView):
     model=Product
-    fields=["name", "code", "unit", "price", "description"]
+    fields=["name", "code", "unit", "price","price_unit", "description"]
     template_name="company/common/product-create-update.html"
     def get_queryset(self):
         global company
@@ -275,7 +275,7 @@ class ProductCreate(LoginRequiredMixin,SpecialCompanyMixin, CreateView):
 
 class ProductUpdate(LoginRequiredMixin,SpecialCompanyMixin, UpdateView):
     model=Product
-    fields=["name", "code", "unit", "price", "description"]
+    fields=["name", "code", "unit", "price","price_unit", "description"]
     template_name = "company/common/product-create-update.html"
     def get_success_url(self):
         slug= self.kwargs.get('slug')

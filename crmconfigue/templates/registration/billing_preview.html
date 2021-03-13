@@ -40,7 +40,7 @@
                 <span>تمدید اعتبار حساب</span>
               </div>
               <div class="mt-1 mt-sm-0 col-sm-6 d-flex justify-content-end">
-                <img src="{% static 'frest/assets/images/logo/logo.jpg' %}" alt="logo" height="46" width="164">
+                <img src="{% static 'frest/assets/images/logo/png-150-selikan.png' %}" alt="logo" height="150" width="150">
               </div>
             </div>
             <hr>
@@ -151,12 +151,12 @@
           </div>
           <div class="invoice-action-btn">
             <button class="btn btn-light-primary btn-block invoice-print">
-              <span>چاپ</span>
+              <span>چاپ و ذخیره PDF</span>
             </button>
           </div>
           <div class="invoice-action-btn">
-            <a href="#" class="btn btn-light-primary btn-block">
-              <span>ویرایش صورتحساب</span>
+            <a href="{% url 'payment:billing-delete' company.slug object.pk %}" class="btn btn-light-danger btn-block">
+              <span>انصراف و حذف صورت‌حساب</span>
             </a>
           </div>
         </div>

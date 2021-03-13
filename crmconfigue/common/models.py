@@ -6,7 +6,7 @@ from django.urls import reverse
 from cuser.middleware import CuserMiddleware
 from .managers import  EnrolledManager
 from datetime import timedelta
-from common.utils import COUNTRIES, ROLES, INDCHOICES, PROVINCE
+from common.utils import COUNTRIES, ROLES, INDCHOICES, PROVINCE, UNITS, CURRENCY
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 
 def img_url(self, filename):
@@ -74,7 +74,7 @@ class Company(models.Model):
     slug=models.SlugField(max_length=100,unique=True, verbose_name ="<لینک شرکت>/selikan.ir")
 #    sub_domain = models.CharField(max_length=30,null=True, blank=True, verbose_name="آدرس زیر دامنه")
     user_limit = models.IntegerField(default=1,blank=True, null=True,verbose_name="محدودیت کاربر")
-    country = models.CharField(max_length=3, default="IR", choices=COUNTRIES, blank=True, null=True,verbose_name="کشور")
+    country = models.CharField(max_length=200, choices=COUNTRIES, blank=True, null=True,verbose_name="کشور")
     creator = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='crm_creator', verbose_name="ایجادکننده شرکت")
     created_time=models.DateTimeField(auto_now_add=True, verbose_name ="تاریخ ایجاد")
     staff=models.ManyToManyField(User, through='Enrolled',blank=True, related_name='companystaff')
@@ -124,7 +124,7 @@ class Address(models.Model):
     postcode = models.CharField(
          max_length=64, blank=True, null=True ,verbose_name="کدپستی"
     )
-    country = models.CharField(max_length=3, choices=COUNTRIES, blank=True, null=True ,verbose_name="کشور")
+    country = models.CharField(max_length=200, choices=COUNTRIES, blank=True, null=True ,verbose_name="کشور")
 
     class Meta:
         verbose_name = "آدرس"
@@ -206,8 +206,9 @@ class Enrolled(models.Model):
 class Product(models.Model):
     name=models.CharField( max_length=255, blank=True, null=True,verbose_name="نام محصول")
     code=models.CharField( max_length=255, blank=True, null=True,verbose_name="کد محصول")
-    unit=models.CharField( max_length=255, blank=True, null=True,verbose_name="واحد اندازه‌گیری")
+    unit=models.CharField( max_length=255, blank=True, choices=UNITS, null=True,verbose_name="واحد اندازه‌گیری")
     price=models.DecimalField(max_digits=20, decimal_places=0,blank=True, null=True, verbose_name="قیمت واحد محصول")
+    price_unit=models.CharField( max_length=255, blank=True, choices=CURRENCY, null=True,verbose_name="واحد پولی")
     description=models.TextField(blank=True, null=True,verbose_name="توضیحات")
     created_by=models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='product_creator', verbose_name="ایجادکننده محصول")
     created_on=models.DateTimeField(auto_now_add=True, verbose_name ="تاریخ ایجاد")
@@ -225,7 +226,7 @@ class Product(models.Model):
 
 class Country(models.Model):
     name=models.CharField( max_length=255, blank=True, null=True,verbose_name="نام کشور")
-    short_name=models.CharField(max_length=3, choices=COUNTRIES, blank=True, null=True,verbose_name="نام کوتاه کشور")
+    short_name=models.CharField(max_length=200, choices=COUNTRIES, blank=True, null=True,verbose_name="نام کوتاه کشور")
     created_by=models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='country_creator', verbose_name="ایجادکننده کشور")
     created_on=models.DateTimeField(auto_now_add=True, verbose_name ="تاریخ ایجاد")
     company=models.ForeignKey(Company, on_delete=models.SET_NULL, related_name="companycountries", null=True, blank=True, verbose_name="کشورهای مرتبط شرکت")
@@ -241,7 +242,7 @@ class Country(models.Model):
 
 class Province(models.Model):
     name=models.CharField( max_length=255, blank=True, null=True,verbose_name="نام استان")
-    short_name=models.CharField(max_length=3, choices=COUNTRIES, blank=True, null=True,verbose_name="نام کوتاه استان")
+    short_name=models.CharField(max_length=200, choices=COUNTRIES, blank=True, null=True,verbose_name="نام کوتاه استان")
 
     class Meta:
         verbose_name = "استان"

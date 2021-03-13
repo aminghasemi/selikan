@@ -2,6 +2,7 @@
 import arrow
 from django.db import models
 from extensions.utils import jalali_converter
+from common.utils import COUNTRIES, ROLES, INDCHOICES, PROVINCE, UNITS, CURRENCY
 
 from common.models import Address, User, Company, Country, Province
 from phonenumber_field.modelfields import PhoneNumberField
@@ -25,9 +26,9 @@ class Contact(models.Model):
     billing_address_line = models.CharField(max_length=255, blank=True,null=True, verbose_name="آدرس")
     billing_street = models.CharField(max_length=55, blank=True,null=True, verbose_name="خیابان")
     billing_city = models.CharField( max_length=255, blank=True,null=True, verbose_name="شهر")
-    billing_state = models.ForeignKey(Province,  on_delete=models.SET_NULL,null=True, max_length=255, blank=True, verbose_name="استان")
+    billing_state = models.CharField(max_length=200, choices=PROVINCE, blank=True, null=True,verbose_name="استان")
     billing_postcode = models.CharField(max_length=10, blank=True,null=True, verbose_name="کد پستی")
-    billing_country = models.ForeignKey(Country,  on_delete=models.SET_NULL,null=True, blank=True, verbose_name="کشور")
+    billing_country = models.CharField(max_length=200, choices=COUNTRIES, blank=True, null=True,verbose_name="کشور")
     company = models.ForeignKey(Company, related_name="companycontacts",  on_delete=models.SET_NULL,null=True, blank=True, verbose_name="شرکت")
     birthday=models.DateField(null=True, blank=True, verbose_name="تاریخ تولد")
     archive = models.BooleanField(default=False, verbose_name="بایگانی شود؟")

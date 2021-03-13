@@ -42,8 +42,13 @@
           <div class="card-body">
             <p>در حال حاضر هزینه تمدید اشتراک به ازای هر کاربر مبلغ ۱۰۰ هزار تومان در ماه می‌باشد.</p>
           </div>
-        </div>
-      </div>
+
+            <div class="col-12 d-flex justify-content-end">
+
+            <a class="btn btn-info mr-1 mb-1" href="{% url 'payment:billing-list' company.slug %}">سوابق پرداخت</a>
+          </div>
+
+          </div>
     </div>
   </div>
 </section>

@@ -34,36 +34,36 @@ def jwt_payload_handler(user):
 
 
 INDCHOICES = (
-    ("تبلیغات", "ADVERTISING"),
-    ("AGRICULTURE", "AGRICULTURE"),
-    ("APPAREL & ACCESSORIES", "APPAREL & ACCESSORIES"),
-    ("AUTOMOTIVE", "AUTOMOTIVE"),
-    ("BANKING", "BANKING"),
-    ("BIOTECHNOLOGY", "BIOTECHNOLOGY"),
-    ("BUILDING MATERIALS & EQUIPMENT", "BUILDING MATERIALS & EQUIPMENT"),
-    ("CHEMICAL", "CHEMICAL"),
-    ("COMPUTER", "COMPUTER"),
-    ("EDUCATION", "EDUCATION"),
-    ("ELECTRONICS", "ELECTRONICS"),
-    ("ENERGY", "ENERGY"),
-    ("ENTERTAINMENT & LEISURE", "ENTERTAINMENT & LEISURE"),
-    ("FINANCE", "FINANCE"),
-    ("FOOD & BEVERAGE", "FOOD & BEVERAGE"),
-    ("GROCERY", "GROCERY"),
-    ("HEALTHCARE", "HEALTHCARE"),
-    ("INSURANCE", "INSURANCE"),
-    ("LEGAL", "LEGAL"),
-    ("MANUFACTURING", "MANUFACTURING"),
-    ("PUBLISHING", "PUBLISHING"),
-    ("REAL ESTATE", "REAL ESTATE"),
-    ("SERVICE", "SERVICE"),
-    ("SOFTWARE", "SOFTWARE"),
-    ("SPORTS", "SPORTS"),
-    ("TECHNOLOGY", "TECHNOLOGY"),
-    ("TELECOMMUNICATIONS", "TELECOMMUNICATIONS"),
-    ("TELEVISION", "TELEVISION"),
-    ("TRANSPORTATION", "TRANSPORTATION"),
-    ("VENTURE CAPITAL", "VENTURE CAPITAL"),
+    ("تبلیغات", "تبلیغات"),
+    ("کشاورزی", "کشاورزی"),
+    ("پوشاک و تجهیزات جانبی", "پوشاک و تجهیزات جانبی"),
+    ("خودرویی", "خودرویی"),
+    ("بانکی", "بانکی"),
+    ("بیوتکنولوژی", "بیوتکنولوژی"),
+    ("مصالح و ابزار ساختمانی", "مصالح و ابزار ساختمانی"),
+    ("شیمیایی", "شیمیایی"),
+    ("کامپیوتر", "کامپیوتر"),
+    ("آموزش", "آموزش"),
+    ("الکترونیک", "الکترونیک"),
+    ("انرژی", "انرژی"),
+    ("سرگرمی", "سرگرمی"),
+    ("مالی", "مالی"),
+    ("صنایع غذایی", "صنایع غذایی"),
+    ("خواربار", "خواربار"),
+    ("سلامت", "سلامت"),
+    ("بیمه", "بیمه"),
+    ("حقوقی", "حقوقی"),
+    ("مونتاژ و تولیدی", "مونتاژ و تولیدی"),
+    ("نشر و چاپ", "نشر و چاپ"),
+    ("املاک", "املاک"),
+    ("خدمات", "خدمات"),
+    ("نرم‌افزار", "نرم‌افزار"),
+    ("ورزش", "ورزش"),
+    ("تکنولوژی", "تکنولوژی"),
+    ("ارتباطات", "ارتباطات"),
+    ("تلوزیون", "تلوزیون"),
+    ("حمل و نقل", "حمل و نقل"),
+    ("سرمایه‌گذاری", "سرمایه‌گذاری"),
 )
 
 TYPECHOICES = (
@@ -138,6 +138,33 @@ SOURCES = (
     ("WEBSITE", "WEBSITE"),
     ("OTHER", "OTHER"),
 )
+CURRENCY = (
+    ("تومان", "تومان"),
+    ("ریال", "ریال"),
+    ("دلار", " دلار"),
+    ("یورو", "یورو"),
+    ("پوند", "پوند"),
+    ("دینار", "دینار"),
+    ("درهم", "درهم"),
+    ("افغانی", "افغانی"),
+    ("لیر", "لیر"),
+    ("مانات", "مانات"),
+
+)
+UNITS = (
+    ("عدد", "عدد"),
+    ("کیلوگرم", "کیلوگرم"),
+    ("گرم", " گرم"),
+    ("تن", "تن"),
+    ("بسته", "بسته"),
+    ("جعبه", "جعبه"),
+    ("کارتن", "کارتن"),
+    ("متر", "متر"),
+    ("لیتر", "لیتر"),
+    ("مترمکعب", "مترکعب"),
+    ("سی‌سی", "سی‌سی"),
+    ("مثقال", "مثقال"),
+)
 
 EVENT_PARENT_TYPE = ((10, "Account"), (13, "Lead"), (14, "Opportunity"), (11, "Case"))
 
@@ -184,7 +211,26 @@ PROVINCE= (
 ('همدان', 'همدان'),
 ('یزد', 'یزد'),
 )
+
 COUNTRIES = (
+    ("ایران", "ایران"),
+    ("ترکیه", "ترکیه"),
+    ("چین", "چین"),
+    ("افغانستان", "افغانستان"),
+    ("عراق", "عراق"),
+    ("پاکستان", "پاکستان"),
+    ("آذربایجان", "آذربایجان"),
+    ("امارات", "امارات"),
+    ("سوریه", "سوریه"),
+    ("روسیه", "روسیه"),
+    ("قطر", "قطر"),
+    ("کویت", "کویت"),
+    ("ترکمنستان", "ترکمنستان"),
+    ("هندوستان", "هندوستان"),
+
+
+)
+COUNTRIES_ALL = (
     ("GB", _("United Kingdom")),
     ("AF", _("Afghanistan")),
     ("AX", _("Aland Islands")),

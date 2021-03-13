@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView
 from django.urls import reverse_lazy, reverse
 from common.models import Company
 from common.mixins import EnrollMixin, SuperUserAccessMixin, CreatorAccessMixin, SpecialCompanyMixin
@@ -78,6 +78,26 @@ class BillingDetail(EnrollMixin,LoginRequiredMixin,DetailView):
     def get_success_url(self):
         slug= self.kwargs.get('slug')
         return reverse_lazy('request', kwargs={'slug': slug, 'pk': self.object.pk}, current_app='payment')
+
+class BillingDelete(EnrollMixin, LoginRequiredMixin, DeleteView):
+    model=Billing
+    template_name = "registration/billing_confirm_delete.html"
+    success_url= reverse_lazy('common:home')
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companybilling.all()
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['company'] = company
+        return context
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        return reverse_lazy('common:home', current_app='payment')
+
+
+
 
 # -*- coding: utf-8 -*-
 # Github.com/Rasooll

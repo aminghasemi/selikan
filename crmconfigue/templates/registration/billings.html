@@ -1,4 +1,6 @@
 {% extends 'registration/base.html' %}
+{% load jalali_tags %}
+{% load humanize %}
 
 {% block main %}
         <div class="row">
@@ -13,7 +15,7 @@
                       <th>شماره فاکتور</th>
                       <th>تاریخ فاکتور</th>
                       <th>وضعیت</th>
-                      <th>مبلغ</th>
+                      <th>مبلغ (تومان)</th>
                       <th>عملیات</th>
                     </tr>
                   </thead>
@@ -21,7 +23,7 @@
                     {% for billings in object_list %}
                       <tr>
                         <td>{{billings.invoice_number}}</td>
-                        <td>{{billings.staff.jinvoice_date}}</td>
+                        <td>{{billings.staff.invoice_date|to_jalali}}</td>
                         <td>{% if billings.status == 'PAID'%}
                           <span class="badge badge-success">پرداخت شده</span>
                         {% elif billings.status == 'NOT_PAID' %}
@@ -29,7 +31,7 @@
                         {% else %}
                           <span class="badge badge-warning">در حال پرداخت</span>
                         {% endif %} </td>
-                        <td>{{billings.amount}}</td>
+                        <td>{{billings.amount|intcomma:False}}</td>
                         <td>
                             <a class="badge" href="{% url 'payment:billing-detail' company.slug billings.pk %}">مشاهده</a>
 

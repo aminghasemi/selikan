@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from extensions.utils import jalali_converter
 
 from common.models import User, Company, Country, Province
-from common.utils import INDCHOICES, COUNTRIES
+from common.utils import COUNTRIES, ROLES, INDCHOICES, PROVINCE, UNITS, CURRENCY
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.text import slugify
 from teams.models import Teams
@@ -37,9 +37,9 @@ class Account(models.Model):
     billing_address_line = models.CharField(max_length=255, blank=True,null=True, verbose_name="آدرس")
     billing_street = models.CharField(max_length=55, blank=True,null=True, verbose_name="خیابان")
     billing_city = models.CharField( max_length=255, blank=True,null=True, verbose_name="شهر")
-    billing_state = models.ForeignKey(Province,  on_delete=models.SET_NULL,null=True, max_length=255, blank=True, verbose_name="استان")
+    billing_state = models.CharField(max_length=200, choices=PROVINCE, blank=True, null=True,verbose_name="استان")
     billing_postcode = models.CharField(max_length=10, blank=True,null=True, verbose_name="کد پستی")
-    billing_country = models.ForeignKey(Country, on_delete=models.SET_NULL,null=True, blank=True, verbose_name="کشور")
+    billing_country = models.CharField(max_length=200, choices=COUNTRIES, blank=True, null=True,verbose_name="کشور")
     website = models.CharField(blank=True,null=True, verbose_name="وب‌سایت", max_length=200)
     description = models.TextField(blank=True,null=True, verbose_name="توضیحات")
     created_by = models.ForeignKey(User, related_name="account_created_by", on_delete=models.SET_NULL,null=True, verbose_name="ایجاد شده توسط")
