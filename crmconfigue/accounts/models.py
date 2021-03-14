@@ -48,6 +48,30 @@ class Account(models.Model):
     tags = models.ForeignKey(Tags, blank=True, on_delete=models.SET_NULL,null=True, verbose_name="تگ‌ها")
     company = models.ForeignKey(Company, related_name= "companyaccounts",  on_delete=models.SET_NULL,null=True,  blank=True, verbose_name="کاربر سایت")
     archive = models.BooleanField(default=False, verbose_name="بایگانی شود؟")
+######PERSONA-FIELDS######
+    success_measure=models.CharField(max_length=255,null=True, blank=True, verbose_name="مشتری موفقیت خود را بر چه اساسی تعیین می‌کند؟")
+    main_challenges=models.TextField(blank=True,null=True, verbose_name="مهمترین چالش‌های مشتری چه چیز‌هایی هستند؟")
+    yearly_goal=models.TextField(blank=True,null=True, verbose_name="اهداف سالیانه مشتری چیست؟")
+    longterm_goal=models.TextField(blank=True,null=True, verbose_name="اهداف طولانی مدت مشتری چیست؟")
+    solution_expectation=models.TextField(blank=True,null=True, verbose_name="مشتری انتظار چه نوع راه‌حلی از شما دارد؟")
+    employee_count=models.CharField(max_length=255,null=True, blank=True, verbose_name="تعداد کارمندان مشتری")
+    yearly_revenue=models.CharField(max_length=255,null=True, blank=True, verbose_name="درآمد سالیانه مشتری در چه حدودی است؟")
+    customer_base=models.CharField(max_length=255,null=True, blank=True, verbose_name="مهمترین بخش‌بندی مشتریان شرکت چه کسانی هستند؟")
+    want_purchase=models.CharField(max_length=255,null=True, blank=True, verbose_name="چه دلیلی باعث خرید مشتری می‌شود؟")
+    solution_catalyst=models.TextField(blank=True,null=True, verbose_name="چه چیزی باعث ترغیب مشتری برای خرید چدید شده است؟")
+    competing_products=models.TextField(blank=True,null=True, verbose_name="مشتری چه محصولات دیگری را بررسی کرده است؟")
+    feature_convince=models.TextField(blank=True,null=True, verbose_name="کدام ویژگی محصول شما باعث ترغیب مشتری می‌شود؟")
+    competitors_feature=models.TextField(blank=True,null=True, verbose_name="کدام ویژگی رقبا باعث تاثیر‌گذاری بر روی مشتری می‌شود؟")
+    product_offer=models.TextField(blank=True,null=True, verbose_name="چه محصول اختصاصی مناسب مشتری است؟")
+    best_solution=models.TextField(blank=True,null=True, verbose_name="بهترین راه‌حل پیش‌روی مشتری کدام است؟")
+    business_help=models.TextField(blank=True,null=True, verbose_name="شرکت شما دقیقا چه کمکی می‌تواند به مشتری بکند؟")
+    active_socialnetworks=models.TextField(blank=True,null=True, verbose_name="مشتری در کدام شبکه‌های اجتماعی فعال است؟")
+    active_groups=models.TextField(blank=True,null=True, verbose_name="مشتری در کدام گروه‌های کاری فعال است؟")
+    information_source=models.TextField(blank=True,null=True, verbose_name="مشتری اطلاعات کاری خود را از چه طریقی تامین می‌کند؟")
+    count_decisionmakers=models.CharField(max_length=255,null=True, blank=True, verbose_name="چه تعداد تصمیم‌گیرنده برای مشتری وجود دارد؟")
+    influential_descisionmakers=models.TextField(blank=True,null=True, verbose_name="مهمترین تصمیم‌گیرنده مشتری چه کسی است؟")
+    stakeholders=models.TextField(blank=True,null=True, verbose_name="آیا ذینفعان دیگری برای مشتری وجود دارد؟")
+    influence_decisionmakers=models.TextField(blank=True,null=True, verbose_name="مهمترین فرد تاثیرگذار بر روی تصمیم‌گیرندگان چه کسی است؟")
 
     def __str__(self):
         return self.name
@@ -136,3 +160,4 @@ class EmailLog(models.Model):
     class Meta:
         verbose_name= "لاگ ایمیل"
         verbose_name_plural="لاگ‌های ایمیل‌ها"
+

@@ -9,77 +9,237 @@
 
 
 {% block main %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'common:home' %}"><i class="bx bx-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="{% url 'common:dashboard' company.slug %}">{{company.name}}</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'accounts:accounts' company.slug %}">مشتریان</a></li>
+    <li class="breadcrumb-item active" aria-current="page">ایجاد مشتری جدید</li>
+  </ol>
+</nav>
 <div class="col-md-12">
-  <div class="card card-primary">
-    <div class="card-header">
-      <h3 class="card-title mb-0 float-left">افزودن و ویرایش مشتریان</h3>
-    </div>
-      <div class="card-body">
-        <form method="post" enctype="multipart/form-data"> {% csrf_token %}
-          <div class="row">
-            <div class="col-3">
-              {{ form.name|as_crispy_field }}
-            </div>
-            <div class="col-3">
-              {{ form.national_id|as_crispy_field }}
-            </div>
-            <div class="col-3">
-              {{ form.economic_id|as_crispy_field }}
-            </div>
-            <div class="col-3">
-               {{form.email|as_crispy_field}}
-            </div>
-            <div class="col-3">
-              {{ form.phone|as_crispy_field }}
-            </div>
-            <div class="col-3">
-              {{ form.whatsapp_phone|as_crispy_field }}
-            </div>
-            <div class="col-3">
-              {{ form.office_phone|as_crispy_field}}
-            </div>
-            <div class="col-3">
-              {{ form.fax|as_crispy_field}}
-            </div>
-            <div class="col-3">
-              {{ form.industry|as_crispy_field}}
-            </div>
-            <div class="col-6">
-              {{ form.billing_address_line|as_crispy_field}}
-            </div>
-            <div class="col-6">
-              {{ form.billing_street|as_crispy_field}}
-            </div>
-            <div class="col-3">
-              {{ form.billing_city|as_crispy_field}}
-            </div>
-            <div class="col-3">
-              {{ form.billing_state|as_crispy_field}}
-            </div>
-            <div class="col-3">
-              {{ form.billing_postcode|as_crispy_field}}
-            </div>
-            <div class="col-3">
-              {{ form.billing_country|as_crispy_field}}
-            </div>
-            <div class="col-3">
-              {{ form.website|as_crispy_field}}
-            </div>
-            <div class="col-3">
-              {{ form.is_active|as_crispy_field}}
-            </div>
-            <div class="col-3">
-              {{ form.tags|as_crispy_field}}
-            </div>
-
-            <div class="col-12">
-              {{ form.description|as_crispy_field }}
+  <form method="post" enctype="multipart/form-data"> {% csrf_token %}
+    <div class="card">
+      <div class="card-content">
+        <div class="card-body">
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link active" id="base-tab" data-toggle="pill" href="#base" aria-expanded="true">اطلاعات پایه</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="address-tab" data-toggle="pill" href="#address" aria-expanded="false">اطلاعات پستی
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="persona-tab" data-toggle="pill" href="#persona" aria-expanded="false">پرسونا</a>
+    </li>
+  </ul>
+</div>
+</div>
+</div>
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="base" aria-labelledby="base-tab" aria-expanded="true">
+      <section id="content-types">
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <div class="card">
+            <div class="card-content">
+              <div class="card-body">
+                <h4 class="card-title">اطلاعات پایه مشتری</h4>
+                <div>{{ form.name|as_crispy_field }}</div>
+                <div>{{ form.phone|as_crispy_field }}</div>
+                <div>{{ form.whatsapp_phone|as_crispy_field }}</div>
+                <div>{{ form.email|as_crispy_field }}</div>
+                <div>{{ form.office_phone|as_crispy_field }}</div>
+              </div>
             </div>
           </div>
-              <button class="btn btn-success">ذخیره</button>
-            </form>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <div class="card">
+            <div class="card-content">
+              <div class="card-body">
+                <h4 class="card-title">اطلاعات ثبتی مشتری</h4>
+                <div>{{ form.national_id|as_crispy_field }}</div>
+                <div>{{ form.economic_id|as_crispy_field }}</div>
+                <div>{{ form.website|as_crispy_field }}</div>
+                <div>{{ form.industry|as_crispy_field }}</div>
+                <div>{{ form.fax|as_crispy_field }}</div>
+    
+              </div>
+            </div>
+          </div>
+
+      </div>
+      </div>
+      </section>
+    </div>
+    <div class="tab-pane" id="address" role="tabpanel" aria-labelledby="address-tab" aria-expanded="false">
+      <section id="content-types">
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <h4 class="card-title">اطلاعات پستی مشتری</h4>
+                  <div>{{ form.billing_address_line|as_crispy_field }}</div>
+                  <div>{{ form.billing_street|as_crispy_field }}</div>
+                  <div>{{ form.billing_city|as_crispy_field }}</div>
+                  <div>{{ form.billing_state|as_crispy_field }}</div>
+                  <div>{{ form.billing_postcode|as_crispy_field }}</div>
+                  <div>{{ form.billing_country|as_crispy_field }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <h4 class="card-title">اطلاعات توضیحی مشتری</h4>
+                  <div>{{ form.description|as_crispy_field }}</div>
+                  <div>{{ form.is_active|as_crispy_field }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </section>
+    </div>
+    <div class="tab-pane" id="persona" role="tabpanel" aria-labelledby="persona-tab" aria-expanded="false">
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link active" id="goals-tab" data-toggle="pill" href="#goals" aria-expanded="true">اهداف و چالش‌ها</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="company-tab" data-toggle="pill" href="#company" aria-expanded="false">اطلاعات شرکتی
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="decision-tab" data-toggle="pill" href="#decision" aria-expanded="false">فرایند تصمیم‌گیری</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="competitors-tab" data-toggle="pill" href="#competitors" aria-expanded="false">رقبا و تاثیر بر روی مشتری</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+      <div class="tab-pane active" id="goals" role="tabpanel" aria-labelledby="goals-tab" aria-expanded="true">
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <h4 class="card-title">اهداف و چالش‌ها</h4>
+                  <div>{{ form.success_measure|as_crispy_field }}</div>
+                  <div>{{ form.yearly_goal|as_crispy_field }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <div>{{ form.longterm_goal|as_crispy_field }}</div>
+                  <div>{{ form.main_challenges|as_crispy_field }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="company" role="tabpanel" aria-labelledby="company-tab" aria-expanded="false">
+            <div class="row">
+            <div class="col-md-6 col-sm-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <h4 class="card-title">اطلاعات شرکتی مشتری</h4>
+                  <div>{{ form.employee_count|as_crispy_field }}</div>
+                  <div>{{ form.yearly_revenue|as_crispy_field }}</div>
+                  <div>{{ form.customer_base|as_crispy_field }}</div>
+                  <div>{{ form.active_socialnetworks|as_crispy_field }}</div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <div>{{ form.solution_catalyst|as_crispy_field }}</div>
+                  <div>{{ form.active_groups|as_crispy_field }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="decision" role="tabpanel" aria-labelledby="decision-tab" aria-expanded="false">
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="card">
+                <div class="card-content">
+                  <div class="card-body">
+                    <h4 class="card-title">فرایند تصمیم‌گیری</h4>
+                    <div>{{ form.information_source|as_crispy_field }}</div>
+                    <div>{{ form.count_decisionmakers|as_crispy_field }}</div>
+                    <div>{{ form.influence_decisionmakers|as_crispy_field }}</div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="card">
+                <div class="card-content">
+                  <div class="card-body">
+                    <div>{{ form.influential_descisionmakers|as_crispy_field }}</div>
+                    <div>{{ form.stakeholders|as_crispy_field }}</div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="tab-pane" id="competitors" role="tabpanel" aria-labelledby="competitors-tab" aria-expanded="false">
+            <div class="row">
+              <div class="col-md-6 col-sm-12">
+              <div class="card">
+                <div class="card-content">
+                  <div class="card-body">
+                    <h4 class="card-title">رقبا و تاثیر بر روی مشتری</h4>
+                    <div>{{ form.competing_products|as_crispy_field }}</div>
+                    <div>{{ form.feature_convince|as_crispy_field }}</div>
+                    <div>{{ form.competitors_feature|as_crispy_field }}</div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="card">
+                <div class="card-content">
+                  <div class="card-body">
+                    <div>{{ form.product_offer|as_crispy_field }}</div>
+                    <div>{{ form.best_solution|as_crispy_field }}</div>
+                    <div>{{ form.business_help|as_crispy_field }}</div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
       </div>
     </div>
   </div>
+  <br>
+  <button class="btn btn-success">ذخیره</button>
+
+</form>
 </div>
 {% endblock %}
