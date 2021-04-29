@@ -12,7 +12,7 @@ from jalali_date.widgets import AdminJalaliDateWidget, AdminSplitJalaliDateTime
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task    
-        fields=("title", "status", "priority","due_date", "account", "description","tags", "assigned_to","done_on", "done_by", "archive")
+        fields=("title", "status", "priority","subject","due_date", "account", "description","tags", "assigned_to","done_on", "done_by", "archive")
         account = forms.CharField(widget=forms.TextInput(attrs={'id': 'select2'} ))  
 #    due_date=forms.DateField(label="مهلت انجام",input_formats=MY_DATE_FORMATS,widget=forms.TextInput(attrs={'class': 'shamsi-datepicker'} ))  
   #  done_on=forms.DateField(label="تاریخ تکمیل",input_formats=MY_DATE_FORMATS,widget=AdminJalaliDateWidget )  

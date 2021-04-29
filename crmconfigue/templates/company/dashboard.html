@@ -8,429 +8,100 @@
     <!-- BEGIN: Content-->
 <section id="dashboard-ecommerce">
   <div class="row">
-    <!-- Greetings Content Starts -->
-    <div class="col-xl-4 col-md-6 col-12 dashboard-greetings">
-      <div class="card">
-        {% if total %}
-        <div class="card-header">
-          <h3 class="greeting-text mt-n25">تبریک می‌گوییم!</h3>
-          <p class="mb-0">شما در این ماه</p>
+<!-- Widgets Advance start -->
+    <!-- Notification Widget Starts -->
+    <div class="col-lg-4">
+      <div class="card widget-notification">
+        <div class="card-header border-bottom">
+          <h4 class="card-title d-flex align-items-center">
+            <i class="bx bx-bell font-medium-4 mr-1"></i>جلسات و تماس‌های امروز</h4>
+          <div class="heading-elements">
+            </div>
         </div>
         <div class="card-content">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-end">
-              <div class="dashboard-content-left">
-                <h1 class="text-primary font-large-2 text-bold-500 line-height-1 mb-2 primary-font">{{ total|intcomma:False }} <small>تومان</small></h1>
-                <p>فروخته‌اید</p>
-                <a type="button" href="{% url 'deals:deals' company.slug %}" class="btn btn-primary glow" style=color:white>مشاهده معاملات</a>
-              </div>
-              <div class="dashboard-content-right">
-                <img src="{% static 'frest/assets/images/icon/cup.png' %}" height="220" width="220" class="img-fluid" alt="Dashboard Ecommerce">
-              </div>
-            </div>
-          </div>
-        </div>
-        {% else %}
-        <div class="card-header">
-          <p class="mb-0">شما در این ماه</p>
-        </div>
-        <div class="card-content">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-end">
-              <div class="dashboard-content-left">
-                <br>
-                <br>
-                <br>
-                <h3 class="text-danger  text-bold-500 line-height-1 mb-2 primary-font">تاکنون فروشی نداشته‌اید!</h3>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <a type="button" href="{% url 'deals:deals' company.slug %}" class="btn btn-primary glow" style=color:white>مشاهده معاملات</a>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      {% endif %}
-      </div>
-    </div>
-    <!-- Multi Radial Chart Starts -->
-    <div class="col-xl-4 col-md-6 col-12 dashboard-visit">
-      <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-          <h4 class="card-title">نرخ‌های تبدیل</h4>
-        </div>
-        <div class="card-content">
-          <div class="card-body">
-            <div id="multi-radial-chart" class="mt-2 mb-1"></div>
-            <ul class="list-inline d-flex justify-content-around mb-0">
-              <li> <span class="bullet bullet-xs bullet-primary mr-50"></span>معاملات</li>
-              <li> <span class="bullet bullet-xs bullet-danger mr-50"></span>سرنخ‌ها</li>
-              <li> <span class="bullet bullet-xs bullet-warning mr-50"></span>فرصت‌‌ها</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-xl-4 col-12 dashboard-users">
-      <div class="row  ">
-        <!-- Statistics Cards Starts -->
-        <div class="col-12">
-          <div class="row">
-            <div class="col-sm-6 col-12 dashboard-users-success">
-              <div class="card text-center">
-                <div class="card-content">
-                  <div class="card-body py-1">
-                    <div class="badge-circle badge-circle-lg badge-circle-light-success mx-auto my-75">
-                      <i class="bx bx-briefcase-alt font-medium-5"></i>
-                    </div>
-                    <div class="text line-height-2 mb-50">معاملات جدید ماه</div>
-                    <h3 class="line-height-1 mb-50 primary-font">{{totaldeals}}</h3>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-12 dashboard-users-danger">
-              <div class="card text-center">
-                <div class="card-content">
-                  <div class="card-body py-1">
-                    <div class="badge-circle badge-circle-lg badge-circle-light-danger mx-auto my-75">
-                      <i class="bx bx-user font-medium-5"></i>
-                    </div>
-                    <div class="text-muted line-ellipsis line-height-2 mb-50">مشتریان جدید ماه</div>
-                    <h3 class="line-height-1 mb-50 primary-font">{{newaccounts}}</h3>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-12 col-lg-6 col-12 dashboard-revenue-growth">
-              <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center pb-0">
-                  <h4 class="card-title">رشد درآمد</h4>
-                  <div class="d-flex align-items-end justify-content-end">
-                    <span class="mr-25">25,980 تومان</span>
-                  </div>
-                </div>
-                <div class="card-content">
-                  <div class="card-body pb-0">
-                    <div id="revenue-growth-chart" class="mt-25"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Revenue Growth Chart Starts -->
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xl-8 col-12 dashboard-order-summary">
-      <div class="card">
-        <div class="row">
-          <!-- Order Summary Starts -->
-          <div class="col-md-8 col-12 order-summary border-right pr-md-0">
-            <div class="card mb-0">
-              <div class="card-header d-flex justify-content-between align-items-center">
-                <h4 class="card-title">خلاصه سفارش</h4>
-                <div class="d-flex">
-                  <button type="button" class="btn btn-sm btn-light-primary mr-1">ماه</button>
-                  <button type="button" class="btn btn-sm btn-primary glow">هفته</button>
-                </div>
-              </div>
-              <div class="card-content">
-                <div class="card-body p-0">
-                  <div id="order-summary-chart"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Sales History Starts -->
-          <div class="col-md-4 col-12 pl-md-0">
-            <div class="card mb-0">
-              <div class="card-header pb-50">
-                <h4 class="card-title">سابقه فروش</h4>
-              </div>
-              <div class="card-content">
-                <div class="card-body py-1">
-                  <div class="d-flex justify-content-between align-items-center mb-2">
-                    <div class="sales-item-name">
-                      <p class="mb-0">ایرپاد ها</p>
-                      <small class="text-muted">30 دقیقه پیش</small>
-                    </div>
-                    <div class="sales-item-amount">
-                      <h6 class="mb-0 primary-font"><span class="text-success">+</span> 50,000 تومان</h6>
-                    </div>
-                  </div>
-                  <div class="d-flex justify-content-between align-items-center mb-2">
-                    <div class="sales-item-name">
-                      <p class="mb-0">آیفون</p>
-                      <small class="text-muted">2 ساعت پیش</small>
-                    </div>
-                    <div class="sales-item-amount">
-                      <h6 class="mb-0 primary-font"><span class="text-danger">-</span> 59,000 تومان</h6>
-                    </div>
-                  </div>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="sales-item-name">
-                      <p class="mb-0">مک بوک</p>
-                      <small class="text-muted">1 روز پیش</small>
-                    </div>
-                    <div class="sales-item-amount">
-                      <h6 class="mb-0 primary-font"><span class="text-success">+</span> 12,000 تومان</h6>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-footer border-top pb-75">
-                  <h5 class="mt-n25 mb-50 font-medium-2">مجموع فروش</h5>
-                  <span class="text-primary text-bold-500 font-medium-1">82,950,000 تومان</span>
-                  <div class="progress progress-bar-primary progress-sm my-50">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="78" style="width:78%"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Latest Update Starts -->
-    <div class="col-xl-4 col-md-6 col-12 dashboard-latest-update">
-      <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center pb-50">
-          <h4 class="card-title">خلاصه آمار این ماه</h4>
-        </div>
-        <div class="card-content">
-          <div class="card-body p-0 pb-1">
+          <div class="card-body p-0">
             <ul class="list-group list-group-flush">
+              {% for meeting in meeting %}
               <li class="list-group-item list-group-item-action border-0 d-flex align-items-center justify-content-between">
                 <div class="list-left d-flex align-items-center">
                   <div class="list-icon mr-1">
-                    <div class="avatar bg-rgba-primary m-0">
+                    <div class="avatar bg-rgba-primary m-0 p-25">
                       <div class="avatar-content">
-                        <i class="bx bxs-zap text-primary font-size-base"></i>
+                        {% if meeting.subject == "تماس" %}
+                        <i class="bx bx-phone-call text-primary font-medium-5"></i>
+                        {% else %}
+                        <i class="bx bxs-group text-info font-medium-5"></i>
+                        {% endif %}
                       </div>
                     </div>
                   </div>
                   <div class="list-content mt-n25">
-                    <span class="list-title">مجموع فروش </span>
-                    <small class="text-muted d-block">تعداد فروش: {{totaldeals|intcomma:False}} </small>
+                    <span class="list-title"><a href="{% url 'task:task-update' company.slug meeting.pk %}">{{meeting.title}}</a>
+                    </span>
+                    <small class="text-muted d-block">{{meeting.due_date|to_jalali}}</small>
                   </div>
                 </div>
-                {% if total %}
-                <span>{{total|intcomma:False}} تومان</span>
-                {% else %}
-                <span>صفر</span>
-                {% endif %}
               </li>
-              <li class="list-group-item list-group-item-action border-0 d-flex align-items-center justify-content-between">
-                <div class="list-left d-flex align-items-center">
-                  <div class="list-icon mr-1">
-                    <div class="avatar bg-rgba-info m-0">
-                      <div class="avatar-content">
-                        <i class="bx bx-stats text-info font-size-base"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="list-content mt-n25">
-                    <span class="list-title">مجموع معاملات ایجاد شده</span>
-                    <small class="text-muted d-block">نرخ تبدیل معاملات: {{deals_conversionrate}} ٪</small>
-                  </div>
-                </div>
-                <span>{{totaldeals}}</span>
-              </li>
-              <li class="list-group-item list-group-item-action border-0 d-flex align-items-center justify-content-between">
-                <div class="list-left d-flex align-items-center">
-                  <div class="list-icon mr-1">
-                    <div class="avatar bg-rgba-danger m-0">
-                      <div class="avatar-content">
-                        <i class="bx bx-credit-card text-danger font-size-base"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="list-content mt-n25">
-                    <span class="list-title">مجموع سرنخ‌های ایجاد شده</span>
-                    <small class="text-muted d-block">نرخ تبدیل سرنخ‌ها: {{leads_conversionrate}} % </small>
-                  </div>
-                </div>
-                <span>{{leads_current_month}}</span>
-              </li>
-              <li class="list-group-item list-group-item-action border-0 d-flex align-items-center justify-content-between">
-                <div class="list-left d-flex align-items-center">
-                  <div class="list-icon mr-1">
-                    <div class="avatar bg-rgba-success m-0">
-                      <div class="avatar-content">
-                        <i class="bx bx-dollar text-success font-size-base"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="list-content mt-n25">
-                    <span class="list-title">مجموع فرصت‌های ایجاد شده</span>
-                    <small class="text-muted d-block">نرخ تبدیل فرصت‌ها: {{opportunity_conversionrate}} % </small>
-                  </div>
-                </div>
-                <span>{{opportunity_current_month}}</span>
-              </li>
-              <li class="list-group-item list-group-item-action border-0 d-flex align-items-center justify-content-between">
-                <div class="list-left d-flex align-items-center">
-                  <div class="list-icon mr-1">
-                    <div class="avatar bg-rgba-primary m-0">
-                      <div class="avatar-content">
-                        <i class="bx bx-user text-primary font-size-base"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="list-content mt-n25">
-                    <span class="list-title">تعداد مشتریان جدید</span>
-                    <small class="text-muted d-block">مجموع مشتریان تاکنون: {{accountsall}}</small>
-                  </div>
-                </div>
-                <span>{{newaccounts}}</span>
-              </li>
-              <li class="list-group-item list-group-item-action border-0 d-flex align-items-center justify-content-between">
-                <div class="list-left d-flex align-items-center">
-                  <div class="list-icon mr-1">
-                    <div class="avatar bg-rgba-danger m-0">
-                      <div class="avatar-content">
-                        <i class="bx bx-edit-alt text-danger font-size-base"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="list-content mt-n25">
-                    <span class="list-title">تعداد وظایف جدید</span>
-                    <small class="text-muted d-block">مجموع وظایف انجام شده: {{tasks_done_month}}</small>
-                  </div>
-                </div>
-                <span>{{tasks_done}}</span>
-              </li>
+              {% endfor %}
             </ul>
           </div>
         </div>
       </div>
     </div>
-    <!-- Earning Swiper Starts -->
-    <div class="col-xl-4 col-md-6 col-12 dashboard-earning-swiper" id="widget-earnings">
-      <div class="card">
-        <div class="card-header border-bottom d-flex justify-content-between align-items-center">
-          <h5 class="card-title"><i class="bx bx-task font-medium-5 align-middle"></i> <span class="align-middle">وظایف و کارها</span></h5>
-          <div class="col-md-3 col-12 text-md-right">
-          <a type="button" class="btn btn-sm btn-warning glow mt-md-2 mb-1" href="{% url 'task:task' company.slug %}">همه وظایف</a>
-          </div>
-        </div>
-        <div class="card-content">
-          <div class="card-body py-1 px-0">
-            <!-- earnings swiper starts -->
-            <div class="widget-earnings-swiper swiper-container p-1">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide rounded swiper-shadow py-50 px-2 d-flex align-items-center" id="repo-design">
-                  <i class="bx bx-pyramid mr-1 font-weight-normal font-medium-4"></i>
-                  <div class="swiper-text">
-                    <div class="swiper-heading">اهمیت بالا</div>
-                  </div>
-                </div>
-                <div class="swiper-slide rounded swiper-shadow py-50 px-2 d-flex align-items-center" id="laravel-temp">
-                  <i class="bx bx-sitemap mr-50 font-large-1"></i>
-                  <div class="swiper-text">
-                    <div class="swiper-heading">اهمیت معمولی</div>
-                  </div>
-                </div>
-                <div class="swiper-slide rounded swiper-shadow py-50 px-2 d-flex align-items-center" id="admin-theme">
-                  <i class="bx bx-check-shield mr-50 font-large-1"></i>
-                  <div class="swiper-text">
-                    <div class="swiper-heading">اهمیت پایین</div>
-                  </div>
-                </div>
+    <!-- Notification Widget Ends -->
+    <!-- Task App Widget Starts -->
+    <div class="col-lg-8">
+      <div class="row">
+        <div class="col-12">
+          <div class="card widget-todo">
+            <div class="card-header border-bottom d-flex justify-content-between align-items-center">
+              <h4 class="card-title d-flex mr-1 align-items-center">
+                <i class="bx bx-check font-medium-5 pl-25 pr-75"></i>وظایف و کارهای امروز
+              </h4>
+              <div class="heading-elements">
+                <a type="button" class="btn btn-sm btn-info glow" href="{% url 'task:task' company.slug %}">همه وظایف </a>
               </div>
             </div>
-            <!-- earnings swiper ends -->
-          </div>
-        </div>
-        <div class="main-wrapper-content">
-          <div class="wrapper-content" data-earnings="repo-design">
-            <div class="widget-earnings-scroll table-responsive">
-              <table class="table table-borderless widget-earnings-width mb-0">
-                <tbody>
-                  {% for important_tasks in important_tasks %}
-                  <tr>
-                    <td class="pr-1">
-                      <div class="media align-items-center">
-                        <a class="media-left mr-50" href="#">
-                        </a>
-                        <div class="media-body">
-                          <a class="media-heading mb-0 mt-n25 primary-font" href="{% url 'task:task-update' company.slug important_tasks.pk %}">{{important_tasks.title}}</a>
-                          <span class="font-small-2">مهلت انجام:{{important_tasks.due_date|to_jalali}} </span>
-                        </div>
+            <div class="card-body px-0 py-1">
+              {% for task in todaytasks %}
+              <ul class="widget-todo-list-wrapper" id="widget-todo-list">
+                <li class="widget-todo-item">
+                  <div class="widget-todo-title-wrapper d-flex justify-content-between align-items-center mb-50">
+                    <div class="widget-todo-title-area d-flex align-items-center">
+                      <div class="avatar m-0 mr-50">
+                        <img src="{{task.assigned_to.thumbnail}}" alt="img placeholder" height="32" width="32">
                       </div>
-                    </td>
-                    <td class="px-0 w-25">
-                    <td class="text-center"><span class="badge badge-light-danger">{{important_tasks.status}}</span></td>
-                    </td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="wrapper-content" data-earnings="laravel-temp">
-            <div class="widget-earnings-scroll table-responsive">
-              <table class="table table-borderless widget-earnings-width mb-0">
-                <tbody>
-                  {% for average_tasks in average_tasks %}
-                  <tr>
-                    <td class="pr-1">
-                      <div class="media align-items-center">
-                        <a class="media-left mr-50" href="#">
-                        </a>
-                        <div class="media-body">
-                          <a class="media-heading mb-0 mt-n25 primary-font" href="{% url 'task:task-update' company.slug average_tasks.pk %}">{{average_tasks.title}} </a>
-                          <span class="font-small-2">مهلت انجام:{{average_tasks.due_date|to_jalali}} </span>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-0 w-25">
-                    <td class="text-center"><span class="badge badge-light-danger">{{average_tasks.status}}</span></td>
-                    </td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="wrapper-content" data-earnings="admin-theme">
-            <div class="widget-earnings-scroll table-responsive">
-              <table class="table table-borderless widget-earnings-width mb-0">
-                <tbody>
-                  {% for low_tasks in low_tasks %}
-                  <tr>
-                    <td class="pr-1">
-                      <div class="media align-items-center">
-                        <a class="media-left mr-50" href="#">
-                        </a>
-                        <div class="media-body">
-                          <a class="media-heading mb-0 mt-n25 primary-font" href="{% url 'task:task-update' company.slug low_tasks.pk %}">{{low_tasks.title}} </a>
-                          <span class="font-small-2">مهلت انجام:{{low_tasks.due_date|to_jalali}} </span>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-0 w-25">
-                    <td class="text-center"><span class="badge badge-light-danger">{{low_tasks.status}}</span></td>
-                    </td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
+                      <a href="{% url 'task:task-update' company.slug task.pk %}">{{task.title}}</a>
+                    </div>
+                    <div class="widget-todo-item-action d-flex align-items-center">
+                      <div class="badge badge-pill badge-light-success mr-1"> موضوع: {{task.subject}}</div>
+                      <div class="badge badge-pill badge-light-danger mr-1"> وضعیت: {{task.status}}</div>
+                      <div class="badge badge-pill badge-light-info mr-1"> اولویت: {{task.priority}}</div>
+
+                    </div>
+                  </div>
+                </li>
+                {% endfor %}
+
+
+
+
+
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- Task App Widget Ends -->
+<!-- Widgets Advance End -->
+
+
     <!-- Marketing Campaigns Starts -->
     <div class="col-xl-8 col-12 dashboard-marketing-campaign">
       <div class="card marketing-campaigns">
         <div class="card-header d-flex justify-content-between align-items-center pb-1">
-          <h4 class="card-title">لیست آخرین معاملات</h4>
+          <h4 class="card-title">لیست معاملات در جریان</h4>
         </div>
         <div class="card-content">
           <div class="card-body pb-0">
@@ -514,7 +185,148 @@
         </div>
       </div>
     </div>
-  </div>
+    <!-- Radial Followers Primary Chart Starts -->
+    <div class="col-xl-4 col-md-6 col-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body p-0">
+            <div class="d-lg-flex justify-content-between">
+              <div class="widget-card-details d-flex flex-column justify-content-between p-2">
+                <div>
+                  <h5 class="font-medium-2 font-weight-normal">معاملات</h5>
+                  <p class="text-muted">تحقق تارگت معاملات فروش در این ماه</p>
+                </div>
+                <a href="#">جزئیات</a>
+              </div>
+              <div class="mb-1 mb-sm-0" id="radial-chart-primary"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Radial Followers Primary Chart Ends -->
+
+    
+
+
+    <!-- Marketing Campaigns Starts -->
+    <div class="col-xl-8 col-12 dashboard-marketing-campaign">
+      <div class="card marketing-campaigns">
+        <div class="card-header d-flex justify-content-between align-items-center pb-1">
+          <h4 class="card-title">لیست فرصت‌های در جریان</h4>
+          <a type="button" class="btn btn-sm btn-info glow" href="{% url 'opportunity:opportunity' company.slug %}">همه فرصت‌ها </a>
+        </div>
+
+        <div class="table-responsive">
+          <!-- table start -->
+          <table id="table-marketing-campaigns" class="table table-borderless table-marketing-campaigns mb-0">
+            <thead>
+              <tr>
+                <th>عنوان فرصت</th>
+                <th>مرحله فرصت</th>
+                <th>مبلغ فرصت</th>
+                <th>نام مشتری</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for opportunity in opportunity_show %}
+              <tr>
+                <td class="py-1 line-ellipsis">
+                  <a href="{% url 'opportunity:opportunity-update' company.slug opportunity.pk %}">{{opportunity.name}}</a>
+                </td>
+                <td class="py-1">
+                  <i class="bx bx-trending-up text-success align-middle mr-50"></i><span>{{opportunity.status}}</span>
+                </td>
+                <td class="py-1">{{opportunity.amount|intcomma:False}} تومان</td>
+                <td class="text-secondary py-1">{{opportunity.account}}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+          <!-- table ends -->
+        </div>
+      </div>
+    </div>
+    <!-- Radial Users Success Chart Starts -->
+    <div class="col-xl-4 col-md-6 col-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body p-0">
+            <div class="d-lg-flex justify-content-between">
+              <div class="widget-card-details d-flex flex-column justify-content-between p-2">
+                <div>
+                  <h5 class="font-medium-2 font-weight-normal">فرصت‌ها</h5>
+                  <p class="text-muted">تحقق تارگت فرصت‌ها در این ماه</p>
+                </div>
+                <a href="#">جزئیات</a>
+              </div>
+              <div class="mb-1 mb-sm-0" id="radial-chart-success"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Radial Users Success Chart Ends -->
+
+
+    <!-- Marketing Campaigns Starts -->
+    <div class="col-xl-8 col-12 dashboard-marketing-campaign">
+      <div class="card marketing-campaigns">
+        <div class="card-header d-flex justify-content-between align-items-center pb-1">
+          <h4 class="card-title">لیست سرنخ‌های در جریان</h4>
+          <a type="button" class="btn btn-sm btn-warning glow" href="{% url 'deals:deals' company.slug %}">همه سرنخ‌ها</a>
+        </div>
+
+        <div class="table-responsive">
+          <!-- table start -->
+          <table id="table-marketing-campaigns" class="table table-borderless table-marketing-campaigns mb-0">
+            <thead>
+              <tr>
+                <th>عنوان سرنخ</th>
+                <th>مرحله سرنخ</th>
+                <th>منبع سرنخ</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for leads in leads_show %}
+              <tr>
+                <td class="py-1 line-ellipsis">
+                  <a href="{% url 'leads:lead-update' company.slug leads.pk %}">{{leads.title}}</a>
+                </td>
+                <td class="py-1">
+                  <i class="bx bx-trending-up text-success align-middle mr-50"></i><span>{{leads.status}}</span>
+                </td>
+                <td class="py-1">{{leads.source}}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+          <!-- table ends -->
+        </div>
+      </div>
+    </div>
+    <!-- Radial Registrations Danger Chart Starts -->
+    <div class="col-xl-4 col-md-6 col-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body p-0">
+            <div class="d-lg-flex justify-content-between">
+              <div class="widget-card-details d-flex flex-column justify-content-between p-2">
+                <div>
+                  <h5 class="font-medium-2 font-weight-normal">سرنخ‌ها</h5>
+                  <p class="text-muted">تحقق تارگت سرنخ‌ها در این ماه</p>
+                </div>
+                <a href="#">جزئیات</a>
+              </div>
+              <div class="mb-1 mb-sm-0" id="radial-chart-danger"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Radial Registrations Danger Chart Ends -->
+
+
 </section>
 <!-- Dashboard Ecommerce ends -->
 
@@ -524,4 +336,13 @@
 
     <!-- END: Content-->
 
+{% endblock %}
+
+{% block page_vendor_js %}
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{% static 'frest/assets/vendors/js/extensions/dragula.min.js' %}"></script>
+    <!-- END: Page Vendor JS-->
+    <!-- BEGIN: Page JS-->
+    <script src="{% static 'frest/assets/js/scripts/cards/widgets.js' %}"></script>
+    <!-- END: Page JS-->
 {% endblock %}

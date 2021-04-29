@@ -40,7 +40,7 @@ class Opportunity(models.Model):
     account = models.ForeignKey(Account,related_name="opportunities",on_delete=models.SET_NULL,null=True, blank=True,verbose_name="مشتری")
     status = models.ForeignKey(OpportunityStatus,blank=True, related_name="Opportunity_status",on_delete=models.SET_NULL, null=True,verbose_name="مرحله")
     source = models.ForeignKey(OpportunitySource,related_name="Opportunity_source",on_delete=models.SET_NULL, null=True, blank=True, verbose_name="منبع")
-    amount = models.FloatField(blank=True,null=True, verbose_name="مبلغ")
+    amount = models.DecimalField(decimal_places=0,max_digits=20, blank=True,null=True, verbose_name="مبلغ")
     probability = models.IntegerField(default=0, blank=True,null=True, verbose_name="احتمال")
     contacts = models.ForeignKey(Contact,blank=True, on_delete=models.SET_NULL, null=True, verbose_name="شخص")
     converted_by = models.ForeignKey(Enrolled,related_name="Opportunity_converted_by", on_delete=models.SET_NULL, null=True, blank=True, verbose_name="تکمیل‌شده توسط")

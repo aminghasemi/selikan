@@ -30,7 +30,7 @@ SECRET_KEY = 'axndae)8$g%r4_ca5n@(1*@0kafhw(o7_st3ixi5+r*dsw@b(a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['selikan.ir', 'www.selikan.ir']
 
 
 # Application definition
@@ -109,9 +109,11 @@ WSGI_APPLICATION = 'crmconfigue.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / 'db.sqlite3'),
-
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'selikan_main_db2',
+        'USER': 'root',
+        'PASSWORD': 'Aidastar9009!',
+        'HOST': 'selikandb',
     }
 }
 
@@ -152,10 +154,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-#STATIC_ROOT= os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
+STATIC_ROOT= os.path.join(BASE_DIR, 'static')
+#STATICFILES_DIRS = [
+ #   os.path.join(BASE_DIR, "static"),
+#]
 
 
 MEDIA_URL= '/media/'
@@ -167,11 +169,9 @@ AUTH_USER_MODEL = "common.User"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'selikan.crm@gmail.com'
-EMAIL_HOST_PASSWORD = 'Aidastar9009!'
+EMAIL_HOST_PASSWORD = 'jhesefcpgumtwtfm'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-
-
 
 
 

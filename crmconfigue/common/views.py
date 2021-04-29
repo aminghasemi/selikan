@@ -14,7 +14,7 @@ from .forms import EnrollForm, ProfileForm, CompanyForm, Enroll_InvitationForm
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from datetime import timedelta, datetime
 from django.utils import timezone 
-from django.db.models import Sum
+from django.db.models import Sum, Q
 from django.http import HttpResponse, HttpResponseRedirect 
 # Create your views here.
 
@@ -395,7 +395,7 @@ def Dashboard(request, slug):
     totaldeals=company.companydeals.filter(created_on__year=today.year, created_on__month=today.month).count()
     deals2 = company.companydeals.filter(pipeline_status__won=True).filter(closed_on__year=today.year, closed_on__month=today.month).count()
     days7_total=days7_deals.aggregate(sum=Sum('deal_amount'))['sum']
-    deals_show=company.companydeals.all().order_by('-id')[:5]
+    deals_show=company.companydeals.filter(pipeline_status__won=False).order_by('-id')[:5]
     dealswon = company.companydeals.filter(pipeline_status__won=True).count()
     if totaldeals!= 0:
         deals_conversionrate=(deals2/totaldeals)*100
@@ -403,6 +403,7 @@ def Dashboard(request, slug):
         deals_conversionrate=0
     
     #Queries of Leads
+    leads_show=company.companyleads.all().order_by('-id')[:5]
     leads_current_month=company.companyleads.filter(created_on__year=today.year, created_on__month=today.month).count()
     leads_won = company.companyleads.filter(status__won=True).filter(closed_on__year=today.year, closed_on__month=today.month).count()
     if leads_current_month!= 0:
@@ -410,6 +411,7 @@ def Dashboard(request, slug):
     else:
         leads_conversionrate=0
     #Queries of Opportunities
+    opportunity_show=company.companyopportunity.all().order_by('-id')[:5]
     opportunity_current_month=company.companyopportunity.filter(created_on__year=today.year, created_on__month=today.month).count()
     opportunity_won = company.companyopportunity.filter(status__won=True).filter(closed_on__year=today.year, closed_on__month=today.month).count()
     if opportunity_current_month!= 0:
@@ -426,13 +428,13 @@ def Dashboard(request, slug):
     new_tasks_month=company.companytask.filter(created_on__year=today.year, created_on__month=today.month).count()
     tasks_done=company.companytask.filter(created_on__year=today.year, created_on__month=today.month).count()
     tasks_done_month=company.companytask.filter(done_on__year=today.year, done_on__month=today.month).count()
-    
-
+    todaytasks=company.companytask.filter(due_date=datetime.today())
+    meeting=company.companytask.filter(due_date=datetime.today()).filter(Q(subject="جلسه") | Q(subject="تماس"))
 
     return render(request, template_name, {'total': total,
                                            'company': company,
                                            'deals_conversionrate': deals_conversionrate,
-                                           'important_tasks': important_tasks,
+                                           'todaytasks': todaytasks,
                                            'average_tasks': average_tasks,
                                            'low_tasks': low_tasks,
                                            'tasks_done': tasks_done,
@@ -446,4 +448,7 @@ def Dashboard(request, slug):
                                            'leads_conversionrate': leads_conversionrate,
                                            'opportunity_current_month': opportunity_current_month,
                                            'opportunity_conversionrate': opportunity_conversionrate,
+                                           'opportunity_show': opportunity_show,
+                                           'leads_show':leads_show,
+                                           'meeting': meeting,
                                            })
