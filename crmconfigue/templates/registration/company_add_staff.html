@@ -28,20 +28,6 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                {% if company.creator.thumbnail %}
-              <td><img class="round" src="{{company.creator.thumbnail.url}}" alt="avatar" height="40" width="40"></td>
-              {% else %}
-              <td><img class="round" src="{% static 'frest/assets/images/placeholder.png' %}" alt="avatar" height="40" width="40"></td>
-              {% endif %}
-              <td class="text-bold-500">{{ company.creator.get_full_name }}</td>
-              <td>{{ company.creator.username }}</td>
-              <td class="text-bold-500">{{ company.creator.email }}</td>
-              <td class="text-bold-500">{{ company.creator.date_joined|to_jalali:'%y/%m/%d' }}</td>
-              <td>
-                <span class="badge badge-primary">سازنده شرکت</span>
-            </td>
-            </tr>
               {% for person in companystaff %}
               <tr>
                   {% if person.thumbnail %}

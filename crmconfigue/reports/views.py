@@ -6,7 +6,6 @@ from django.contrib.auth.decorators import login_required
 from jalali_date import datetime2jalali, date2jalali
 from common.decorators import allowed_users, company_enrolled, user_limit
 from django.db.models import Sum
-
 from common.models import Company
 from .models import Dealreport, Leadreport, Opportunityreport, Taskreport, Staffreport, Companyreport
 from common.mixins import EnrollMixin, SuperUserAccessMixin, CreatorAccessMixin, SpecialCompanyMixin
@@ -68,10 +67,13 @@ class DealreportUpdate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, Upda
         company = get_object_or_404(Company , slug=slug)
         return company.companydealsreports.all()
     def get_context_data(self, **kwargs):
+        assigned_to1=company.staff_enroll.filter(company=company)
+        assigned_to2=company.creator
+        assigned_to=assigned_to1 | assigned_to2
         context= super().get_context_data(**kwargs)
         context['company'] = company
         context['form'].fields['pipeline_status'].queryset = company.companypipelines.filter(company=company)
-        context['form'].fields['converted_by'].queryset = company.staff_enroll.filter(company=company)
+        context['form'].fields['converted_by'].queryset = assigned_to
         context['form'].fields['product'].queryset = company.companyproducts.filter(company=company)
         return context
 
@@ -564,8 +566,11 @@ class StaffreportCreate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, Cre
     def get_context_data(self, **kwargs):
         slug= self.kwargs.get('slug')
         company = get_object_or_404(Company , slug=slug)
+        assigned_to1=company.staff_enroll.filter(company=company)
+        assigned_to2=company.creator
+        assigned_to=assigned_to1 | assigned_to2
         context= super().get_context_data(**kwargs)
-        context['form'].fields['staff'].queryset = company.staff_enroll.filter(company=company)
+        context['form'].fields['staff'].queryset = assigned_to
         context['company'] = company
         return context
     def form_valid(self, form, **kwargs):       

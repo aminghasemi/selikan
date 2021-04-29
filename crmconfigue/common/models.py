@@ -73,7 +73,7 @@ class Company(models.Model):
     name = models.CharField(max_length=100,verbose_name="نام شرکت")
     slug=models.SlugField(max_length=100,unique=True, verbose_name ="<لینک شرکت>/selikan.ir")
 #    sub_domain = models.CharField(max_length=30,null=True, blank=True, verbose_name="آدرس زیر دامنه")
-    user_limit = models.IntegerField(default=1,blank=True, null=True,verbose_name="محدودیت کاربر")
+    user_limit = models.IntegerField(default=2,blank=True, null=True,verbose_name="محدودیت کاربر")
     country = models.CharField(max_length=200, choices=COUNTRIES, blank=True, null=True,verbose_name="کشور")
     creator = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='crm_creator', verbose_name="ایجادکننده شرکت")
     created_time=models.DateTimeField(auto_now_add=True, verbose_name ="تاریخ ایجاد")

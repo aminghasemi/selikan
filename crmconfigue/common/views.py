@@ -26,10 +26,8 @@ class CompaniesList(LoginRequiredMixin, ListView):
     queryset= Company.objects.all()
     template_name="registration/home.html"
     def get_queryset(self):
-        class1=Company.objects.filter(creator=self.request.user)
-        class2=Company.objects.filter(staff=self.request.user)
-        class3=chain(class1,class2)
-        return class3
+        company=Company.objects.filter(staff=self.request.user)
+        return company
     def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
         enroll_invitations=Enroll_Invitation.objects.filter(email=self.request.user.email)
@@ -44,8 +42,19 @@ class CompanyCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.creator = self.request.user
         form.instance.access_date=timezone.now()+timedelta(days=15)
+        self.object=form.save()
         return super().form_valid(form)
+    def get_success_url(self):
+        slug= self.kwargs.get('slug')
+        pk= self.kwargs.get('pk')
+        return reverse_lazy('common:company-preview', kwargs={'slug': self.object.slug}, current_app='common')
 
+@login_required(login_url='login')
+def Company_Preview(request, slug):
+    template_name = 'company/common/company-preview.html'
+    company = get_object_or_404(Company, slug=slug)
+    Enrolled.objects.create(company=company, staff=request.user)
+    return render(request, template_name, {'company': company,})
 
 class CompanyUpdate(LoginRequiredMixin,CreatorAccessMixin, UpdateView):
     model=Company

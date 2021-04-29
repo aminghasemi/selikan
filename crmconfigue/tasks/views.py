@@ -42,6 +42,7 @@ class TaskCreate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, CreateView
         context= super().get_context_data(**kwargs)
         context['form'].fields['account'].queryset = company.companyaccounts.filter(company=company)
         context['form'].fields['assigned_to'].queryset = company.staff_enroll.filter(company=company)
+        context['form'].fields['done_by'].queryset = company.staff_enroll.filter(company=company)
         context['form'].fields['tags'].queryset = company.companytags.filter(company=company)
         context['company'] = company
         return context
@@ -71,6 +72,7 @@ class TaskUpdate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, UpdateView
         context['company'] = company
         context['form'].fields['account'].queryset = company.companyaccounts.filter(company=company)
         context['form'].fields['assigned_to'].queryset = company.staff_enroll.filter(company=company)
+        context['form'].fields['done_by'].queryset = company.staff_enroll.filter(company=company)
         context['form'].fields['tags'].queryset = company.companytags.filter(company=company)
         pk=self.kwargs.get('pk')
         context['docs']=company.companydocs.filter(tasks_id=pk)

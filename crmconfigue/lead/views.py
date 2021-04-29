@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-
+from itertools import chain
 from common.models import Company
 from django.contrib.auth.decorators import login_required
 from common.decorators import company_enrolled

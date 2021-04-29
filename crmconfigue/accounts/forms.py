@@ -8,7 +8,7 @@ class AccountForm(forms.ModelForm):
     class Meta:
         model = Account
         fields=("name","national_id", "economic_id", "email","phone","whatsapp_phone","office_phone", "fax",
-         "industry","billing_address_line","billing_street","billing_city", "billing_state", "billing_postcode",
+         "industry","billing_address_line","billing_city", "billing_state", "billing_postcode",
          "billing_country", "website", "description", "is_active", "archive","success_measure", "main_challenges",
          "yearly_goal", "longterm_goal", "solution_expectation", "employee_count",
          "yearly_revenue", "customer_base", "want_purchase", "solution_catalyst", "competing_products", "feature_convince",

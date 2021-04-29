@@ -11,7 +11,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 class CompanyForm(forms.ModelForm):
     class Meta:
         model = Company
-        fields=("name","slug","country","national_id","thumbnail", "economic_id",
+        fields=("name","slug","country","national_id","thumbnail", "economic_id", "staff",
          "email","phone","office_phone", "fax", "industry","billing_address_line","billing_street",
          "billing_city", "billing_state", "billing_postcode", "website", "description", "is_active")
 

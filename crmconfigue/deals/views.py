@@ -11,6 +11,7 @@ from common.mixins import EnrollMixin,SpecialCompanyMixin, SuperUserAccessMixin,
 from datetime import timedelta
 from django.utils import timezone
 from datetime import datetime
+from itertools import chain
 # Create your views here.
 
 
