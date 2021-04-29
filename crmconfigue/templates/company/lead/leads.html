@@ -28,10 +28,9 @@
                   <thead>
                     <tr>
                       <th>عنوان سرنخ</th>
-                      <th>وضعیت</th>
+                      <th>مرحله سرنخ</th>
                       <th>منبع</th>
                       <th>محول شده به</th>
-                      <th>مقدار فرصت</th>
                       <th>عملیات</th>
                     </tr>
                   </thead>
@@ -39,16 +38,15 @@
                     {% for leads in object_list %}
                       <tr>
                         <td><a href="{% url 'leads:lead-update' company.slug leads.pk %}">{{leads.title}}</a></td>
-                        {% if leads.lead_status.won %}
-                        <td><a class="badge badge-success" style="color:white">{{leads.lead_status}}</a></td>
-                        {% elif leads.lead_status.lost %}
-                        <td><a class="badge badge-danger" style="color:white">{{leads.lead_status}}</a></td>
+                        {% if leads.status.won %}
+                        <td><a class="badge badge-success" style="color:white">{{leads.status}}</a></td>
+                        {% elif leads.status.lost %}
+                        <td><a class="badge badge-danger" style="color:white">{{leads.status}}</a></td>
                         {% else %}
-                        <td><a class="badge badge-primary" style="color:white" >{{leads.lead_status}}</a></td>
+                        <td><a class="badge badge-primary" style="color:white" >{{leads.status}}</a></td>
                         {% endif %} 
                         <td>{{leads.source}}</td>
                         <td>{{leads.assigned_to.get_full_name}}</td>
-                        <td>{{leads.opportunity_amount}}</td>
                         <td>
                             {% if user.is_superuser %}
                             <a class="badge" href="{% url 'leads:lead-update' company.slug leads.pk %}">ویرایش</a>

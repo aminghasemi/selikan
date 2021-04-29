@@ -54,7 +54,7 @@ class Lead(models.Model):
     teams = models.ForeignKey(Teams,on_delete=models.SET_NULL, null=True,blank=True, related_name="lead_teams", verbose_name="تیم سرنخ")
     company = models.ForeignKey(Company, on_delete=models.SET_NULL, null=True, related_name="companyleads", blank=True, verbose_name="کاربر سایت")
     converted_by = models.ForeignKey(Enrolled, on_delete=models.SET_NULL, null=True, related_name="lead_converted_by", blank=True, verbose_name="تکمیل‌شده توسط")
-    closed_on = models.DateField(blank=True, verbose_name="تاریخ تکمیل")
+    closed_on = models.DateField(blank=True,null=True, verbose_name="تاریخ تکمیل")
     archive = models.BooleanField(default=False, verbose_name="بایگانی شود؟")
 
 

@@ -28,7 +28,7 @@ LOGOUT_REDIRECT_URL = "login"
 SECRET_KEY = 'axndae)8$g%r4_ca5n@(1*@0kafhw(o7_st3ixi5+r*dsw@b(a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['selikan.ir', 'www.selikan.ir']
 
@@ -109,9 +109,11 @@ WSGI_APPLICATION = 'crmconfigue.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / 'db.sqlite3'),
-
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'selikan_main_db2',
+        'USER': 'root',
+        'PASSWORD': 'Aidastar9009!',
+        'HOST': 'selikandb',
     }
 }
 
@@ -165,11 +167,11 @@ CRISPY_TEMPLATE_PACK= 'bootstrap4'
 AUTH_USER_MODEL = "common.User"
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'stmp.gmail.com'
-EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'selikan.crm@gmail.com'
+EMAIL_HOST_PASSWORD = 'jhesefcpgumtwtfm'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'amiin.ghasemi@gmail.com'
-EMAIL_HOST_PASSWORD = 'aminstar9009'
+EMAIL_USE_TLS = True
 
 
 
