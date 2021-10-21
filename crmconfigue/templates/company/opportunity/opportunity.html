@@ -1,68 +1,234 @@
-{% extends 'company/base.html' %}
-
+{% load static %}
 {% load humanize %}
+{% load jalali_tags %}
 
-{% block main %}
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{% url 'common:home' %}"><i class="bx bx-home"></i></a></li>
-    <li class="breadcrumb-item"><a href="{% url 'common:dashboard' company.slug %}">{{company.name}}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">فرصت‌ها</li>
-  </ol>
-</nav>
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
+<!DOCTYPE html>
+<html class="loading" lang="fa" data-textdirection="rtl" dir="rtl">
+  <!-- BEGIN: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>فرصت‌ها - سلیکان</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'frest/assets/images/ico/favicon-50.png' %}">
+	<meta name="theme-color" content="#5A8DEE">
+    
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/vendors.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/pickers/datepicker-jalali/bootstrap-datepicker.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/forms/select/select2.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/editors/quill/quill.snow.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/extensions/dragula.min.css' %}">
+    <!-- END: Vendor CSS-->
 
-              <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <div class="card-header d-flex justify-content-between align-items-center pb-1">
-                  <a class="btn btn-info" href="{% url 'opportunity:opportunity-create' company.slug  %}">ایجاد فرصت جدید</a>
-                  <div class="col-md-6 col-12 text-md-right">
-                    <a type="button" class="btn  btn-warning glow mt-md-2 mb-1" href="{% url 'opportunity:opportunitystatus' company.slug %}"><i class="bx bx-cog"></i> تنظیمات مراحل فرصت‌ها</a>
-                    <a type="button" class="btn  btn-warning glow mt-md-2 mb-1" href="{% url 'opportunity:opportunitysource' company.slug %}"><i class="bx bx-cog"></i> تنظیمات منابع فرصت‌ها</a>
-                  </div>
-                </div>
-                </div>
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th>عنوان فرصت</th>
-                      <th>وضعیت فرصت</th>
-                      <th>مشتری</th>
-                      <th>مقدار</th>
-                      <th>احتمال موفقیت</th>
-                      <th>عملیات</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for opportunity in object_list %}
-                      <tr>
-                        <td><a href="{% url 'opportunity:opportunity-update' company.slug opportunity.pk %}">{{opportunity.name}}</a></td>
-                        {% if opportunity.opportunity_status.won %}
-                        <td><a class="badge badge-success" style="color:white">{{opportunity.status}}</a></td>
-                        {% elif opportunity.opportunity_status.lost %}
-                        <td><a class="badge badge-danger" style="color:white">{{opportunity.status}}</a></td>
-                        {% else %}
-                        <td><a class="badge badge-primary" style="color:white" >{{opportunity.status}}</a></td>
-                        {% endif %}
-                        <td>{{opportunity.account}}</td>
-                        <td>{{opportunity.amount|intcomma:False}}</td>
-                        <td>{{opportunity.probability}}</td>
-                        <td>
-                            {% if user.is_superuser %}
-                            <a class="badge" href="{% url 'opportunity:opportunity-update' company.slug opportunity.pk %}">ویرایش</a>
-                            <a class="badge" href="{% url 'opportunity:opportunity-delete' company.slug opportunity.pk %}">حذف</a>
-                            {% endif %}
-                        </td>
-                      </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/bootstrap-extended.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/colors.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/components.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/themes/dark-layout.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/themes/semi-dark-layout.css' %}">
+    <!-- END: Theme CSS-->
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/core/menu/menu-types/vertical-menu.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/pages/app-todo.css' %}">
+    <!-- END: Page CSS-->
+
+  </head>
+  <!-- END: Head-->
+
+  <!-- BEGIN: Body-->
+  <body class="vertical-layout vertical-menu-modern semi-dark-layout content-left-sidebar todo-application navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="content-left-sidebar" data-layout="semi-dark-layout">
+
+    {% include 'company/header.html'%}
+
+
+
+    {% include 'company/sidebar.html'%}
+
+
+
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+      <div class="content-area-wrapper">
+        <div class="sidebar-left">
+          <div class="sidebar"><div class="todo-sidebar d-flex">
+  <span class="sidebar-close-icon">
+    <i class="bx bx-x"></i>
+  </span>
+  <!-- todo app menu -->
+  <div class="todo-app-menu">
+    <div class="form-group text-center add-task">
+      <!-- new task button -->
+      <div>
+      <a class="btn btn-outline-info btn my-1" href="{% url 'opportunity:opportunity-create' company.slug  %}">ایجاد فرصت جدید</a>
+      <a class="btn btn-icon btn-outline-warning my-1" data-toggle="tooltip" data-placement="top" title="" data-original-title="تنظیمات فرصت‌ها" href="{% url 'opportunity:opportunitystatus' company.slug %}"><i class="bx bx-cog"></i></a>
+
+      </div>
+    </div>
+    <!-- sidebar list start -->
+    <div class="sidebar-menu-list">
+      <div class="list-group">
+        <a href="{% url 'opportunity:opportunity' company.slug  %}" class="list-group-item border-0">
+          <span class="fonticon-wrap mr-50">
+            <i class="livicon-evo" data-options="name: priority-high.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent;"></i>
+          </span>
+          <span>در جریان</span>
+        </a>
+        <a href="{% url 'opportunity:opportunity-all' company.slug  %}" class="list-group-item border-0">
+          <span class="fonticon-wrap mr-50">
+            <i class="livicon-evo" data-options="name: list.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent;"></i>
+          </span>
+          <span> همه</span>
+        </a>
+      </div>
+      <label class="filter-label mt-2 mb-1 pt-25">زمان پیگیری</label>
+      <div class="list-group">
+        <a href="{% url 'opportunity:opportunity-today' company.slug  %}" class="list-group-item border-0">
+          <span class="fonticon-wrap mr-50">
+            <i class="livicon-evo" data-options="name: hourglass.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent;"></i>
+          </span>
+          <span>امروز</span>
+        </a>
+        <a href="{% url 'opportunity:opportunity-3days' company.slug  %}" class="list-group-item border-0">
+          <span class="fonticon-wrap mr-50">
+            <i class="livicon-evo" data-options="name: priority-low.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent;"></i>
+          </span>
+          <span>سه روز آینده</span>
+        </a>
+        <a href="{% url 'opportunity:opportunity-10days' company.slug  %}" class="list-group-item border-0">
+          <span class="fonticon-wrap mr-50">
+            <i class="livicon-evo" data-options="name: calendar.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent;"></i>
+          </span>
+          <span>ده روز آینده</span>
+        </a>
+      </div>
+    </div>
+    <!-- sidebar list end -->
+  </div>
+</div>
+
+
           </div>
         </div>
-{% endblock %}
+        <div class="content-right">
+          <div class="content-overlay"></div>
+          <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body"><div class="app-content-overlay"></div>
+<div class="todo-app-area">
+  <div class="todo-app-list-wrapper">
+    <div class="todo-app-list">
+      <div class="todo-fixed-search d-flex justify-content-between align-items-center">
+        <div class="sidebar-toggle d-block d-lg-none">
+          <i class="bx bx-menu"></i>
+        </div>
+        <fieldset class="form-group position-relative has-icon-left m-0 flex-grow-1">
+          <input type="text" class="form-control todo-search" id="todo-search" placeholder="جستجوی فرصت‌ها">
+          <div class="form-control-position">
+            <i class="bx bx-search"></i>
+          </div>
+        </fieldset>
+        <div class="todo-sort dropdown mr-1">
+          <button class="btn dropdown-toggle sorting" type="button" id="sortDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="bx bx-filter"></i>
+            <span>ترتیب</span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="sortDropdown">
+            <a class="dropdown-item ascending" href="#">جدید‌ترین</a>
+            <a class="dropdown-item descending" href="#">قدیمی‌ترین</a>
+          </div>
+        </div>
+      </div>
+      <div class="todo-task-list list-group">
+        <!-- task list start -->
+        <ul class="todo-task-list-wrapper list-unstyled" id="todo-task-list-drag">
+          {% for opportunity in object_list %}
+
+          <li class="todo-item" data-name="David Smith">
+            <div class="todo-title-wrapper d-flex justify-content-sm-between justify-content-end align-items-center">
+              <div class="todo-title-area d-flex align-items-center">
+                <div class="avatar m-50 ml-50 mr-50">
+                  {% if opportunity.assigned_to.staff.thumbnail %}
+                    <img class="round" src="{{opportunity.assigned_to.staff.thumbnail.url}}" alt="avatar" height="32" width="32">
+                  {% else %}
+                    <img class="round" src="{% static 'frest/assets/images/placeholder.png' %}" alt="avatar" height="32" width="32">
+                  {% endif %}
+                  </div>
+                  <span class="badge badge-light-success badge-pill mr-1">{{opportunity.status}}</span>
+                <span><a class="mr-50" href="{% url 'opportunity:opportunity-update' company.slug opportunity.pk %}">{{opportunity.name}}</a></span>
+
+                </div>
+              <div class="todo-item-action d-flex align-items-center">
+                <div class="todo-badge-wrapper d-flex">
+                  <span class="badge badge-light-warning badge-pill mr-1"> زمان پیگیری: {{opportunity.due_date| to_jalali:'۱۴%y/%m/%d'}}</span>
+                  <span class="badge badge-light-danger badge-pill mr-1">{{opportunity.source}}</span>
+
+                </div>
+
+                <a class="todo-item-delete ml-75"href="{% url 'opportunity:opportunity-delete' company.slug opportunity.pk %}"><i class="bx bx-trash"></i></a>
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+        </ul>
+        <!-- task list end -->
+        <div class="no-results">
+          <h5>موردی یافت نشد</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END: Content-->
+
+
+
+
+
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    {% include 'company/footer.html'%}
+
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="{% static 'frest/assets/vendors/js/vendors.min.js' %}"></script>
+    <script src="{% static 'frest/assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.min.js' %}"></script>
+    <script src="{% static 'frest/assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js' %}"></script>
+    <script src="{% static 'frest/assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js' %}"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{% static 'frest/assets/vendors/js/pickers/datepicker-jalali/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'frest/assets/vendors/js/pickers/datepicker-jalali/bootstrap-datepicker.fa.min.js' %}"></script>
+    <script src="{% static 'frest/assets/vendors/js/forms/select/select2.full.min.js' %}"></script>
+    <script src="{% static 'frest/assets/vendors/js/editors/quill/quill.min.js' %}"></script>
+    <script src="{% static 'frest/assets/vendors/js/extensions/dragula.min.js' %}"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="{% static 'frest/assets/js/scripts/configs/vertical-menu-dark.js' %}"></script>
+    <script src="{% static 'frest/assets/js/core/app-menu.js' %}"></script>
+    <script src="{% static 'frest/assets/js/core/app.js' %}"></script>
+    <script src="{% static 'frest/assets/js/scripts/components.js' %}"></script>
+    <script src="{% static 'frest/assets/js/scripts/footer.js' %}"></script>
+    <script src="{% static 'frest/assets/js/scripts/customizer.js' %}"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="{% static 'frest/assets/js/scripts/pages/app-todo.js' %}"></script>
+    <!-- END: Page JS-->
+
+  </body>
+  <!-- END: Body-->
+</html>

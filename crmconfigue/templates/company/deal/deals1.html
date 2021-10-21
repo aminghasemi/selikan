@@ -1,0 +1,88 @@
+{% extends 'company/base.html' %}
+
+{% block title %}داشبورد اصلی{% endblock %}
+
+{% load humanize %}
+{% load jalali_tags %}
+{% block main %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'common:home' %}"><i class="bx bx-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="{% url 'common:dashboard' company.slug %}">{{company.name}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">معاملات</li>
+  </ol>
+</nav>
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <div class="card-header d-flex justify-content-between align-items-center pb-1">
+                  <a class="btn btn-info" href="{% url 'deals:deal-create' company.slug  %}">ایجاد معامله جدید</a>
+                  <div class="col-md-3 col-12 text-md-right">
+                    <a type="button" class="btn  btn-warning glow mt-md-2 mb-1" href="{% url 'deals:pipelines' company.slug %}"><i class="bx bx-cog"></i> تنظیمات مراحل معاملات</a>
+                        </div>
+                </div>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>عنوان معامله</th>
+                      <th>مرحله فروش</th>
+                      <th>مبلغ</th>
+                      <th>محول شده به</th>
+                      <th> نام مشتری </th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for deal in object_list %}
+                      <tr>
+                        <td>
+                        <a href="{% url 'deals:deal-update' company.slug deal.pk %}">{{deal.title}}
+                          {% if warning_date >= deal.created_on %}
+                          <a class="nav-link nav-link-label" href="#" style="color:orange" data-toggle="dropdown" aria-expanded="false"><i class="ficon bx bx-bell bx-tada bx-flip-horizontal"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-media">
+                              <div class="media-body mr-1 ml-1 mt-1 mb-1">
+                                <span class="media-heading">از زمان ایجاد این معامله مدت زیادی می‌گذرد. لطفا بررسی نمایید.</span><p><small class="notification-text">تاریخ ایجاد معامله: {{deal.created_on|to_jalali}}</small></p>
+                              </div>
+                            </ul>
+                          </a>
+                          {% endif %}
+                        </a>
+                        </td>
+                        {% if deal.pipeline_status.won %}
+                        <td><a class="badge badge-success" style="color:white">{{deal.pipeline_status}}</a></td>
+                        {% elif deal.pipeline_status.lost %}
+                        <td><a class="badge badge-danger" style="color:white">{{deal.pipeline_status}}</a></td>
+                        {% else %}
+                        <td><a class="badge badge-primary" style="color:white" >{{deal.pipeline_status}}</a></td>
+                        {% endif %}
+                        <td>{{ deal.deal_amount|intcomma:False }} تومان </td>
+                        {% if deal.assigned_to is null %}
+                        <td style="color:red">تعریف‌نشده</td>
+                        {% else %}
+                        <td>{{deal.assigned_to}}</td>
+                        {% endif %}
+                        {% if deal.account is null %}
+                        <td style="color:red">تعریف‌نشده</td>
+                        {% else %}
+                        <td>{{deal.account}}</td>
+                        {% endif %}
+                        <td>
+                            
+                            <a class="badge badge-light-info" href="{% url 'deals:deal-update' company.slug deal.pk %}">ویرایش</a>
+                            <a class="badge badge-light-danger" href="{% url 'deals:deal-delete' company.slug deal.pk %}">حذف</a>
+                          
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+{% endblock %}

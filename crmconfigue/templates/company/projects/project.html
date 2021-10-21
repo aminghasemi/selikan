@@ -1,0 +1,55 @@
+{% extends 'company/base.html' %}
+
+{% load jalali_tags %}
+
+{% block main %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'common:home' %}"><i class="bx bx-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="{% url 'common:dashboard' company.slug %}">{{company.name}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">پروژه‌ها</li>
+  </ol>
+</nav>
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <div class="card-header d-flex justify-content-between align-items-center pb-1">
+                  <a class="btn btn-info" href="{% url 'project:project-create' company.slug  %}">ایجاد پروژه جدید</a>
+                </div>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>عنوان</th>
+                      <th>وضعیت</th>
+                      <th>تاریخ شروع</th>
+                      <th>تاریخ پایان</th>
+                      <th>مدیر پروژه</th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for project in object_list %}
+                      <tr>
+                        <td><a href="{% url 'project:project-update' company.slug project.pk %}">{{project.title}}</a></td>
+                        <td>{{project.status}}</td>
+                        <td>{{project.start_date| to_jalali:'۱۴%y/%m/%d'}}</td>
+                        <td>{{project.end_date| to_jalali:'۱۴%y/%m/%d'}}</td>
+                        <td>{{project.project_manager}}</td>
+                        <td>
+                            <a class="badge badge-warning" href="{% url 'project:project-update' company.slug project.pk %}">ویرایش</a>
+                            <a class="badge badge-danger" href="{% url 'project:project-delete' company.slug project.pk %}">حذف</a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+{% endblock %}

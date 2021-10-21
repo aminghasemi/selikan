@@ -34,6 +34,7 @@ urlpatterns = [
     path('<slug:slug>/docs/', include('docs.urls')),
     path('<slug:slug>/targets/', include('targets.urls')),
     path('<slug:slug>/reports/', include('reports.urls')),
+    path('<slug:slug>/projects/', include('projects.urls')),
     path('login/', Login.as_view(), name='login'),
     path('register/', Register.as_view(), name='register'),
     path('', include('django.contrib.auth.urls')),

@@ -9,6 +9,9 @@ from common.decorators import company_enrolled
 from .models import Opportunity, OpportunityStatus, OpportunitySource
 from common.mixins import EnrollMixin, SuperUserAccessMixin, SpecialCompanyMixin, CreatorAccessMixin
 from .forms import OpportunityForm, OpportunityStatusForm, OpportunitySourceForm
+from datetime import timedelta
+from django.utils import timezone
+from datetime import datetime
 # Create your views here.
 
 
@@ -165,13 +168,81 @@ class OpportunityList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListVi
         global company
         slug= self.kwargs.get('slug')
         company = get_object_or_404(Company , slug=slug)
-        return company.companyopportunity.all()
+        return company.companyopportunity.filter(archive=False)
     def get_context_data(self, **kwargs):
         slug= self.kwargs.get('slug')
         company = get_object_or_404(Company , slug=slug)
         context= super().get_context_data(**kwargs)
         context['company'] = company
         return context
+
+
+class OpportunityListAll(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
+    template_name = 'company/opportunity/opportunity.html'
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companyopportunity.all()
+    def get_context_data(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        warning_date=datetime.now() - timedelta(days=1)
+        context['company'] = company
+        context['warning_date']= warning_date
+      #  context['deals']= company.companydeals.all()
+        return context
+
+class OpportunityList_today(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
+    template_name = 'company/opportunity/opportunity.html'
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companyopportunity.filter(due_date=datetime.today(), archive=False)
+    def get_context_data(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        warning_date=datetime.now() - timedelta(days=1)
+        context['company'] = company
+        context['warning_date']= warning_date
+      #  context['deals']= company.companydeals.all()
+        return context
+class OpportunityList_3days(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
+    template_name = 'company/opportunity/opportunity.html'
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companyopportunity.filter(due_date__lte=datetime.today()+timedelta(days=3), archive=False)
+    def get_context_data(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        warning_date=datetime.now() - timedelta(days=1)
+        context['company'] = company
+        context['warning_date']= warning_date
+      #  context['deals']= company.companydeals.all()
+        return context
+class OpportunityList_10days(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
+    template_name = 'company/opportunity/opportunity.html'
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companyopportunity.filter(due_date__lte=datetime.today()+timedelta(days=10), archive=False)
+    def get_context_data(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        warning_date=datetime.now() - timedelta(days=1)
+        context['company'] = company
+        context['warning_date']= warning_date
+      #  context['deals']= company.companydeals.all()
+        return context
+
 
 class OpportunityCreate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, CreateView):
     model=Opportunity
@@ -195,7 +266,6 @@ class OpportunityCreate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, Cre
         context['form'].fields['assigned_to'].queryset = company.staff_enroll.filter(company=company)
         context['form'].fields['converted_by'].queryset = company.staff_enroll.filter(company=company)
         context['form'].fields['teams'].queryset = company.companyteams.filter(company=company)
-        context['form'].fields['contacts'].queryset = company.companycontacts.filter(company=company)
         context['form'].fields['tags'].queryset = company.companytags.filter(company=company)
 
         context['company'] = company
@@ -227,7 +297,6 @@ class OpportunityUpdate(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin, Upd
         context['form'].fields['assigned_to'].queryset = company.staff_enroll.filter(company=company)
         context['form'].fields['converted_by'].queryset = company.staff_enroll.filter(company=company)
         context['form'].fields['teams'].queryset = company.companyteams.filter(company=company)
-        context['form'].fields['contacts'].queryset = company.companycontacts.filter(company=company)
         context['form'].fields['tags'].queryset = company.companytags.filter(company=company)
         context['company'] = company
         pk=self.kwargs.get('pk')

@@ -1,88 +1,233 @@
-{% extends 'company/base.html' %}
-
-{% block title %}داشبورد اصلی{% endblock %}
-
+{% load static %}
 {% load humanize %}
 {% load jalali_tags %}
-{% block main %}
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{% url 'common:home' %}"><i class="bx bx-home"></i></a></li>
-    <li class="breadcrumb-item"><a href="{% url 'common:dashboard' company.slug %}">{{company.name}}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">معاملات</li>
-  </ol>
-</nav>
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
 
-              <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <div class="card-header d-flex justify-content-between align-items-center pb-1">
-                  <a class="btn btn-info" href="{% url 'deals:deal-create' company.slug  %}">ایجاد معامله جدید</a>
-                  <div class="col-md-3 col-12 text-md-right">
-                    <a type="button" class="btn  btn-warning glow mt-md-2 mb-1" href="{% url 'deals:pipelines' company.slug %}"><i class="bx bx-cog"></i> تنظیمات مراحل معاملات</a>
-                        </div>
-                </div>
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th>عنوان معامله</th>
-                      <th>مرحله فروش</th>
-                      <th>مبلغ</th>
-                      <th>محول شده به</th>
-                      <th> نام مشتری </th>
-                      <th>عملیات</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for deal in object_list %}
-                      <tr>
-                        <td>
-                        <a href="{% url 'deals:deal-update' company.slug deal.pk %}">{{deal.title}}
-                          {% if warning_date >= deal.created_on %}
-                          <a class="nav-link nav-link-label" href="#" style="color:orange" data-toggle="dropdown" aria-expanded="false"><i class="ficon bx bx-bell bx-tada bx-flip-horizontal"></i></a>
-                            <ul class="dropdown-menu dropdown-menu-media">
-                              <div class="media-body mr-1 ml-1 mt-1 mb-1">
-                                <span class="media-heading">از زمان ایجاد این معامله مدت زیادی می‌گذرد. لطفا بررسی نمایید.</span><p><small class="notification-text">تاریخ ایجاد معامله: {{deal.created_on|to_jalali}}</small></p>
-                              </div>
-                            </ul>
-                          </a>
-                          {% endif %}
-                        </a>
-                        </td>
-                        {% if deal.pipeline_status.won %}
-                        <td><a class="badge badge-success" style="color:white">{{deal.pipeline_status}}</a></td>
-                        {% elif deal.pipeline_status.lost %}
-                        <td><a class="badge badge-danger" style="color:white">{{deal.pipeline_status}}</a></td>
-                        {% else %}
-                        <td><a class="badge badge-primary" style="color:white" >{{deal.pipeline_status}}</a></td>
-                        {% endif %}
-                        <td>{{ deal.deal_amount|intcomma:False }} تومان </td>
-                        {% if deal.assigned_to is null %}
-                        <td style="color:red">تعریف‌نشده</td>
-                        {% else %}
-                        <td>{{deal.assigned_to}}</td>
-                        {% endif %}
-                        {% if deal.account is null %}
-                        <td style="color:red">تعریف‌نشده</td>
-                        {% else %}
-                        <td>{{deal.account}}</td>
-                        {% endif %}
-                        <td>
-                            
-                            <a class="badge badge-light-info" href="{% url 'deals:deal-update' company.slug deal.pk %}">ویرایش</a>
-                            <a class="badge badge-light-danger" href="{% url 'deals:deal-delete' company.slug deal.pk %}">حذف</a>
-                          
-                        </td>
-                      </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
+<!DOCTYPE html>
+<html class="loading" lang="fa" data-textdirection="rtl" dir="rtl">
+  <!-- BEGIN: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>معاملات - سلیکان</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'frest/assets/images/ico/favicon-50.png' %}">
+	<meta name="theme-color" content="#5A8DEE">
+    
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/vendors.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/pickers/datepicker-jalali/bootstrap-datepicker.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/forms/select/select2.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/editors/quill/quill.snow.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/extensions/dragula.min.css' %}">
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/bootstrap-extended.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/colors.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/components.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/themes/dark-layout.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/themes/semi-dark-layout.css' %}">
+    <!-- END: Theme CSS-->
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/core/menu/menu-types/vertical-menu.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/pages/app-todo.css' %}">
+    <!-- END: Page CSS-->
+
+  </head>
+  <!-- END: Head-->
+
+  <!-- BEGIN: Body-->
+  <body class="vertical-layout vertical-menu-modern semi-dark-layout content-left-sidebar todo-application navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="content-left-sidebar" data-layout="semi-dark-layout">
+
+    {% include 'company/header.html'%}
+
+
+
+    {% include 'company/sidebar.html'%}
+
+
+
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+      <div class="content-area-wrapper">
+        <div class="sidebar-left">
+          <div class="sidebar"><div class="todo-sidebar d-flex">
+  <span class="sidebar-close-icon">
+    <i class="bx bx-x"></i>
+  </span>
+  <!-- todo app menu -->
+  <div class="todo-app-menu">
+    <div class="form-group text-center add-task">
+      <!-- new task button -->
+      <div>
+      <a class="btn btn-outline-info btn my-1" href="{% url 'deals:deal-create' company.slug  %}">ایجاد معامله جدید</a>
+      <a class="btn btn-icon btn-outline-warning my-1" data-toggle="tooltip" data-placement="top" title="" data-original-title="تنظیمات مراحل معاملات" href="{% url 'deals:pipelines' company.slug %}"><i class="bx bx-cog"></i></a>
+      </div>
+    </div>
+    <!-- sidebar list start -->
+    <div class="sidebar-menu-list">
+      <div class="list-group">
+        <a href="{% url 'deals:deals' company.slug  %}" class="list-group-item border-0">
+          <span class="fonticon-wrap mr-50">
+            <i class="livicon-evo" data-options="name: priority-high.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent;"></i>
+          </span>
+          <span>در جریان</span>
+        </a>
+        <a href="{% url 'deals:deals-all' company.slug  %}" class="list-group-item border-0">
+          <span class="fonticon-wrap mr-50">
+            <i class="livicon-evo" data-options="name: list.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent;"></i>
+          </span>
+          <span> همه</span>
+        </a>
+      </div>
+      <label class="filter-label mt-2 mb-1 pt-25">زمان پیگیری</label>
+      <div class="list-group">
+        <a href="{% url 'deals:deals-today' company.slug  %}" class="list-group-item border-0">
+          <span class="fonticon-wrap mr-50">
+            <i class="livicon-evo" data-options="name: hourglass.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent;"></i>
+          </span>
+          <span>امروز</span>
+        </a>
+        <a href="{% url 'deals:deals-3days' company.slug  %}" class="list-group-item border-0">
+          <span class="fonticon-wrap mr-50">
+            <i class="livicon-evo" data-options="name: priority-low.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent;"></i>
+          </span>
+          <span>سه روز آینده</span>
+        </a>
+        <a href="{% url 'deals:deals-10days' company.slug  %}" class="list-group-item border-0">
+          <span class="fonticon-wrap mr-50">
+            <i class="livicon-evo" data-options="name: calendar.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent;"></i>
+          </span>
+          <span>ده روز آینده</span>
+        </a>
+      </div>
+    </div>
+    <!-- sidebar list end -->
+  </div>
+</div>
+
+
           </div>
         </div>
-{% endblock %}
+        <div class="content-right">
+          <div class="content-overlay"></div>
+          <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body"><div class="app-content-overlay"></div>
+<div class="todo-app-area">
+  <div class="todo-app-list-wrapper">
+    <div class="todo-app-list">
+      <div class="todo-fixed-search d-flex justify-content-between align-items-center">
+        <div class="sidebar-toggle d-block d-lg-none">
+          <i class="bx bx-menu"></i>
+        </div>
+        <fieldset class="form-group position-relative has-icon-left m-0 flex-grow-1">
+          <input type="text" class="form-control todo-search" id="todo-search" placeholder="جستجوی معاملات">
+          <div class="form-control-position">
+            <i class="bx bx-search"></i>
+          </div>
+        </fieldset>
+        <div class="todo-sort dropdown mr-1">
+          <button class="btn dropdown-toggle sorting" type="button" id="sortDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="bx bx-filter"></i>
+            <span>ترتیب</span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="sortDropdown">
+            <a class="dropdown-item ascending" href="#">جدید‌ترین</a>
+            <a class="dropdown-item descending" href="#">قدیمی‌ترین</a>
+          </div>
+        </div>
+      </div>
+      <div class="todo-task-list list-group">
+        <!-- task list start -->
+        <ul class="todo-task-list-wrapper list-unstyled" id="todo-task-list-drag">
+          {% for deal in object_list %}
+
+          <li class="todo-item" data-name="David Smith">
+            <div class="todo-title-wrapper d-flex justify-content-sm-between justify-content-end align-items-center">
+              <div class="todo-title-area d-flex align-items-center">
+                <div class="avatar m-50 ml-50 mr-50">
+                  {% if deal.assigned_to.staff.thumbnail %}
+                    <img class="round" src="{{deal.assigned_to.staff.thumbnail.url}}" alt="avatar" height="32" width="32">
+                  {% else %}
+                    <img class="round" src="{% static 'frest/assets/images/placeholder.png' %}" alt="avatar" height="32" width="32">
+                  {% endif %}
+                  </div>
+                  <span class="badge badge-light-success badge-pill mr-1">{{deal.pipeline_status}}</span>
+                <span><a class="mr-50" href="{% url 'deals:deal-update' company.slug deal.pk %}">{{deal.title}}</a></span>
+
+                </div>
+              <div class="todo-item-action d-flex align-items-center">
+                <div class="todo-badge-wrapper d-flex">
+                  <span class="badge badge-light-warning badge-pill mr-1"> زمان پیگیری: {{deal.due_date| to_jalali:'۱۴%y/%m/%d'}}</span>
+                  <span class="badge badge-light-danger badge-pill mr-1">{{ deal.deal_amount|intcomma:False }} تومان</span>
+
+                </div>
+
+                <a class="todo-item-delete ml-75"href="{% url 'deals:deal-delete' company.slug deal.pk %}"><i class="bx bx-trash"></i></a>
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+        </ul>
+        <!-- task list end -->
+        <div class="no-results">
+          <h5>موردی یافت نشد</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END: Content-->
+
+
+
+
+
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    {% include 'company/footer.html'%}
+
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="{% static 'frest/assets/vendors/js/vendors.min.js' %}"></script>
+    <script src="{% static 'frest/assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.min.js' %}"></script>
+    <script src="{% static 'frest/assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js' %}"></script>
+    <script src="{% static 'frest/assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js' %}"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{% static 'frest/assets/vendors/js/pickers/datepicker-jalali/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'frest/assets/vendors/js/pickers/datepicker-jalali/bootstrap-datepicker.fa.min.js' %}"></script>
+    <script src="{% static 'frest/assets/vendors/js/forms/select/select2.full.min.js' %}"></script>
+    <script src="{% static 'frest/assets/vendors/js/editors/quill/quill.min.js' %}"></script>
+    <script src="{% static 'frest/assets/vendors/js/extensions/dragula.min.js' %}"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="{% static 'frest/assets/js/scripts/configs/vertical-menu-dark.js' %}"></script>
+    <script src="{% static 'frest/assets/js/core/app-menu.js' %}"></script>
+    <script src="{% static 'frest/assets/js/core/app.js' %}"></script>
+    <script src="{% static 'frest/assets/js/scripts/components.js' %}"></script>
+    <script src="{% static 'frest/assets/js/scripts/footer.js' %}"></script>
+    <script src="{% static 'frest/assets/js/scripts/customizer.js' %}"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="{% static 'frest/assets/js/scripts/pages/app-todo.js' %}"></script>
+    <!-- END: Page JS-->
+
+  </body>
+  <!-- END: Body-->
+</html>

@@ -50,12 +50,12 @@ class Lead(models.Model):
     created_on = models.DateTimeField( auto_now_add=True, verbose_name="تاریخ ایجاد")
     is_active = models.BooleanField(default=True, verbose_name="فعال")
     tags = models.ForeignKey(Tags, blank=True, on_delete=models.SET_NULL, null=True, verbose_name="تگ‌ها")
-    contacts = models.ForeignKey(Contact,on_delete=models.SET_NULL, null=True,blank=True, related_name="lead_contacts", verbose_name="اشخاص مرتبط")
     teams = models.ForeignKey(Teams,on_delete=models.SET_NULL, null=True,blank=True, related_name="lead_teams", verbose_name="تیم سرنخ")
     company = models.ForeignKey(Company, on_delete=models.SET_NULL, null=True, related_name="companyleads", blank=True, verbose_name="کاربر سایت")
     converted_by = models.ForeignKey(Enrolled, on_delete=models.SET_NULL, null=True, related_name="lead_converted_by", blank=True, verbose_name="تکمیل‌شده توسط")
     closed_on = models.DateField(blank=True,null=True, verbose_name="تاریخ تکمیل")
     archive = models.BooleanField(default=False, verbose_name="بایگانی شود؟")
+    due_date = models.DateField(null=True,blank=True, verbose_name="زمان پیگیری")
 
 
     class Meta:

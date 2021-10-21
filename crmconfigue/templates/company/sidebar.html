@@ -17,6 +17,141 @@
             </li>
           </ul>
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
+            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="idea"></i><span class="menu-title" data-i18n="Dashboard">دپارتمان فروش</span></a>
+              <ul class="menu-content">
+                <li><a href="{% url 'deals:deals' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">معاملات</span></a>
+                </li>
+                <li><a href="{% url 'opportunity:opportunity' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i></i><span class="menu-item" data-i18n="eCommerce">فرصت‌ها</span></a>
+                </li>
+                <li><a href="{% url 'accounts:accounts' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i></i><span class="menu-item" data-i18n="eCommerce">مشتریان</span></a>
+                </li>
+
+              </ul>
+            </li>
+          </ul>
+          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
+            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="trophy"></i><span class="menu-title" data-i18n="Dashboard">دپارتمان بازاریابی</span></a>
+              <ul class="menu-content">
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">برنامه بازاریابی</span></a>
+                </li>
+                <li><a href="{% url 'leads:leads' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i></i><span class="menu-item" data-i18n="eCommerce">سرنخ‌ها</span></a>
+                </li>
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">کمپین‌های تبلیغاتی</span></a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
+            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="trophy"></i><span class="menu-title" data-i18n="Dashboard">دپارتمان مالی</span></a>
+              <ul class="menu-content">
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">حسابداری</span></a>
+                </li>
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">حقوق و دستمزد</span></a>
+                </li>
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">فاکتور و پیش‌فاکتور</span></a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
+            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="trophy"></i><span class="menu-title" data-i18n="Dashboard">دپارتمان تولید</span></a>
+              <ul class="menu-content">
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">مدیریت تولید</span></a>
+                </li>
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">مدیریت انبار</span></a>
+                </li>
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">مدیریت خط تولید</span></a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
+            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="trophy"></i><span class="menu-title" data-i18n="Dashboard">دپارتمان منابع انسانی</span></a>
+              <ul class="menu-content">
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">چارت سازمانی</span></a>
+                </li>
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">استخدام</span></a>
+                </li>
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">حضور و غیاب و مرخصی</span></a>
+                </li>
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">برنامه‌های منابع انسانی</span></a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
+            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="trophy"></i><span class="menu-title" data-i18n="Dashboard">دپارتمان اداری مدیریتی</span></a>
+              <ul class="menu-content">
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">هدف‌گذاری</span></a>
+                </li>
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">گزارش‌ها</span></a>
+                </li>
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">اتوماسیون</span></a>
+                </li>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
+            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="trophy"></i><span class="menu-title" data-i18n="Dashboard">دپارتمان حقوقی</span></a>
+              <ul class="menu-content">
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">امور قراردادها</span></a>
+                </li>
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">پرونده‌های حقوقی</span></a>
+                </li>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
+            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="trophy"></i><span class="menu-title" data-i18n="Dashboard">مدیریت پروژه و عملیات</span></a>
+              <ul class="menu-content">
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">عملیات اجرایی</span></a>
+                </li>
+                <li><a href="{% url 'project:project' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">مدیریت پروژه</span></a>
+                </li>
+                <li><a href="{% url 'task:task' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">مدیریت وظایف</span></a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
+            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="trophy"></i><span class="menu-title" data-i18n="Dashboard">پایگاه دانش</span></a>
+              <ul class="menu-content">
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">رویه‌ها و قوانین سازمان</span></a>
+                </li>
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">آموزش پلت‌فرم</span></a>
+                </li>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
+            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="trophy"></i><span class="menu-title" data-i18n="Dashboard">صندوق پیام</span></a>
+              <ul class="menu-content">
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">پیام‌های سازمانی</span></a>
+                </li>
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">پیام‌های شخصی</span></a>
+                </li>
+                </li>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
+            <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="trophy"></i><span class="menu-title" data-i18n="Dashboard">پروفایل سازمانی</span></a>
+              <ul class="menu-content">
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">مرخصی</span></a>
+                </li>
+                <li><a href="#"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">حقوق و دستمزد</span></a>
+                </li>
+                </li>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
             <li class=" nav-item"><a href="#"><i class="menu-livicon" data-icon="trophy"></i><span class="menu-title" data-i18n="Dashboard">هدف‌گذاری</span></a>
               <ul class="menu-content">
                 <li><a href="{% url 'targets:companytargets' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">لیست اهداف شرکت</span></a>
@@ -24,47 +159,6 @@
                 <li><a href="{% url 'targets:stafftargets' company.slug %}"><i class="bx bx-left-arrow-alt" data-icon="check-alt"></i><span class="menu-item" data-i18n="eCommerce">لیست اهداف کارمندان</span></a>
                 </li>
               </ul>
-            </li>
-          </ul>
-          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" nav-item"><a href="{% url 'deals:deals' company.slug %}"><i class="menu-livicon" data-icon="us-dollar"></i><span class="menu-title" data-i18n="Dashboard">معاملات</span></a>
-            </li>
-          </ul>
-          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" nav-item"><a href="{% url 'accounts:accounts' company.slug %}"><i class="menu-livicon" data-icon="building"></i><span class="menu-title" data-i18n="Dashboard">مشتریان</span></a>
-
-            </li>
-          </ul>
-          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" nav-item"><a href="{% url 'leads:leads' company.slug %}"><i class="menu-livicon" data-icon="search"></i><span class="menu-title" data-i18n="Dashboard">سرنخ‌ها</span></a>
-
-            </li>
-          </ul>
-          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" nav-item"><a href="{% url 'task:task' company.slug %}"><i class="menu-livicon" data-icon="priority-high"></i><span class="menu-title" data-i18n="Dashboard">وظایف و کارها</span></a>
-
-            </li>
-          </ul>
-          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" nav-item"><a href="{% url 'opportunity:opportunity' company.slug %}"><i class="menu-livicon" data-icon="idea"></i><span class="menu-title" data-i18n="Dashboard">فرصت‌ها</span></a>
-
-            </li>
-          </ul>
-          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" nav-item"><a href="{% url 'contacts:contacts' company.slug %}"><i class="menu-livicon" data-icon="users"></i><span class="menu-title" data-i18n="Dashboard">اشخاص</span></a>
-
-            </li>
-          </ul>
-          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" nav-item"><a href="{% url 'teams:teams' company.slug %}"><i class="menu-livicon" data-icon="headphones"></i><span class="menu-title" data-i18n="Dashboard">تیم‌ها</span></a>
-            </li>
-          </ul>
-          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" nav-item"><a href="{% url 'invoice:invoices' company.slug %}"><i class="menu-livicon" data-icon="print-doc"></i><span class="menu-title" data-i18n="Dashboard">فاکتورها</span></a>
-            </li>
-          </ul>
-          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" nav-item"><a href="{% url 'doc:docs' company.slug %}"><i class="menu-livicon" data-icon="box"></i><span class="menu-title" data-i18n="Dashboard">فایل‌ها</span></a>
             </li>
           </ul>
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
@@ -93,7 +187,7 @@
             </li>
           </ul>
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" nav-item"><a href="{% url 'common:company-update' company.slug %}"><i class="menu-livicon" data-icon="gears"></i><span class="menu-title" data-i18n="Dashboard">تنظیمات CRM</span></a>
+            <li class=" nav-item"><a href="{% url 'common:company-update' company.slug %}"><i class="menu-livicon" data-icon="gears"></i><span class="menu-title" data-i18n="Dashboard">تنظیمات پلت‌فرم</span></a>
           </ul>
         </div>
       </div>

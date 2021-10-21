@@ -42,7 +42,6 @@ class Opportunity(models.Model):
     source = models.ForeignKey(OpportunitySource,related_name="Opportunity_source",on_delete=models.SET_NULL, null=True, blank=True, verbose_name="منبع")
     amount = models.DecimalField(decimal_places=0,max_digits=20, blank=True,null=True, verbose_name="مبلغ")
     probability = models.IntegerField(default=0, blank=True,null=True, verbose_name="احتمال")
-    contacts = models.ForeignKey(Contact,blank=True, on_delete=models.SET_NULL, null=True, verbose_name="شخص")
     converted_by = models.ForeignKey(Enrolled,related_name="Opportunity_converted_by", on_delete=models.SET_NULL, null=True, blank=True, verbose_name="تکمیل‌شده توسط")
     closed_on = models.DateField(blank=True,null=True, verbose_name="تاریخ تکمیل")
     description = models.TextField(blank=True,null=True, verbose_name="توضیحات")
@@ -54,6 +53,7 @@ class Opportunity(models.Model):
     teams = models.ForeignKey(Teams,on_delete=models.SET_NULL, null=True,blank=True, related_name="oppurtunity_teams", verbose_name="تیم")
     company = models.ForeignKey(Company, related_name= "companyopportunity", on_delete=models.SET_NULL, null=True,  blank=True, verbose_name="کاربر سایت")
     archive = models.BooleanField(default=False, verbose_name="بایگانی شود؟")
+    due_date = models.DateField(null=True,blank=True, verbose_name="زمان پیگیری")
 
     class Meta:
         ordering = ["-created_on"]

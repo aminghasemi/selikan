@@ -1,0 +1,57 @@
+{% extends 'company/base.html' %}
+
+{% load jalali_tags %}
+
+{% block main %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'common:home' %}"><i class="bx bx-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="{% url 'common:dashboard' company.slug %}">{{company.name}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">وظایف و کارها</li>
+  </ol>
+</nav>
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <div class="card-header d-flex justify-content-between align-items-center pb-1">
+                  <a class="btn btn-info" href="{% url 'task:task-create' company.slug  %}">ایجاد وظیفه جدید</a>
+                </div>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>عنوان</th>
+                      <th>نام مشتری</th>
+                      <th>وضعیت</th>
+                      <th>اهمیت</th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for task in object_list %}
+                      <tr>
+                        <td><a href="{% url 'task:task-update' company.slug task.pk %}">{{task.title}}</a></td>
+                        {% if task.account is null %}
+                        <td style="color:red">مشتری تعریف‌نشده</td>
+                        {% else %}
+                        <td>{{task.account}}</td>
+                        {% endif %}
+                        <td>{{task.status}}</td>
+                        <td>{{task.priority}}</td>
+                        <td>
+                            <a class="badge" href="{% url 'task:task-update' company.slug task.pk %}">ویرایش</a>
+                            <a class="badge" href="{% url 'task:task-delete' company.slug task.pk %}">حذف</a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+{% endblock %}

@@ -13,6 +13,10 @@
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
+            <li class=" nav-item"><a href="{% url 'common:dashboard' company.slug %}"><i class="menu-livicon" data-icon="dashboard"></i><span class="menu-title" data-i18n="Dashboard">داشبورد</span></a>
+            </li>
+          </ul>
+          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
             <li class=" nav-item"><a href="{% url 'targets:targetsubjectlist' company.slug %}"><i class="menu-livicon" data-icon="gear"></i><span class="menu-title" data-i18n="Dashboard">تنظیمات اهداف</span></a>
 
             </li>
@@ -44,6 +48,18 @@
           </ul>
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
             <li class=" nav-item"><a href="{% url 'common:products' company.slug %}"><i class="menu-livicon" data-icon="gear"></i><span class="menu-title" data-i18n="Dashboard">تنظیمات محصولات</span></a>
+            </li>
+          </ul>
+          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
+            <li class=" nav-item"><a href="{% url 'teams:teams' company.slug %}"><i class="menu-livicon" data-icon="headphones"></i><span class="menu-title" data-i18n="Dashboard">تیم‌ها</span></a>
+            </li>
+          </ul>
+          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
+            <li class=" nav-item"><a href="{% url 'invoice:invoices' company.slug %}"><i class="menu-livicon" data-icon="print-doc"></i><span class="menu-title" data-i18n="Dashboard">فاکتورها</span></a>
+            </li>
+          </ul>
+          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
+            <li class=" nav-item"><a href="{% url 'doc:docs' company.slug %}"><i class="menu-livicon" data-icon="box"></i><span class="menu-title" data-i18n="Dashboard">فایل‌ها</span></a>
             </li>
           </ul>
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">

@@ -9,6 +9,19 @@ from django.urls import reverse
 from extensions.utils import jalali_converter
 from jalali_date import datetime2jalali, date2jalali
 from django_jalali.db import models as jmodels
+from projects.models import Project
+
+class TaskSubject(models.Model):
+    tasksubject_title = models.CharField(max_length=64, verbose_name="عنوان")
+    created_by = models.ForeignKey(User, related_name="tasksubject_created_by", on_delete=models.CASCADE,  verbose_name="ساخته شده توسط")
+    created_on = models.DateTimeField( auto_now_add=True, verbose_name="تاریخ ایجاد")
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="companytasksubject", verbose_name="کاربر سایت")
+    class Meta:
+        verbose_name = "موضوع"
+        verbose_name_plural = "موضوعات"
+    def __str__(self):
+        return self.tasksubject_title
+
 
 class Task(models.Model):
 
@@ -31,13 +44,17 @@ class Task(models.Model):
         ("قرارداد", "قرارداد"),
         ("کاتالوگ", "کاتالوگ"),
         ("پروپوزال", "پروپوزال"),
+        ("سایر", "سایر"),
+
     )
 
 
     title = models.CharField( max_length=200,null=True,blank=True, verbose_name="عنوان")
     status = models.CharField( max_length=50,null=True,blank=True, choices=STATUS_CHOICES, verbose_name="وضعیت")
     priority = models.CharField( max_length=50,null=True,blank=True, choices=PRIORITY_CHOICES, verbose_name="تقدم")
-    subject = models.CharField( max_length=50,null=True,blank=True, choices=SUBJECT_CHOICES, verbose_name="موضوع")
+    subject = models.CharField( max_length=50,null=True,blank=True, choices=SUBJECT_CHOICES, verbose_name="موضوع کار")
+    project = models.ForeignKey(Project, on_delete=models.SET_NULL,null=True, related_name='projecttask', blank=True, verbose_name="پروژه")
+    tasksubject = models.ForeignKey(TaskSubject, on_delete=models.SET_NULL,null=True, related_name='tasksubject', blank=True, verbose_name="موضوع")
     due_date = models.DateField(null=True,blank=True, verbose_name="مهلت انجام")
     created_on = models.DateTimeField( auto_now_add=True, verbose_name="تاریخ ایجاد")
     account = models.ForeignKey(Account,null=True, related_name="accounts_tasks",blank=True,on_delete=models.SET_NULL, verbose_name="نام مشتری")

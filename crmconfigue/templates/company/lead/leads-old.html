@@ -1,0 +1,66 @@
+{% extends 'company/base.html' %}
+
+{% block title %}داشبورد اصلی{% endblock %}
+
+
+{% block main %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'common:home' %}"><i class="bx bx-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="{% url 'common:dashboard' company.slug %}">{{company.name}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">معاملات</li>
+  </ol>
+</nav>
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <div class="card-header d-flex justify-content-between align-items-center pb-1">
+                  <a class="btn btn-info" href="{% url 'leads:lead-create' company.slug  %}">ایجاد سرنخ جدید</a>
+                  <div class="col-md-6 col-12 text-md-right">
+                    <a type="button" class="btn  btn-warning glow mt-md-2 mb-1" href="{% url 'leads:leadstatus' company.slug %}"><i class="bx bx-cog"></i> تنظیمات مراحل سرنخ‌ها</a>
+                    <a type="button" class="btn  btn-warning glow mt-md-2 mb-1" href="{% url 'leads:leadsource' company.slug %}"><i class="bx bx-cog"></i> تنظیمات منابع سرنخ‌ها</a>
+                  </div>
+                </div>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>عنوان سرنخ</th>
+                      <th>مرحله سرنخ</th>
+                      <th>منبع</th>
+                      <th>محول شده به</th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for leads in object_list %}
+                      <tr>
+                        <td><a href="{% url 'leads:lead-update' company.slug leads.pk %}">{{leads.title}}</a></td>
+                        {% if leads.status.won %}
+                        <td><a class="badge badge-success" style="color:white">{{leads.status}}</a></td>
+                        {% elif leads.status.lost %}
+                        <td><a class="badge badge-danger" style="color:white">{{leads.status}}</a></td>
+                        {% else %}
+                        <td><a class="badge badge-primary" style="color:white" >{{leads.status}}</a></td>
+                        {% endif %} 
+                        <td>{{leads.source}}</td>
+                        <td>{{leads.assigned_to.get_full_name}}</td>
+                        <td>
+                            {% if user.is_superuser %}
+                            <a class="badge" href="{% url 'leads:lead-update' company.slug leads.pk %}">ویرایش</a>
+                            <a class="badge" href="{% url 'leads:lead-delete' company.slug leads.pk %}">حذف</a>
+                            {% endif %}
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+kind: ExternalService
+name: selikan
+spec:
+  image_pull_policy: Always
+  port: 80
+  source:
+    context: .
+    media_path: ''
+    project_type: django
+    python_version: '3.7'
+    static_path: static
+    wsgi: crmconfigue.wsgi
+  volume_mounts:
+  - mount_path: /usr/src/app/media
+    sub_path: selikan/media
+    volume_name: armanparadise
+  volume_mounts:
+  - mount_path: /usr/src/app/static
+    sub_path: selikan/static
+    volume_name: armanparadise

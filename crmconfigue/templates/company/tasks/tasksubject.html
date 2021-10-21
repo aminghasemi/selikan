@@ -1,0 +1,44 @@
+{% extends 'company/company-settings-base.html' %}
+
+{% block title %}داشبورد اصلی{% endblock %}
+
+
+{% block main %}
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <div class="card-header d-flex justify-content-between align-items-center pb-1">
+                  <a class="btn btn-info" href="{% url 'task:tasksubject-create' company.slug  %}">ایجاد موضوعات وظایف جدید</a>
+                  <div class="col-md-3 col-12 text-md-right">
+                    <a type="button" class="btn  btn-success glow mt-md-2 mb-1" href="{% url 'task:task' company.slug %}"><i class="bx bx-reply"></i> بازگشت به وظایف</a>
+                        </div>
+                </div>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>عنوان</th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for tasksubject in object_list %}
+                      <tr>
+                        <td><a href="{% url 'task:tasksubject-update' company.slug tasksubject.pk %}">{{tasksubject.tasksubject_title}}</a></td>
+                        <td>
+                            <a class="badge badge-warning" href="{% url 'task:tasksubject-update' company.slug tasksubject.pk %}">ویرایش</a>
+                            <a class="badge badge-danger" href="{% url 'task:tasksubject-delete' company.slug tasksubject.pk %}">حذف</a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+{% endblock %}

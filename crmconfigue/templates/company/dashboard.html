@@ -69,7 +69,11 @@
                   <div class="widget-todo-title-wrapper d-flex justify-content-between align-items-center mb-50">
                     <div class="widget-todo-title-area d-flex align-items-center">
                       <div class="avatar m-0 mr-50">
-                        <img src="{{task.assigned_to.thumbnail}}" alt="img placeholder" height="32" width="32">
+                      {% if task.assigned_to.staff.thumbnail %}
+                        <img class="round" src="{{task.assigned_to.staff.thumbnail.url}}" alt="avatar" height="32" width="32">
+                      {% else %}
+                        <img class="round" src="{% static 'frest/assets/images/placeholder.png' %}" alt="avatar" height="32" width="32">
+                      {% endif %}
                       </div>
                       <a href="{% url 'task:task-update' company.slug task.pk %}">{{task.title}}</a>
                     </div>
@@ -101,7 +105,7 @@
     <div class="col-xl-8 col-12 dashboard-marketing-campaign">
       <div class="card marketing-campaigns">
         <div class="card-header d-flex justify-content-between align-items-center pb-1">
-          <h4 class="card-title">لیست معاملات در جریان</h4>
+          <h4 class="card-title">معاملاتی که باید امروز پیگیری شوند:</h4>
         </div>
         <div class="card-content">
           <div class="card-body pb-0">
@@ -213,7 +217,7 @@
     <div class="col-xl-8 col-12 dashboard-marketing-campaign">
       <div class="card marketing-campaigns">
         <div class="card-header d-flex justify-content-between align-items-center pb-1">
-          <h4 class="card-title">لیست فرصت‌های در جریان</h4>
+          <h4 class="card-title">فرصت‌هایی که باید امروز پیگیری شوند:</h4>
           <a type="button" class="btn btn-sm btn-info glow" href="{% url 'opportunity:opportunity' company.slug %}">همه فرصت‌ها </a>
         </div>
 
@@ -273,7 +277,7 @@
     <div class="col-xl-8 col-12 dashboard-marketing-campaign">
       <div class="card marketing-campaigns">
         <div class="card-header d-flex justify-content-between align-items-center pb-1">
-          <h4 class="card-title">لیست سرنخ‌های در جریان</h4>
+          <h4 class="card-title">سرنخ‌هایی که باید امروز پیگیری شوند:</h4>
           <a type="button" class="btn btn-sm btn-warning glow" href="{% url 'deals:deals' company.slug %}">همه سرنخ‌ها</a>
         </div>
 

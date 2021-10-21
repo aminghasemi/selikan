@@ -95,6 +95,23 @@ class DealsList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
         global company
         slug= self.kwargs.get('slug')
         company = get_object_or_404(Company , slug=slug)
+        return company.companydeals.filter(archive=False)
+    def get_context_data(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        warning_date=datetime.now() - timedelta(days=1)
+        context['company'] = company
+        context['warning_date']= warning_date
+      #  context['deals']= company.companydeals.all()
+        return context
+
+class DealsListAll(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
+    template_name = 'company/deal/deals.html'
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
         return company.companydeals.all()
     def get_context_data(self, **kwargs):
         slug= self.kwargs.get('slug')
@@ -105,6 +122,56 @@ class DealsList(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
         context['warning_date']= warning_date
       #  context['deals']= company.companydeals.all()
         return context
+
+class DealsList_today(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
+    template_name = 'company/deal/deals.html'
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companydeals.filter(due_date=datetime.today(), archive=False)
+    def get_context_data(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        warning_date=datetime.now() - timedelta(days=1)
+        context['company'] = company
+        context['warning_date']= warning_date
+      #  context['deals']= company.companydeals.all()
+        return context
+class DealsList_3days(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
+    template_name = 'company/deal/deals.html'
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companydeals.filter(due_date__lte=datetime.today()+timedelta(days=3), archive=False)
+    def get_context_data(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        warning_date=datetime.now() - timedelta(days=1)
+        context['company'] = company
+        context['warning_date']= warning_date
+      #  context['deals']= company.companydeals.all()
+        return context
+class DealsList_10days(EnrollMixin,SpecialCompanyMixin, LoginRequiredMixin,ListView):
+    template_name = 'company/deal/deals.html'
+    def get_queryset(self):
+        global company
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        return company.companydeals.filter(due_date__lte=datetime.today()+timedelta(days=10), archive=False)
+    def get_context_data(self, **kwargs):
+        slug= self.kwargs.get('slug')
+        company = get_object_or_404(Company , slug=slug)
+        context= super().get_context_data(**kwargs)
+        warning_date=datetime.now() - timedelta(days=1)
+        context['company'] = company
+        context['warning_date']= warning_date
+      #  context['deals']= company.companydeals.all()
+        return context
+
 class DealCreate(LoginRequiredMixin, SpecialCompanyMixin,CreateView):
     model=Deal
     form_class = DealForm

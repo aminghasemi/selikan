@@ -1,11 +1,12 @@
 kind: ExternalService
 name: selikan
 spec:
+  volume_browser_enabled: true
   image_pull_policy: Always
   port: 80
   source:
     context: .
-    media_path: media
+    media_path: ''
     project_type: django
     python_version: '3.7'
     static_path: static
@@ -13,5 +14,6 @@ spec:
   volume_mounts:
   - mount_path: /usr/src/app/media
     sub_path: selikan/media
+    volume_name: selikan
   domains:
     - name: selikan.ir

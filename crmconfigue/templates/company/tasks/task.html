@@ -1,57 +1,271 @@
-{% extends 'company/base.html' %}
-
+{% load static %}
+{% load humanize %}
 {% load jalali_tags %}
 
-{% block main %}
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{% url 'common:home' %}"><i class="bx bx-home"></i></a></li>
-    <li class="breadcrumb-item"><a href="{% url 'common:dashboard' company.slug %}">{{company.name}}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">وظایف و کارها</li>
-  </ol>
-</nav>
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
+<!DOCTYPE html>
+<html class="loading" lang="fa" data-textdirection="rtl" dir="rtl">
+  <!-- BEGIN: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>وظایف - سلیکان</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'frest/assets/images/ico/favicon-50.png' %}">
+	<meta name="theme-color" content="#5A8DEE">
+    
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/vendors.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/pickers/datepicker-jalali/bootstrap-datepicker.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/forms/select/select2.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/editors/quill/quill.snow.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/vendors/css/extensions/dragula.min.css' %}">
+    <!-- END: Vendor CSS-->
 
-              <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <div class="card-header d-flex justify-content-between align-items-center pb-1">
-                  <a class="btn btn-info" href="{% url 'task:task-create' company.slug  %}">ایجاد وظیفه جدید</a>
-                </div>
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th>عنوان</th>
-                      <th>نام مشتری</th>
-                      <th>وضعیت</th>
-                      <th>اهمیت</th>
-                      <th>عملیات</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for task in object_list %}
-                      <tr>
-                        <td><a href="{% url 'task:task-update' company.slug task.pk %}">{{task.title}}</a></td>
-                        {% if task.account is null %}
-                        <td style="color:red">مشتری تعریف‌نشده</td>
-                        {% else %}
-                        <td>{{task.account}}</td>
-                        {% endif %}
-                        <td>{{task.status}}</td>
-                        <td>{{task.priority}}</td>
-                        <td>
-                            <a class="badge" href="{% url 'task:task-update' company.slug task.pk %}">ویرایش</a>
-                            <a class="badge" href="{% url 'task:task-delete' company.slug task.pk %}">حذف</a>
-                        </td>
-                      </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/bootstrap-extended.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/colors.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/components.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/themes/dark-layout.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/themes/semi-dark-layout.css' %}">
+    <!-- END: Theme CSS-->
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/core/menu/menu-types/vertical-menu.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frest/assets/css/pages/app-todo.css' %}">
+    <!-- END: Page CSS-->
+
+  </head>
+  <!-- END: Head-->
+
+  <!-- BEGIN: Body-->
+  <body class="vertical-layout vertical-menu-modern semi-dark-layout content-left-sidebar todo-application navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="content-left-sidebar" data-layout="semi-dark-layout">
+
+    {% include 'company/header.html'%}
+
+
+
+    {% include 'company/sidebar.html'%}
+
+
+
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+      <div class="content-area-wrapper">
+        <div class="sidebar-left">
+          <div class="sidebar"><div class="todo-sidebar d-flex">
+  <span class="sidebar-close-icon">
+    <i class="bx bx-x"></i>
+  </span>
+  <!-- todo app menu -->
+  <div class="todo-app-menu">
+    <div class="form-group text-center add-task">
+      <!-- new task button -->
+      <a class="btn btn-outline-info btn my-1" href="{% url 'task:task-create' company.slug  %}">ایجاد وظیفه جدید</a>
+      <a class="btn btn-icon btn-outline-warning my-1" data-toggle="tooltip" data-placement="top" title="" data-original-title="تنظیمات وظایف" href="{% url 'task:tasksubject' company.slug %}"><i class="bx bx-cog"></i></a>
+
+    </div>
+    <!-- sidebar list start -->
+    <div class="sidebar-menu-list">
+      <div class="list-group">
+        <a href="{% url 'task:task' company.slug  %}" class="list-group-item border-0">
+          <span class="fonticon-wrap mr-50">
+            <i class="livicon-evo" data-options="name: priority-high.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent;"></i>
+          </span>
+          <span>در جریان</span>
+        </a>
+        <a href="{% url 'task:task-all' company.slug  %}" class="list-group-item border-0">
+          <span class="fonticon-wrap mr-50">
+            <i class="livicon-evo" data-options="name: list.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent;"></i>
+          </span>
+          <span> همه</span>
+        </a>
+      </div>
+      <label class="filter-label mt-2 mb-1 pt-25">فیلتر ها</label>
+      <div class="list-group">
+        <a href="{% url 'task:task-daily' company.slug  %}" class="list-group-item border-0">
+          <span class="fonticon-wrap mr-50">
+            <i class="livicon-evo" data-options="name: hourglass.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent;"></i>
+          </span>
+          <span>روزانه</span>
+        </a>
+        <a href="{% url 'task:task-weekly' company.slug  %}" class="list-group-item border-0">
+          <span class="fonticon-wrap mr-50">
+            <i class="livicon-evo" data-options="name: priority-low.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent;"></i>
+          </span>
+          <span>هفت روز آینده</span>
+        </a>
+        <a href="{% url 'task:task-monthly' company.slug  %}" class="list-group-item border-0">
+          <span class="fonticon-wrap mr-50">
+            <i class="livicon-evo" data-options="name: calendar.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent;"></i>
+          </span>
+          <span>سی روز آینده</span>
+        </a>
+      </div>
+      <label class="filter-label mt-2 mb-1 pt-25">موضوع</label>
+      <div class="list-group">
+        <a href="{% url 'task:task-call' company.slug  %}" class="list-group-item border-0 d-flex align-items-center justify-content-between">
+          <span>تماس</span>
+          <span class="bullet bullet-sm bullet-primary"></span>
+        </a>
+        <a href="{% url 'task:task-meeting' company.slug  %}" class="list-group-item border-0 d-flex align-items-center justify-content-between">
+          <span>جلسه</span>
+          <span class="bullet bullet-sm bullet-success"></span>
+        </a>
+        <a href="{% url 'task:task-email' company.slug  %}" class="list-group-item border-0 d-flex align-items-center justify-content-between">
+          <span>ایمیل</span>
+          <span class="bullet bullet-sm bullet-danger"></span>
+        </a>
+        <a href="{% url 'task:task-preinvoice' company.slug  %}" class="list-group-item border-0 d-flex align-items-center justify-content-between">
+          <span>پیش‌فاکتور</span>
+          <span class="bullet bullet-sm bullet-warning"></span>
+        </a>
+        <a href="{% url 'task:task-invoice' company.slug  %}" class="list-group-item border-0 d-flex align-items-center justify-content-between">
+          <span>فاکتور</span>
+          <span class="bullet bullet-sm bullet-info"></span>
+        </a>
+        <a href="{% url 'task:task-followup' company.slug  %}" class="list-group-item border-0 d-flex align-items-center justify-content-between">
+          <span>پیگیری</span>
+          <span class="bullet bullet-sm bullet-secondary"></span>
+        </a>
+        <a href="{% url 'task:task-contract' company.slug  %}" class="list-group-item border-0 d-flex align-items-center justify-content-between">
+          <span>قرارداد</span>
+          <span class="bullet bullet-sm bullet-primary"></span>
+        </a>
+        <a href="{% url 'task:task-catalog' company.slug  %}" class="list-group-item border-0 d-flex align-items-center justify-content-between">
+          <span>کاتالوگ</span>
+          <span class="bullet bullet-sm bullet-success"></span>
+        </a>
+        <a href="{% url 'task:task-proposal' company.slug  %}" class="list-group-item border-0 d-flex align-items-center justify-content-between">
+          <span>پروپوزال</span>
+          <span class="bullet bullet-sm bullet-danger"></span>
+        </a>
+      </div>
+    </div>
+    <!-- sidebar list end -->
+  </div>
+</div>
+
+
           </div>
         </div>
-{% endblock %}
+        <div class="content-right">
+          <div class="content-overlay"></div>
+          <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body"><div class="app-content-overlay"></div>
+<div class="todo-app-area">
+  <div class="todo-app-list-wrapper">
+    <div class="todo-app-list">
+      <div class="todo-fixed-search d-flex justify-content-between align-items-center">
+        <div class="sidebar-toggle d-block d-lg-none">
+          <i class="bx bx-menu"></i>
+        </div>
+        <fieldset class="form-group position-relative has-icon-left m-0 flex-grow-1">
+          <input type="text" class="form-control todo-search" id="todo-search" placeholder="جستجوی وظیفه">
+          <div class="form-control-position">
+            <i class="bx bx-search"></i>
+          </div>
+        </fieldset>
+        <div class="todo-sort dropdown mr-1">
+          <button class="btn dropdown-toggle sorting" type="button" id="sortDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="bx bx-filter"></i>
+            <span>ترتیب</span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="sortDropdown">
+            <a class="dropdown-item ascending" href="#">جدید‌ترین</a>
+            <a class="dropdown-item descending" href="#">قدیمی‌ترین</a>
+          </div>
+        </div>
+      </div>
+      <div class="todo-task-list list-group">
+        <!-- task list start -->
+        <ul class="todo-task-list-wrapper list-unstyled" id="todo-task-list-drag">
+          {% for task in object_list %}
+
+          <li class="todo-item" data-name="David Smith">
+            <div class="todo-title-wrapper d-flex justify-content-sm-between justify-content-end align-items-center">
+              <div class="todo-title-area d-flex align-items-center">
+                <div class="avatar m-50 ml-50 mr-50">
+                  {% if task.assigned_to.staff.thumbnail %}
+                    <img class="round" src="{{task.assigned_to.staff.thumbnail.url}}" alt="avatar" height="32" width="32">
+                  {% else %}
+                    <img class="round" src="{% static 'frest/assets/images/placeholder.png' %}" alt="avatar" height="32" width="32">
+                  {% endif %}
+                  </div>
+                  <span class="badge badge-light-success badge-pill mr-1">{{task.status}}</span>
+                <span><a class="mr-50" href="{% url 'task:task-update' company.slug task.pk %}">{{task.title}}</a></span>
+
+                </div>
+              <div class="todo-item-action d-flex align-items-center">
+                <div class="todo-badge-wrapper d-flex">
+                  <span class="badge badge-light-warning badge-pill mr-1"> مهلت انجام: {{task.due_date| to_jalali:'۱۴%y/%m/%d'}}</span>
+                  <span class="badge badge-light-danger badge-pill mr-1"> اهمیت: {{task.priority}}</span>
+
+                </div>
+
+                <a class="todo-item-delete ml-75"href="{% url 'task:task-delete' company.slug task.pk %}"><i class="bx bx-trash"></i></a>
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+        </ul>
+        <!-- task list end -->
+        <div class="no-results">
+          <h5>موردی یافت نشد</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END: Content-->
+
+
+
+
+
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    {% include 'company/footer.html'%}
+
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="{% static 'frest/assets/vendors/js/vendors.min.js' %}"></script>
+    <script src="{% static 'frest/assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.min.js' %}"></script>
+    <script src="{% static 'frest/assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js' %}"></script>
+    <script src="{% static 'frest/assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js' %}"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{% static 'frest/assets/vendors/js/pickers/datepicker-jalali/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'frest/assets/vendors/js/pickers/datepicker-jalali/bootstrap-datepicker.fa.min.js' %}"></script>
+    <script src="{% static 'frest/assets/vendors/js/forms/select/select2.full.min.js' %}"></script>
+    <script src="{% static 'frest/assets/vendors/js/editors/quill/quill.min.js' %}"></script>
+    <script src="{% static 'frest/assets/vendors/js/extensions/dragula.min.js' %}"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="{% static 'frest/assets/js/scripts/configs/vertical-menu-dark.js' %}"></script>
+    <script src="{% static 'frest/assets/js/core/app-menu.js' %}"></script>
+    <script src="{% static 'frest/assets/js/core/app.js' %}"></script>
+    <script src="{% static 'frest/assets/js/scripts/components.js' %}"></script>
+    <script src="{% static 'frest/assets/js/scripts/footer.js' %}"></script>
+    <script src="{% static 'frest/assets/js/scripts/customizer.js' %}"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="{% static 'frest/assets/js/scripts/pages/app-todo.js' %}"></script>
+    <!-- END: Page JS-->
+
+  </body>
+  <!-- END: Body-->
+</html>

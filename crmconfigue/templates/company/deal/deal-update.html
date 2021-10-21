@@ -27,6 +27,9 @@
               {{ form.deal_amount|as_crispy_field|intcomma:False }}
             </div>
             <div class="col-3">
+              {{ form.due_date|as_crispy_field}}
+            </div>
+            <div class="col-3">
                {{form.account|as_crispy_field}}
             </div>
             <div class="col-3">

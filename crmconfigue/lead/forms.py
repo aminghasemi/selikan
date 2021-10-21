@@ -8,10 +8,11 @@ from jalali_date.widgets import AdminJalaliDateWidget, AdminSplitJalaliDateTime
 class LeadForm(forms.ModelForm):
     class Meta:
         model = Lead
-        fields=("title","first_name","last_name","email","phone","status","source","description","assigned_to","is_active","tags","contacts","teams","converted_by","closed_on", "archive")
+        fields=("title","first_name","last_name","email","phone","status","source","description","assigned_to","is_active","tags","due_date","teams","converted_by","closed_on", "archive")
     def __init__(self, *args, **kwargs):
         super(LeadForm, self).__init__(*args, **kwargs)
-        self.fields['closed_on'] = JalaliDateField(label="تاریخ تکمیل",widget=AdminJalaliDateWidget,required=False)  
+        self.fields['closed_on'] = JalaliDateField(label="تاریخ تکمیل",widget=AdminJalaliDateWidget,required=False)
+        self.fields['due_date'] = JalaliDateField(label="تاریخ پیگیری",widget=AdminJalaliDateWidget,required=False)
 class LeadStatusForm(forms.ModelForm):
     class Meta:
         model = LeadStatus

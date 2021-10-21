@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'docs.apps.DocsConfig',
     'targets.apps.TargetsConfig',
     'reports.apps.ReportsConfig',
+    'projects.apps.ProjectsConfig',
 
 
     # third party apps 

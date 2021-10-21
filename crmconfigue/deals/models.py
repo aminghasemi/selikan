@@ -34,7 +34,7 @@ class Deal(models.Model):
     assigned_to = models.ForeignKey(Enrolled,on_delete=models.SET_NULL,null=True, related_name="deal_assigned_users", blank=True, verbose_name="محول شده به")
     account_name = models.CharField(max_length=255,  blank=True, verbose_name="نام حساب")
     deal_amount = models.DecimalField(decimal_places=0, max_digits=20,blank=True, null=True, verbose_name="مبلغ معامله")
-  #  deal_amount = models.IntegerField(blank=True, null=True, verbose_name="مبلغ معامله")
+    due_date = models.DateField(null=True,blank=True, verbose_name="زمان پیگیری")
     created_by = models.ForeignKey(User, related_name="deal_created_by", on_delete=models.CASCADE, verbose_name="ساخته شده توسط")
     created_on = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
     is_active = models.BooleanField(default=True, verbose_name="فعال")

@@ -177,7 +177,7 @@ class Enroll_Invitation(models.Model):
 
 
 class Enrolled(models.Model):
-    staff = models.OneToOneField(User, unique=True, related_name='staff',on_delete=models.CASCADE,  null=True, blank=True,verbose_name="کارمند")
+    staff = models.ForeignKey(User, related_name='staff',on_delete=models.CASCADE,  null=True, blank=True,verbose_name="کارمند")
     company = models.ForeignKey(Company, on_delete=models.CASCADE , related_name='staff_enroll', null=True, blank=True, verbose_name="نام شرکت")
     date =models.DateTimeField(auto_now_add=True, verbose_name="تاریخ عضویت")
     previous_attempts = models.IntegerField(default=0)
