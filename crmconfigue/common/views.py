@@ -21,6 +21,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 def home(request):
     return render(request, 'statichome/home.html')
+def contact(request):
+    return render(request, 'statichome/contact.html')
+def about(request):
+    return render(request, 'statichome/about.html')
 
 class CompaniesList(LoginRequiredMixin, ListView):
     queryset= Company.objects.all()

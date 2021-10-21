@@ -2,11 +2,17 @@ from django.urls import path, re_path, reverse
 from django.contrib.auth import views
 from django.conf.urls import url
 
-from .views import Dashboard,Company_Preview, home,EnrollCreate,Enroll_InvitationDelete,Enroll_InvitationDelete_addstaff, CompaniesList, CompanyCreate, CompanyUpdate, CompanyDelete, company_staff,StaffDelete, Profile ,ProductsList,ProductCreate,ProductUpdate,ProductDelete, CountriesList, CountryCreate, CountryUpdate, CountryDelete
+from .views import ( Dashboard,Company_Preview, home, contact, about,
+                     EnrollCreate,Enroll_InvitationDelete,Enroll_InvitationDelete_addstaff,
+                     CompaniesList, CompanyCreate, CompanyUpdate, CompanyDelete, company_staff,StaffDelete, Profile ,ProductsList,ProductCreate,ProductUpdate,ProductDelete,
+                     CountriesList, CountryCreate, CountryUpdate, CountryDelete, 
+                    )
 
 app_name="common"
 urlpatterns = [
     path('', home,name="statichome"),
+    path('contact', contact,name="contact"),
+    path('about', about,name="about"),
     path('account', CompaniesList.as_view(),name="home"),
     path('create/', CompanyCreate.as_view(),name="company-create"),
     path('update/<slug:slug>', CompanyUpdate.as_view(),name="company-update"),

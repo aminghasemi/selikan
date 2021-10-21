@@ -85,7 +85,7 @@ Default CSS
 body {
   padding: 0;
   margin: 0;
-  font-family: "Vazir-FD", sans-serif;
+  font-family: "Sahel", sans-serif;
   font-size: 15px;
 }
 
@@ -110,7 +110,7 @@ p {
   line-height: 1.8;
   color: #777777;
   font-weight: 400;
-  font-family: "Vazir-FD", sans-serif;
+  font-family: "Sahel", sans-serif;
   font-size: 15px;
 }
 
@@ -165,7 +165,7 @@ img {
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
   color: #0d1820;
   text-transform: capitalize;
-  font-family: "Vazir-FD", sans-serif;
+  font-family: "Sahel", sans-serif;
   font-weight: 600;
 }
 
@@ -6036,7 +6036,7 @@ right: -35px;
 
 .skill-bar {
   margin-top: 30px;
-  font-family: "Vazir-FD", sans-serif;
+  font-family: "Sahel", sans-serif;
 }
 
 .skill-bar .progress-title-holder {
@@ -6793,7 +6793,7 @@ Contact Area CSS
 
 .contact-form #msgSubmit.text-danger {
   margin-top: 20px !important;
-  font-family: "Vazir-FD", sans-serif;
+  font-family: "Sahel", sans-serif;
 }
 
 .contact-info {
@@ -7106,7 +7106,7 @@ Sign In CSS
 
 .sign-in-form .sign-in-title h3 {
   font-size: 30px;
-  font-family: "Vazir-FD", sans-serif;
+  font-family: "Sahel", sans-serif;
   margin-bottom: 8px;
 }
 
@@ -7221,7 +7221,7 @@ Sign Up CSS
 
 .signup-form h3 {
   font-size: 30px;
-  font-family: "Vazir-FD", sans-serif;
+  font-family: "Sahel", sans-serif;
   margin-bottom: 30px;
   text-align: center;
 }

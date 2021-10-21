@@ -1,0 +1,103 @@
+{% extends 'statichome/base.html' %}
+{% load static %}
+{% block main %}
+
+        <!-- Start Contact Area -->
+        <section class="contact-area pt-100 pb-100">
+            <div class="container">
+                <div class="contact-inner">
+                    <h2>تماس با سلیکان</h2>
+                    <div class="contact-info">
+                        <div class="contact-info-content">
+                            <div style="text-align: right;">
+                            <h3>تلفن‌های تماس پشتیبانی:</h3>
+                            <h4>
+                                <a href="tel:+984432259637">044-32259637</a>
+                                <span>یا</span>
+                                <a href="tel:+984433379087">044-33379087</a>
+                            </h4>
+                            <br>
+                            <p>جهت تماس از طریق نرم‌افزارهای پیام رسان واتساپ و تلگرام از شماره زیر استفاده کنید:</p>
+                            <p><a href="https://wa.me/+989141398038" target="_blank">09141398038</a></p>
+                            <hr>
+                            <h4>ساعات کار</h4>
+                            <p>شنبه تا چهارشنبه: ۹ صبح الی ۱۷</p>
+                            <hr>
+                            <h3>آدرس</h3>
+                            <h4>دفتر ارومیه</h4>
+                            <p>ارومیه، خیابان استادان، مجتمع ایران‌زمین، طبقه۱، واحد ۳۳</p>
+                            </div>
+                            <ul class="social">
+                                <li><a href="https://t.me/selikan" target="_blank"><i class="bx bxl-telegram"></i></a></li>
+                                <li><a href="https://wa.me/+989141398038" target="_blank"><i class="bx bxl-whatsapp"></i></a></li>
+                                <li><a href="https://twitter.com/selikan.ir" target="_blank"><i class="bx bxl-twitter"></i></a></li>
+                                <li><a href="https://youtube.com/selikan.ir" target="_blank"><i class="bx bxl-youtube"></i></a></li>
+                                <li><a href="https://facebook.com/selikan.ir" target="_blank"><i class='bx bxl-facebook'></i></a></li>
+                                <li><a href="https://linkedin.com/company/selikan.ir" target="_blank"><i class="bx bxl-linkedin"></i></a></li>
+                                <li><a href="https://instagram.com/selikan.ir" target="_blank"><i class="bx bxl-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Contact Area -->
+
+        <!-- Start Map Area -->
+		<div class="map-area">
+            <iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=urmia&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+		</div>
+		<!-- End Map Area -->
+
+        <!-- Start Overview Area -->
+        <section class="overview-area ptb-100">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <div class="overview-image">
+                                    <img src="{% static 'statichome/assets/img/overview/image1.png' %}" alt="image">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="overview-content">
+                                    <h2>مشاهده و بررسی نرم افزار</h2>
+                                    <p>برای آشنایی با سلیکان و امکانات آن دمو نرم‌افزار مشاهده کنید. </p>
+                                    <a href="#" class="btn-one">
+                                        مشاهده دمو
+                                        <i class='bx bx-left-arrow-alt'></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <div class="overview-image">
+                                    <img src="{% static 'statichome/assets/img/overview/image2.png' %}" alt="image">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="overview-content">
+                                    <h2>جلسه مشاوره</h2>
+                                    <p>در صورتی که به دنبال پیاده‌سازی CRM در سازمان خود هستید با ما تماس بگیرید.</p>
+                                    <a href="#" class="btn-two">
+                                        درخواست جلسه مشاوره
+                                        <i class='bx bx-left-arrow-alt'></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Overview Area -->
+
+
+{% endblock %}
