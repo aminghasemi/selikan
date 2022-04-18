@@ -11,7 +11,7 @@ Selikan is a CRM open source software. It is developed with Django framework for
 4. Use settings-local in config folder for settings. 
 5. Make Migrations
 6. Create a Superuser in django
-7. runserver
+7. Runserver
 
 
 Note: the language of project is in Persian.
